@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project | Ashel</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+</head>
+<body class="scanlines">
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+  <div class="noise"></div>
+  <div class="grid-bg"></div>
+
+  <header class="header">
+    <a href="index.html" class="logo">Ashel</a>
+    <ul class="nav-links">
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#gallery">Gallery</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <button class="mobile-menu-btn" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <main id="project-content">
+    <div class="loading">Loading</div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 Ashel</p>
+    <p>Built with obsession</p>
+  </footer>
+
+  <script>
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+
+    mobileMenuBtn?.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      mobileMenuBtn.classList.toggle('active');
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+          navLinks.classList.remove('active');
+          mobileMenuBtn.classList.remove('active');
+        }
+      });
+    });
+
+    const dot = document.querySelector('.cursor-dot');
+    const ring = document.querySelector('.cursor-ring');
+    let mouseX = 0, mouseY = 0;
+    let ringX = 0, ringY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      dot.style.transform = `translate(${mouseX - 3}px, ${mouseY - 3}px)`;
+    });
+
+    function animateRing() {
+      ringX += (mouseX - ringX) * 0.15;
+      ringY += (mouseY - ringY) * 0.15;
+      ring.style.transform = `translate(${ringX - 18}px, ${ringY - 18}px)`;
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    function attachCursor(el) {
+      const accent = getComputedStyle(document.documentElement).getPropertyValue('--section-accent').trim() || '#ff2d55';
+      const accentSec = getComputedStyle(document.documentElement).getPropertyValue('--section-accent-secondary').trim() || '#5856d6';
+      el.addEventListener('mouseenter', () => {
+        ring.style.width = '60px';
+        ring.style.height = '60px';
+        ring.style.borderColor = accentSec;
+      });
+      el.addEventListener('mouseleave', () => {
+        ring.style.width = '36px';
+        ring.style.height = '36px';
+        ring.style.borderColor = accent;
+      });
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const projectId = params.get('id');
+
+    if (!projectId) {
+      window.location.href = 'index.html';
+    }
+
+    fetch('data.json')
+      .then(res => res.json())
+      .then(data => {
+        const project = data.projects.find(p => p.id === projectId);
+
+        if (!project) {
+          document.getElementById('project-content').innerHTML = `
+            <div class="container" style="padding-top: 120px; text-align: center;">
+              <a href="index.html#projects" class="back-link">&larr; Back to Projects</a>
+              <h1>Project not found</h1>
+            </div>`;
+          return;
+        }
+
+        document.title = `${project.name} | Ashel`;
+
+        const genresHtml = project.genres.map(g => `<span class="genre-tag">${g}</span>`).join('');
+        const membersHtml = project.members.map(m => `<li><strong>${m.name}</strong> — ${m.role}</li>`).join('');
+        const linksHtml = project.links.map(l => `<a href="${l.url}" target="_blank" class="btn-small">${l.label}</a>`).join('');
+        const descriptionHtml = project.description.map(p => `<p class="detail-description">${p}</p>`).join('');
+        const featured = project.releases.find(r => r.featured);
+
+        const releasesHtml = project.releases.map(r => `
+          <a href="${r.url}" target="_blank" class="album-card">
+            <img src="${r.cover}" alt="${r.name}" class="album-cover" loading="lazy">
+            <div class="album-info">
+              <span class="album-type">${r.type}</span>
+              <p class="album-name">${r.name}</p>
+              <p class="album-year">${r.year}</p>
+            </div>
+          </a>`).join('');
+
+        const featuredSection = featured ? `
+          <section class="featured-release">
+            <div class="section-label" style="border: none; padding: 0; margin-bottom: 2rem;">
+              <span>Featured Release</span>
+              <span class="count">${featured.year}</span>
+            </div>
+            <h2>Now Playing</h2>
+            <h3>${featured.name}</h3>
+            <p>${featured.description}</p>
+            <div class="detail-player-section">
+              <iframe src="${featured.embed}" height="450" frameborder="0"></iframe>
+            </div>
+          </section>` : '';
+
+        document.getElementById('project-content').innerHTML = `
+          <section class="detail-header">
+            <a href="index.html#projects" class="back-link">&larr; Back to Projects</a>
+            <div class="detail-hero">
+              <img src="${project.cover}" alt="${project.name}" class="detail-cover">
+              <div class="detail-info">
+                <h1>${project.name}</h1>
+                <div class="detail-genres">${genresHtml}</div>
+                <p class="detail-location">${project.location}</p>
+                ${descriptionHtml}
+                <div class="detail-members">
+                  <h3>Members</h3>
+                  <ul class="member-list">${membersHtml}</ul>
+                </div>
+                <div class="detail-links">${linksHtml}</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="discography">
+            <div class="section-label" style="border: none; padding: 0; margin-bottom: 2rem;">
+              <span>Discography</span>
+              <span class="count">${String(project.releases.length).padStart(2, '0')}</span>
+            </div>
+            <div class="discography-grid">${releasesHtml}</div>
+          </section>
+
+          ${featuredSection}`;
+
+        document.querySelectorAll('a, button, .album-card').forEach(attachCursor);
+
+        const colorThief = new ColorThief();
+        fetch(project.cover)
+          .then(res => res.blob())
+          .then(blob => {
+            const url = URL.createObjectURL(blob);
+            const img = new Image();
+            img.onload = () => {
+              const dominant = colorThief.getColor(img);
+              const palette = colorThief.getPalette(img, 8);
+              const vibrant = palette.filter(c => {
+                const max = Math.max(...c);
+                const min = Math.min(...c);
+                const brightness = (c[0] + c[1] + c[2]) / 3;
+                const saturation = max === 0 ? 0 : (max - min) / max;
+                return brightness > 40 && brightness < 220 && saturation > 0.2;
+              });
+              const sorted = vibrant.length > 0 ? vibrant : palette;
+              const c1 = `#${dominant[0].toString(16).padStart(2, '0')}${dominant[1].toString(16).padStart(2, '0')}${dominant[2].toString(16).padStart(2, '0')}`;
+              const c2 = sorted[1] ? `#${sorted[1][0].toString(16).padStart(2, '0')}${sorted[1][1].toString(16).padStart(2, '0')}${sorted[1][2].toString(16).padStart(2, '0')}` : c1;
+              const c3 = sorted[2] ? `#${sorted[2][0].toString(16).padStart(2, '0')}${sorted[2][1].toString(16).padStart(2, '0')}${sorted[2][2].toString(16).padStart(2, '0')}` : c1;
+              document.documentElement.style.setProperty('--section-accent', c1);
+              document.documentElement.style.setProperty('--section-accent-secondary', c2);
+              document.documentElement.style.setProperty('--section-accent-tertiary', c3);
+              URL.revokeObjectURL(url);
+            };
+            img.src = url;
+          })
+          .catch(() => {
+            if (project.accent) {
+              document.documentElement.style.setProperty('--section-accent', project.accent);
+              document.documentElement.style.setProperty('--section-accent-secondary', project.accentSecondary || project.accent);
+              document.documentElement.style.setProperty('--section-accent-tertiary', project.accentTertiary || project.accent);
+            }
+          });
+      })
+      .catch(err => {
+        document.getElementById('project-content').innerHTML = `
+          <div class="loading">Error loading data</div>`;
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
