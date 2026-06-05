@@ -862,19 +862,10 @@ button:hover ~ .cursor-ring,
   line-height: 1;
   letter-spacing: -0.03em;
   margin-bottom: 2rem;
-  background: linear-gradient(
-    135deg,
-    var(--section-accent, var(--accent)),
-    var(--section-accent-secondary, var(--accent-secondary))
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .detail-genres .genre-tag {
   border-color: var(--section-accent, var(--accent));
-  color: var(--section-accent, var(--text-dim));
 }
 
 .detail-genres {
@@ -887,7 +878,7 @@ button:hover ~ .cursor-ring,
 .detail-location {
   font-family: var(--mono);
   font-size: 0.7rem;
-  color: var(--section-accent-secondary, var(--text-muted));
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.15em;
   margin-bottom: 2rem;
@@ -896,11 +887,9 @@ button:hover ~ .cursor-ring,
 .detail-description {
   font-family: var(--mono);
   font-size: 0.8rem;
-  color: var(--section-accent-tertiary, var(--text-dim));
+  color: var(--text-dim);
   line-height: 1.8;
   margin-bottom: 1.5rem;
-  border-left: 2px solid var(--section-accent, var(--border));
-  padding-left: 1rem;
 }
 
 .album-selector-wrap {
@@ -915,15 +904,15 @@ button:hover ~ .cursor-ring,
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: var(--section-accent, var(--text-muted));
+  color: var(--text-muted);
 }
 
 .album-selector-wrap select {
   font-family: var(--mono);
   font-size: 0.75rem;
   background: var(--surface);
-  color: var(--section-accent-secondary, var(--text));
-  border: 1px solid var(--section-accent, var(--border));
+  color: var(--text);
+  border: 1px solid var(--border);
   border-radius: 4px;
   padding: 0.4rem 0.75rem;
   cursor: pointer;
@@ -933,13 +922,13 @@ button:hover ~ .cursor-ring,
 
 .album-selector-wrap select:hover,
 .album-selector-wrap select:focus {
-  border-color: var(--section-accent-secondary, var(--accent));
+  border-color: var(--section-accent, var(--accent));
 }
 
 .detail-members {
   margin-top: 3rem;
   padding-top: 2rem;
-  border-top: 2px solid var(--section-accent-secondary, var(--border));
+  border-top: 2px solid var(--section-accent, var(--border));
 }
 
 .detail-members h3 {
@@ -947,7 +936,7 @@ button:hover ~ .cursor-ring,
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: var(--section-accent-secondary, var(--text-muted));
+  color: var(--text-muted);
   margin-bottom: 1rem;
 }
 
@@ -958,7 +947,7 @@ button:hover ~ .cursor-ring,
 .member-list li {
   font-family: var(--mono);
   font-size: 0.8rem;
-  color: var(--section-accent-tertiary, var(--text-dim));
+  color: var(--text-dim);
   padding: 0.5rem 0;
   border-bottom: 1px solid var(--border);
 }
@@ -983,8 +972,8 @@ button:hover ~ .cursor-ring,
   font-size: 0.65rem;
   padding: 0.6rem 1.2rem;
   background: transparent;
-  color: var(--section-accent, var(--text));
-  border: 1px solid var(--section-accent, var(--border-strong));
+  color: var(--text-dim);
+  border: 1px solid var(--border-strong);
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.15em;
@@ -1042,22 +1031,6 @@ button:hover ~ .cursor-ring,
   filter: grayscale(0%);
 }
 
-.album-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--section-accent, var(--accent));
-  transform: scaleX(0);
-  transition: transform 0.3s;
-}
-
-.album-card:hover::after {
-  transform: scaleX(1);
-}
-
 .album-cover {
   width: 100%;
   aspect-ratio: 1;
@@ -1100,7 +1073,7 @@ button:hover ~ .cursor-ring,
 /* Featured player */
 .featured-release {
   padding: 4rem 2rem;
-  border-bottom: 2px solid var(--section-accent, var(--border));
+  border-bottom: 1px solid var(--border);
 }
 
 .featured-release h2 {
@@ -1118,13 +1091,12 @@ button:hover ~ .cursor-ring,
   font-weight: 900;
   margin-bottom: 1.5rem;
   letter-spacing: -0.02em;
-  color: var(--section-accent-secondary, var(--text));
 }
 
 .featured-release p {
   font-family: var(--mono);
   font-size: 0.8rem;
-  color: var(--section-accent-tertiary, var(--text-dim));
+  color: var(--text-dim);
   line-height: 1.8;
   margin-bottom: 2rem;
   max-width: 600px;
@@ -1302,7 +1274,8 @@ button:hover ~ .cursor-ring,
   }
 
   .detail-header {
-    padding: 6rem 1.5rem 3rem;
+    padding: 8rem 2rem 4rem;
+    border-bottom: 2px solid var(--section-accent, var(--border));
   }
   .detail-hero {
     grid-template-columns: 1fr;
