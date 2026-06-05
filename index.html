@@ -164,6 +164,102 @@
       const browserLang = navigator.language.startsWith('es') ? 'es' : 'en';
       let currentLocale = params.get('locale') || localStorage.getItem('locale') || browserLang;
       let i18nData = null;
+      let siteData = null;
+      const colorCache = {};
+      const colorThief = new ColorThief();
+
+      function applyCardColors() {
+        const cards = document.querySelectorAll('.project-card');
+        const items = document.querySelectorAll('.gallery-item');
+        siteData.projects.forEach((project, index) => {
+          const colors = colorCache[project.id];
+          if (!colors) return;
+          const card = cards[index];
+          if (card) {
+            card.style.setProperty('--section-accent', colors[0]);
+            card.style.setProperty('--section-accent-secondary', colors[1]);
+            card.style.setProperty('--section-accent-tertiary', colors[2]);
+            const badge = card.querySelector('.project-badge');
+            if (badge) badge.style.background = colors[0];
+            card.querySelectorAll('.genre-tag').forEach((g) => {
+              g.style.borderColor = colors[0];
+            });
+          }
+          const item = items[index];
+          if (item) {
+            item.style.setProperty('--section-accent', colors[0]);
+            item.style.setProperty('--section-accent-secondary', colors[1]);
+          }
+        });
+      }
+
+      function extractColors(projectId, imageUrl) {
+        return fetch(imageUrl)
+          .then((res) => res.blob())
+          .then((blob) => {
+            const url = URL.createObjectURL(blob);
+            return new Promise((resolve, reject) => {
+              const img = new Image();
+              img.onload = () => {
+                try {
+                  const palette = colorThief.getPalette(img, 16);
+                  const analyzeColor = (c) => {
+                    const max = Math.max(...c);
+                    const min = Math.min(...c);
+                    const brightness = (c[0] + c[1] + c[2]) / 3;
+                    const saturation = max === 0 ? 0 : (max - min) / max;
+                    return {
+                      r: c[0],
+                      g: c[1],
+                      b: c[2],
+                      brightness,
+                      saturation,
+                      score: saturation * 0.6 + (brightness > 80 && brightness < 200 ? 0.4 : 0),
+                    };
+                  };
+                  const analyzed = palette.map(analyzeColor).sort((a, b) => b.score - a.score);
+                  let accent = analyzed[0];
+                  if (accent.brightness < 80 && analyzed.length > 1) {
+                    accent =
+                      analyzed.filter((c) => c.brightness >= 60 && c.saturation > 0.25)[0] ||
+                      analyzed[0];
+                  }
+                  const brighten = (c, factor) => {
+                    const r = Math.min(255, Math.floor(c.r * factor));
+                    const g = Math.min(255, Math.floor(c.g * factor));
+                    const b = Math.min(255, Math.floor(c.b * factor));
+                    return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+                  };
+                  const factor = accent.brightness < 100 ? 1.4 : 1.25;
+                  const c1 = brighten(accent, factor);
+                  const secondary =
+                    analyzed.filter(
+                      (c) => Math.abs(c.score - accent.score) > 0.1 && c.brightness >= 50
+                    )[0] ||
+                    analyzed[1] ||
+                    accent;
+                  const c2 = brighten(secondary, 1.3);
+                  const tertiary =
+                    analyzed.filter(
+                      (c) =>
+                        c !== secondary &&
+                        Math.abs(c.score - secondary.score) > 0.05 &&
+                        c.brightness >= 50
+                    )[0] ||
+                    analyzed[2] ||
+                    secondary;
+                  const c3 = brighten(tertiary, 1.15);
+                  URL.revokeObjectURL(url);
+                  resolve([c1, c2, c3]);
+                } catch (e) {
+                  reject(e);
+                }
+              };
+              img.onerror = reject;
+              img.src = url;
+            });
+          });
+      }
 
       function applyTranslations() {
         if (!i18nData) return;
@@ -183,6 +279,74 @@
         document.documentElement.lang = currentLocale;
       }
 
+      function renderContent() {
+        if (!i18nData || !siteData) return;
+        const t = i18nData[currentLocale] || i18nData.en;
+        const data = siteData;
+
+        document.getElementById('hero-tagline').textContent =
+          t.site?.subtitle || data.site.subtitle;
+
+        const marqueeItems = data.projects
+          .map(
+            (p) =>
+              `<span>${p.name} <span class="accent">—</span> ${p.genres.slice(0, 2).join(' / ')}</span>`
+          )
+          .join('');
+        document.getElementById('marquee').innerHTML = marqueeItems + marqueeItems;
+
+        const projectsHtml = data.projects
+          .map(
+            (p, i) => `
+          <a href="project.html?id=${p.id}" class="project-card" id="project-${p.id}">
+            <div class="project-cover-wrap">
+              <img src="${p.cover}" alt="${p.name}" class="project-cover" loading="lazy">
+              ${p.badge ? `<span class="project-badge">${p.badge}</span>` : ''}
+            </div>
+            <div class="project-info">
+              <span class="project-number">${String(i + 1).padStart(2, '0')}</span>
+              <h2 class="project-name">${p.name}</h2>
+              <div class="project-genres">
+                ${p.genres.map((g) => `<span class="genre-tag">${g}</span>`).join('')}
+              </div>
+              <p class="project-desc">${t.projects?.[p.id]?.shortDescription || p.shortDescription}</p>
+              <span class="project-arrow">→</span>
+            </div>
+          </a>`
+          )
+          .join('');
+        document.getElementById('projects-grid').innerHTML = projectsHtml;
+
+        const statLabels = t.stats || {
+          projects: 'Projects',
+          tracks: 'Tracks Released',
+          years: 'Years Active',
+        };
+        const statKeys = ['projects', 'tracks', 'years'];
+
+        const bioText = t.site?.bio || data.site.bio;
+        const aboutHtml = `
+          <h3>Ashel</h3>
+          ${bioText.map((b) => `<p>${b}</p>`).join('')}
+          <div class="stats">
+            ${data.site.stats
+              .map(
+                (s, i) => `
+              <div class="stat">
+                <span class="stat-number">${s.number}</span>
+                <span class="stat-label">${statLabels[statKeys[i]] || s.label}</span>
+              </div>`
+              )
+              .join('')}
+          </div>`;
+        document.getElementById('about-text').innerHTML = aboutHtml;
+
+        applyCardColors();
+        document
+          .querySelectorAll('a, .project-card, .album-card, .gallery-item, button')
+          .forEach(attachCursor);
+      }
+
       function setLocale(lang) {
         currentLocale = lang;
         localStorage.setItem('locale', lang);
@@ -190,6 +354,7 @@
         url.searchParams.set('locale', lang);
         window.history.replaceState({}, '', url);
         applyTranslations();
+        renderContent();
       }
 
       document.querySelectorAll('.lang-option').forEach((opt) => {
@@ -200,21 +365,15 @@
         });
       });
 
-      fetch('assets/i18n.json', { cache: 'no-store' })
-        .then((res) => res.json())
-        .then((t) => {
-          i18nData = t;
-          applyTranslations();
-        });
-
       Promise.all([
         fetch('assets/i18n.json', { cache: 'no-store' }).then((r) => r.json()),
         fetch('data.json', { cache: 'no-store' }).then((r) => r.json()),
       ])
         .then(([translations, data]) => {
-          const t = translations[currentLocale] || translations.en;
-          document.getElementById('hero-tagline').textContent =
-            t.site?.subtitle || data.site.subtitle;
+          i18nData = translations;
+          siteData = data;
+          applyTranslations();
+          renderContent();
 
           const canvas = document.getElementById('wave-canvas');
           const ctx = canvas.getContext('2d');
@@ -389,39 +548,27 @@
           }
           animate();
 
-          const marqueeItems = data.projects
+          const galleryHtml = data.projects
             .map(
-              (p) =>
-                `<span>${p.name} <span class="accent">—</span> ${p.genres.slice(0, 2).join(' / ')}</span>`
+              (p) => `
+          <div class="gallery-item" data-label="${p.name}">
+            <img src="${p.cover}" alt="${p.name}" loading="lazy">
+          </div>`
             )
             .join('');
-          document.getElementById('marquee').innerHTML = marqueeItems + marqueeItems;
+          document.getElementById('gallery-grid').innerHTML = galleryHtml;
 
           document.getElementById('project-count').textContent = String(
             data.projects.length
           ).padStart(2, '0');
 
-          const projectsHtml = data.projects
+          const socialHtml = data.site.social
             .map(
-              (p, i) => `
-          <a href="project.html?id=${p.id}" class="project-card" id="project-${p.id}">
-            <div class="project-cover-wrap">
-              <img src="${p.cover}" alt="${p.name}" class="project-cover" loading="lazy">
-              ${p.badge ? `<span class="project-badge">${p.badge}</span>` : ''}
-            </div>
-            <div class="project-info">
-              <span class="project-number">${String(i + 1).padStart(2, '0')}</span>
-              <h2 class="project-name">${p.name}</h2>
-              <div class="project-genres">
-                ${p.genres.map((g) => `<span class="genre-tag">${g}</span>`).join('')}
-              </div>
-              <p class="project-desc">${t.projects?.[p.id]?.shortDescription || p.shortDescription}</p>
-              <span class="project-arrow">→</span>
-            </div>
-          </a>`
+              (s) => `
+          <a href="${s.url}" target="_blank">${s.label}</a>`
             )
             .join('');
-          document.getElementById('projects-grid').innerHTML = projectsHtml;
+          document.getElementById('social-links').innerHTML = socialHtml;
 
           const bubblesContainer = document.getElementById('hero-bubbles');
           const activeBubbles = [];
@@ -550,171 +697,20 @@
           }
           requestAnimationFrame(animateBubbles);
 
-          const galleryHtml = data.projects
-            .map(
-              (p) => `
-          <div class="gallery-item" data-label="${p.name}">
-            <img src="${p.cover}" alt="${p.name}" loading="lazy">
-          </div>`
-            )
-            .join('');
-          document.getElementById('gallery-grid').innerHTML = galleryHtml;
-
-          const bioText = t.site?.bio || data.site.bio;
-          const statLabels = t.stats || {
-            projects: 'Projects',
-            tracks: 'Tracks Released',
-            years: 'Years Active',
-          };
-          const statKeys = ['projects', 'tracks', 'years'];
-
-          const aboutHtml = `
-          <h3>Ashel</h3>
-          ${bioText.map((b) => `<p>${b}</p>`).join('')}
-          <div class="stats">
-            ${data.site.stats
-              .map(
-                (s, i) => `
-              <div class="stat">
-                <span class="stat-number">${s.number}</span>
-                <span class="stat-label">${statLabels[statKeys[i]] || s.label}</span>
-              </div>`
-              )
-              .join('')}
-          </div>`;
-          document.getElementById('about-text').innerHTML = aboutHtml;
-
-          const socialHtml = data.site.social
-            .map(
-              (s) => `
-          <a href="${s.url}" target="_blank">${s.label}</a>`
-            )
-            .join('');
-          document.getElementById('social-links').innerHTML = socialHtml;
-
-          document
-            .querySelectorAll('a, .project-card, .album-card, .gallery-item, button')
-            .forEach(attachCursor);
-
-          const colorThief = new ColorThief();
-
-          function extractColors(imageUrl) {
-            return fetch(imageUrl)
-              .then((res) => res.blob())
-              .then((blob) => {
-                const url = URL.createObjectURL(blob);
-                return new Promise((resolve, reject) => {
-                  const img = new Image();
-                  img.onload = () => {
-                    try {
-                      const palette = colorThief.getPalette(img, 16);
-
-                      const analyzeColor = (c) => {
-                        const max = Math.max(...c);
-                        const min = Math.min(...c);
-                        const brightness = (c[0] + c[1] + c[2]) / 3;
-                        const saturation = max === 0 ? 0 : (max - min) / max;
-                        return {
-                          r: c[0],
-                          g: c[1],
-                          b: c[2],
-                          brightness,
-                          saturation,
-                          score: saturation * 0.6 + (brightness > 80 && brightness < 200 ? 0.4 : 0),
-                        };
-                      };
-
-                      const analyzed = palette.map(analyzeColor).sort((a, b) => b.score - a.score);
-
-                      let accent = analyzed[0];
-                      if (accent.brightness < 80 && analyzed.length > 1) {
-                        accent =
-                          analyzed.filter((c) => c.brightness >= 60 && c.saturation > 0.25)[0] ||
-                          analyzed[0];
-                      }
-
-                      const brighten = (c, factor) => {
-                        let r = Math.min(255, Math.floor(c.r * factor));
-                        let g = Math.min(255, Math.floor(c.g * factor));
-                        let b = Math.min(255, Math.floor(c.b * factor));
-                        return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
-                      };
-
-                      const factor = accent.brightness < 100 ? 1.4 : 1.25;
-                      const c1 = brighten(accent, factor);
-
-                      const secondary =
-                        analyzed.filter(
-                          (c) => Math.abs(c.score - accent.score) > 0.1 && c.brightness >= 50
-                        )[0] ||
-                        analyzed[1] ||
-                        accent;
-                      const c2 = brighten(secondary, 1.3);
-
-                      const tertiary =
-                        analyzed.filter(
-                          (c) =>
-                            c !== secondary &&
-                            Math.abs(c.score - secondary.score) > 0.05 &&
-                            c.brightness >= 50
-                        )[0] ||
-                        analyzed[2] ||
-                        secondary;
-                      const c3 = brighten(tertiary, 1.15);
-
-                      URL.revokeObjectURL(url);
-                      resolve([c1, c2, c3]);
-                    } catch (e) {
-                      reject(e);
-                    }
-                  };
-                  img.onerror = reject;
-                  img.src = url;
-                });
-              });
-          }
-
-          const cards = document.querySelectorAll('.project-card');
-          const items = document.querySelectorAll('.gallery-item');
-
-          data.projects.forEach((project, index) => {
-            extractColors(project.cover)
-              .then(([c1, c2, c3]) => {
-                const card = cards[index];
-                if (card) {
-                  card.style.setProperty('--section-accent', c1);
-                  card.style.setProperty('--section-accent-secondary', c2);
-                  card.style.setProperty('--section-accent-tertiary', c3);
-
-                  const badge = card.querySelector('.project-badge');
-                  if (badge) badge.style.background = c1;
-
-                  const genres = card.querySelectorAll('.genre-tag');
-                  genres.forEach((g) => {
-                    g.style.borderColor = c1;
-                  });
-                }
-
-                const item = items[index];
-                if (item) {
-                  item.style.setProperty('--section-accent', c1);
-                  item.style.setProperty('--section-accent-secondary', c2);
-                }
+          siteData.projects.forEach((project) => {
+            extractColors(project.id, project.cover)
+              .then((colors) => {
+                colorCache[project.id] = colors;
+                applyCardColors();
               })
               .catch(() => {
                 if (project.accent) {
-                  const card = cards[index];
-                  if (card) {
-                    card.style.setProperty('--section-accent', project.accent);
-                    card.style.setProperty(
-                      '--section-accent-secondary',
-                      project.accentSecondary || project.accent
-                    );
-                    card.style.setProperty(
-                      '--section-accent-tertiary',
-                      project.accentTertiary || project.accent
-                    );
-                  }
+                  colorCache[project.id] = [
+                    project.accent,
+                    project.accentSecondary || project.accent,
+                    project.accentTertiary || project.accent,
+                  ];
+                  applyCardColors();
                 }
               });
           });
