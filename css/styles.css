@@ -558,7 +558,9 @@ button:hover ~ .cursor-ring,
   font-family: var(--mono);
   font-size: 0.6rem;
   padding: 4px 10px;
-  border: 1px solid var(--border-strong);
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--border-strong);
   border-radius: 0;
   color: var(--text-dim);
   text-transform: uppercase;
