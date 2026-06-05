@@ -151,7 +151,7 @@
       });
     }
 
-    fetch('data.json')
+    fetch('data.json', { cache: 'no-store' })
       .then(res => res.json())
       .then(data => {
         document.getElementById('hero-tagline').textContent = data.site.subtitle;
@@ -383,6 +383,11 @@
           bubble.appendChild(img);
           bubblesContainer.appendChild(bubble);
 
+          const bubbleObj = { el: bubble, x, y, vx, vy, size, project, hovered: false };
+
+          bubble.addEventListener('mouseenter', () => bubbleObj.hovered = true);
+          bubble.addEventListener('mouseleave', () => bubbleObj.hovered = false);
+
           bubble.addEventListener('click', () => {
             const card = document.getElementById(`project-${project.id}`);
             if (card) {
@@ -394,7 +399,7 @@
             }
           });
 
-          activeBubbles.push({ el: bubble, x, y, vx, vy, size, project });
+          activeBubbles.push(bubbleObj);
         }
 
         for (let i = 0; i < data.projects.length; i++) createBubble();
@@ -430,9 +435,11 @@
 
             const dist = Math.hypot(b.x - dim.w / 2, b.y - dim.h / 2);
             const maxDist = Math.max(dim.w, dim.h) * 0.6;
-            const opacity = Math.max(0.2, Math.min(0.6, (1 - dist / maxDist) * 0.5));
+            const baseOpacity = Math.max(0.5, Math.min(0.85, (1 - dist / maxDist) * 0.7));
+            const opacity = b.hovered ? 1.0 : baseOpacity;
+            const scale = b.hovered ? 1.2 : 1;
 
-            b.el.style.transform = `translate(${b.x}px, ${b.y}px)`;
+            b.el.style.transform = `translate(${b.x}px, ${b.y}px) scale(${scale})`;
             b.el.style.opacity = opacity;
           }
 

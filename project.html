@@ -119,7 +119,31 @@
         const membersHtml = project.members.map(m => `<li><strong>${m.name}</strong> — ${m.role}</li>`).join('');
         const linksHtml = project.links.map(l => `<a href="${l.url}" target="_blank" class="btn-small">${l.label}</a>`).join('');
         const descriptionHtml = project.description.map(p => `<p class="detail-description">${p}</p>`).join('');
-        const featured = project.releases.find(r => r.featured);
+
+        function renderFeatured(release) {
+          if (!release) return '';
+          return `
+            <section class="featured-release" id="featured-section">
+              <div class="section-label" style="border: none; padding: 0; margin-bottom: 2rem;">
+                <span>Featured Release</span>
+                <span class="count">${release.year}</span>
+              </div>
+              <h2>Now Playing</h2>
+              <h3>${release.name}</h3>
+              ${release.description ? `<p>${release.description}</p>` : ''}
+              ${release.embed ? `<div class="detail-player-section"><iframe src="${release.embed}" height="450" frameborder="0"></iframe></div>` : ''}
+            </section>`;
+        }
+
+        const defaultFeatured = project.releases.find(r => r.featured) || project.releases[0];
+
+        const selectorHtml = project.releases.length > 1 ? `
+          <div class="album-selector-wrap">
+            <label>Album</label>
+            <select id="album-selector">
+              ${project.releases.map(r => `<option value="${r.name}" ${r === defaultFeatured || r.name === defaultFeatured.name ? 'selected' : ''}>${r.name} (${r.year})</option>`).join('')}
+            </select>
+          </div>` : '';
 
         const releasesHtml = project.releases.map(r => `
           <a href="${r.url}" target="_blank" class="album-card">
@@ -155,6 +179,7 @@
                 <div class="detail-genres">${genresHtml}</div>
                 <p class="detail-location">${project.location}</p>
                 ${descriptionHtml}
+                ${selectorHtml}
                 <div class="detail-members">
                   <h3>Members</h3>
                   <ul class="member-list">${membersHtml}</ul>
@@ -172,9 +197,18 @@
             <div class="discography-grid">${releasesHtml}</div>
           </section>
 
-          ${featuredSection}`;
+          ${renderFeatured(defaultFeatured)}`;
 
         document.querySelectorAll('a, button, .album-card').forEach(attachCursor);
+
+        const selector = document.getElementById('album-selector');
+        selector?.addEventListener('change', () => {
+          const selected = project.releases.find(r => r.name === selector.value);
+          const section = document.getElementById('featured-section');
+          if (section && selected) {
+            section.outerHTML = renderFeatured(selected);
+          }
+        });
 
         const colorThief = new ColorThief();
         fetch(project.cover)

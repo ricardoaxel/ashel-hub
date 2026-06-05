@@ -72,7 +72,7 @@
     {
       "id": "dotzd",
       "name": "Dotzd",
-      "cover": "assets/images/dotzd.jpg",
+      "cover": "assets/images/dotzd-tempo.jpg",
       "genres": ["Blackgaze", "Post-Rock", "Shoegaze", "Post-Metal", "Slowcore", "Ambient", "Psychedelic", "Noise"],
       "location": "Mexico City, Mexico",
       "badge": null,
@@ -97,7 +97,6 @@
           "year": "Nov 2024",
           "cover": "assets/images/dotzd-empero.jpg",
           "url": "https://dotzd.bandcamp.com/album/empero",
-          "featured": true,
           "description": "\"Empero\" represents a long-awaited release forged through a complicated journey and numerous revisions. Written and recorded during 2020, the album features Carlo Ixcamparij on drums — a first for Dotzd. Tracks: \"Viento,\" \"Memorias del tiempo,\" and \"Empero.\"",
           "embed": "https://bandcamp.com/EmbeddedPlayer/album=3599040728/size=large/bgcol=333333/linkcol=6c5ce7/minimal=true/transparent=true/"
         },
@@ -106,7 +105,10 @@
           "name": "Tempo",
           "year": "Dec 2020",
           "cover": "assets/images/dotzd-tempo.jpg",
-          "url": "https://dotzd.bandcamp.com/album/tempo"
+          "url": "https://dotzd.bandcamp.com/album/tempo",
+          "featured": true,
+          "description": "Produced at Echo Bravo Studio, Tempo explores the passage of time through layered guitar textures and hypnotic rhythms.",
+          "embed": "https://bandcamp.com/EmbeddedPlayer/album=2063025139/size=large/bgcol=333333/linkcol=6c5ce7/minimal=true/transparent=true/"
         },
         {
           "type": "Album",
