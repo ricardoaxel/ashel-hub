@@ -70,7 +70,10 @@ function renderIndexContent() {
     .join('');
   document.getElementById('projects-grid').innerHTML = projectsHtml;
 
-  document.getElementById('project-count').textContent = String(data.projects.length).padStart(2, '0');
+  document.getElementById('project-count').textContent = String(data.projects.length).padStart(
+    2,
+    '0'
+  );
 
   const galleryHtml = data.projects
     .map(
@@ -111,7 +114,9 @@ function renderIndexContent() {
   document.getElementById('about-text').innerHTML = aboutHtml;
 
   applyCardColors();
-  document.querySelectorAll('a, .project-card, .album-card, .gallery-item, button').forEach(attachCursor);
+  document
+    .querySelectorAll('a, .project-card, .album-card, .gallery-item, button')
+    .forEach(attachCursor);
 }
 
 // ---- Wave Canvas ----
@@ -166,7 +171,12 @@ function initWaveCanvas() {
       this.vy += dy * 0.00003;
       this.vx *= 0.999;
       this.vy *= 0.999;
-      if (this.x < -20 || this.x > canvas.width + 20 || this.y < -20 || this.y > canvas.height + 20) {
+      if (
+        this.x < -20 ||
+        this.x > canvas.width + 20 ||
+        this.y < -20 ||
+        this.y > canvas.height + 20
+      ) {
         this.reset();
       }
     }

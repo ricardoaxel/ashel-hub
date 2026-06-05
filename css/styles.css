@@ -430,18 +430,18 @@ button:hover ~ .cursor-ring,
 .section-label {
   font-family: var(--mono);
   font-size: 0.7rem;
-  color: var(--section-accent, var(--text-muted));
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.2em;
   padding: 2rem;
-  border-top: 2px solid var(--section-accent, var(--border));
+  border-top: 1px solid var(--border);
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .section-label .count {
-  color: var(--section-accent, var(--accent));
+  color: var(--text-muted);
 }
 
 /* Projects */
@@ -811,7 +811,7 @@ button:hover ~ .cursor-ring,
 /* Detail page */
 .detail-header {
   padding: 8rem 2rem 4rem;
-  border-bottom: 2px solid var(--section-accent, var(--border));
+  border-bottom: 1px solid var(--border);
 }
 
 .back-link {
@@ -837,12 +837,12 @@ button:hover ~ .cursor-ring,
   grid-template-columns: 400px 1fr;
   gap: 0;
   align-items: start;
-  border: 1px solid var(--section-accent, var(--border));
+  border: 1px solid var(--border);
   overflow: hidden;
 }
 
 .detail-info {
-  border-left: 1px solid var(--section-accent, var(--border));
+  border-left: 1px solid var(--border);
   padding: 3rem;
 }
 
@@ -930,7 +930,7 @@ button:hover ~ .cursor-ring,
 .detail-members {
   margin-top: 3rem;
   padding-top: 2rem;
-  border-top: 2px solid var(--section-accent, var(--border));
+  border-top: 1px solid var(--border);
 }
 
 .detail-members h3 {
@@ -992,7 +992,7 @@ button:hover ~ .cursor-ring,
 /* Discography */
 .discography {
   padding: 4rem 2rem;
-  border-bottom: 2px solid var(--section-accent, var(--border));
+  border-bottom: 1px solid var(--border);
 }
 
 .discography-title {
@@ -1045,7 +1045,7 @@ button:hover ~ .cursor-ring,
 
 .album-info {
   padding: 1rem;
-  border-top: 1px solid var(--section-accent, var(--border));
+  border-top: 1px solid var(--border);
 }
 
 .album-type {

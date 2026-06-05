@@ -74,8 +74,7 @@ function extractColors(imageUrl) {
             let accent = analyzed[0];
             if (accent.brightness < 80 && analyzed.length > 1) {
               accent =
-                analyzed.filter((c) => c.brightness >= 60 && c.saturation > 0.25)[0] ||
-                analyzed[0];
+                analyzed.filter((c) => c.brightness >= 60 && c.saturation > 0.25)[0] || analyzed[0];
             }
             const brighten = (c, factor) => {
               const r = Math.min(255, Math.floor(c.r * factor));
