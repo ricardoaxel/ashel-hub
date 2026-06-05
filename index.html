@@ -320,7 +320,7 @@
         document.getElementById('project-count').textContent = String(data.projects.length).padStart(2, '0');
 
         const projectsHtml = data.projects.map((p, i) => `
-          <a href="project.html?id=${p.id}" class="project-card">
+          <a href="project.html?id=${p.id}" class="project-card" id="project-${p.id}">
             <div class="project-cover-wrap">
               <img src="${p.cover}" alt="${p.name}" class="project-cover" loading="lazy">
               ${p.badge ? `<span class="project-badge">${p.badge}</span>` : ''}
@@ -354,41 +354,25 @@
           return p;
         }
 
-        function createBubble(startOnScreen = false) {
+        function createBubble() {
           const project = getRandomCover();
           if (!project) return;
 
           const dim = getDimensions();
           const size = Math.random() * 70 + 30;
+          const halfSize = size / 2;
           const bubble = document.createElement('div');
           bubble.className = 'hero-bubble';
           bubble.style.width = `${size}px`;
           bubble.style.height = `${size}px`;
 
-          const edge = Math.floor(Math.random() * 4);
-          let startX, startY;
+          let x = halfSize + Math.random() * (dim.w - size - halfSize * 2);
+          let y = halfSize + Math.random() * (dim.h - size - halfSize * 2);
 
-          if (edge === 0) { startX = Math.random() * dim.w; startY = -size; }
-          else if (edge === 1) { startX = dim.w + size; startY = Math.random() * dim.h; }
-          else if (edge === 2) { startX = Math.random() * dim.w; startY = dim.h + size; }
-          else { startX = -size; startY = Math.random() * dim.h; }
-
-          const targetX = dim.w * (0.2 + Math.random() * 0.6);
-          const targetY = dim.h * (0.2 + Math.random() * 0.6);
+          const angle = Math.random() * Math.PI * 2;
           const speed = 0.1 + Math.random() * 0.4;
-          const dist = Math.hypot(targetX - startX, targetY - startY);
-          const vx = ((targetX - startX) / dist) * speed;
-          const vy = ((targetY - startY) / dist) * speed;
-
-          let x, y;
-          if (startOnScreen) {
-            const progress = 0.3 + Math.random() * 0.4;
-            x = startX + ((targetX - startX) * progress);
-            y = startY + ((targetY - startY) * progress);
-          } else {
-            x = startX;
-            y = startY;
-          }
+          const vx = Math.cos(angle) * speed;
+          const vy = Math.sin(angle) * speed;
 
           bubble.style.transform = `translate(${x}px, ${y}px)`;
 
@@ -399,31 +383,57 @@
           bubble.appendChild(img);
           bubblesContainer.appendChild(bubble);
 
-          activeBubbles.push({ el: bubble, x, y, vx, vy, size });
+          bubble.addEventListener('click', () => {
+            const card = document.getElementById(`project-${project.id}`);
+            if (card) {
+              card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              card.style.boxShadow = '0 0 0 2px var(--section-accent, #ff2d55), 0 0 20px rgba(255,45,85,0.3)';
+              setTimeout(() => {
+                card.style.boxShadow = 'none';
+              }, 500);
+            }
+          });
+
+          activeBubbles.push({ el: bubble, x, y, vx, vy, size, project });
         }
 
-        for (let i = 0; i < data.projects.length; i++) createBubble(true);
+        for (let i = 0; i < data.projects.length; i++) createBubble();
 
         function animateBubbles() {
           const dim = getDimensions();
-          const margin = 200;
 
-          for (let i = activeBubbles.length - 1; i >= 0; i--) {
-            const b = activeBubbles[i];
+          for (const b of activeBubbles) {
             b.x += b.vx;
             b.y += b.vy;
 
+            const halfSize = b.size / 2;
+
+            if (b.x <= halfSize) {
+              b.x = halfSize;
+              b.vx = Math.abs(b.vx) * (0.9 + Math.random() * 0.2);
+              b.vy += (Math.random() - 0.5) * 0.1;
+            } else if (b.x >= dim.w - halfSize - b.size) {
+              b.x = dim.w - halfSize - b.size;
+              b.vx = -Math.abs(b.vx) * (0.9 + Math.random() * 0.2);
+              b.vy += (Math.random() - 0.5) * 0.1;
+            }
+
+            if (b.y <= halfSize) {
+              b.y = halfSize;
+              b.vy = Math.abs(b.vy) * (0.9 + Math.random() * 0.2);
+              b.vx += (Math.random() - 0.5) * 0.1;
+            } else if (b.y >= dim.h - halfSize - b.size) {
+              b.y = dim.h - halfSize - b.size;
+              b.vy = -Math.abs(b.vy) * (0.9 + Math.random() * 0.2);
+              b.vx += (Math.random() - 0.5) * 0.1;
+            }
+
             const dist = Math.hypot(b.x - dim.w / 2, b.y - dim.h / 2);
             const maxDist = Math.max(dim.w, dim.h) * 0.6;
-            const opacity = Math.max(0, Math.min(0.5, (1 - dist / maxDist) * 0.5));
+            const opacity = Math.max(0.2, Math.min(0.6, (1 - dist / maxDist) * 0.5));
 
             b.el.style.transform = `translate(${b.x}px, ${b.y}px)`;
             b.el.style.opacity = opacity;
-
-            if (b.x < -margin - b.size || b.x > dim.w + margin || b.y < -margin - b.size || b.y > dim.h + margin) {
-              b.el.remove();
-              activeBubbles.splice(i, 1);
-            }
           }
 
           requestAnimationFrame(animateBubbles);

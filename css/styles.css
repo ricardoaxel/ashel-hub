@@ -253,6 +253,13 @@ button:hover ~ .cursor-ring,
   border-radius: 50%;
   overflow: hidden;
   will-change: transform, opacity;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: transform 0.2s;
+}
+
+.hero-bubble:hover {
+  z-index: 10;
 }
 
 .hero-bubble img {
@@ -390,7 +397,7 @@ button:hover ~ .cursor-ring,
   color: inherit;
   position: relative;
   overflow: hidden;
-  transition: background 0.3s, border-left 0.3s, padding-left 0.3s;
+  transition: background 0.3s, border-left 0.3s, padding-left 0.3s, box-shadow 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   padding-left: 0;
 }
 
