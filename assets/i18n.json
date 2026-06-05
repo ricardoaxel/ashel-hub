@@ -39,6 +39,80 @@
       "projects": "Projects",
       "tracks": "Tracks Released",
       "years": "Years Active"
+    },
+    "projects": {
+      "oshira": {
+        "shortDescription": "Dark screamo duo with Manuel Espinoza. Debut EP \"Vorágine\" mastered by Brad Boatright. For fans of Portrayal of Guilt, Respire, Saetia.",
+        "description": [
+          "Dark screamo duo exploring the tension between identity, fear, and the pressure we impose on ourselves in the face of uncertainty. The feeling of \"not arriving in time to your own life,\" oscillating between disappearing and asserting your existence, seeking clarity within chaos. For fans of Portrayal of Guilt, Ostraca, Saetia, Respire, Infant Island, Lightning Bolt, Hella, and The Body.",
+          "Oshira solidified their live presence in spaces like House of Vans in Mexico City. \"Vorágine\" was recorded and mixed by the duo, with mastering by Brad Boatright and cover art by Ethan Lee McCarthy."
+        ],
+        "members": {
+          "Manuel Espinoza": "Drums",
+          "Ashel": "Guitar, Vocals"
+        },
+        "releases": {
+          "Vorágine": "Six-track EP addressing identity, fear, and the pressure of uncertainty. Tracks: \"Umbral\" (ambient intro), \"Saber Desaparecer\", \"Punto Ciego\", \"Sigilo\", \"Vorágine\", and \"Fisura\"."
+        }
+      },
+      "dotzd": {
+        "shortDescription": "Solo post-(rock/metal) (shoe/black)-gaze project. 8 releases since 2012 spanning blackgaze, shoegaze, slowcore, ambient, and psychedelia.",
+        "description": [
+          "Solo post-(rock/metal) (shoe/black)-gaze project from Mexico City. Active since 2012, Dotzd is Ashel's primary solo vehicle to explore the duality of opposites — day and night, change and eternal constant. All songs written, performed, produced, mixed, and mastered by Ashel.",
+          "The sound spans blackgaze, shoegaze, slowcore, psychedelia, ambient, and noise — everything needed to express the sensation of duality that is always a constant in life. \"Tempo\" was produced at Echo Bravo Studio. \"Empero\" features Carlo Ixcamparij on drums, marking the first collaboration on a Dotzd release."
+        ],
+        "members": {
+          "Ashel": "Guitars, Bass, Vocals, Drum Programming",
+          "Carlo Ixcamparij": "Drums (Empero, 2024)"
+        },
+        "releases": {
+          "Empero": "\"Empero\" represents a long-awaited release, forged through a complicated journey and numerous revisions. Written and recorded during 2020, the album features Carlo Ixcamparij on drums — a first for Dotzd. Tracks: \"Viento\", \"Memorias del tiempo\", and \"Empero\".",
+          "Tempo": "Produced at Echo Bravo Studio, Tempo explores the passage of time through layers of guitar textures and hypnotic rhythms."
+        }
+      },
+      "rdusp": {
+        "shortDescription": "Math rock with huevos. 4-piece band with Mauricio Narváez, Ivan Luna \"Chapu\", and Arturo Macías. Born mid-2017.",
+        "description": [
+          "Math rock with huevos. Born mid-2017, this 4-piece band fuses math rock, emo, and screamo with raw energy. Their only release \"Valle Bravo\" contains 6 tracks — each named as failed attempts at the band's name. Fully recorded by the band at El Cuarto de Ensayo in December 2017, with mixing, production, and design by Ashel."
+        ],
+        "members": {
+          "Mauricio Narváez": "Bass, Vocals (lyrics)",
+          "Ashel": "Guitar (mixing, production, design)",
+          "Ivan Luna \"Chapu\"": "Drums",
+          "Arturo Macías \"サクヒン\"": "Guitar"
+        },
+        "releases": {
+          "Valle Bravo": "6 tracks of math rock/emo/screamo energy. \"Shiba Inu\", \"Siempre la misma fórmula\", \"Debería irme pronto\", \"Sin memoria\", \"NES (Nada es suficiente)\", and \"Escultores\"."
+        }
+      },
+      "ashel-solo": {
+        "shortDescription": "Personal solo project for ambient experiments, post-rock compositions, math rock, and covers. Plus guitar improvisations on YouTube.",
+        "description": [
+          "Personal solo project for ambient experiments, post-rock compositions, math rock, and covers. A space to explore sounds outside the confines of other projects — from ambient experiments and Delta Sleep covers to an ambient/post-rock reinterpretation of Metallica's \"ONE\". Also includes guitar improvisations shared on YouTube."
+        ],
+        "members": {
+          "Ashel": "All instruments, production, mixing, mastering"
+        },
+        "releases": {
+          "El caos es la naturaleza de las cosas...": "4 tracks of ambient/post-rock/experimental. Includes \"Esencia\", \"Copo\", \"Meow\", and \"Camp\" (Delta Sleep cover)."
+        }
+      },
+      "hostem": {
+        "shortDescription": "Thrash/hardcore band from Tlalnepantla. Debut self-titled EP with 4 tracks. Raziel, Sebastián, Diego, Alec, and Ashel.",
+        "description": [
+          "Thrash/hardcore band from Tlalnepantla. Raw and relentless energy with 4 tracks spanning social critique to dark fantasy. Debut self-titled EP recorded at Diego's house, mixed by Ashel. Lyrics by Diego and Raziel, with special thanks to Aldo \"Hacha Loca\" López."
+        ],
+        "members": {
+          "Raziel": "Vocals (lyrics)",
+          "Sebastián": "Drums",
+          "Diego": "Guitar (lyrics)",
+          "Alec": "Bass",
+          "Ashel": "Guitar (mixing)"
+        },
+        "releases": {
+          "Hostem": "4 tracks of thrash/hardcore fury. \"Incursion\", \"Hacha Loca\", \"Porquería Social\", and \"Cursed Souls\"."
+        }
+      }
     }
   },
   "es": {
