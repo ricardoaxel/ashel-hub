@@ -415,7 +415,7 @@
               <div class="project-genres">
                 ${p.genres.map((g) => `<span class="genre-tag">${g}</span>`).join('')}
               </div>
-              <p class="project-desc">${p.shortDescription}</p>
+              <p class="project-desc">${t.projects?.[p.id]?.shortDescription || p.shortDescription}</p>
               <span class="project-arrow">→</span>
             </div>
           </a>`
@@ -560,9 +560,8 @@
             .join('');
           document.getElementById('gallery-grid').innerHTML = galleryHtml;
 
-          const t2 = i18nData?.[currentLocale] || i18nData?.en || {};
-          const bioText = t2.site?.bio || data.site.bio;
-          const statLabels = t2.stats || {
+          const bioText = t.site?.bio || data.site.bio;
+          const statLabels = t.stats || {
             projects: 'Projects',
             tracks: 'Tracks Released',
             years: 'Years Active',
