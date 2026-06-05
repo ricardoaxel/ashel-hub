@@ -20,18 +20,23 @@ A responsive HTML/CSS portfolio page for showcasing your music projects.
 ## Embedding Music Players
 
 ### Spotify
+
 Replace the `src` in the Spotify iframe with your album/track embed URL:
+
 ```
 https://open.spotify.com/embed/album/YOUR_ALBUM_ID
 ```
 
 ### SoundCloud
+
 Replace the `src` with your track URL:
+
 ```
 https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/YOUR_TRACK
 ```
 
 ### Bandcamp
+
 Use the Bandcamp embed code from your album page.
 
 ## Customizing
@@ -43,7 +48,9 @@ Use the Bandcamp embed code from your album page.
 ## Opening the Page
 
 Just open `index.html` in any browser, or use a local server:
+
 ```bash
 python3 -m http.server 8000
 ```
+
 Then visit `http://localhost:8000`

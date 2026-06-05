@@ -39,9 +39,7 @@
         { "name": "Manuel Espinoza", "role": "Drums" },
         { "name": "Ashel", "role": "Guitar, Vocals" }
       ],
-      "links": [
-        { "label": "Bandcamp", "url": "https://oshira.bandcamp.com" }
-      ],
+      "links": [{ "label": "Bandcamp", "url": "https://oshira.bandcamp.com" }],
       "releases": [
         {
           "type": "EP",
@@ -73,7 +71,16 @@
       "id": "dotzd",
       "name": "Dotzd",
       "cover": "assets/images/dotzd-tempo.jpg",
-      "genres": ["Blackgaze", "Post-Rock", "Shoegaze", "Post-Metal", "Slowcore", "Ambient", "Psychedelic", "Noise"],
+      "genres": [
+        "Blackgaze",
+        "Post-Rock",
+        "Shoegaze",
+        "Post-Metal",
+        "Slowcore",
+        "Ambient",
+        "Psychedelic",
+        "Noise"
+      ],
       "location": "Mexico City, Mexico",
       "badge": null,
       "shortDescription": "Post-(Rock/Metal) (Shoe/Black)-gaze one man band. 8 releases since 2012 spanning blackgaze, shoegaze, slowcore, ambient, and psychedelic.",
@@ -199,9 +206,7 @@
       "description": [
         "Personal solo project for ambient experiments, post-rock compositions, math rock, and covers. A space to explore sounds outside the confines of other projects — from ambient experiments and Delta Sleep covers to a Metallica \"ONE\" ambient/post-rock reimagining. Also includes guitar improvisations shared on YouTube."
       ],
-      "members": [
-        { "name": "Ashel", "role": "All instruments, production, mixing, mastering" }
-      ],
+      "members": [{ "name": "Ashel", "role": "All instruments, production, mixing, mastering" }],
       "links": [
         { "label": "Bandcamp", "url": "https://ashel.bandcamp.com" },
         { "label": "YouTube", "url": "https://www.youtube.com/@ashel6708" },
@@ -280,9 +285,7 @@
         { "name": "Alec", "role": "Bass" },
         { "name": "Ashel", "role": "Guitar (mixing)" }
       ],
-      "links": [
-        { "label": "Bandcamp", "url": "https://hostem.bandcamp.com" }
-      ],
+      "links": [{ "label": "Bandcamp", "url": "https://hostem.bandcamp.com" }],
       "releases": [
         {
           "type": "EP",

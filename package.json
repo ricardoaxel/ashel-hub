@@ -1,0 +1,24 @@
+{
+  "name": "music-portfolio",
+  "version": "1.0.0",
+  "description": "A responsive HTML/CSS portfolio page for showcasing your music projects.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "lint": "node -e \"const fs=require('fs'); ['index.html','project.html'].forEach(f => { const html=fs.readFileSync(f,'utf8'); const scripts=html.split('<script>').slice(1); scripts.forEach((s,i) => { const code=s.split('</script>')[0]; try{new Function(code); console.log(f+': script '+i+' OK'); }catch(e){console.log(f+': script '+i+' ERROR: '+e.message);}}); });\"",
+    "format": "prettier --write '**/*.{html,css,json,md}'",
+    "format:check": "prettier --check '**/*.{html,css,json,md}'",
+    "format": "prettier --write '**/*.{html,css,json,md,js}'",
+    "format:check": "prettier --check '**/*.{html,css,json,md,js}'",
+    "check": "npm run format:check && npm run lint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "editorconfig-checker": "^6.1.1",
+    "eslint": "^10.4.1",
+    "prettier": "^3.8.3"
+  }
+}
