@@ -13,20 +13,27 @@
   <div class="noise"></div>
   <div class="grid-bg"></div>
 
-  <header class="header">
-    <a href="#" class="logo">Ashel</a>
-    <ul class="nav-links">
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <button class="mobile-menu-btn" aria-label="Toggle menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </header>
+    <header class="header">
+      <a href="#" class="logo">Ashel</a>
+      <div class="header-right">
+        <ul class="nav-links">
+          <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+          <li><a href="#gallery" data-i18n="nav.gallery">Gallery</a></li>
+          <li><a href="#about" data-i18n="nav.about">About</a></li>
+          <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+        <div class="lang-toggle" id="lang-toggle">
+          <span class="lang-option" data-lang="en">EN</span>
+          <span class="lang-separator">|</span>
+          <span class="lang-option" data-lang="es">ES</span>
+        </div>
+      </div>
+      <button class="mobile-menu-btn" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </header>
 
   <main>
     <section class="hero">
@@ -39,7 +46,7 @@
         <p class="hero-tagline" id="hero-tagline"></p>
       </div>
       <div class="hero-scroll">
-        <span>Scroll ↓</span>
+        <span data-i18n="site.scrollHint">Scroll</span> ↓
       </div>
     </section>
 
@@ -50,7 +57,7 @@
 
     <section id="projects">
       <div class="section-label">
-        <span>Projects / Bands</span>
+        <span data-i18n="labels.projectsSection">Projects / Bands</span>
         <span class="count" id="project-count"></span>
       </div>
       <div class="projects-list" id="projects-grid">
@@ -59,7 +66,7 @@
 
     <section id="gallery">
       <div class="section-label">
-        <span>Gallery</span>
+        <span data-i18n="labels.galleryLabel">Gallery</span>
         <span class="count">06</span>
       </div>
       <div class="gallery-grid" id="gallery-grid">
@@ -68,7 +75,7 @@
 
     <section id="about">
       <div class="section-label">
-        <span>About</span>
+        <span data-i18n="labels.aboutLabel">About</span>
         <span class="count">001</span>
       </div>
       <div class="about">
@@ -82,10 +89,10 @@
 
     <section id="contact" class="contact">
       <div class="section-label" style="border-bottom: none; padding-bottom: 0;">
-        <span>Contact / Links</span>
+        <span data-i18n="labels.contactLabel">Contact / Links</span>
         <span class="count">∞</span>
       </div>
-      <p class="contact-subtitle">For collaborations, bookings, or just to say hi</p>
+      <p class="contact-subtitle" data-i18n="labels.emailDesc">For collaborations, bookings, or just to say hi</p>
       <div class="social-links" id="social-links">
       </div>
     </section>
@@ -93,7 +100,7 @@
 
   <footer class="footer">
     <p>&copy; 2026 Ashel</p>
-    <p>Built with obsession</p>
+    <p data-i18n="site.builtWith">Built with obsession</p>
   </footer>
 
   <script>
@@ -151,10 +158,59 @@
       });
     }
 
-    fetch('data.json', { cache: 'no-store' })
+    const params = new URLSearchParams(window.location.search);
+    const browserLang = navigator.language.startsWith('es') ? 'es' : 'en';
+    let currentLocale = params.get('locale') || localStorage.getItem('locale') || browserLang;
+    let i18nData = null;
+
+    function applyTranslations() {
+      if (!i18nData) return;
+      const t = i18nData[currentLocale] || i18nData.en;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        const keys = key.split('.');
+        let value = t;
+        for (const k of keys) {
+          value = value?.[k];
+        }
+        if (typeof value === 'string') el.textContent = value;
+      });
+      document.querySelectorAll('.lang-option').forEach(opt => {
+        opt.classList.toggle('active', opt.dataset.lang === currentLocale);
+      });
+      document.documentElement.lang = currentLocale;
+    }
+
+    function setLocale(lang) {
+      currentLocale = lang;
+      localStorage.setItem('locale', lang);
+      const url = new URL(window.location);
+      url.searchParams.set('locale', lang);
+      window.history.replaceState({}, '', url);
+      applyTranslations();
+    }
+
+    document.querySelectorAll('.lang-option').forEach(opt => {
+      opt.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setLocale(opt.dataset.lang);
+      });
+    });
+
+    fetch('assets/i18n.json', { cache: 'no-store' })
       .then(res => res.json())
-      .then(data => {
-        document.getElementById('hero-tagline').textContent = data.site.subtitle;
+      .then(t => {
+        i18nData = t;
+        applyTranslations();
+      });
+
+    Promise.all([
+      fetch('assets/i18n.json', { cache: 'no-store' }).then(r => r.json()),
+      fetch('data.json', { cache: 'no-store' }).then(r => r.json())
+    ]).then(([translations, data]) => {
+      const t = translations[currentLocale] || translations.en;
+      document.getElementById('hero-tagline').textContent = t.site?.subtitle || data.site.subtitle;
 
         const canvas = document.getElementById('wave-canvas');
         const ctx = canvas.getContext('2d');
@@ -339,24 +395,25 @@
 
         const bubblesContainer = document.getElementById('hero-bubbles');
         const activeBubbles = [];
-        const usedCovers = [];
+
+        const allReleases = data.projects.flatMap(p =>
+          p.releases.map(r => ({ ...r, projectId: p.id, projectName: p.name }))
+        );
+
+        const shuffled = [...allReleases].sort(() => Math.random() - 0.5);
+        let releaseIndex = 0;
 
         function getDimensions() {
           const hero = document.querySelector('.hero');
           return { w: hero.offsetWidth, h: hero.offsetHeight };
         }
 
-        function getRandomCover() {
-          const available = data.projects.filter(p => !usedCovers.includes(p.id));
-          if (available.length === 0) return null;
-          const p = available[Math.floor(Math.random() * available.length)];
-          usedCovers.push(p.id);
-          return p;
-        }
-
         function createBubble() {
-          const project = getRandomCover();
-          if (!project) return;
+          if (releaseIndex >= shuffled.length) {
+            releaseIndex = 0;
+            shuffled.sort(() => Math.random() - 0.5);
+          }
+          const release = shuffled[releaseIndex++];
 
           const dim = getDimensions();
           const size = Math.random() * 70 + 30;
@@ -377,19 +434,19 @@
           bubble.style.transform = `translate(${x}px, ${y}px)`;
 
           const img = document.createElement('img');
-          img.src = project.cover;
-          img.alt = '';
+          img.src = release.cover;
+          img.alt = release.name;
           img.loading = 'lazy';
           bubble.appendChild(img);
           bubblesContainer.appendChild(bubble);
 
-          const bubbleObj = { el: bubble, x, y, vx, vy, size, project, hovered: false };
+          const bubbleObj = { el: bubble, x, y, vx, vy, size, release, hovered: false, currentScale: 1 };
 
           bubble.addEventListener('mouseenter', () => bubbleObj.hovered = true);
           bubble.addEventListener('mouseleave', () => bubbleObj.hovered = false);
 
           bubble.addEventListener('click', () => {
-            const card = document.getElementById(`project-${project.id}`);
+            const card = document.getElementById(`project-${release.projectId}`);
             if (card) {
               card.scrollIntoView({ behavior: 'smooth', block: 'center' });
               card.style.boxShadow = '0 0 0 2px var(--section-accent, #ff2d55), 0 0 20px rgba(255,45,85,0.3)';
@@ -402,7 +459,7 @@
           activeBubbles.push(bubbleObj);
         }
 
-        for (let i = 0; i < data.projects.length; i++) createBubble();
+        for (let i = 0; i < allReleases.length; i++) createBubble();
 
         function animateBubbles() {
           const dim = getDimensions();
@@ -435,11 +492,16 @@
 
             const dist = Math.hypot(b.x - dim.w / 2, b.y - dim.h / 2);
             const maxDist = Math.max(dim.w, dim.h) * 0.6;
-            const baseOpacity = Math.max(0.5, Math.min(0.85, (1 - dist / maxDist) * 0.7));
-            const opacity = b.hovered ? 1.0 : baseOpacity;
-            const scale = b.hovered ? 1.2 : 1;
+            const baseOpacity = 0.35 + ((1 - dist / maxDist) * 0.1);
+            const target = b.hovered ? 0.9 : baseOpacity;
+            const current = parseFloat(b.el.style.opacity || baseOpacity);
+            const opacity = current + (target - current) * 0.08;
+            
+            const hoverTargetWidth = 100;
+            const targetScale = b.hovered ? hoverTargetWidth / b.size : 1;
+            b.currentScale = b.currentScale + (targetScale - b.currentScale) * 0.08;
 
-            b.el.style.transform = `translate(${b.x}px, ${b.y}px) scale(${scale})`;
+            b.el.style.transform = `translate(${b.x}px, ${b.y}px) scale(${b.currentScale})`;
             b.el.style.opacity = opacity;
           }
 
@@ -453,14 +515,19 @@
           </div>`).join('');
         document.getElementById('gallery-grid').innerHTML = galleryHtml;
 
+        const t = (i18nData?.[currentLocale] || i18nData?.en) || {};
+        const bioText = t.site?.bio || data.site.bio;
+        const statLabels = t.stats || { projects: 'Projects', tracks: 'Tracks Released', years: 'Years Active' };
+        const statKeys = ['projects', 'tracks', 'years'];
+
         const aboutHtml = `
           <h3>Ashel</h3>
-          ${data.site.bio.map(b => `<p>${b}</p>`).join('')}
+          ${bioText.map(b => `<p>${b}</p>`).join('')}
           <div class="stats">
-            ${data.site.stats.map(s => `
+            ${data.site.stats.map((s, i) => `
               <div class="stat">
                 <span class="stat-number">${s.number}</span>
-                <span class="stat-label">${s.label}</span>
+                <span class="stat-label">${statLabels[statKeys[i]] || s.label}</span>
               </div>`).join('')}
           </div>`;
         document.getElementById('about-text').innerHTML = aboutHtml;

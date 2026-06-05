@@ -15,12 +15,19 @@
 
   <header class="header">
     <a href="index.html" class="logo">Ashel</a>
-    <ul class="nav-links">
-      <li><a href="index.html#projects">Projects</a></li>
-      <li><a href="index.html#gallery">Gallery</a></li>
-      <li><a href="index.html#about">About</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
-    </ul>
+    <div class="header-right">
+      <ul class="nav-links">
+        <li><a href="index.html#projects" data-i18n="nav.projects">Projects</a></li>
+        <li><a href="index.html#gallery" data-i18n="nav.gallery">Gallery</a></li>
+        <li><a href="index.html#about" data-i18n="nav.about">About</a></li>
+        <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+      <div class="lang-toggle" id="lang-toggle">
+        <span class="lang-option" data-lang="en">EN</span>
+        <span class="lang-separator">|</span>
+        <span class="lang-option" data-lang="es">ES</span>
+      </div>
+    </div>
     <button class="mobile-menu-btn" aria-label="Toggle menu">
       <span></span>
       <span></span>
@@ -29,15 +36,62 @@
   </header>
 
   <main id="project-content">
-    <div class="loading">Loading</div>
+    <div class="loading" data-i18n="site.loading">Loading</div>
   </main>
 
   <footer class="footer">
     <p>&copy; 2026 Ashel</p>
-    <p>Built with obsession</p>
+    <p data-i18n="site.builtWith">Built with obsession</p>
   </footer>
 
   <script>
+    const params = new URLSearchParams(window.location.search);
+    const browserLang = navigator.language.startsWith('es') ? 'es' : 'en';
+    let currentLocale = params.get('locale') || localStorage.getItem('locale') || browserLang;
+    let i18nData = null;
+
+    function applyTranslations() {
+      if (!i18nData) return;
+      const t = i18nData[currentLocale] || i18nData.en;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        const keys = key.split('.');
+        let value = t;
+        for (const k of keys) {
+          value = value?.[k];
+        }
+        if (typeof value === 'string') el.textContent = value;
+      });
+      document.querySelectorAll('.lang-option').forEach(opt => {
+        opt.classList.toggle('active', opt.dataset.lang === currentLocale);
+      });
+      document.documentElement.lang = currentLocale;
+    }
+
+    function setLocale(lang) {
+      currentLocale = lang;
+      localStorage.setItem('locale', lang);
+      const url = new URL(window.location);
+      url.searchParams.set('locale', lang);
+      window.history.replaceState({}, '', url);
+      applyTranslations();
+    }
+
+    document.querySelectorAll('.lang-option').forEach(opt => {
+      opt.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setLocale(opt.dataset.lang);
+      });
+    });
+
+    fetch('assets/i18n.json', { cache: 'no-store' })
+      .then(res => res.json())
+      .then(t => {
+        i18nData = t;
+        applyTranslations();
+      });
+
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
 
@@ -92,7 +146,6 @@
       });
     }
 
-    const params = new URLSearchParams(window.location.search);
     const projectId = params.get('id');
 
     if (!projectId) {
@@ -103,12 +156,13 @@
       .then(res => res.json())
       .then(data => {
         const project = data.projects.find(p => p.id === projectId);
+        const t = (i18nData?.[currentLocale] || i18nData?.en) || {};
 
         if (!project) {
           document.getElementById('project-content').innerHTML = `
             <div class="container" style="padding-top: 120px; text-align: center;">
-              <a href="index.html#projects" class="back-link">&larr; Back to Projects</a>
-              <h1>Project not found</h1>
+              <a href="index.html#projects" class="back-link">&larr; ${t.site?.backToProjects || 'Back to Projects'}</a>
+              <h1>${t.site?.notFound || 'Project not found'}</h1>
             </div>`;
           return;
         }
@@ -125,10 +179,10 @@
           return `
             <section class="featured-release" id="featured-section">
               <div class="section-label" style="border: none; padding: 0; margin-bottom: 2rem;">
-                <span>Featured Release</span>
+                <span>${t.site?.featuredRelease || 'Featured Release'}</span>
                 <span class="count">${release.year}</span>
               </div>
-              <h2>Now Playing</h2>
+              <h2>${t.site?.nowPlaying || 'Now Playing'}</h2>
               <h3>${release.name}</h3>
               ${release.description ? `<p>${release.description}</p>` : ''}
               ${release.embed ? `<div class="detail-player-section"><iframe src="${release.embed}" height="450" frameborder="0"></iframe></div>` : ''}
@@ -139,7 +193,7 @@
 
         const selectorHtml = project.releases.length > 1 ? `
           <div class="album-selector-wrap">
-            <label>Album</label>
+            <label>${t.site?.albumLabel || 'Album'}</label>
             <select id="album-selector">
               ${project.releases.map(r => `<option value="${r.name}" ${r === defaultFeatured || r.name === defaultFeatured.name ? 'selected' : ''}>${r.name} (${r.year})</option>`).join('')}
             </select>
@@ -155,33 +209,19 @@
             </div>
           </a>`).join('');
 
-        const featuredSection = featured ? `
-          <section class="featured-release">
-            <div class="section-label" style="border: none; padding: 0; margin-bottom: 2rem;">
-              <span>Featured Release</span>
-              <span class="count">${featured.year}</span>
-            </div>
-            <h2>Now Playing</h2>
-            <h3>${featured.name}</h3>
-            <p>${featured.description}</p>
-            <div class="detail-player-section">
-              <iframe src="${featured.embed}" height="450" frameborder="0"></iframe>
-            </div>
-          </section>` : '';
-
         document.getElementById('project-content').innerHTML = `
           <section class="detail-header">
-            <a href="index.html#projects" class="back-link">&larr; Back to Projects</a>
+            <a href="index.html#projects" class="back-link">&larr; ${t.site?.backToProjects || 'Back to Projects'}</a>
             <div class="detail-hero">
               <img src="${project.cover}" alt="${project.name}" class="detail-cover">
               <div class="detail-info">
                 <h1>${project.name}</h1>
                 <div class="detail-genres">${genresHtml}</div>
-                <p class="detail-location">${project.location}</p>
+                <p class="detail-location">${t.labels?.location || 'Location'}: ${project.location}</p>
                 ${descriptionHtml}
                 ${selectorHtml}
                 <div class="detail-members">
-                  <h3>Members</h3>
+                  <h3>${t.labels?.members || 'Members'}</h3>
                   <ul class="member-list">${membersHtml}</ul>
                 </div>
                 <div class="detail-links">${linksHtml}</div>
@@ -191,7 +231,7 @@
 
           <section class="discography">
             <div class="section-label" style="border: none; padding: 0; margin-bottom: 2rem;">
-              <span>Discography</span>
+              <span>${t.site?.discography || 'Discography'}</span>
               <span class="count">${String(project.releases.length).padStart(2, '0')}</span>
             </div>
             <div class="discography-grid">${releasesHtml}</div>

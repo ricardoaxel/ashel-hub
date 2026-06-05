@@ -1,0 +1,86 @@
+{
+  "en": {
+    "site": {
+      "title": "Ashel",
+      "subtitle": "Guitarist | Producer | Multi-Project Artist from Mexico City",
+      "scrollHint": "Scroll",
+      "backToProjects": "Back to Projects",
+      "nowPlaying": "Now Playing",
+      "featuredRelease": "Featured Release",
+      "discography": "Discography",
+      "albumLabel": "Album",
+      "members": "Members",
+      "loading": "Loading",
+      "notFound": "Project not found",
+      "builtWith": "Built with obsession",
+      "bio": [
+        "Multi-instrumentalist, guitarist, and producer from Mexico City. Active across multiple projects spanning blackgaze, post-rock, math rock, screamo, thrash metal, and ambient music.",
+        "Handles production, mixing, mastering, and design across most projects, recording at home studios and Echo Bravo Studio."
+      ]
+    },
+    "nav": {
+      "projects": "Projects",
+      "gallery": "Gallery",
+      "about": "About",
+      "contact": "Contact"
+    },
+    "labels": {
+      "projectsSection": "Projects / Bands",
+      "galleryLabel": "Gallery",
+      "aboutLabel": "About",
+      "contactLabel": "Contact / Links",
+      "members": "Members",
+      "location": "Location",
+      "socialLinks": "Social Links",
+      "email": "Email",
+      "emailDesc": "For collaborations, bookings, or just to say hi."
+    },
+    "stats": {
+      "projects": "Projects",
+      "tracks": "Tracks Released",
+      "years": "Years Active"
+    }
+  },
+  "es": {
+    "site": {
+      "title": "Ashel",
+      "subtitle": "Guitarrista | Productor | Artista Multi-Proyecto de la Ciudad de México",
+      "scrollHint": "Desplázate",
+      "backToProjects": "Volver a Proyectos",
+      "nowPlaying": "Reproduciendo",
+      "featuredRelease": "Lanzamiento Destacado",
+      "discography": "Discografía",
+      "albumLabel": "Álbum",
+      "members": "Miembros",
+      "loading": "Cargando",
+      "notFound": "Proyecto no encontrado",
+      "builtWith": "Construido con obsesión",
+      "bio": [
+        "Multiinstrumentista, guitarrista y productor de la Ciudad de México. Activo en múltiples proyectos que abarcan blackgaze, post-rock, math rock, screamo, thrash metal y música ambient.",
+        "Se encarga de la producción, mezcla, mastering y diseño en la mayoría de proyectos, grabando en estudios caseros y Echo Bravo Studio."
+      ]
+    },
+    "nav": {
+      "projects": "Proyectos",
+      "gallery": "Galería",
+      "about": "Acerca de",
+      "contact": "Contacto"
+    },
+    "labels": {
+      "projectsSection": "Proyectos / Bandas",
+      "galleryLabel": "Galería",
+      "aboutLabel": "Acerca de",
+      "contactLabel": "Contacto / Enlaces",
+      "members": "Miembros",
+      "location": "Ubicación",
+      "socialLinks": "Redes Sociales",
+      "email": "Email",
+      "emailDesc": "Para colaboraciones, reservas, o simplemente para saludar."
+    },
+    "stats": {
+      "projects": "Proyectos",
+      "tracks": "Canciones Lanzadas",
+      "years": "Años Activo"
+    }
+  }
+}
