@@ -167,6 +167,17 @@
       let siteData = null;
       const colorCache = {};
       const colorThief = new ColorThief();
+      let heroColors = ['#ff2d55', '#5856d6', '#00d4aa'];
+
+      function updateHeroColors() {
+        const top3 = siteData.projects.slice(0, 3);
+        const allLoaded = top3.every((p) => colorCache[p.id]);
+        if (!allLoaded) return;
+        const c1 = colorCache[top3[0].id][0];
+        const c2 = colorCache[top3[1].id][0];
+        const c3 = colorCache[top3[2].id][0];
+        heroColors = [c1, c2, c3];
+      }
 
       function applyCardColors() {
         const cards = document.querySelectorAll('.project-card');
@@ -191,6 +202,7 @@
             item.style.setProperty('--section-accent-secondary', colors[1]);
           }
         });
+        updateHeroColors();
       }
 
       function extractColors(projectId, imageUrl) {
@@ -493,20 +505,7 @@
 
             ctx.globalCompositeOperation = 'lighter';
 
-            const accent =
-              getComputedStyle(document.documentElement)
-                .getPropertyValue('--section-accent')
-                .trim() || '#ff2d55';
-            const accentSec =
-              getComputedStyle(document.documentElement)
-                .getPropertyValue('--section-accent-secondary')
-                .trim() || '#5856d6';
-            const accentTer =
-              getComputedStyle(document.documentElement)
-                .getPropertyValue('--section-accent-tertiary')
-                .trim() || '#00d4aa';
-
-            const colors = [accent, accentSec, accentTer];
+            const colors = heroColors;
             const opacities = [0.3, 0.2, 0.15];
 
             for (let layer = 0; layer < 3; layer++) {
