@@ -1009,7 +1009,7 @@ button:hover ~ .cursor-ring,
 .discography-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1px;
+  gap: 2px;
   background: var(--border);
 }
 
@@ -1020,12 +1020,11 @@ button:hover ~ .cursor-ring,
   color: inherit;
   transition: background 0.3s;
   position: relative;
-  border-top: 3px solid var(--section-accent, #ff2d55);
+  border-top: 3px solid #ff2d55;
 }
 
 .album-card:hover {
   background: var(--surface);
-  border-top-color: var(--section-accent-secondary, var(--accent-secondary));
 }
 
 .album-card:hover .album-cover {
