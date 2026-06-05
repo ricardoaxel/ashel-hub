@@ -1020,7 +1020,7 @@ button:hover ~ .cursor-ring,
   color: inherit;
   transition: background 0.3s;
   position: relative;
-  border-top: 3px solid #ff2d55;
+  border-top: 3px solid #ff2d55 !important;
 }
 
 .album-card:hover {
