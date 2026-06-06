@@ -124,7 +124,7 @@ function applyProjectColors(projectId, colors) {
 // ---- Cursor ----
 let cursorDot, cursorRing, cursorMouseX, cursorMouseY, cursorRingX, cursorRingY;
 let currentSectionColor = '#ff2d55';
-let scrollActiveColor = '#ff2d55';
+let trackedColor = '#ff2d55';
 
 function initCursor() {
   cursorDot = document.querySelector('.cursor-dot');
@@ -147,60 +147,66 @@ function initCursor() {
   initCursorScrollTracking();
 }
 
-function getAccentColorForElement(el) {
-  if (!el) return '#ff2d55';
+function getElementAccent(el) {
+  if (!el) return null;
 
-  let current = el;
-  while (current && current !== document.body) {
-    const color = getComputedStyle(current).getPropertyValue('--section-accent').trim();
-    if (color && color !== 'rgba(0, 0, 0, 0)') return color;
-    current = current.parentElement;
+  // Only return accent if set directly on the element (inline style)
+  const inlineColor = el.style.getPropertyValue('--section-accent').trim();
+  if (inlineColor && inlineColor !== 'rgba(0, 0, 0, 0)' && inlineColor !== '') return inlineColor;
+
+  return null;
+}
+
+function applyColor(color) {
+  if (color && color !== currentSectionColor) {
+    currentSectionColor = color;
+    trackedColor = color;
+    cursorRing.style.borderColor = color;
   }
-
-  return null; // Signal to use scrollActiveColor
 }
 
 function initCursorScrollTracking() {
   if (!cursorRing) return;
 
-  const trackables = document.querySelectorAll('.project-card, .projects, .gallery, .about, .contact, .footer');
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        // Find the project card most visible in the viewport
+        const cards = document.querySelectorAll('.project-card');
+        let bestCard = null;
+        let maxVisible = 0;
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      let maxRatio = 0;
-      let bestColor = '#ff2d55';
+        cards.forEach((card) => {
+          const rect = card.getBoundingClientRect();
+          const visibleTop = Math.max(0, rect.top);
+          const visibleBottom = Math.min(window.innerHeight, rect.bottom);
+          const visibleHeight = Math.max(0, visibleBottom - visibleTop);
 
-      entries.forEach((entry) => {
-        if (entry.intersectionRatio > maxRatio) {
-          maxRatio = entry.intersectionRatio;
-          const color = getComputedStyle(entry.target).getPropertyValue('--section-accent').trim();
-          if (color && color !== 'rgba(0, 0, 0, 0)') {
-            bestColor = color;
-          } else {
-            bestColor = getComputedStyle(document.documentElement).getPropertyValue('--section-accent').trim() || '#ff2d55';
+          if (visibleHeight > maxVisible) {
+            maxVisible = visibleHeight;
+            bestCard = card;
           }
+        });
+
+        if (bestCard) {
+          const color = bestCard.style.getPropertyValue('--section-accent').trim();
+          if (color) applyColor(color);
         }
+
+        ticking = false;
       });
-
-      scrollActiveColor = bestColor;
-      if (scrollActiveColor !== currentSectionColor) {
-        currentSectionColor = scrollActiveColor;
-        cursorRing.style.borderColor = currentSectionColor;
-      }
-    },
-    { threshold: [0.1, 0.25, 0.5, 0.75] }
-  );
-
-  trackables.forEach((el) => observer.observe(el));
+      ticking = true;
+    }
+  });
 }
 
 function updateCursorSectionColor(e) {
-  const directColor = getAccentColorForElement(document.elementFromPoint(e.clientX, e.clientY));
-  const newColor = directColor !== null ? directColor : scrollActiveColor;
-
-  if (newColor !== currentSectionColor) {
-    currentSectionColor = newColor;
-    cursorRing.style.borderColor = newColor;
+  const color = getElementAccent(document.elementFromPoint(e.clientX, e.clientY));
+  if (color) {
+    applyColor(color);
+  } else {
+    applyColor(trackedColor);
   }
 }
 
