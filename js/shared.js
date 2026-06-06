@@ -124,7 +124,7 @@ function applyProjectColors(projectId, colors) {
 // ---- Cursor ----
 let cursorDot, cursorRing, cursorMouseX, cursorMouseY, cursorRingX, cursorRingY;
 let currentSectionColor = '#ff2d55';
-let trackedColor = '#ff2d55';
+let scrollActiveColor = '#ff2d55';
 
 function initCursor() {
   cursorDot = document.querySelector('.cursor-dot');
@@ -140,7 +140,7 @@ function initCursor() {
     cursorMouseX = e.clientX;
     cursorMouseY = e.clientY;
     cursorDot.style.transform = `translate(${cursorMouseX - 3}px, ${cursorMouseY - 3}px)`;
-    updateCursorSectionColor(e);
+    updateCursorColor();
   });
 
   animateCursorRing();
@@ -149,18 +149,14 @@ function initCursor() {
 
 function getElementAccent(el) {
   if (!el) return null;
-
-  // Only return accent if set directly on the element (inline style)
-  const inlineColor = el.style.getPropertyValue('--section-accent').trim();
-  if (inlineColor && inlineColor !== 'rgba(0, 0, 0, 0)' && inlineColor !== '') return inlineColor;
-
-  return null;
+  const color = el.style.getPropertyValue('--section-accent').trim();
+  return (color && color !== 'rgba(0, 0, 0, 0)' && color !== '') ? color : null;
 }
 
 function applyColor(color) {
   if (color && color !== currentSectionColor) {
     currentSectionColor = color;
-    trackedColor = color;
+    scrollActiveColor = color;
     cursorRing.style.borderColor = color;
   }
 }
@@ -168,46 +164,52 @@ function applyColor(color) {
 function initCursorScrollTracking() {
   if (!cursorRing) return;
 
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        // Find the project card most visible in the viewport
-        const cards = document.querySelectorAll('.project-card');
-        let bestCard = null;
-        let maxVisible = 0;
+  function observeCards() {
+    const cards = document.querySelectorAll('.project-card');
+    if (!cards.length) return;
 
-        cards.forEach((card) => {
-          const rect = card.getBoundingClientRect();
-          const visibleTop = Math.max(0, rect.top);
-          const visibleBottom = Math.min(window.innerHeight, rect.bottom);
-          const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        let maxRatio = 0;
+        let bestColor = null;
 
-          if (visibleHeight > maxVisible) {
-            maxVisible = visibleHeight;
-            bestCard = card;
+        entries.forEach((entry) => {
+          if (entry.intersectionRatio > maxRatio) {
+            maxRatio = entry.intersectionRatio;
+            bestColor = getElementAccent(entry.target);
           }
         });
 
-        if (bestCard) {
-          const color = bestCard.style.getPropertyValue('--section-accent').trim();
-          if (color) applyColor(color);
+        if (bestColor) {
+          scrollActiveColor = bestColor;
+          if (scrollActiveColor !== currentSectionColor) {
+            currentSectionColor = scrollActiveColor;
+            cursorRing.style.borderColor = scrollActiveColor;
+          }
         }
+      },
+      { threshold: [0, 0.1, 0.25, 0.5, 0.75] }
+    );
 
-        ticking = false;
-      });
-      ticking = true;
-    }
-  });
+    cards.forEach((card) => observer.observe(card));
+  }
+
+  // Retry if cards aren't rendered yet
+  observeCards();
+  if (!document.querySelectorAll('.project-card').length) {
+    const retry = setInterval(() => {
+      observeCards();
+      if (document.querySelectorAll('.project-card').length) clearInterval(retry);
+    }, 100);
+    setTimeout(() => clearInterval(retry), 5000);
+  }
 }
 
-function updateCursorSectionColor(e) {
-  const color = getElementAccent(document.elementFromPoint(e.clientX, e.clientY));
-  if (color) {
-    applyColor(color);
-  } else {
-    applyColor(trackedColor);
-  }
+function updateCursorColor() {
+  const el = document.elementFromPoint(cursorMouseX, cursorMouseY);
+  const directColor = getElementAccent(el);
+  const color = directColor || scrollActiveColor;
+  applyColor(color);
 }
 
 function animateCursorRing() {
