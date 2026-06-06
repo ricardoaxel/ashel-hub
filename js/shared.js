@@ -124,7 +124,7 @@ function applyProjectColors(projectId, colors) {
 // ---- Cursor ----
 let cursorDot, cursorRing, cursorMouseX, cursorMouseY, cursorRingX, cursorRingY;
 let currentSectionColor = '#ff2d55';
-let scrollActiveColor = '#ff2d55';
+let fallbackColor = '#ff2d55';
 
 function initCursor() {
   cursorDot = document.querySelector('.cursor-dot');
@@ -143,73 +143,63 @@ function initCursor() {
     updateCursorColor();
   });
 
-  animateCursorRing();
-  initCursorScrollTracking();
-}
-
-function getElementAccent(el) {
-  if (!el) return null;
-  const color = el.style.getPropertyValue('--section-accent').trim();
-  return (color && color !== 'rgba(0, 0, 0, 0)' && color !== '') ? color : null;
-}
-
-function applyColor(color) {
-  if (color && color !== currentSectionColor) {
-    currentSectionColor = color;
-    scrollActiveColor = color;
-    cursorRing.style.borderColor = color;
-  }
-}
-
-function initCursorScrollTracking() {
-  if (!cursorRing) return;
-
-  function observeCards() {
-    const cards = document.querySelectorAll('.project-card');
-    if (!cards.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        let maxRatio = 0;
-        let bestColor = null;
-
-        entries.forEach((entry) => {
-          if (entry.intersectionRatio > maxRatio) {
-            maxRatio = entry.intersectionRatio;
-            bestColor = getElementAccent(entry.target);
-          }
-        });
-
-        if (bestColor) {
-          scrollActiveColor = bestColor;
-          if (scrollActiveColor !== currentSectionColor) {
-            currentSectionColor = scrollActiveColor;
-            cursorRing.style.borderColor = scrollActiveColor;
-          }
+  let scrollTicking = false;
+  window.addEventListener('scroll', () => {
+    if (!scrollTicking) {
+      requestAnimationFrame(() => {
+        const card = getMostVisibleCard();
+        if (card) {
+          fallbackColor = card.style.getPropertyValue('--section-accent').trim() || '#ff2d55';
         }
-      },
-      { threshold: [0, 0.1, 0.25, 0.5, 0.75] }
-    );
+        updateCursorColor();
+        scrollTicking = false;
+      });
+      scrollTicking = true;
+    }
+  });
 
-    cards.forEach((card) => observer.observe(card));
+  animateCursorRing();
+}
+
+function getMostVisibleCard() {
+  const cards = document.querySelectorAll('.project-card');
+  let bestCard = null;
+  let maxVisible = 0;
+
+  cards.forEach((card) => {
+    const rect = card.getBoundingClientRect();
+    const visibleTop = Math.max(0, rect.top);
+    const visibleBottom = Math.min(window.innerHeight, rect.bottom);
+    const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+
+    if (visibleHeight > maxVisible) {
+      maxVisible = visibleHeight;
+      bestCard = card;
+    }
+  });
+
+  return bestCard;
+}
+
+function getCursorColor() {
+  const el = document.elementFromPoint(cursorMouseX, cursorMouseY);
+  if (!el) return fallbackColor;
+
+  const card = el.closest('.project-card');
+  if (card) {
+    const color = card.style.getPropertyValue('--section-accent').trim();
+    if (color) return color;
   }
 
-  // Retry if cards aren't rendered yet
-  observeCards();
-  if (!document.querySelectorAll('.project-card').length) {
-    const retry = setInterval(() => {
-      observeCards();
-      if (document.querySelectorAll('.project-card').length) clearInterval(retry);
-    }, 100);
-    setTimeout(() => clearInterval(retry), 5000);
-  }
+  return fallbackColor;
 }
 
 function updateCursorColor() {
-  const el = document.elementFromPoint(cursorMouseX, cursorMouseY);
-  const directColor = getElementAccent(el);
-  const color = directColor || scrollActiveColor;
-  applyColor(color);
+  const color = getCursorColor();
+  if (color !== currentSectionColor) {
+    currentSectionColor = color;
+    cursorRing.style.borderColor = color;
+  }
 }
 
 function animateCursorRing() {
