@@ -143,6 +143,41 @@ function initCursor() {
   });
 
   animateCursorRing();
+  initCursorScrollTracking();
+}
+
+function initCursorScrollTracking() {
+  if (!cursorRing) return;
+
+  function updateFromViewport() {
+    const centerY = window.innerHeight / 2;
+    const el = document.elementFromPoint(window.innerWidth / 2, centerY);
+    if (!el) return;
+
+    let newColor = getComputedStyle(document.documentElement).getPropertyValue('--section-accent').trim() || '#ff2d55';
+    const card = el.closest('.project-card');
+    if (card) {
+      newColor = getComputedStyle(card).getPropertyValue('--section-accent').trim() || newColor;
+    }
+
+    if (newColor !== currentSectionColor) {
+      currentSectionColor = newColor;
+      cursorRing.style.borderColor = currentSectionColor;
+    }
+  }
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateFromViewport();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  updateFromViewport();
 }
 
 function updateCursorSectionColor(e) {
