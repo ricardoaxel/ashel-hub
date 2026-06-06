@@ -86,9 +86,9 @@ body {
   border-radius: 50%;
   transform: translate(-50%, -50%);
   transition:
+    border-color 0.3s,
     width 0.3s,
-    height 0.3s,
-    border-color 0.3s;
+    height 0.3s;
 }
 
 a:hover ~ .cursor-ring,

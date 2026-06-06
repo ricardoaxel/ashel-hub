@@ -123,6 +123,7 @@ function applyProjectColors(projectId, colors) {
 
 // ---- Cursor ----
 let cursorDot, cursorRing, cursorMouseX, cursorMouseY, cursorRingX, cursorRingY;
+let currentSectionColor = '#ff2d55';
 
 function initCursor() {
   cursorDot = document.querySelector('.cursor-dot');
@@ -138,9 +139,36 @@ function initCursor() {
     cursorMouseX = e.clientX;
     cursorMouseY = e.clientY;
     cursorDot.style.transform = `translate(${cursorMouseX - 3}px, ${cursorMouseY - 3}px)`;
+    updateCursorSectionColor(e);
   });
 
   animateCursorRing();
+}
+
+function updateCursorSectionColor(e) {
+  const el = document.elementFromPoint(e.clientX, e.clientY);
+  if (!el) return;
+
+  let sectionColor = '#ff2d55';
+
+  const projectCard = el.closest('.project-card');
+  if (projectCard) {
+    const colors = getComputedStyle(projectCard);
+    sectionColor =
+      colors.getPropertyValue('--section-accent').trim() || '#ff2d55';
+  } else {
+    const heroSection = document.querySelector('.hero');
+    if (heroSection && heroSection.contains(el)) {
+      sectionColor = '#ff2d55';
+    } else {
+      sectionColor = getComputedStyle(document.documentElement).getPropertyValue('--section-accent').trim() || '#ff2d55';
+    }
+  }
+
+  if (sectionColor !== currentSectionColor) {
+    currentSectionColor = sectionColor;
+    cursorRing.style.borderColor = sectionColor;
+  }
 }
 
 function animateCursorRing() {
@@ -152,22 +180,18 @@ function animateCursorRing() {
 
 function attachCursor(el) {
   if (!cursorRing) return;
-  const accent =
-    getComputedStyle(document.documentElement).getPropertyValue('--section-accent').trim() ||
-    '#ff2d55';
-  const accentSec =
-    getComputedStyle(document.documentElement)
-      .getPropertyValue('--section-accent-secondary')
-      .trim() || '#5856d6';
   el.addEventListener('mouseenter', () => {
+    const accent =
+      getComputedStyle(document.documentElement).getPropertyValue('--section-accent').trim() ||
+      '#ff2d55';
     cursorRing.style.width = '60px';
     cursorRing.style.height = '60px';
-    cursorRing.style.borderColor = accentSec;
+    cursorRing.style.borderColor = accent;
   });
   el.addEventListener('mouseleave', () => {
     cursorRing.style.width = '36px';
     cursorRing.style.height = '36px';
-    cursorRing.style.borderColor = accent;
+    cursorRing.style.borderColor = currentSectionColor;
   });
 }
 
