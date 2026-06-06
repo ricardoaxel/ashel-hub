@@ -212,12 +212,8 @@ function animateCursorRing() {
 function attachCursor(el) {
   if (!cursorRing) return;
   el.addEventListener('mouseenter', () => {
-    const accent =
-      getComputedStyle(document.documentElement).getPropertyValue('--section-accent').trim() ||
-      '#ff2d55';
     cursorRing.style.width = '60px';
     cursorRing.style.height = '60px';
-    cursorRing.style.borderColor = accent;
   });
   el.addEventListener('mouseleave', () => {
     cursorRing.style.width = '36px';
