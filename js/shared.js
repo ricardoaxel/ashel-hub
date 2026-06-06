@@ -124,6 +124,7 @@ function applyProjectColors(projectId, colors) {
 // ---- Cursor ----
 let cursorDot, cursorRing, cursorMouseX, cursorMouseY, cursorRingX, cursorRingY;
 let currentSectionColor = '#ff2d55';
+let scrollActiveColor = '#ff2d55';
 
 function initCursor() {
   cursorDot = document.querySelector('.cursor-dot');
@@ -149,7 +150,6 @@ function initCursor() {
 function getAccentColorForElement(el) {
   if (!el) return '#ff2d55';
 
-  // Walk up to find --section-accent
   let current = el;
   while (current && current !== document.body) {
     const color = getComputedStyle(current).getPropertyValue('--section-accent').trim();
@@ -157,32 +157,47 @@ function getAccentColorForElement(el) {
     current = current.parentElement;
   }
 
-  // Fallback to page-level accent or root accent
-  return getComputedStyle(document.documentElement).getPropertyValue('--section-accent').trim() || '#ff2d55';
+  return null; // Signal to use scrollActiveColor
 }
 
 function initCursorScrollTracking() {
   if (!cursorRing) return;
 
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        const el = document.elementFromPoint(cursorMouseX, cursorMouseY);
-        const newColor = getAccentColorForElement(el);
-        if (newColor !== currentSectionColor) {
-          currentSectionColor = newColor;
-          cursorRing.style.borderColor = currentSectionColor;
+  const trackables = document.querySelectorAll('.project-card, .projects, .gallery, .about, .contact, .footer');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      let maxRatio = 0;
+      let bestColor = '#ff2d55';
+
+      entries.forEach((entry) => {
+        if (entry.intersectionRatio > maxRatio) {
+          maxRatio = entry.intersectionRatio;
+          const color = getComputedStyle(entry.target).getPropertyValue('--section-accent').trim();
+          if (color && color !== 'rgba(0, 0, 0, 0)') {
+            bestColor = color;
+          } else {
+            bestColor = getComputedStyle(document.documentElement).getPropertyValue('--section-accent').trim() || '#ff2d55';
+          }
         }
-        ticking = false;
       });
-      ticking = true;
-    }
-  });
+
+      scrollActiveColor = bestColor;
+      if (scrollActiveColor !== currentSectionColor) {
+        currentSectionColor = scrollActiveColor;
+        cursorRing.style.borderColor = currentSectionColor;
+      }
+    },
+    { threshold: [0.1, 0.25, 0.5, 0.75] }
+  );
+
+  trackables.forEach((el) => observer.observe(el));
 }
 
 function updateCursorSectionColor(e) {
-  const newColor = getAccentColorForElement(document.elementFromPoint(e.clientX, e.clientY));
+  const directColor = getAccentColorForElement(document.elementFromPoint(e.clientX, e.clientY));
+  const newColor = directColor !== null ? directColor : scrollActiveColor;
+
   if (newColor !== currentSectionColor) {
     currentSectionColor = newColor;
     cursorRing.style.borderColor = newColor;
