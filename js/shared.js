@@ -130,8 +130,8 @@ function initCursor() {
   cursorRing = document.querySelector('.cursor-ring');
   if (!cursorDot || !cursorRing) return;
 
-  cursorMouseX = 0;
-  cursorMouseY = 0;
+  cursorMouseX = window.innerWidth / 2;
+  cursorMouseY = window.innerHeight / 2;
   cursorRingX = 0;
   cursorRingY = 0;
 
@@ -146,63 +146,46 @@ function initCursor() {
   initCursorScrollTracking();
 }
 
+function getAccentColorForElement(el) {
+  if (!el) return '#ff2d55';
+
+  // Walk up to find --section-accent
+  let current = el;
+  while (current && current !== document.body) {
+    const color = getComputedStyle(current).getPropertyValue('--section-accent').trim();
+    if (color && color !== 'rgba(0, 0, 0, 0)') return color;
+    current = current.parentElement;
+  }
+
+  // Fallback to page-level accent or root accent
+  return getComputedStyle(document.documentElement).getPropertyValue('--section-accent').trim() || '#ff2d55';
+}
+
 function initCursorScrollTracking() {
   if (!cursorRing) return;
-
-  function updateFromViewport() {
-    const centerY = window.innerHeight / 2;
-    const el = document.elementFromPoint(window.innerWidth / 2, centerY);
-    if (!el) return;
-
-    let newColor = getComputedStyle(document.documentElement).getPropertyValue('--section-accent').trim() || '#ff2d55';
-    const card = el.closest('.project-card');
-    if (card) {
-      newColor = getComputedStyle(card).getPropertyValue('--section-accent').trim() || newColor;
-    }
-
-    if (newColor !== currentSectionColor) {
-      currentSectionColor = newColor;
-      cursorRing.style.borderColor = currentSectionColor;
-    }
-  }
 
   let ticking = false;
   window.addEventListener('scroll', () => {
     if (!ticking) {
       requestAnimationFrame(() => {
-        updateFromViewport();
+        const el = document.elementFromPoint(cursorMouseX, cursorMouseY);
+        const newColor = getAccentColorForElement(el);
+        if (newColor !== currentSectionColor) {
+          currentSectionColor = newColor;
+          cursorRing.style.borderColor = currentSectionColor;
+        }
         ticking = false;
       });
       ticking = true;
     }
   });
-
-  updateFromViewport();
 }
 
 function updateCursorSectionColor(e) {
-  const el = document.elementFromPoint(e.clientX, e.clientY);
-  if (!el) return;
-
-  let sectionColor = '#ff2d55';
-
-  const projectCard = el.closest('.project-card');
-  if (projectCard) {
-    const colors = getComputedStyle(projectCard);
-    sectionColor =
-      colors.getPropertyValue('--section-accent').trim() || '#ff2d55';
-  } else {
-    const heroSection = document.querySelector('.hero');
-    if (heroSection && heroSection.contains(el)) {
-      sectionColor = '#ff2d55';
-    } else {
-      sectionColor = getComputedStyle(document.documentElement).getPropertyValue('--section-accent').trim() || '#ff2d55';
-    }
-  }
-
-  if (sectionColor !== currentSectionColor) {
-    currentSectionColor = sectionColor;
-    cursorRing.style.borderColor = sectionColor;
+  const newColor = getAccentColorForElement(document.elementFromPoint(e.clientX, e.clientY));
+  if (newColor !== currentSectionColor) {
+    currentSectionColor = newColor;
+    cursorRing.style.borderColor = newColor;
   }
 }
 
