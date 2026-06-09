@@ -29,7 +29,7 @@ function renderProjectContent() {
         <h2>${t.site?.nowPlaying || 'Now Playing'}</h2>
         <h3>${release.name}</h3>
         ${desc ? `<p>${desc}</p>` : ''}
-        ${release.embed ? `<div class="detail-player-section"><iframe src="${release.embed}" height="450" frameborder="0"></iframe></div>` : ''}
+        ${release.embed ? `<div class="detail-player-section">${release.embed}</div>` : ''}
       </section>`;
   }
 

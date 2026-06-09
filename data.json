@@ -7,19 +7,52 @@
       "Handles production, mixing, mastering, and design across most projects, recording at home studios and Echo Bravo Studio."
     ],
     "stats": [
-      { "number": "5", "label": "Projects" },
-      { "number": "40+", "label": "Tracks Released" },
-      { "number": "13+", "label": "Years Active" }
+      {
+        "number": "5",
+        "label": "Projects"
+      },
+      {
+        "number": "40+",
+        "label": "Tracks Released"
+      },
+      {
+        "number": "13+",
+        "label": "Years Active"
+      }
     ],
     "social": [
-      { "label": "Dotzd", "url": "https://dotzd.bandcamp.com" },
-      { "label": "Oshira", "url": "https://oshira.bandcamp.com" },
-      { "label": "Ashel", "url": "https://ashel.bandcamp.com" },
-      { "label": "Hostem", "url": "https://hostem.bandcamp.com" },
-      { "label": "RdUSP", "url": "https://recuerdosdeunsuenoperdido.bandcamp.com" },
-      { "label": "YouTube", "url": "https://www.youtube.com/@ashel6708" },
-      { "label": "Instagram", "url": "https://www.instagram.com/dotzd_mx/" },
-      { "label": "Facebook", "url": "https://www.facebook.com/Dotzdmx/" }
+      {
+        "label": "Dotzd",
+        "url": "https://dotzd.bandcamp.com"
+      },
+      {
+        "label": "Oshira",
+        "url": "https://oshira.bandcamp.com"
+      },
+      {
+        "label": "Ashel",
+        "url": "https://ashel.bandcamp.com"
+      },
+      {
+        "label": "Hostem",
+        "url": "https://hostem.bandcamp.com"
+      },
+      {
+        "label": "RdUSP",
+        "url": "https://recuerdosdeunsuenoperdido.bandcamp.com"
+      },
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@ashel6708"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/dotzd_mx/"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/Dotzdmx/"
+      }
     ]
   },
   "projects": [
@@ -27,7 +60,13 @@
       "id": "oshira",
       "name": "Oshira",
       "cover": "assets/images/oshira.jpg",
-      "genres": ["Dark Screamo", "Post-Hardcore", "Post-Metal", "Math Rock", "Skramz"],
+      "genres": [
+        "Dark Screamo",
+        "Post-Hardcore",
+        "Post-Metal",
+        "Math Rock",
+        "Skramz"
+      ],
       "location": "Mexico City, Mexico",
       "badge": "New Release",
       "shortDescription": "Dark screamo duo with Manuel Espinoza. Debut EP \"Vorágine\" mastered by Brad Boatright. For fans of Portrayal of Guilt, Respire, Saetia.",
@@ -36,10 +75,21 @@
         "Oshira sharpened their live thing playing rooms like House of Vans in Mexico City. \"Vorágine\" was recorded and mixed by the duo themselves, with mastering by Brad Boatright and cover art by Ethan Lee McCarthy."
       ],
       "members": [
-        { "name": "Manuel Espinoza", "role": "Drums" },
-        { "name": "Ashel", "role": "Guitar, Vocals" }
+        {
+          "name": "Manuel Espinoza",
+          "role": "Drums"
+        },
+        {
+          "name": "Ashel",
+          "role": "Guitar, Vocals"
+        }
       ],
-      "links": [{ "label": "Bandcamp", "url": "https://oshira.bandcamp.com" }],
+      "links": [
+        {
+          "label": "Bandcamp",
+          "url": "https://oshira.bandcamp.com"
+        }
+      ],
       "releases": [
         {
           "type": "EP",
@@ -49,7 +99,7 @@
           "url": "https://oshira.bandcamp.com/album/vor-gine",
           "featured": true,
           "description": "Six-track EP tackling identity, fear, and the pressure of uncertainty. Tracks: \"Umbral\" (ambient intro), \"Saber Desaparecer,\" \"Punto Ciego,\" \"Sigilo,\" \"Vorágine,\" and \"Fisura.\"",
-          "embed": "https://bandcamp.com/EmbeddedPlayer/album=4247038164/size=large/bgcol=333333/linkcol=6c5ce7/minimal=true/transparent=true/"
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=749502210/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://oshira.bandcamp.com/album/vor-gine\">Vorágine de Oshira</a></iframe>"
         },
         {
           "type": "Single",
@@ -89,13 +139,28 @@
         "The sound spans blackgaze, shoegaze, slowcore, psychedelia, ambient, and noise — whatever it takes to express the feeling of duality that is always a constant in life. \"Tempo\" was produced at Echo Bravo Studio. \"Empero\" features Carlo Ixcamparij on drums, marking the first collaboration on a Dotzd release."
       ],
       "members": [
-        { "name": "Ashel", "role": "Guitars, Bass, Vocals, Drum Programming" },
-        { "name": "Carlo Ixcamparij", "role": "Drums (Empero, 2024)" }
+        {
+          "name": "Ashel",
+          "role": "Guitars, Bass, Vocals, Drum Programming"
+        },
+        {
+          "name": "Carlo Ixcamparij",
+          "role": "Drums (Empero, 2024)"
+        }
       ],
       "links": [
-        { "label": "Bandcamp", "url": "https://dotzd.bandcamp.com" },
-        { "label": "Instagram", "url": "https://www.instagram.com/dotzd_mx/" },
-        { "label": "Facebook", "url": "https://www.facebook.com/Dotzdmx/" }
+        {
+          "label": "Bandcamp",
+          "url": "https://dotzd.bandcamp.com"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/dotzd_mx/"
+        },
+        {
+          "label": "Facebook",
+          "url": "https://www.facebook.com/Dotzdmx/"
+        }
       ],
       "releases": [
         {
@@ -105,7 +170,7 @@
           "cover": "assets/images/dotzd-empero.jpg",
           "url": "https://dotzd.bandcamp.com/album/empero",
           "description": "\"Empero\" represents a long-awaited release forged through a complicated journey and numerous revisions. Written and recorded during 2020, the album features Carlo Ixcamparij on drums — a first for Dotzd. Tracks: \"Viento,\" \"Memorias del tiempo,\" and \"Empero.\"",
-          "embed": "https://bandcamp.com/EmbeddedPlayer/album=3599040728/size=large/bgcol=333333/linkcol=6c5ce7/minimal=true/transparent=true/"
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=3599040728/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://dotzd.bandcamp.com/album/empero\">Empero de Dotzd</a></iframe>"
         },
         {
           "type": "Album",
@@ -115,7 +180,7 @@
           "url": "https://dotzd.bandcamp.com/album/tempo",
           "featured": true,
           "description": "Produced at Echo Bravo Studio, Tempo explores the passage of time through layered guitar textures and hypnotic rhythms.",
-          "embed": "https://bandcamp.com/EmbeddedPlayer/album=2063025139/size=large/bgcol=333333/linkcol=6c5ce7/minimal=true/transparent=true/"
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=2063025139/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://dotzd.bandcamp.com/album/tempo\">Tempo de Dotzd</a></iframe>"
         },
         {
           "type": "Album",
@@ -165,7 +230,13 @@
       "id": "rdusp",
       "name": "Recuerdos de un Sueño Perdido",
       "cover": "assets/images/rdusp.jpg",
-      "genres": ["Math Rock", "Emo", "Screamo", "Mathcore", "Alternative Rock"],
+      "genres": [
+        "Math Rock",
+        "Emo",
+        "Screamo",
+        "Mathcore",
+        "Alternative Rock"
+      ],
       "location": "Mexico City, Mexico",
       "badge": null,
       "shortDescription": "Math rock con huevos. 4-piece band with Mauricio Narváez, Ivan Luna \"Chapu\", and Arturo Macías. Born in mid-2017.",
@@ -173,14 +244,32 @@
         "Math rock con huevos. Born in mid-2017, this 4-piece band blends math rock, emo, and screamo with raw energy. Their only release \"Valle Bravo\" features 6 tracks — each named after failed attempts at the band name. Recorded entirely by the band at El Cuarto de Ensayo in December 2017, with mixing, production, and design by Ashel."
       ],
       "members": [
-        { "name": "Mauricio Narváez", "role": "Bass, Vocals (lyrics)" },
-        { "name": "Ashel", "role": "Guitar (mixing, production, design)" },
-        { "name": "Ivan Luna \"Chapu\"", "role": "Drums" },
-        { "name": "Arturo Macías \"サクヒン\"", "role": "Guitar" }
+        {
+          "name": "Mauricio Narváez",
+          "role": "Bass, Vocals (lyrics)"
+        },
+        {
+          "name": "Ashel",
+          "role": "Guitar (mixing, production, design)"
+        },
+        {
+          "name": "Ivan Luna \"Chapu\"",
+          "role": "Drums"
+        },
+        {
+          "name": "Arturo Macías \"サクヒン\"",
+          "role": "Guitar"
+        }
       ],
       "links": [
-        { "label": "Bandcamp", "url": "https://recuerdosdeunsuenoperdido.bandcamp.com" },
-        { "label": "Facebook", "url": "https://www.facebook.com/RecuerdosdeunSuenoPerdido/" }
+        {
+          "label": "Bandcamp",
+          "url": "https://recuerdosdeunsuenoperdido.bandcamp.com"
+        },
+        {
+          "label": "Facebook",
+          "url": "https://www.facebook.com/RecuerdosdeunSuenoPerdido/"
+        }
       ],
       "releases": [
         {
@@ -191,7 +280,7 @@
           "url": "https://recuerdosdeunsuenoperdido.bandcamp.com/album/valle-bravo",
           "featured": true,
           "description": "6 tracks of math rock/emo/screamo energy. \"Shiba Inu,\" \"Siempre la misma fórmula,\" \"Debería irme pronto,\" \"Sin memoria,\" \"NES (Nada es suficiente),\" and \"Escultores.\"",
-          "embed": "https://bandcamp.com/EmbeddedPlayer/album=2931108156/size=large/bgcol=333333/linkcol=6c5ce7/minimal=true/transparent=true/"
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=2931108156/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://recuerdosdeunsuenoperdido.bandcamp.com/album/valle-bravo\">Valle Bravo de Recuerdos de un Sueño Perdido</a></iframe>"
         }
       ]
     },
@@ -199,18 +288,39 @@
       "id": "ashel-solo",
       "name": "Ashel (Solo)",
       "cover": "assets/images/ashel-solo.jpg",
-      "genres": ["Ambient", "Post-Rock", "Experimental", "Shoegaze", "Math Rock", "Lo-Fi"],
+      "genres": [
+        "Ambient",
+        "Post-Rock",
+        "Experimental",
+        "Shoegaze",
+        "Math Rock",
+        "Lo-Fi"
+      ],
       "location": "Mexico City, Mexico",
       "badge": null,
       "shortDescription": "Personal solo project for ambient experiments, post-rock compositions, math rock, and covers. Plus guitar improvisations on YouTube.",
       "description": [
         "Personal solo project for ambient experiments, post-rock compositions, math rock, and covers. A space to explore sounds outside the confines of other projects — from ambient experiments and Delta Sleep covers to a Metallica \"ONE\" ambient/post-rock reimagining. Also includes guitar improvisations shared on YouTube."
       ],
-      "members": [{ "name": "Ashel", "role": "All instruments, production, mixing, mastering" }],
+      "members": [
+        {
+          "name": "Ashel",
+          "role": "All instruments, production, mixing, mastering"
+        }
+      ],
       "links": [
-        { "label": "Bandcamp", "url": "https://ashel.bandcamp.com" },
-        { "label": "YouTube", "url": "https://www.youtube.com/@ashel6708" },
-        { "label": "Facebook", "url": "https://www.facebook.com/Ashel-480327362049672/" }
+        {
+          "label": "Bandcamp",
+          "url": "https://ashel.bandcamp.com"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@ashel6708"
+        },
+        {
+          "label": "Facebook",
+          "url": "https://www.facebook.com/Ashel-480327362049672/"
+        }
       ],
       "releases": [
         {
@@ -256,7 +366,7 @@
           "url": "https://ashel.bandcamp.com/album/el-caos-es-la-naturaleza-de-las-cosas-y-el-orden-es-la-naturaleza-de-lo-sint-tico",
           "featured": true,
           "description": "4 tracks of ambient/post-rock/experimental. Includes \"Esencia,\" \"Copo,\" \"Meow,\" and \"Camp\" (Delta Sleep cover).",
-          "embed": "https://bandcamp.com/EmbeddedPlayer/album=2947640300/size=large/bgcol=333333/linkcol=6c5ce7/minimal=true/transparent=true/"
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=2947640300/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://ashel.bandcamp.com/album/el-caos-es-la-naturaleza-de-las-cosas-y-el-orden-es-la-naturaleza-de-lo-sint-tico\">El caos es la naturaleza de las cosas... de Ashel (Solo)</a></iframe>"
         },
         {
           "type": "Single",
@@ -271,7 +381,12 @@
       "id": "hostem",
       "name": "Hostem",
       "cover": "assets/images/hostem.jpg",
-      "genres": ["Thrash Metal", "Hardcore Punk", "Heavy Metal", "Alternative Metal"],
+      "genres": [
+        "Thrash Metal",
+        "Hardcore Punk",
+        "Heavy Metal",
+        "Alternative Metal"
+      ],
       "location": "Tlalnepantla, Mexico",
       "badge": null,
       "shortDescription": "Thrash/hardcore band from Tlalnepantla. Self-titled debut EP with 4 tracks. Raziel, Sebastián, Diego, Alec, and Ashel.",
@@ -279,13 +394,33 @@
         "Thrash/hardcore band from Tlalnepantla. Raw, unrelenting energy with 4 tracks covering themes from social critique to dark fantasy. Self-titled debut EP recorded at Diego's house, mixed by Ashel. Lyrics by Diego and Raziel, with special thanks to Aldo \"Hacha Loca\" López."
       ],
       "members": [
-        { "name": "Raziel", "role": "Vocals (lyrics)" },
-        { "name": "Sebastián", "role": "Drums" },
-        { "name": "Diego", "role": "Guitar (lyrics)" },
-        { "name": "Alec", "role": "Bass" },
-        { "name": "Ashel", "role": "Guitar (mixing)" }
+        {
+          "name": "Raziel",
+          "role": "Vocals (lyrics)"
+        },
+        {
+          "name": "Sebastián",
+          "role": "Drums"
+        },
+        {
+          "name": "Diego",
+          "role": "Guitar (lyrics)"
+        },
+        {
+          "name": "Alec",
+          "role": "Bass"
+        },
+        {
+          "name": "Ashel",
+          "role": "Guitar (mixing)"
+        }
       ],
-      "links": [{ "label": "Bandcamp", "url": "https://hostem.bandcamp.com" }],
+      "links": [
+        {
+          "label": "Bandcamp",
+          "url": "https://hostem.bandcamp.com"
+        }
+      ],
       "releases": [
         {
           "type": "EP",
@@ -295,7 +430,7 @@
           "url": "https://hostem.bandcamp.com/album/hostem",
           "featured": true,
           "description": "4 tracks of thrash/hardcore fury. \"Incursion,\" \"Hacha Loca,\" \"Porquería Social,\" and \"Cursed Souls.\"",
-          "embed": "https://bandcamp.com/EmbeddedPlayer/album=2886975373/size=large/bgcol=333333/linkcol=6c5ce7/minimal=true/transparent=true/"
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=2886975373/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://hostem.bandcamp.com/album/hostem\">Hostem de Hostem</a></iframe>"
         },
         {
           "type": "Single",
