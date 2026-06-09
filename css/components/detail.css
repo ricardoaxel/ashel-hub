@@ -1,0 +1,205 @@
+.detail-header {
+  padding: 8rem 2rem 4rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.back-link {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--section-accent, var(--accent));
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 3rem;
+  transition: opacity 0.3s;
+}
+
+.back-link:hover {
+  opacity: 0.7;
+}
+
+.detail-hero {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 0;
+  align-items: start;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.detail-info {
+  border-left: 1px solid var(--border);
+  padding: 3rem;
+}
+
+.detail-cover {
+  width: 100%;
+  display: block;
+}
+
+.detail-left {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.detail-left .featured-release {
+  padding: 1.5rem;
+  border-bottom: none;
+}
+
+.detail-left .featured-release .section-label {
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.detail-left .featured-release h2 {
+  font-size: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.detail-left .featured-release h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.detail-left .featured-release p {
+  font-size: 0.7rem;
+  margin-bottom: 1rem;
+}
+
+.detail-info h1 {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 2rem;
+}
+
+.detail-genres .genre-tag {
+  border-color: var(--section-accent, var(--accent));
+}
+
+.detail-genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.detail-location {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 2rem;
+}
+
+.detail-description {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.album-selector-wrap {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.album-selector-wrap label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+}
+
+.album-selector-wrap select {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.album-selector-wrap select:hover,
+.album-selector-wrap select:focus {
+  border-color: var(--section-accent, var(--accent));
+}
+
+.detail-members {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.detail-members h3 {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.member-list {
+  list-style: none;
+}
+
+.member-list li {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.member-list li:last-child {
+  border-bottom: none;
+}
+
+.member-list li strong {
+  color: var(--section-accent-secondary, var(--text));
+}
+
+.detail-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.btn-small {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  padding: 0.6rem 1.2rem;
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--border-strong);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.btn-small:hover {
+  background: var(--section-accent, var(--accent));
+  border-color: var(--section-accent, var(--accent));
+  color: var(--bg);
+}

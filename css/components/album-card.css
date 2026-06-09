@@ -1,0 +1,57 @@
+.album-card {
+  background: var(--bg);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.3s;
+  position: relative;
+  border-top: 3px solid var(--section-accent, #ff2d55);
+}
+
+.album-card:hover {
+  background: var(--surface);
+}
+
+.album-card:hover .album-cover {
+  transform: scale(1.05);
+  filter: grayscale(0%);
+}
+
+.album-cover {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  filter: contrast(1.1);
+  transition:
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.5s;
+}
+
+.album-info {
+  padding: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.album-type {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  color: var(--section-accent, var(--accent));
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.album-name {
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0.25rem 0;
+  line-height: 1.2;
+  color: var(--section-accent-secondary, var(--text));
+}
+
+.album-year {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--section-accent-tertiary, var(--text-muted));
+  letter-spacing: 0.1em;
+}
