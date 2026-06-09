@@ -9,8 +9,8 @@ let loadPromise = null;
 export async function loadData() {
   if (loadPromise) return loadPromise;
   loadPromise = Promise.all([
-    fetch('data.json', { cache: 'no-store' }).then((r) => r.json()),
-    fetch('assets/i18n.json', { cache: 'no-store' }).then((r) => r.json()),
+    fetch('data.json').then((r) => r.json()),
+    fetch('assets/i18n.json').then((r) => r.json()),
   ]).then(
     ([site, i18n]) => {
       siteData = site;
