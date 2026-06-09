@@ -30,7 +30,12 @@ export function initCursor() {
     cursorMouseX = e.clientX;
     cursorMouseY = e.clientY;
     cursorDot.style.transform = `translate(${cursorMouseX - 3}px, ${cursorMouseY - 3}px)`;
-    updateCursorColor();
+    const card = e.target.closest('.project-card');
+    if (card) {
+      const c = card.style.getPropertyValue('--section-accent').trim();
+      if (c) fallbackColor = c;
+    }
+    applyCursorColor();
     clearTimeout(cursorIdleTimer);
     startCursorRing();
     cursorIdleTimer = setTimeout(stopCursorRing, 2000);
@@ -42,9 +47,10 @@ export function initCursor() {
       requestAnimationFrame(() => {
         const card = getMostVisibleCard();
         if (card) {
-          fallbackColor = card.style.getPropertyValue('--section-accent').trim() || '#ff2d55';
+          const c = card.style.getPropertyValue('--section-accent').trim();
+          if (c) fallbackColor = c;
         }
-        updateCursorColor();
+        applyCursorColor();
         ticking = false;
       });
       ticking = true;
@@ -67,26 +73,10 @@ function getMostVisibleCard() {
   return bestCard;
 }
 
-function getCursorColor() {
-  const el = document.elementFromPoint(cursorMouseX, cursorMouseY);
-  if (!el) return fallbackColor;
-  const card = el.closest('.project-card');
-  if (card) {
-    const color = card.style.getPropertyValue('--section-accent').trim();
-    if (color) return color;
-  }
-  const rootAccent = getComputedStyle(document.documentElement)
-    .getPropertyValue('--section-accent')
-    .trim();
-  if (rootAccent && rootAccent !== '#ff2d55') return rootAccent;
-  return fallbackColor;
-}
-
-function updateCursorColor() {
-  const color = getCursorColor();
-  if (color !== currentSectionColor) {
-    currentSectionColor = color;
-    cursorRing.style.borderColor = color;
+function applyCursorColor() {
+  if (fallbackColor !== currentSectionColor) {
+    currentSectionColor = fallbackColor;
+    cursorRing.style.borderColor = currentSectionColor;
   }
 }
 
