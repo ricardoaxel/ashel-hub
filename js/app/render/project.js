@@ -1,7 +1,7 @@
 import { getSiteData, getI18nData } from '../data.js';
 import { getLocale } from '../i18n.js';
 import { attachCursor } from '../cursor.js';
-import { colorCache, getColorFallback } from '../colors.js';
+import { colorCache, getColorFallback, extractColors } from '../colors.js';
 
 let currentProject = null;
 let currentProjectId = null;
@@ -138,6 +138,15 @@ export function renderProjectContent() {
     if (section && selected) {
       section.outerHTML = renderFeatured(selected);
       document.querySelector('.detail-cover').src = selected.cover;
+      extractColors(selected.cover)
+        .then((colors) => {
+          colorCache[project.id] = colors;
+          const root = document.documentElement.style;
+          root.setProperty('--section-accent', colors[0]);
+          root.setProperty('--section-accent-secondary', colors[1]);
+          root.setProperty('--section-accent-tertiary', colors[2]);
+        })
+        .catch(() => {});
     }
   });
 

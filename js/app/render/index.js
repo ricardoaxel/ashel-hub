@@ -90,6 +90,10 @@ export function renderIndexContent() {
     2,
     '0'
   );
+  document.getElementById('gallery-count').textContent = String(data.projects.length).padStart(
+    2,
+    '0'
+  );
 
   const galleryHtml = data.projects
     .map(
