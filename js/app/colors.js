@@ -4,6 +4,20 @@ try {
 } catch (_) {}
 const colorCache = {};
 
+const imageCache = new Map();
+
+function getLoadedImage(url) {
+  if (imageCache.has(url)) return imageCache.get(url);
+  const promise = new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = url;
+  });
+  imageCache.set(url, promise);
+  return promise;
+}
+
 /** Converts hex color to "r,g,b" string for rgba(). */
 export function hexToRgb(hex) {
   const r = parseInt(hex.slice(1, 3), 16);
@@ -21,56 +35,42 @@ function brighten(c, factor) {
 
 export async function extractColors(imageUrl) {
   if (!colorThief) throw new Error('ColorThief not loaded yet');
-  const res = await fetch(imageUrl);
-  const blob = await res.blob();
-  const url = URL.createObjectURL(blob);
-  try {
-    const img = await new Promise((resolve, reject) => {
-      const i = new Image();
-      i.onload = () => resolve(i);
-      i.onerror = reject;
-      i.src = url;
-    });
-    const palette = colorThief.getPalette(img, 16);
-    const analyze = (c) => {
-      const max = Math.max(...c);
-      const min = Math.min(...c);
-      const brightness = (c[0] + c[1] + c[2]) / 3;
-      const saturation = max === 0 ? 0 : (max - min) / max;
-      return {
-        r: c[0],
-        g: c[1],
-        b: c[2],
-        brightness,
-        saturation,
-        score: saturation * 0.6 + (brightness > 80 && brightness < 200 ? 0.4 : 0),
-      };
+  const img = await getLoadedImage(imageUrl);
+  const palette = colorThief.getPalette(img, 16);
+  const analyze = (c) => {
+    const max = Math.max(...c);
+    const min = Math.min(...c);
+    const brightness = (c[0] + c[1] + c[2]) / 3;
+    const saturation = max === 0 ? 0 : (max - min) / max;
+    return {
+      r: c[0],
+      g: c[1],
+      b: c[2],
+      brightness,
+      saturation,
+      score: saturation * 0.6 + (brightness > 80 && brightness < 200 ? 0.4 : 0),
     };
-    const analyzed = palette.map(analyze).sort((a, b) => b.score - a.score);
-    let accent = analyzed[0];
-    if (accent.brightness < 80 && analyzed.length > 1) {
-      accent = analyzed.filter((c) => c.brightness >= 60 && c.saturation > 0.25)[0] || analyzed[0];
-    }
-    const factor = accent.brightness < 100 ? 1.4 : 1.25;
-    const c1 = brighten(accent, factor);
-    const secondary =
-      analyzed.filter((c) => Math.abs(c.score - accent.score) > 0.1 && c.brightness >= 50)[0] ||
-      analyzed[1] ||
-      accent;
-    const c2 = brighten(secondary, 1.3);
-    const tertiary =
-      analyzed.filter(
-        (c) => c !== secondary && Math.abs(c.score - secondary.score) > 0.05 && c.brightness >= 50
-      )[0] ||
-      analyzed[2] ||
-      secondary;
-    const c3 = brighten(tertiary, 1.15);
-    URL.revokeObjectURL(url);
-    return [c1, c2, c3];
-  } catch (e) {
-    URL.revokeObjectURL(url);
-    throw e;
+  };
+  const analyzed = palette.map(analyze).sort((a, b) => b.score - a.score);
+  let accent = analyzed[0];
+  if (accent.brightness < 80 && analyzed.length > 1) {
+    accent = analyzed.filter((c) => c.brightness >= 60 && c.saturation > 0.25)[0] || analyzed[0];
   }
+  const factor = accent.brightness < 100 ? 1.4 : 1.25;
+  const c1 = brighten(accent, factor);
+  const secondary =
+    analyzed.filter((c) => Math.abs(c.score - accent.score) > 0.1 && c.brightness >= 50)[0] ||
+    analyzed[1] ||
+    accent;
+  const c2 = brighten(secondary, 1.3);
+  const tertiary =
+    analyzed.filter(
+      (c) => c !== secondary && Math.abs(c.score - secondary.score) > 0.05 && c.brightness >= 50
+    )[0] ||
+    analyzed[2] ||
+    secondary;
+  const c3 = brighten(tertiary, 1.15);
+  return [c1, c2, c3];
 }
 
 export { colorCache };
