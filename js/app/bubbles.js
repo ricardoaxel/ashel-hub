@@ -36,6 +36,7 @@ export function initBubbles(siteData) {
     const vx = Math.cos(angle) * speed;
     const vy = Math.sin(angle) * speed;
     bubble.style.transform = `translate(${x}px, ${y}px)`;
+    bubble.style.opacity = '0';
 
     const img = document.createElement('img');
     img.src = release.cover;

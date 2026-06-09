@@ -63,6 +63,9 @@ export function renderIndexContent() {
     )
     .join('');
   document.getElementById('marquee').innerHTML = marqueeItems + marqueeItems;
+  setTimeout(() => {
+    document.querySelector('.marquee-content')?.classList.add('animate');
+  }, 2000);
 
   const projectsHtml = data.projects
     .map(

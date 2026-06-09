@@ -3,7 +3,7 @@ import { applyTranslations, initLangToggle, onLocaleChange } from './i18n.js';
 import { initCursor } from './cursor.js';
 import { initMobileMenu } from './mobile-menu.js';
 import { extractColors, colorCache, getColorFallback } from './colors.js';
-import { renderIndexContent, getHeroColors } from './render/index.js';
+import { renderIndexContent, getHeroColors, applyCardColors } from './render/index.js';
 import { setCurrentProject, renderProjectContent } from './render/project.js';
 import { initWaveCanvas } from './wave-canvas.js';
 import { initBubbles } from './bubbles.js';
@@ -42,11 +42,13 @@ loadData()
         extractColors(project.cover)
           .then((colors) => {
             colorCache[project.id] = colors;
-            reRender();
+            if (isProjectPage) renderProjectContent();
+            else applyCardColors();
           })
           .catch(() => {
             colorCache[project.id] = getColorFallback(project);
-            reRender();
+            if (isProjectPage) renderProjectContent();
+            else applyCardColors();
           });
       });
     }

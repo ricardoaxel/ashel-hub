@@ -47,6 +47,11 @@
 .marquee-content {
   display: inline-flex;
   animation: marquee 30s linear infinite;
+  animation-play-state: paused;
+}
+
+.marquee-content.animate {
+  animation-play-state: running;
 }
 
 .marquee-content span {

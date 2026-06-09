@@ -2,6 +2,17 @@
   border-top: 1px solid var(--border);
 }
 
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .project-card {
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -10,11 +21,28 @@
   color: inherit;
   position: relative;
   overflow: hidden;
+  animation: cardFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
   transition:
     background 0.3s,
     border-left 0.3s,
     padding-left 0.3s;
   padding-left: 0;
+}
+
+.project-card:nth-child(1) {
+  animation-delay: 0s;
+}
+.project-card:nth-child(2) {
+  animation-delay: 0.08s;
+}
+.project-card:nth-child(3) {
+  animation-delay: 0.16s;
+}
+.project-card:nth-child(4) {
+  animation-delay: 0.24s;
+}
+.project-card:nth-child(5) {
+  animation-delay: 0.32s;
 }
 
 .project-card::before {
