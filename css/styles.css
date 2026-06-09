@@ -852,12 +852,38 @@ button:hover ~ .cursor-ring,
 .detail-cover {
   width: 100%;
   display: block;
-  filter: contrast(1.1);
-  transition: filter 0.5s;
 }
 
-.detail-cover:hover {
-  filter: contrast(1);
+.detail-left {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.detail-left .featured-release {
+  padding: 1.5rem;
+  border-bottom: none;
+}
+
+.detail-left .featured-release .section-label {
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.detail-left .featured-release h2 {
+  font-size: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.detail-left .featured-release h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.detail-left .featured-release p {
+  font-size: 0.7rem;
+  margin-bottom: 1rem;
 }
 
 .detail-info h1 {

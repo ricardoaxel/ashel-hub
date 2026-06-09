@@ -20,6 +20,9 @@ function renderProjectContent() {
   function renderFeatured(release) {
     if (!release) return '';
     const desc = projT.releases?.[release.name] || release.description;
+    const embed = release.embed
+      ? release.embed
+      : '';
     return `
       <section class="featured-release" id="featured-section">
         <div class="section-label" style="border: none; padding: 0; margin-bottom: 2rem;">
@@ -29,7 +32,7 @@ function renderProjectContent() {
         <h2>${t.site?.nowPlaying || 'Now Playing'}</h2>
         <h3>${release.name}</h3>
         ${desc ? `<p>${desc}</p>` : ''}
-        ${release.embed ? `<div class="detail-player-section">${release.embed}</div>` : ''}
+        ${embed ? `<div class="detail-player-section">${embed}</div>` : ''}
       </section>`;
   }
 
@@ -64,7 +67,10 @@ function renderProjectContent() {
     <section class="detail-header">
       <a href="index.html#projects" class="back-link">&larr; ${t.site?.backToProjects || 'Back to Projects'}</a>
       <div class="detail-hero">
-        <img src="${project.cover}" alt="${project.name}" class="detail-cover">
+          <div class="detail-left">
+            <img src="${project.cover}" alt="${project.name}" class="detail-cover">
+            ${renderFeatured(defaultFeatured)}
+          </div>
         <div class="detail-info">
           <h1>${project.name}</h1>
           <div class="detail-genres">${genresHtml}</div>
@@ -86,9 +92,7 @@ function renderProjectContent() {
         <span class="count">${String(project.releases.length).padStart(2, '0')}</span>
       </div>
       <div class="discography-grid">${releasesHtml}</div>
-    </section>
-
-    ${renderFeatured(defaultFeatured)}`;
+    </section>`;
 
   document.querySelectorAll('a, button, .album-card').forEach(attachCursor);
 
@@ -98,6 +102,7 @@ function renderProjectContent() {
     const section = document.getElementById('featured-section');
     if (section && selected) {
       section.outerHTML = renderFeatured(selected);
+      document.querySelector('.detail-cover').src = selected.cover;
     }
   });
 
