@@ -7,10 +7,15 @@ let currentLocale =
   (navigator.language.startsWith('es') ? 'es' : 'en');
 let localeListeners = [];
 
+/** Returns the current locale code (e.g. 'en', 'es'). */
 export function getLocale() {
   return currentLocale;
 }
 
+/**
+ * Updates all [data-i18n] elements and .lang-option active states
+ * to match the current locale.
+ */
 export function applyTranslations() {
   const i18nData = getI18nData();
   if (!i18nData) return;
@@ -28,6 +33,7 @@ export function applyTranslations() {
   document.documentElement.lang = currentLocale;
 }
 
+/** Switches locale, persists to localStorage/URL, updates DOM, fires listeners. */
 export function setLocale(lang) {
   currentLocale = lang;
   localStorage.setItem('locale', lang);

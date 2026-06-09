@@ -1,6 +1,7 @@
 const colorThief = new ColorThief();
 const colorCache = {};
 
+/** Converts hex color to "r,g,b" string for rgba(). */
 export function hexToRgb(hex) {
   const r = parseInt(hex.slice(1, 3), 16);
   const g = parseInt(hex.slice(3, 5), 16);

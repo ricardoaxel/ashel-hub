@@ -139,4 +139,12 @@ export function initWaveCanvas(getHeroColors) {
     animationId = requestAnimationFrame(animate);
   }
   animate();
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      cancelAnimationFrame(animationId);
+    } else {
+      animate();
+    }
+  });
 }
