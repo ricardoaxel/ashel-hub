@@ -16,6 +16,8 @@ function reRender() {
   else renderIndexContent();
 }
 
+if (!isProjectPage) initWaveCanvas(getHeroColors);
+
 loadData()
   .then(() => {
     applyTranslations();
@@ -32,7 +34,6 @@ loadData()
       if (p) document.title = `${p.name} | Ashel`;
     } else {
       renderIndexContent();
-      initWaveCanvas(getHeroColors);
       initBubbles(getSiteData());
     }
 
