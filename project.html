@@ -4,7 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Project | Ashel</title>
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap"
+    />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components/cursor.css" />
+    <link rel="stylesheet" href="css/components/nav.css" />
+    <link rel="stylesheet" href="css/components/project-card.css" />
+    <link rel="stylesheet" href="css/components/gallery.css" />
+    <link rel="stylesheet" href="css/components/about.css" />
+    <link rel="stylesheet" href="css/components/contact.css" />
+    <link rel="stylesheet" href="css/components/album-card.css" />
+    <link rel="stylesheet" href="css/components/discography.css" />
+    <link rel="stylesheet" href="css/components/featured-player.css" />
+    <link rel="stylesheet" href="css/components/detail.css" />
+    <link rel="stylesheet" href="css/effects.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
     <script
       async
       src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"
@@ -47,5 +67,16 @@
       <p>&copy; 2026 Ashel</p>
       <p data-i18n="site.builtWith">Built with obsession</p>
     </footer>
+    <script>
+      (function () {
+        var d = document.querySelector('.cursor-dot'),
+          r = document.querySelector('.cursor-ring');
+        if (!d || !r) return;
+        document.addEventListener('mousemove', function (e) {
+          d.style.transform = 'translate(' + (e.clientX - 3) + 'px,' + (e.clientY - 3) + 'px)';
+          r.style.transform = 'translate(' + (e.clientX - 15) + 'px,' + (e.clientY - 15) + 'px)';
+        });
+      })();
+    </script>
   </body>
 </html>
