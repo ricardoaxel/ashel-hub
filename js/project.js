@@ -38,13 +38,24 @@ function renderProjectContent() {
 
   const defaultFeatured = project.releases.find((r) => r.featured) || project.releases[0];
 
+  const typeOrder = ['Album', 'EP', 'Single', 'Cover'];
+  const grouped = {};
+  project.releases.forEach(r => {
+    const t = r.type || 'Single';
+    if (!grouped[t]) grouped[t] = [];
+    grouped[t].push(r);
+  });
+
   const selectorHtml =
     project.releases.length > 1
       ? `
       <div class="album-selector-wrap">
-        <label>${t.site?.albumLabel || 'Album'}</label>
+        <label>${t.site?.albumLabel || 'Release'}</label>
         <select id="album-selector">
-          ${project.releases.map((r) => `<option value="${r.name}" ${r.name === defaultFeatured.name ? 'selected' : ''}>${r.name} (${r.year})</option>`).join('')}
+          ${typeOrder.filter(t => grouped[t]).map(t => `
+          <optgroup label="${t}">
+            ${grouped[t].map(r => `<option value="${r.name}" ${r.name === defaultFeatured.name ? 'selected' : ''}>${r.name} (${r.year})</option>`).join('')}
+          </optgroup>`).join('')}
         </select>
       </div>`
       : '';
