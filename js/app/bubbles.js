@@ -1,6 +1,22 @@
+let bubblesRAF = null;
+let bubblesVisible = true;
+
 export function initBubbles(siteData) {
   const container = document.getElementById('hero-bubbles');
   if (!container) return;
+  const hero = container.closest('.hero');
+  if (hero) {
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        bubblesVisible = e.isIntersecting;
+        if (bubblesVisible && !bubblesRAF) {
+          bubblesRAF = requestAnimationFrame(animateBubbles);
+        }
+      },
+      { threshold: 0 }
+    );
+    obs.observe(hero);
+  }
   const activeBubbles = [];
 
   const allReleases = siteData.projects.flatMap((p) =>
@@ -70,6 +86,10 @@ export function initBubbles(siteData) {
   for (let i = 0; i < allReleases.length; i++) createBubble();
 
   function animateBubbles() {
+    if (!bubblesVisible) {
+      bubblesRAF = null;
+      return;
+    }
     const dim = getDimensions();
     for (const b of activeBubbles) {
       b.x += b.vx;
@@ -106,7 +126,7 @@ export function initBubbles(siteData) {
       b.currentScale += (targetScale - b.currentScale) * 0.08;
       b.el.style.transform = `translate(${b.x}px, ${b.y}px) scale(${b.currentScale})`;
     }
-    requestAnimationFrame(animateBubbles);
+    bubblesRAF = requestAnimationFrame(animateBubbles);
   }
-  requestAnimationFrame(animateBubbles);
+  bubblesRAF = requestAnimationFrame(animateBubbles);
 }

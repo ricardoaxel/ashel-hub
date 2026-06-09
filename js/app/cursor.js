@@ -1,6 +1,20 @@
 let cursorDot, cursorRing, cursorMouseX, cursorMouseY, cursorRingX, cursorRingY;
 let currentSectionColor = '#ff2d55';
 let fallbackColor = '#ff2d55';
+let cursorRAF = null;
+let cursorIdleTimer = null;
+
+function startCursorRing() {
+  if (cursorRAF) return;
+  animateCursorRing();
+}
+
+function stopCursorRing() {
+  if (cursorRAF) {
+    cancelAnimationFrame(cursorRAF);
+    cursorRAF = null;
+  }
+}
 
 export function initCursor() {
   cursorDot = document.querySelector('.cursor-dot');
@@ -17,6 +31,9 @@ export function initCursor() {
     cursorMouseY = e.clientY;
     cursorDot.style.transform = `translate(${cursorMouseX - 3}px, ${cursorMouseY - 3}px)`;
     updateCursorColor();
+    clearTimeout(cursorIdleTimer);
+    startCursorRing();
+    cursorIdleTimer = setTimeout(stopCursorRing, 2000);
   });
 
   let ticking = false;
@@ -33,8 +50,6 @@ export function initCursor() {
       ticking = true;
     }
   });
-
-  animateCursorRing();
 }
 
 function getMostVisibleCard() {
@@ -79,7 +94,7 @@ function animateCursorRing() {
   cursorRingX += (cursorMouseX - cursorRingX) * 0.15;
   cursorRingY += (cursorMouseY - cursorRingY) * 0.15;
   cursorRing.style.transform = `translate(${cursorRingX - 18}px, ${cursorRingY - 18}px)`;
-  requestAnimationFrame(animateCursorRing);
+  cursorRAF = requestAnimationFrame(animateCursorRing);
 }
 
 export function attachCursor(el) {

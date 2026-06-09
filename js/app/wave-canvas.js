@@ -131,20 +131,21 @@ export function initWaveCanvas(getHeroColors) {
     });
   }
 
-  function animate() {
-    time++;
+  function animate(timestamp) {
+    time = (timestamp || 0) / 16;
     generateNextFrame();
     updateFrequencies();
     drawWaveform();
     animationId = requestAnimationFrame(animate);
   }
-  animate();
+  animationId = requestAnimationFrame(animate);
 
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       cancelAnimationFrame(animationId);
-    } else {
-      animate();
+      animationId = null;
+    } else if (!animationId) {
+      animationId = requestAnimationFrame(animate);
     }
   });
 }
