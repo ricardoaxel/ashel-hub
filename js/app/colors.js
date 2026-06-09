@@ -1,4 +1,7 @@
-const colorThief = new ColorThief();
+let colorThief = null;
+try {
+  colorThief = new ColorThief();
+} catch (_) {}
 const colorCache = {};
 
 /** Converts hex color to "r,g,b" string for rgba(). */
@@ -17,6 +20,7 @@ function brighten(c, factor) {
 }
 
 export async function extractColors(imageUrl) {
+  if (!colorThief) throw new Error('ColorThief not loaded yet');
   const res = await fetch(imageUrl);
   const blob = await res.blob();
   const url = URL.createObjectURL(blob);
