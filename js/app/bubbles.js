@@ -57,7 +57,6 @@ export function initBubbles(siteData) {
     const img = document.createElement('img');
     img.src = release.cover;
     img.alt = release.name;
-    img.loading = 'lazy';
     bubble.appendChild(img);
     container.appendChild(bubble);
 

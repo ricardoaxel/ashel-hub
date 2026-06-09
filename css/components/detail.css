@@ -37,6 +37,7 @@
 
 .detail-cover {
   width: 100%;
+  aspect-ratio: 1;
   display: block;
 }
 
@@ -194,7 +195,10 @@
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  transition: all 0.3s;
+  transition:
+    background 0.3s,
+    border-color 0.3s,
+    color 0.3s;
   cursor: pointer;
 }
 

@@ -13,20 +13,6 @@
   height: 6px;
   background: var(--section-accent, var(--accent));
   border-radius: 50%;
-  transition:
-    width 0.2s,
-    height 0.2s;
-}
-
-.cursor-ring {
-  width: 36px;
-  height: 36px;
-  border: 1px solid var(--section-accent, var(--accent));
-  border-radius: 50%;
-  transition:
-    border-color 0.3s,
-    width 0.3s,
-    height 0.3s;
 }
 
 a:hover ~ .cursor-ring,

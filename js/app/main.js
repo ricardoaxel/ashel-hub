@@ -38,6 +38,13 @@ loadData()
     }
 
     const siteData = getSiteData();
+    if (!isProjectPage && siteData?.projects?.[0]?.cover) {
+      const preload = document.createElement('link');
+      preload.rel = 'preload';
+      preload.as = 'image';
+      preload.href = siteData.projects[0].cover;
+      document.head.appendChild(preload);
+    }
     if (siteData) {
       siteData.projects.forEach((project) => {
         extractColors(project.cover)
