@@ -191,6 +191,9 @@ function getCursorColor() {
     if (color) return color;
   }
 
+  const rootAccent = getComputedStyle(document.documentElement).getPropertyValue('--section-accent').trim();
+  if (rootAccent && rootAccent !== '#ff2d55') return rootAccent;
+
   return fallbackColor;
 }
 
