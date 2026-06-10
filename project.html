@@ -48,8 +48,9 @@
   </head>
   <body class="scanlines">
     <div id="page-loader" style="position:fixed;inset:0;z-index:99999;background:#050505;display:flex;align-items:center;justify-content:center">
-      <div class="loading" style="border:none;padding:0">Loading</div>
+      <div class="loading" style="border:none;padding:0" id="loader-text">Loading</div>
     </div>
+    <script>document.getElementById('loader-text').textContent=navigator.language.startsWith('es')?'Cargando':'Loading'</script>
     <div class="cursor-dot"></div>
     <div class="cursor-ring"></div>
     <div class="noise"></div>

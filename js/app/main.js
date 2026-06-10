@@ -40,11 +40,11 @@ loadData()
       renderProjectContent();
       const p = getProject(projectId);
       if (p) document.title = `${p.name} | Ashel`;
-      hidePageLoader();
+      setTimeout(hidePageLoader, 2000);
     } else {
       renderIndexContent();
       initBubbles(getSiteData());
-      hidePageLoader();
+      setTimeout(hidePageLoader, 2000);
     }
 
     const siteData = getSiteData();
