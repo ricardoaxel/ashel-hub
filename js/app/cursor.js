@@ -74,6 +74,10 @@ function getMostVisibleCard() {
 }
 
 function applyCursorColor() {
+  if (fallbackColor === '#ff2d55') {
+    const rootAccent = document.documentElement.style.getPropertyValue('--section-accent').trim();
+    if (rootAccent) fallbackColor = rootAccent;
+  }
   if (fallbackColor !== currentSectionColor) {
     currentSectionColor = fallbackColor;
     cursorRing.style.borderColor = currentSectionColor;
