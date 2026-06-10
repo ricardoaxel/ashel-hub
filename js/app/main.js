@@ -2,7 +2,7 @@ import { loadData, getSiteData, getProject } from './data.js';
 import { applyTranslations, initLangToggle, onLocaleChange } from './i18n.js';
 import { initCursor } from './cursor.js';
 import { initMobileMenu } from './mobile-menu.js';
-import { extractColors, colorCache, getColorFallback } from './colors.js';
+import { extractColors, colorCache, getColorFallback, saveColorCache } from './colors.js';
 import { renderIndexContent, getHeroColors, applyCardColors } from './render/index.js';
 import { setCurrentProject, renderProjectContent } from './render/project.js';
 import { initWaveCanvas } from './wave-canvas.js';
@@ -46,7 +46,7 @@ loadData()
       document.head.appendChild(preload);
     }
     if (siteData) {
-      siteData.projects.forEach((project) => {
+      const extractionPromises = siteData.projects.map((project) =>
         extractColors(project.cover)
           .then((colors) => {
             colorCache[project.id] = colors;
@@ -55,8 +55,9 @@ loadData()
           .catch(() => {
             colorCache[project.id] = getColorFallback(project);
             if (!isProjectPage) applyCardColors();
-          });
-      });
+          })
+      );
+      Promise.all(extractionPromises).then(() => saveColorCache());
     }
   })
   .catch((err) => {

@@ -4,6 +4,17 @@ try {
 } catch (_) {}
 const colorCache = {};
 
+try {
+  const raw = sessionStorage.getItem('colorCache');
+  if (raw) Object.assign(colorCache, JSON.parse(raw));
+} catch (_) {}
+
+export function saveColorCache() {
+  try {
+    sessionStorage.setItem('colorCache', JSON.stringify(colorCache));
+  } catch (_) {}
+}
+
 const imageCache = new Map();
 
 function getLoadedImage(url) {
@@ -77,6 +88,7 @@ export { colorCache };
 
 export function applyProjectColors(projectId, colors) {
   colorCache[projectId] = colors;
+  saveColorCache();
   const root = document.documentElement.style;
   root.setProperty('--section-accent', colors[0]);
   root.setProperty('--section-accent-secondary', colors[1]);

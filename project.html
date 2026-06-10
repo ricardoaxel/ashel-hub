@@ -25,6 +25,21 @@
     <link rel="stylesheet" href="css/components/detail.css" />
     <link rel="stylesheet" href="css/effects.css" />
     <link rel="stylesheet" href="css/responsive.css" />
+    <script>
+      (function () {
+        try {
+          var cache = JSON.parse(sessionStorage.getItem('colorCache') || 'null');
+          if (!cache) return;
+          var id = new URLSearchParams(window.location.search).get('id');
+          var colors = cache[id];
+          if (!colors) return;
+          var root = document.documentElement.style;
+          root.setProperty('--section-accent', colors[0]);
+          root.setProperty('--section-accent-secondary', colors[1]);
+          root.setProperty('--section-accent-tertiary', colors[2]);
+        } catch (e) {}
+      })();
+    </script>
     <script
       defer
       src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"
