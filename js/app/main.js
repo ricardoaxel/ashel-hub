@@ -12,10 +12,8 @@ const isProjectPage = window.location.pathname.includes('project.html');
 const params = new URLSearchParams(window.location.search);
 
 function hidePageLoader() {
-  if (window._loaderTimer) { clearTimeout(window._loaderTimer); window._loaderTimer = null; }
   const loader = document.getElementById('page-loader');
   if (!loader) return;
-  if (loader.style.display === 'none') { loader.remove(); return; }
   loader.style.transition = 'opacity 0.35s ease';
   loader.style.opacity = '0';
   setTimeout(() => loader.remove(), 350);
