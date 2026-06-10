@@ -33,10 +33,11 @@
   </head>
   <body class="scanlines">
     <div id="page-loader" style="display:none;position:fixed;inset:0;z-index:99999;background:#050505;align-items:center;justify-content:center">
-      <div class="loading" style="border:none;padding:0" id="loader-text">Loading</div>
+      <div class="loading" style="border:none;padding:0;opacity:0;transition:opacity 0.3s" id="loader-text">Loading</div>
     </div>
     <script>var _ld=new URLSearchParams(window.location.search).get('locale');try{_ld=_ld||localStorage.getItem('locale')}catch(e){}_ld=_ld||navigator.language;document.getElementById('loader-text').textContent=_ld.startsWith('es')?'Cargando':'Loading'
-    window._loaderTimer=setTimeout(function(){var e=document.getElementById('page-loader');if(e)e.style.display='flex'},250)</script>
+    window._loaderTimer=setTimeout(function(){var e=document.getElementById('page-loader');if(e)e.style.display='flex'},250)
+    window._loaderTextTimer=setTimeout(function(){var t=document.getElementById('loader-text');if(t)t.style.opacity='1'},500)</script>
     <div class="cursor-dot"></div>
     <div class="cursor-ring"></div>
     <div class="noise"></div>
