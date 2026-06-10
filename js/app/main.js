@@ -13,7 +13,7 @@ const params = new URLSearchParams(window.location.search);
 
 function hidePageLoader() {
   if (window._loaderTimer) { clearTimeout(window._loaderTimer); window._loaderTimer = null; }
-
+  if (window._loaderTextTimer) { clearTimeout(window._loaderTextTimer); window._loaderTextTimer = null; }
   const loader = document.getElementById('page-loader');
   if (!loader) return;
   if (loader.style.display === 'none') { loader.remove(); return; }
