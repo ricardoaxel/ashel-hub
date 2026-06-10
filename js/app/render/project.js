@@ -140,7 +140,6 @@ export function renderProjectContent() {
       document.querySelector('.detail-cover').src = selected.cover;
       extractColors(selected.cover)
         .then((colors) => {
-          colorCache[project.id] = colors;
           const root = document.documentElement.style;
           root.setProperty('--section-accent', colors[0]);
           root.setProperty('--section-accent-secondary', colors[1]);
