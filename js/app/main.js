@@ -14,6 +14,7 @@ const params = new URLSearchParams(window.location.search);
 function hidePageLoader() {
   const loader = document.getElementById('page-loader');
   if (!loader) return;
+  if (window._loaderTextTimer) { clearTimeout(window._loaderTextTimer); window._loaderTextTimer = null; }
   loader.style.transition = 'opacity 0.35s ease';
   loader.style.opacity = '0';
   setTimeout(() => loader.remove(), 350);
