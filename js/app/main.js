@@ -52,7 +52,8 @@ loadData()
           .then((colors) => {
             colorCache[project.id] = colors;
             if (isProjectPage) {
-              if (project.id === projectId) applyProjectColors(project.id, colors);
+              const cached = colorCache[projectId];
+              if (cached) applyProjectColors(projectId, cached);
             } else {
               applyCardColors();
             }
@@ -61,7 +62,8 @@ loadData()
             const fallback = getColorFallback(project);
             colorCache[project.id] = fallback;
             if (isProjectPage) {
-              if (project.id === projectId) applyProjectColors(project.id, fallback);
+              const cached = colorCache[projectId];
+              if (cached) applyProjectColors(projectId, cached);
             } else {
               applyCardColors();
             }
