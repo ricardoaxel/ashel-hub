@@ -34,6 +34,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: var(--border-strong) var(--bg);
 }
