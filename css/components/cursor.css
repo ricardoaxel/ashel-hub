@@ -1,0 +1,32 @@
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 10000;
+}
+
+.cursor-ring {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--section-accent, var(--accent));
+  border-radius: 50%;
+  mix-blend-mode: difference;
+  transition: border-color 0.3s, width 0.3s, height 0.3s;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--section-accent, var(--accent));
+  border-radius: 50%;
+}
+
+a:hover ~ .cursor-ring,
+button:hover ~ .cursor-ring,
+.project-card:hover ~ .cursor-ring {
+  width: 60px;
+  height: 60px;
+  border-color: var(--section-accent-secondary, var(--accent-secondary));
+}

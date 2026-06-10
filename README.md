@@ -1,56 +1,63 @@
-# Music Portfolio
+# Ashel — Music Portfolio
 
-A responsive HTML/CSS portfolio page for showcasing your music projects.
+A data-driven portfolio site showcasing music projects, releases, and embedded Bandcamp players. Built with vanilla JS (ES modules), custom cursor, canvas-based audio visualization, and dynamic color extraction from album art.
+
+## Architecture
+
+```
+├── index.html              # Main portfolio page
+├── project.html            # Per-project detail page
+├── data.json               # All project/release data (single source of truth)
+├── css/
+│   ├── styles.css          # Import hub (14 CSS modules)
+│   ├── base.css            # Reset, variables, typography
+│   ├── layout.css          # Header, hero, marquee, footer
+│   ├── effects.css         # Noise/scanlines overlays
+│   ├── responsive.css      # All media queries
+│   └── components/         # Per-component stylesheets
+└── js/
+    └── app/                # ES modules
+        ├── main.js         # Entry point (page detection, boot sequence)
+        ├── data.js         # Fetch + cache layer for data.json / i18n.json
+        ├── i18n.js         # Locale engine (EN/ES), onLocaleChange events
+        ├── colors.js       # ColorThief extraction, palette scoring
+        ├── cursor.js       # Custom cursor (dot + ring)
+        ├── mobile-menu.js  # Mobile nav toggle
+        ├── wave-canvas.js  # Hero waveform visualization
+        ├── bubbles.js      # Floating album cover bubbles
+        └── render/         # Page renderers
+            ├── index.js
+            └── project.js
+```
 
 ## Setup
 
-1. Replace placeholder content in `index.html`:
-   - Your name, bio, and contact info
-   - Project titles, descriptions, and embed links
-   - Social media links
+1. Edit `data.json` to add/remove projects and releases
+2. Add cover images to `assets/images/` matching paths in `data.json`
+3. Edit `assets/i18n.json` for translations (EN/ES)
+4. Swap portrait in `assets/images/about.jpg`
 
-2. Add your images to `assets/images/`:
-   - `project-placeholder.jpg` - Album/project covers (300x300px recommended)
-   - `photo-1.jpg` through `photo-6.jpg` - Gallery images
-   - `artist-photo.jpg` - Your portrait for the About section
+## Requirements
 
-3. Add audio files to `assets/audio/` (optional):
-   - Use the HTML5 `<audio>` player for direct MP3 hosting
-
-## Embedding Music Players
-
-### Spotify
-
-Replace the `src` in the Spotify iframe with your album/track embed URL:
-
-```
-https://open.spotify.com/embed/album/YOUR_ALBUM_ID
-```
-
-### SoundCloud
-
-Replace the `src` with your track URL:
-
-```
-https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/YOUR_TRACK
-```
-
-### Bandcamp
-
-Use the Bandcamp embed code from your album page.
-
-## Customizing
-
-- **Colors**: Edit CSS variables in `:root` at the top of `css/styles.css`
-- **Fonts**: Change the `font-family` in the `body` selector
-- **Layout**: Adjust grid columns and breakpoints in the media queries
-
-## Opening the Page
-
-Just open `index.html` in any browser, or use a local server:
+Uses ES modules (`<script type="module">`) — requires an HTTP server:
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Then visit `http://localhost:8000`
+Then open `http://localhost:8000`. Opening `index.html` directly from disk (`file://`) will not work due to browser module restrictions.
+
+## Customizing
+
+- **Colors**: Edit CSS variables in `css/base.css` `:root`
+- **Fonts**: Change `font-family` in `css/base.css` `body`
+- **Layout**: Breakpoints in `css/responsive.css`
+
+## Tech
+
+- Zero frameworks, zero build tools
+- ES modules with shared data layer
+- ColorThief for dynamic accent extraction from album covers
+- Canvas-based audio waveform visualization
+- EN/ES i18n with URL-persisted locale
+- Custom cursor with section-aware color blending

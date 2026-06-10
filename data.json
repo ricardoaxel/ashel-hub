@@ -60,13 +60,7 @@
       "id": "oshira",
       "name": "Oshira",
       "cover": "assets/images/oshira.jpg",
-      "genres": [
-        "Dark Screamo",
-        "Post-Hardcore",
-        "Post-Metal",
-        "Math Rock",
-        "Skramz"
-      ],
+      "genres": ["Dark Screamo", "Post-Hardcore", "Post-Metal", "Math Rock", "Skramz"],
       "location": "Mexico City, Mexico",
       "badge": "New Release",
       "shortDescription": "Dark screamo duo with Manuel Espinoza. Debut EP \"Vorágine\" mastered by Brad Boatright. For fans of Portrayal of Guilt, Respire, Saetia.",
@@ -238,13 +232,7 @@
       "id": "rdusp",
       "name": "Recuerdos de un Sueño Perdido",
       "cover": "assets/images/rdusp.jpg",
-      "genres": [
-        "Math Rock",
-        "Emo",
-        "Screamo",
-        "Mathcore",
-        "Alternative Rock"
-      ],
+      "genres": ["Math Rock", "Emo", "Screamo", "Mathcore", "Alternative Rock"],
       "location": "Mexico City, Mexico",
       "badge": null,
       "shortDescription": "Math rock con huevos. 4-piece band with Mauricio Narváez, Ivan Luna \"Chapu\", and Arturo Macías. Born in mid-2017.",
@@ -296,14 +284,7 @@
       "id": "ashel-solo",
       "name": "Ashel (Solo)",
       "cover": "assets/images/ashel-solo.jpg",
-      "genres": [
-        "Ambient",
-        "Post-Rock",
-        "Experimental",
-        "Shoegaze",
-        "Math Rock",
-        "Lo-Fi"
-      ],
+      "genres": ["Ambient", "Post-Rock", "Experimental", "Shoegaze", "Math Rock", "Lo-Fi"],
       "location": "Mexico City, Mexico",
       "badge": null,
       "shortDescription": "Personal solo project for ambient experiments, post-rock compositions, math rock, and covers. Plus guitar improvisations on YouTube.",
@@ -395,12 +376,7 @@
       "id": "hostem",
       "name": "Hostem",
       "cover": "assets/images/hostem.jpg",
-      "genres": [
-        "Thrash Metal",
-        "Hardcore Punk",
-        "Heavy Metal",
-        "Alternative Metal"
-      ],
+      "genres": ["Thrash Metal", "Hardcore Punk", "Heavy Metal", "Alternative Metal"],
       "location": "Tlalnepantla, Mexico",
       "badge": null,
       "shortDescription": "Thrash/hardcore band from Tlalnepantla. Self-titled debut EP with 4 tracks. Raziel, Sebastián, Diego, Alec, and Ashel.",

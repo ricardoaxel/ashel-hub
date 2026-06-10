@@ -1,0 +1,144 @@
+import { getSiteData, getI18nData } from '../data.js';
+import { getLocale } from '../i18n.js';
+import { colorCache, getColorFallback } from '../colors.js';
+import { attachCursor } from '../cursor.js';
+
+let heroColors = ['#ff2d55', '#5856d6', '#00d4aa'];
+
+export function getHeroColors() {
+  return heroColors;
+}
+
+function updateHeroColors() {
+  const data = getSiteData();
+  if (!data) return;
+  const top3 = data.projects.slice(0, 3);
+  const allLoaded = top3.every((p) => colorCache[p.id]);
+  if (!allLoaded) return;
+  heroColors = [colorCache[top3[0].id][0], colorCache[top3[1].id][0], colorCache[top3[2].id][0]];
+}
+
+export function applyCardColors() {
+  const data = getSiteData();
+  if (!data) return;
+  const cards = document.querySelectorAll('.project-card');
+  const items = document.querySelectorAll('.gallery-item');
+  data.projects.forEach((project, index) => {
+    const colors = colorCache[project.id];
+    if (!colors) return;
+    const card = cards[index];
+    if (card) {
+      card.style.setProperty('--section-accent', colors[0]);
+      card.style.setProperty('--section-accent-secondary', colors[1]);
+      card.style.setProperty('--section-accent-tertiary', colors[2]);
+      const badge = card.querySelector('.project-badge');
+      if (badge) badge.style.background = colors[0];
+      card.querySelectorAll('.genre-tag').forEach((g) => {
+        g.style.borderColor = colors[0];
+      });
+    }
+    const item = items[index];
+    if (item) {
+      item.style.setProperty('--section-accent', colors[0]);
+      item.style.setProperty('--section-accent-secondary', colors[1]);
+    }
+  });
+  updateHeroColors();
+}
+
+export function renderIndexContent() {
+  const i18nData = getI18nData();
+  const siteData = getSiteData();
+  const currentLocale = getLocale();
+  if (!i18nData || !siteData) return;
+  const t = i18nData[currentLocale] || i18nData.en;
+  const data = siteData;
+
+  document.getElementById('hero-tagline').textContent = t.site?.subtitle || data.site.subtitle;
+
+  const marqueeItems = data.projects
+    .map(
+      (p) =>
+        `<span>${p.name} <span class="accent">—</span> ${p.genres.slice(0, 2).join(' / ')}</span>`
+    )
+    .join('');
+  document.getElementById('marquee').innerHTML = marqueeItems + marqueeItems;
+  setTimeout(() => {
+    document.querySelector('.marquee-content')?.classList.add('animate');
+  }, 2000);
+
+  const projectsHtml = data.projects
+    .map(
+      (p, i) => `
+      <a href="project.html?id=${p.id}" class="project-card" id="project-${p.id}">
+        <div class="project-cover-wrap">
+          <img src="${p.cover}" alt="${p.name}" class="project-cover" loading="lazy" decoding="async">
+          ${p.badge ? `<span class="project-badge">${p.badge}</span>` : ''}
+        </div>
+        <div class="project-info">
+          <span class="project-number">${String(i + 1).padStart(2, '0')}</span>
+          <h2 class="project-name">${p.name}</h2>
+          <div class="project-genres">
+            ${p.genres.map((g) => `<span class="genre-tag">${g}</span>`).join('')}
+          </div>
+          <p class="project-desc">${t.projects?.[p.id]?.shortDescription || p.shortDescription}</p>
+          <span class="project-arrow">→</span>
+        </div>
+      </a>`
+    )
+    .join('');
+  document.getElementById('projects-grid').innerHTML = projectsHtml;
+
+  document.getElementById('project-count').textContent = String(data.projects.length).padStart(
+    2,
+    '0'
+  );
+  document.getElementById('gallery-count').textContent = String(data.projects.length).padStart(
+    2,
+    '0'
+  );
+
+  const galleryHtml = data.projects
+    .map(
+      (p) => `
+      <div class="gallery-item" data-label="${p.name}">
+        <img src="${p.cover}" alt="${p.name}" loading="lazy" decoding="async">
+      </div>`
+    )
+    .join('');
+  document.getElementById('gallery-grid').innerHTML = galleryHtml;
+
+  const socialHtml = data.site.social
+    .map((s) => `<a href="${s.url}" target="_blank">${s.label}</a>`)
+    .join('');
+  document.getElementById('social-links').innerHTML = socialHtml;
+
+  const statKeys = ['projects', 'tracks', 'years'];
+  const statLabels = t.stats || {
+    projects: 'Projects',
+    tracks: 'Tracks Released',
+    years: 'Years Active',
+  };
+  const bioText = t.site?.bio || data.site.bio;
+
+  document.getElementById('about-text').innerHTML = `
+    <h3>Ashel</h3>
+    ${bioText.map((b) => `<p>${b}</p>`).join('')}
+    <div class="stats">
+      ${data.site.stats
+        .map(
+          (s, i) => `
+        <div class="stat">
+          <span class="stat-number">${s.number}</span>
+          <span class="stat-label">${statLabels[statKeys[i]] || s.label}</span>
+        </div>`
+        )
+        .join('')}
+    </div>`;
+
+  applyCardColors();
+
+  document
+    .querySelectorAll('a, .project-card, .album-card, .gallery-item, button')
+    .forEach(attachCursor);
+}

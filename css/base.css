@@ -1,0 +1,106 @@
+:root {
+  --bg: #050505;
+  --bg-elevated: #0a0a0a;
+  --surface: #111111;
+  --border: #1a1a1a;
+  --border-strong: #333333;
+  --text: #f0f0f0;
+  --text-dim: #666666;
+  --text-muted: #444444;
+  --accent: #ff2d55;
+  --accent-secondary: #5856d6;
+  --accent-tertiary: #00d4aa;
+  --section-accent: #ff2d55;
+  --section-accent-secondary: #5856d6;
+  --section-accent-tertiary: #00d4aa;
+  --mono: 'Space Mono', 'Courier New', monospace;
+  --serif: 'Playfair Display', 'Georgia', serif;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+::selection {
+  background: var(--section-accent, var(--accent));
+  color: var(--bg);
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) var(--bg);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.5;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  padding: 2rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section-label .count {
+  color: var(--text-muted);
+}
+
+.loading {
+  padding: 10rem 2rem;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.loading::after {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--section-accent, var(--accent));
+  margin-left: 0.5rem;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}

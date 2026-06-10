@@ -1,0 +1,37 @@
+.featured-release {
+  padding: 4rem 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.featured-release h2 {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--section-accent, var(--text-muted));
+  margin-bottom: 1rem;
+}
+
+.featured-release h3 {
+  font-family: var(--serif);
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.featured-release p {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  max-width: 600px;
+}
+
+.detail-player-section iframe {
+  width: 100%;
+  max-width: 800px;
+  border: none;
+  height: 120px;
+}

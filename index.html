@@ -4,10 +4,38 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ashel</title>
-    <link rel="stylesheet" href="css/styles.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap"
+    />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components/cursor.css" />
+    <link rel="stylesheet" href="css/components/nav.css" />
+    <link rel="stylesheet" href="css/components/project-card.css" />
+    <link rel="stylesheet" href="css/components/gallery.css" />
+    <link rel="stylesheet" href="css/components/about.css" />
+    <link rel="stylesheet" href="css/components/contact.css" />
+    <link rel="stylesheet" href="css/components/album-card.css" />
+    <link rel="stylesheet" href="css/components/discography.css" />
+    <link rel="stylesheet" href="css/components/featured-player.css" />
+    <link rel="stylesheet" href="css/components/detail.css" />
+    <link rel="stylesheet" href="css/effects.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"
+    ></script>
+    <script type="module" src="js/app/main.js"></script>
   </head>
   <body class="scanlines">
+    <div id="page-loader" style="position:fixed;inset:0;z-index:99999;background:#050505;display:flex;align-items:center;justify-content:center">
+      <div class="loading" style="border:none;padding:0" id="loader-text">Loading</div>
+    </div>
+    <script>var _ld=new URLSearchParams(window.location.search).get('locale');try{_ld=_ld||localStorage.getItem('locale')}catch(e){}_ld=_ld||navigator.language;document.getElementById('loader-text').textContent=_ld.startsWith('es')?'Cargando':'Loading'</script>
     <div class="cursor-dot"></div>
     <div class="cursor-ring"></div>
     <div class="noise"></div>
@@ -63,7 +91,7 @@
       <section id="gallery">
         <div class="section-label">
           <span data-i18n="labels.galleryLabel">Gallery</span>
-          <span class="count">06</span>
+          <span class="count" id="gallery-count">00</span>
         </div>
         <div class="gallery-grid" id="gallery-grid"></div>
       </section>
@@ -75,7 +103,7 @@
         </div>
         <div class="about">
           <div class="about-image">
-            <img src="assets/images/about.jpg" alt="Ashel" loading="lazy" />
+            <img src="assets/images/about.jpg" alt="Ashel" loading="lazy" decoding="async" />
           </div>
           <div class="about-content" id="about-text"></div>
         </div>
@@ -97,8 +125,16 @@
       <p>&copy; 2026 Ashel</p>
       <p data-i18n="site.builtWith">Built with obsession</p>
     </footer>
-
-    <script src="js/shared.js"></script>
-    <script src="js/index.js"></script>
+    <script>
+      (function () {
+        var d = document.querySelector('.cursor-dot'),
+          r = document.querySelector('.cursor-ring');
+        if (!d || !r) return;
+        document.addEventListener('mousemove', function (e) {
+          d.style.transform = 'translate(' + (e.clientX - 3) + 'px,' + (e.clientY - 3) + 'px)';
+          r.style.transform = 'translate(' + (e.clientX - 15) + 'px,' + (e.clientY - 15) + 'px)';
+        });
+      })();
+    </script>
   </body>
 </html>
