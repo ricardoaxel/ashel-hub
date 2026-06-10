@@ -22,8 +22,9 @@ loadData()
   .then(() => {
     applyTranslations();
 
+    let projectId;
     if (isProjectPage) {
-      const projectId = params.get('id');
+      projectId = params.get('id');
       if (!projectId) {
         window.location.href = 'index.html';
         return;
