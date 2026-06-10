@@ -47,6 +47,9 @@
     <script type="module" src="js/app/main.js"></script>
   </head>
   <body class="scanlines">
+    <div id="page-loader" style="position:fixed;inset:0;z-index:99999;background:#050505;display:flex;align-items:center;justify-content:center">
+      <div class="loading" style="border:none;padding:0">Loading</div>
+    </div>
     <div class="cursor-dot"></div>
     <div class="cursor-ring"></div>
     <div class="noise"></div>
@@ -74,9 +77,7 @@
       </button>
     </header>
 
-    <main id="project-content">
-      <div class="loading" data-i18n="site.loading">Loading</div>
-    </main>
+    <main id="project-content"></main>
 
     <footer class="footer">
       <p>&copy; 2026 Ashel</p>

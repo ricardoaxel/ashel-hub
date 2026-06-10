@@ -11,6 +11,14 @@ import { initBubbles } from './bubbles.js';
 const isProjectPage = window.location.pathname.includes('project.html');
 const params = new URLSearchParams(window.location.search);
 
+function hidePageLoader() {
+  const loader = document.getElementById('page-loader');
+  if (!loader) return;
+  loader.style.transition = 'opacity 0.35s ease';
+  loader.style.opacity = '0';
+  setTimeout(() => loader.remove(), 350);
+}
+
 function reRender() {
   if (isProjectPage) renderProjectContent();
   else renderIndexContent();
@@ -32,9 +40,11 @@ loadData()
       renderProjectContent();
       const p = getProject(projectId);
       if (p) document.title = `${p.name} | Ashel`;
+      hidePageLoader();
     } else {
       renderIndexContent();
       initBubbles(getSiteData());
+      hidePageLoader();
     }
 
     const siteData = getSiteData();
@@ -66,6 +76,7 @@ loadData()
       document.getElementById('project-content').innerHTML =
         '<div class="loading">Error loading data</div>';
     }
+    hidePageLoader();
   });
 
 initLangToggle();
