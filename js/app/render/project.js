@@ -88,7 +88,7 @@ export function renderProjectContent() {
     .map(
       (r) => `
       <a href="${r.url}" target="_blank" class="album-card">
-        <img src="${r.cover}" alt="${r.name}" class="album-cover" loading="lazy">
+        <img src="${r.cover}" alt="${r.name}" class="album-cover" loading="lazy" decoding="async">
         <div class="album-info">
           <span class="album-type">${r.type}</span>
           <p class="album-name">${r.name}</p>
@@ -103,7 +103,7 @@ export function renderProjectContent() {
       <a href="index.html#projects" class="back-link">&larr; ${t.site?.backToProjects || 'Back to Projects'}</a>
       <div class="detail-hero">
         <div class="detail-left">
-          <img src="${project.cover}" alt="${project.name}" class="detail-cover">
+          <img src="${project.cover}" alt="${project.name}" class="detail-cover" decoding="async">
           ${renderFeatured(defaultFeatured)}
         </div>
         <div class="detail-info">

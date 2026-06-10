@@ -131,12 +131,34 @@ export function initWaveCanvas(getHeroColors) {
     });
   }
 
+  let canvasVisible = true;
+  const heroEl = canvas.closest('.hero');
+  if (heroEl) {
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        canvasVisible = e.isIntersecting;
+        if (!canvasVisible && animationId) {
+          cancelAnimationFrame(animationId);
+          animationId = null;
+        } else if (canvasVisible && !animationId) {
+          animationId = requestAnimationFrame(animate);
+        }
+      },
+      { threshold: 0 }
+    );
+    obs.observe(heroEl);
+  }
+
   function animate(timestamp) {
     time = (timestamp || 0) / 16;
     generateNextFrame();
     updateFrequencies();
     drawWaveform();
-    animationId = requestAnimationFrame(animate);
+    if (canvasVisible) {
+      animationId = requestAnimationFrame(animate);
+    } else {
+      animationId = null;
+    }
   }
   animationId = requestAnimationFrame(animate);
 
@@ -144,7 +166,7 @@ export function initWaveCanvas(getHeroColors) {
     if (document.hidden) {
       cancelAnimationFrame(animationId);
       animationId = null;
-    } else if (!animationId) {
+    } else if (!animationId && canvasVisible) {
       animationId = requestAnimationFrame(animate);
     }
   });

@@ -72,7 +72,7 @@ export function renderIndexContent() {
       (p, i) => `
       <a href="project.html?id=${p.id}" class="project-card" id="project-${p.id}">
         <div class="project-cover-wrap">
-          <img src="${p.cover}" alt="${p.name}" class="project-cover" loading="lazy">
+          <img src="${p.cover}" alt="${p.name}" class="project-cover" loading="lazy" decoding="async">
           ${p.badge ? `<span class="project-badge">${p.badge}</span>` : ''}
         </div>
         <div class="project-info">
@@ -102,7 +102,7 @@ export function renderIndexContent() {
     .map(
       (p) => `
       <div class="gallery-item" data-label="${p.name}">
-        <img src="${p.cover}" alt="${p.name}" loading="lazy">
+        <img src="${p.cover}" alt="${p.name}" loading="lazy" decoding="async">
       </div>`
     )
     .join('');
