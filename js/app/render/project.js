@@ -1,7 +1,7 @@
 import { getSiteData, getI18nData } from '../data.js';
 import { getLocale } from '../i18n.js';
 import { attachCursor } from '../cursor.js';
-import { colorCache, getColorFallback, extractColors } from '../colors.js';
+import { colorCache, getColorFallback, extractColors, applyProjectColors } from '../colors.js';
 
 let currentProject = null;
 let currentProjectId = null;
@@ -162,4 +162,8 @@ export function renderProjectContent() {
     root.setProperty('--section-accent-secondary', fallback[1]);
     root.setProperty('--section-accent-tertiary', fallback[2]);
   }
+
+  extractColors(project.cover)
+    .then((extracted) => applyProjectColors(project.id, extracted))
+    .catch(() => applyProjectColors(project.id, getColorFallback(project)));
 }

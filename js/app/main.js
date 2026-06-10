@@ -2,7 +2,7 @@ import { loadData, getSiteData, getProject } from './data.js';
 import { applyTranslations, initLangToggle, onLocaleChange } from './i18n.js';
 import { initCursor } from './cursor.js';
 import { initMobileMenu } from './mobile-menu.js';
-import { extractColors, colorCache, getColorFallback, applyProjectColors } from './colors.js';
+import { extractColors, colorCache, getColorFallback } from './colors.js';
 import { renderIndexContent, getHeroColors, applyCardColors } from './render/index.js';
 import { setCurrentProject, renderProjectContent } from './render/project.js';
 import { initWaveCanvas } from './wave-canvas.js';
@@ -22,9 +22,8 @@ loadData()
   .then(() => {
     applyTranslations();
 
-    let projectId;
     if (isProjectPage) {
-      projectId = params.get('id');
+      const projectId = params.get('id');
       if (!projectId) {
         window.location.href = 'index.html';
         return;
@@ -51,22 +50,11 @@ loadData()
         extractColors(project.cover)
           .then((colors) => {
             colorCache[project.id] = colors;
-            if (isProjectPage) {
-              const cached = colorCache[projectId];
-              if (cached) applyProjectColors(projectId, cached);
-            } else {
-              applyCardColors();
-            }
+            if (!isProjectPage) applyCardColors();
           })
           .catch(() => {
-            const fallback = getColorFallback(project);
-            colorCache[project.id] = fallback;
-            if (isProjectPage) {
-              const cached = colorCache[projectId];
-              if (cached) applyProjectColors(projectId, cached);
-            } else {
-              applyCardColors();
-            }
+            colorCache[project.id] = getColorFallback(project);
+            if (!isProjectPage) applyCardColors();
           });
       });
     }
