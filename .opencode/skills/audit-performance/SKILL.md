@@ -21,6 +21,7 @@ Use this when the user reports the site feels slow, laggy, or buggy — especial
 ## Audit checklist (in priority order)
 
 ### 1. Image weight
+
 - List every image referenced in `data.json` and HTML `<img>` tags
 - Check file sizes with `ls -lh` / `stat`
 - Identify broken/placeholder images (< 100 bytes)
@@ -29,6 +30,7 @@ Use this when the user reports the site feels slow, laggy, or buggy — especial
 - Remove unreferenced/broken files
 
 ### 2. Render-blocking resources
+
 - Check `<head>` for `<script>` tags without `async` or `defer`
 - Check for CSS `@import` chains (sequential, render-blocking)
   - Fix: replace `@import` with parallel `<link>` tags in HTML
@@ -36,16 +38,19 @@ Use this when the user reports the site feels slow, laggy, or buggy — especial
   - Fix: move to `<link>` in `<head>` + add `preconnect` hints
 
 ### 3. Double downloads
+
 - Check if images are fetched a second time for processing (e.g. ColorThief)
   - Fix: shared `Image` cache (`Map<url, Promise<Image>>`)
   - Use direct `new Image()` + `src` instead of `fetch` → `blob` → `ObjectURL`
 
 ### 4. Cache policy
+
 - Check `fetch()` calls for `cache: 'no-store'`
   - Fix: remove or use `'no-cache'` (revalidate)
 - Check for `Cache-Control` headers on the server (if applicable)
 
 ### 5. Animation rAF waste
+
 - Check for `requestAnimationFrame` loops that run continuously
   - Fix 1: add idle timeout (e.g. cursor ring stops after 2s)
   - Fix 2: add `IntersectionObserver` + `threshold: 0` to stop when off-screen
@@ -53,6 +58,7 @@ Use this when the user reports the site feels slow, laggy, or buggy — especial
 - Check `visibilitychange` handler: cancel rAF when hidden, resume when visible
 
 ### 6. Hot paths (mousemove / scroll)
+
 - Check for `document.elementFromPoint()` on every `mousemove`
   - Fix: use `e.target.closest()` instead
 - Check for `getBoundingClientRect()` inside scroll handlers
@@ -60,18 +66,22 @@ Use this when the user reports the site feels slow, laggy, or buggy — especial
 - Check for `getComputedStyle()` calls in frequent handlers
 
 ### 7. Layout shift (CLS)
+
 - Check `<img>` tags missing `width` / `height` or container missing `aspect-ratio`
   - Fix: add `aspect-ratio` to CSS for image wrappers
 
 ### 8. Image decoding
+
 - Check if `<img>` tags need `decoding="async"`
   - Fix: add to every `<img>` tag (HTML + JS template literals)
 
 ### 9. CSS paint properties
+
 - Check for `transition: all` — prefer specific properties
 - Check for expensive SVG filters (`feTurbulence`) on mobile — weigh visual value vs. cost
 
 ### 10. Preload critical assets
+
 - Add `<link rel="preload" as="image">` for first-viewport images after data loads
 - Add `<link rel="preconnect">` for third-party origins (CDN, fonts)
 
@@ -84,6 +94,7 @@ perf: <short description of what and why>
 ```
 
 Example:
+
 ```
 perf: compress all referenced images from 72MB to 7.4MB
 ```

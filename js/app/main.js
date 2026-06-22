@@ -4,6 +4,7 @@ import { initCursor } from './cursor.js';
 import { initMobileMenu } from './mobile-menu.js';
 import { extractColors, colorCache, getColorFallback, saveColorCache } from './colors.js';
 import { renderIndexContent, getHeroColors, applyCardColors } from './render/index.js';
+import { initModal } from './modal.js';
 import { setCurrentProject, renderProjectContent } from './render/project.js';
 import { initWaveCanvas } from './wave-canvas.js';
 import { initBubbles } from './bubbles.js';
@@ -14,7 +15,10 @@ const params = new URLSearchParams(window.location.search);
 function hidePageLoader() {
   const loader = document.getElementById('page-loader');
   if (!loader) return;
-  if (window._loaderTextTimer) { clearTimeout(window._loaderTextTimer); window._loaderTextTimer = null; }
+  if (window._loaderTextTimer) {
+    clearTimeout(window._loaderTextTimer);
+    window._loaderTextTimer = null;
+  }
   loader.style.transition = 'opacity 0.35s ease';
   loader.style.opacity = '0';
   setTimeout(() => loader.remove(), 350);
@@ -39,6 +43,7 @@ loadData()
       }
       setCurrentProject(projectId);
       renderProjectContent();
+      initModal();
       const p = getProject(projectId);
       if (p) document.title = `${p.name} | Ashel`;
       hidePageLoader();

@@ -13,7 +13,10 @@
   border: 1px solid var(--section-accent, var(--accent));
   border-radius: 50%;
   mix-blend-mode: difference;
-  transition: border-color 0.3s, width 0.3s, height 0.3s;
+  transition:
+    border-color 0.3s,
+    width 0.3s,
+    height 0.3s;
 }
 
 .cursor-dot {

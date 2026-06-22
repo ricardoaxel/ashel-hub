@@ -17,6 +17,7 @@ function stopCursorRing() {
 }
 
 export function initCursor() {
+  if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
   cursorDot = document.querySelector('.cursor-dot');
   cursorRing = document.querySelector('.cursor-ring');
   if (!cursorDot || !cursorRing) return;
@@ -92,6 +93,7 @@ function animateCursorRing() {
 }
 
 export function attachCursor(el) {
+  if ('ontouchstart' in window || window.innerWidth <= 768) return;
   if (!cursorRing) return;
   el.addEventListener('mouseenter', () => {
     cursorRing.style.width = '60px';

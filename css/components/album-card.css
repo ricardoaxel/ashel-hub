@@ -55,3 +55,35 @@
   color: var(--section-accent-tertiary, var(--text-muted));
   letter-spacing: 0.1em;
 }
+
+@media (max-width: 768px) {
+  .album-info {
+    padding: 0.75rem;
+  }
+
+  .album-name {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .album-card {
+    border-top-width: 2px;
+  }
+
+  .album-info {
+    padding: 0.65rem;
+  }
+
+  .album-name {
+    font-size: 0.85rem;
+  }
+
+  .album-type {
+    font-size: 0.5rem;
+  }
+
+  .album-year {
+    font-size: 0.5rem;
+  }
+}

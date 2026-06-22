@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="css/components/contact.css" />
     <link rel="stylesheet" href="css/components/album-card.css" />
     <link rel="stylesheet" href="css/components/discography.css" />
+    <link rel="stylesheet" href="css/components/project-photos.css" />
+    <link rel="stylesheet" href="css/components/modal.css" />
     <link rel="stylesheet" href="css/components/featured-player.css" />
     <link rel="stylesheet" href="css/components/detail.css" />
     <link rel="stylesheet" href="css/effects.css" />
@@ -47,11 +49,40 @@
     <script type="module" src="js/app/main.js"></script>
   </head>
   <body class="scanlines">
-    <div id="page-loader" style="position:fixed;inset:0;z-index:99999;background:#050505;display:flex;align-items:center;justify-content:center">
-      <div class="loading" style="border:none;padding:0;opacity:0;transition:opacity 0.3s" id="loader-text">Loading</div>
+    <div
+      id="page-loader"
+      style="
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        background: #050505;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <div
+        class="loading"
+        style="border: none; padding: 0; opacity: 0; transition: opacity 0.3s"
+        id="loader-text"
+      >
+        Loading
+      </div>
     </div>
-    <script>var _ld=new URLSearchParams(window.location.search).get('locale');try{_ld=_ld||localStorage.getItem('locale')}catch(e){}_ld=_ld||navigator.language;document.getElementById('loader-text').textContent=_ld.startsWith('es')?'Cargando':'Loading'
-    window._loaderTextTimer=setTimeout(function(){var t=document.getElementById('loader-text');if(t)t.style.opacity='1'},500)</script>
+    <script>
+      var _ld = new URLSearchParams(window.location.search).get('locale');
+      try {
+        _ld = _ld || localStorage.getItem('locale');
+      } catch (e) {}
+      _ld = _ld || navigator.language;
+      document.getElementById('loader-text').textContent = _ld.startsWith('es')
+        ? 'Cargando'
+        : 'Loading';
+      window._loaderTextTimer = setTimeout(function () {
+        var t = document.getElementById('loader-text');
+        if (t) t.style.opacity = '1';
+      }, 500);
+    </script>
     <div class="cursor-dot"></div>
     <div class="cursor-ring"></div>
     <div class="noise"></div>
@@ -81,12 +112,26 @@
 
     <main id="project-content"></main>
 
+    <div id="gallery-modal" class="gallery-modal">
+      <button class="modal-close" aria-label="Close">&#10005;</button>
+      <button class="modal-btn modal-prev">&larr;</button>
+      <div class="modal-image-wrap">
+        <img class="modal-image" src="" alt="" />
+        <div class="modal-meta">
+          <span class="modal-counter"></span>
+          <span class="modal-caption"></span>
+        </div>
+      </div>
+      <button class="modal-btn modal-next">&rarr;</button>
+    </div>
+
     <footer class="footer">
       <p>&copy; 2026 Ashel</p>
       <p data-i18n="site.builtWith">Built with obsession</p>
     </footer>
     <script>
       (function () {
+        if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
         var d = document.querySelector('.cursor-dot'),
           r = document.querySelector('.cursor-ring');
         if (!d || !r) return;

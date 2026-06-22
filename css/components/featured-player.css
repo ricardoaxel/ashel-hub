@@ -35,3 +35,21 @@
   border: none;
   height: 120px;
 }
+
+@media (max-width: 768px) {
+  .featured-release {
+    padding: 2rem 1.25rem;
+  }
+
+  .featured-release h3 {
+    font-size: 1.5rem;
+  }
+
+  .featured-release p {
+    font-size: 0.7rem;
+  }
+
+  .detail-player-section iframe {
+    height: 100px;
+  }
+}

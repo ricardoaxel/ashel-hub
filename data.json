@@ -84,6 +84,81 @@
           "url": "https://oshira.bandcamp.com"
         }
       ],
+      "flyers": [
+        {
+          "src": "assets/images/projects/oshira-flyer-02.jpg",
+          "caption": "Golpear También, Oshira, SVN NYSIDE & Who Cares at Capitan Gallo — Jan 26, 2024",
+          "date": "2024-01-26"
+        },
+        {
+          "src": "assets/images/projects/oshira-flyer-03.jpg",
+          "caption": "Expedición a las Estrellas feat. Oshira at Sangriento — Mar 16, 2024",
+          "date": "2024-03-16"
+        },
+        {
+          "src": "assets/images/projects/oshira-flyer-01.jpg",
+          "caption": "Cumpleaños Martiyaki feat. Oshira at Denso Rock"
+        },
+        {
+          "src": "assets/images/projects/oshira-flyer-04.jpg",
+          "caption": "Oshira flyer"
+        },
+        {
+          "src": "assets/images/projects/oshira-flyer-05.jpg",
+          "caption": "La División del Norte feat. Oshira at Denso Rock"
+        },
+        {
+          "src": "assets/images/projects/oshira-flyer-06.jpg",
+          "caption": "Oshira flyer"
+        },
+        {
+          "src": "assets/images/projects/oshira-ss-Screenshot 2026-06-17 at 6.39.56 p.m..png",
+          "caption": "Días Difíciles 2025 feat. Oshira at Conexión 222 — Nov 14, 2025",
+          "date": "2025-11-14"
+        },
+        {
+          "src": "assets/images/projects/oshira-ss-Screenshot 2026-06-17 at 6.39.07 p.m..png",
+          "caption": "Oshira at Hipódromo, Cuauhtémoc"
+        },
+        {
+          "src": "assets/images/projects/oshira-ss-Screenshot 2026-06-17 at 6.39.28 p.m..png",
+          "caption": "Nebulosa, Días Dazed, Dandelion, Nada & Oshira at Medellín 143"
+        },
+        {
+          "src": "assets/images/projects/oshira-ss-Screenshot 2026-06-17 at 6.40.37 p.m..png",
+          "caption": "Next Era show en vivo feat. Oshira"
+        },
+        {
+          "src": "assets/images/projects/oshira-ss-Screenshot 2026-06-17 at 6.41.01 p.m..png",
+          "caption": "Oshira flyer"
+        }
+      ],
+      "photos": [
+        {
+          "src": "https://idioteq.com/wp-content/uploads/2026/04/oshira-house-of-vans-1-1.jpg",
+          "caption": "Oshira live at House of Vans"
+        },
+        {
+          "src": "https://idioteq.com/wp-content/uploads/2026/04/oshira-house-of-vans-3-1.jpg",
+          "caption": "Oshira live at House of Vans"
+        },
+        {
+          "src": "assets/images/projects/oshira-hov-1.jpg",
+          "caption": "Oshira at House of Vans CDMX"
+        },
+        {
+          "src": "assets/images/projects/oshira-hov-2.jpg",
+          "caption": "Oshira at House of Vans CDMX"
+        },
+        {
+          "src": "assets/images/projects/oshira-article-1.jpg",
+          "caption": "Oshira (photo by Revenge of the Nerds)"
+        },
+        {
+          "src": "assets/images/projects/oshira-article-2.jpg",
+          "caption": "Oshira (photo by Revenge of the Nerds)"
+        }
+      ],
       "releases": [
         {
           "type": "EP",
@@ -156,6 +231,94 @@
         {
           "label": "Facebook",
           "url": "https://www.facebook.com/Dotzdmx/"
+        }
+      ],
+      "flyers": [
+        {
+          "src": "assets/images/projects/dotzd-flyer-04.jpg",
+          "caption": "Huellas Mágicas! feat. Dotzd — Dec 17, 2016",
+          "date": "2016-12-17"
+        },
+        {
+          "src": "assets/images/projects/dotzd-flyer-05.jpg",
+          "caption": "Pentagon Trip feat. Dotzd at El Mundano — Jan 6, 2017",
+          "date": "2017-01-06"
+        },
+        {
+          "src": "assets/images/projects/dotzd-flyer-07.jpg",
+          "caption": "Infinite Noises: Prefiesta 7 FAF 2K17 feat. Dotzd at Foro Niza 40 — Feb 17, 2017",
+          "date": "2017-02-17"
+        },
+        {
+          "src": "assets/images/projects/dotzd-flyer-08.jpg",
+          "caption": "Dotzd at Laberinto Cultural — Mar 4, 2017",
+          "date": "2017-03-04"
+        },
+        {
+          "src": "assets/images/projects/dotzd-flyer-10.jpg",
+          "caption": "Fragmentos feat. Dotzd — May 6, 2017",
+          "date": "2017-05-06"
+        },
+        {
+          "src": "assets/images/projects/dotzd-flyer-11.jpg",
+          "caption": "Dotzd at Rock E Che — Jul 27, 2017",
+          "date": "2017-07-27"
+        },
+        {
+          "src": "assets/images/projects/dotzd-flyer-12.jpg",
+          "caption": "Fragmentos tape release feat. Dotzd at Foro Zirahuén — Oct 6, 2017",
+          "date": "2017-10-06"
+        },
+        {
+          "src": "assets/images/projects/dotzd-flyer-13.jpg",
+          "caption": "Dotzd — Negrvs — Jul 29, 2022",
+          "date": "2022-07-29"
+        },
+        {
+          "src": "assets/images/projects/dotzd-flyer-01.jpg",
+          "caption": "Dotzd — Johnny Pequenín at Clavería"
+        },
+        {
+          "src": "assets/images/projects/dotzd-flyer-02.jpg",
+          "caption": "Infinite Post-Rock Festival feat. Dotzd at Foro Lata"
+        },
+        {
+          "src": "assets/images/projects/dotzd-flyer-03.jpg",
+          "caption": "23 Noviembre — Deshuesadero, No Way, Dotzd at Pescadería El Primo"
+        },
+        {
+          "src": "assets/images/projects/dotzd-flyer-06.jpg",
+          "caption": "Radical Paint Vol. 1 feat. Dotzd"
+        },
+        {
+          "src": "assets/images/projects/dotzd-flyer-09.jpg",
+          "caption": "Experimental night feat. Dotzd — Feb 2017"
+        }
+      ],
+      "photos": [
+        {
+          "src": "assets/images/projects/dotzd-live-1.jpg",
+          "caption": "Ashel live, 2016. Photo by @jaquelinereed"
+        },
+        {
+          "src": "assets/images/projects/dotzd-promo-1.jpg",
+          "caption": "Empero EP, 2024"
+        },
+        {
+          "src": "assets/images/projects/dotzd-tempo-release.jpg",
+          "caption": "Tempo album release, 2020"
+        },
+        {
+          "src": "assets/images/projects/dotzd-punta-cometa.jpg",
+          "caption": "Punta Cometa single, 2020"
+        },
+        {
+          "src": "assets/images/projects/dotzd-fantasia.jpg",
+          "caption": "Fantasia album, 2018"
+        },
+        {
+          "src": "assets/images/projects/dotzd-viento-promo.jpg",
+          "caption": "Viento single promo, 2024"
         }
       ],
       "releases": [
@@ -267,6 +430,97 @@
           "url": "https://www.facebook.com/RecuerdosdeunSuenoPerdido/"
         }
       ],
+      "flyers": [
+        {
+          "src": "assets/images/projects/rdusp-flyer-2018-02-10.jpg",
+          "caption": "RdUSP at B301 festival — Feb 10, 2018",
+          "date": "2018-02-10"
+        },
+        {
+          "src": "assets/images/projects/rdusp-flyer-2018-03-16.jpg",
+          "caption": "RdUSP at Foro Dirty Sound — Mar 16, 2018",
+          "date": "2018-03-16"
+        },
+        {
+          "src": "assets/images/projects/rdusp-flyer-2018-03-17.jpg",
+          "caption": "RdUSP at Berlin #39 — Mar 17, 2018",
+          "date": "2018-03-17"
+        },
+        {
+          "src": "assets/images/projects/rdusp-flyer-ig-post.jpg",
+          "caption": "RdUSP flyer (IG post)"
+        },
+        {
+          "src": "assets/images/projects/rdusp-flyer-2018-03-23.jpg",
+          "caption": "Bazaar at Casita de Lola — Blvd Calacoya 18, Atizapán — Mar 23, 2018",
+          "date": "2018-03-23"
+        },
+        {
+          "src": "assets/images/projects/rdusp-flyer-2018-04-14.jpg",
+          "caption": "Mole Tour — Tony el Gordo, CDMX — Apr 14, 2018",
+          "date": "2018-04-14"
+        },
+        {
+          "src": "assets/images/projects/rdusp-flyer-2018-10-12.jpg",
+          "caption": "RdUSP at Barrio Satélite — Oct 12, 2018",
+          "date": "2018-10-12"
+        },
+        {
+          "src": "assets/images/projects/rdusp-flyer-2018-11-24.jpg",
+          "caption": "RdUSP at Includeso — Nov 24, 2018",
+          "date": "2018-11-24"
+        },
+        {
+          "src": "assets/images/projects/rdusp-flyer-unknown-01.jpg",
+          "caption": "RdUSP — NO COVER at Santa Maria la Ribera"
+        },
+        {
+          "src": "assets/images/projects/rdusp-flyer-unknown-02.jpg",
+          "caption": "RdUSP — live in Estado de México"
+        },
+        {
+          "src": "assets/images/projects/rdusp-flyer-unknown-03.jpg",
+          "caption": "RdUSP — Saturno live"
+        },
+        {
+          "src": "assets/images/projects/rdusp-flyer-unknown-04.jpg",
+          "caption": "Caravan Havana feat. RdUSP"
+        }
+      ],
+      "photos": [
+        {
+          "src": "assets/images/projects/rdusp-blog-band.jpg",
+          "caption": "Recuerdos de un Sueño Perdido (photo by Valeria Páez)"
+        },
+        {
+          "src": "assets/images/projects/rdusp-vallebravo-art.jpg",
+          "caption": "Valle Bravo EP artwork"
+        },
+        {
+          "src": "assets/images/projects/rdusp-fb-1.jpg",
+          "caption": "Recuerdos de un Sueño Perdido Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/rdusp-fb-3.jpg",
+          "caption": "Recuerdos de un Sueño Perdido Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/rdusp-fb-4.jpg",
+          "caption": "Recuerdos de un Sueño Perdido Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/rdusp-fb-5.jpg",
+          "caption": "Recuerdos de un Sueño Perdido Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/rdusp-fb-6.jpg",
+          "caption": "Recuerdos de un Sueño Perdido Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/rdusp-fb-7.jpg",
+          "caption": "Recuerdos de un Sueño Perdido Facebook photo"
+        }
+      ],
       "releases": [
         {
           "type": "EP",
@@ -309,6 +563,37 @@
         {
           "label": "Facebook",
           "url": "https://www.facebook.com/Ashel-480327362049672/"
+        }
+      ],
+      "flyers": [],
+      "photos": [
+        {
+          "src": "assets/images/projects/ashel-fb-1.jpg",
+          "caption": "Ashel-Solo Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/ashel-fb-2.jpg",
+          "caption": "Ashel-Solo Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/ashel-fb-3.jpg",
+          "caption": "Ashel-Solo Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/ashel-fb-4.jpg",
+          "caption": "Ashel-Solo Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/ashel-fb-5.jpg",
+          "caption": "Ashel-Solo Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/ashel-fb-6.jpg",
+          "caption": "Ashel-Solo Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/ashel-fb-7.jpg",
+          "caption": "Ashel-Solo Facebook photo"
         }
       ],
       "releases": [
@@ -409,6 +694,171 @@
         {
           "label": "Bandcamp",
           "url": "https://hostem.bandcamp.com"
+        }
+      ],
+      "flyers": [
+        {
+          "src": "assets/images/projects/hostem-flyer-08.jpg",
+          "caption": "Hostem at El Chetumal Productions — Mar 8, 2014",
+          "date": "2014-03-08"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-12.jpg",
+          "caption": "Hostem — Aug 29, 2014",
+          "date": "2014-08-29"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-16.jpg",
+          "caption": "Manikie, Bullshit, Hostem & The Homes Ska Club at CCH Vallejo — Nov 27, 2014",
+          "date": "2014-11-27"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-23.jpg",
+          "caption": "Hostem at Multiforo 246 — Jul 11, 2015",
+          "date": "2015-07-11"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-24.jpg",
+          "caption": "Fullius Day 2015 feat. Hostem at Cosa Nostra MX — Oct 23, 2015",
+          "date": "2015-10-23"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-01.jpg",
+          "caption": "Hostem — Guerra de Bandas festival"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-02.jpg",
+          "caption": "Hostem — Peña"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-03.jpg",
+          "caption": "Hostem flyer"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-04.jpg",
+          "caption": "El Fest sin nombre feat. Hostem"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-05.jpg",
+          "caption": "Satelucore feat. Hostem at Comonfort #8"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-06.jpg",
+          "caption": "Hostem & Vecino? at Real de Atizapán"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-07.jpg",
+          "caption": "Roopa, No Why & Hostem"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-09.jpg",
+          "caption": "Hostem flyer"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-10.jpg",
+          "caption": "Hecho en Casa 2 feat. Hostem"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-11.jpg",
+          "caption": "Hostem at Valle Dorado"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-13.jpg",
+          "caption": "Hostem at Real de Atizapán"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-14.jpg",
+          "caption": "Hostem & No Way at Plaza Gigi"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-15.jpg",
+          "caption": "Hostem — Eje Satelite"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-17.jpg",
+          "caption": "Hostem flyer"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-18.jpg",
+          "caption": "Hostem at Billar La Buchaca"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-19.jpg",
+          "caption": "Hostem — Lexice, Vecino, Pescador"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-20.jpg",
+          "caption": "Rock in the Roof feat. Hostem"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-21.jpg",
+          "caption": "Hostem flyer"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-22.jpg",
+          "caption": "Hostem flyer"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-25.jpg",
+          "caption": "Ezkizofrenia Prods feat. Hostem"
+        }
+      ],
+      "photos": [
+        {
+          "src": "assets/images/projects/hostem-fb-1.jpg",
+          "caption": "Hostem Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/hostem-fb-2.jpg",
+          "caption": "Hostem Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/hostem-fb-3.jpg",
+          "caption": "Hostem Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/hostem-fb-4.jpg",
+          "caption": "Hostem Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/hostem-fb-5.jpg",
+          "caption": "Hostem Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/hostem-fb-6.jpg",
+          "caption": "Hostem Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/hostem-fb-7.jpg",
+          "caption": "Hostem Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/hostem-fb-8.jpg",
+          "caption": "Hostem Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/hostem-fb-9.jpg",
+          "caption": "Hostem Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/hostem-fb-10.jpg",
+          "caption": "Hostem Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/hostem-fb-11.jpg",
+          "caption": "Hostem Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/hostem-fb-12.jpg",
+          "caption": "Hostem Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/hostem-fb-13.jpg",
+          "caption": "Hostem Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/hostem-fb-14.jpg",
+          "caption": "Hostem Facebook photo"
         }
       ],
       "releases": [
