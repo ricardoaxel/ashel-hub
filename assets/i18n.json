@@ -23,12 +23,15 @@
     "nav": {
       "projects": "Projects",
       "gallery": "Gallery",
+      "illustrations": "Illustrations/Photo",
       "about": "About",
       "contact": "Contact"
     },
     "labels": {
       "projectsSection": "Projects / Bands",
       "galleryLabel": "Gallery",
+      "illustrationsSection": "Illustrations/Photo",
+      "illustrationLabel": "Illustration",
       "aboutLabel": "About",
       "contactLabel": "Contact / Links",
       "members": "Members",
@@ -141,12 +144,15 @@
     "nav": {
       "projects": "Proyectos",
       "gallery": "Galería",
+      "illustrations": "Ilustraciones/Foto",
       "about": "Acerca de",
       "contact": "Contacto"
     },
     "labels": {
       "projectsSection": "Proyectos / Bandas",
       "galleryLabel": "Galería",
+      "illustrationsSection": "Ilustraciones/Foto",
+      "illustrationLabel": "Ilustración",
       "aboutLabel": "Acerca de",
       "contactLabel": "Contacto / Enlaces",
       "members": "Miembros",

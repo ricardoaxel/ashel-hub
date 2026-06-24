@@ -2,6 +2,7 @@ import { getSiteData, getI18nData } from '../data.js';
 import { getLocale } from '../i18n.js';
 import { colorCache, getColorFallback } from '../colors.js';
 import { attachCursor } from '../cursor.js';
+import { openModal } from '../modal.js';
 
 let heroColors = ['#ff2d55', '#5856d6', '#00d4aa'];
 
@@ -108,6 +109,38 @@ export function renderIndexContent() {
     .join('');
   document.getElementById('gallery-grid').innerHTML = galleryHtml;
 
+  document.getElementById('illustrations-count').textContent = String(data.illustrations.length).padStart(
+    2,
+    '0'
+  );
+
+  const previewCount = Math.min(6, data.illustrations.length);
+  const illustrationsHtml = data.illustrations
+    .slice(0, previewCount)
+    .map(
+      (item, i) => `
+      <div class="illustration-item" data-label="Illustration ${String(i + 1).padStart(2, '0')}" data-index="${i}">
+        <img src="${item.src}" alt="" loading="lazy" decoding="async">
+      </div>`
+    )
+    .join('');
+  document.getElementById('illustrations-grid').innerHTML = illustrationsHtml;
+
+  const totalCount = data.illustrations.length;
+  const grid = document.getElementById('illustrations-grid');
+  if (totalCount > previewCount) {
+    const showMore = document.createElement('div');
+    showMore.className = 'illustration-show-more';
+    showMore.innerHTML = `<a href="illustrations.html">VIEW ALL <span class="count">${String(totalCount).padStart(2, '0')}</span></a>`;
+    grid.parentNode.appendChild(showMore);
+  }
+
+  const dataIllustrations = data.illustrations;
+  document.querySelectorAll('.illustration-item').forEach((el) => {
+    const index = parseInt(el.dataset.index, 10);
+    el.addEventListener('click', () => openModal(dataIllustrations, index));
+  });
+
   const socialHtml = data.site.social
     .map((s) => `<a href="${s.url}" target="_blank">${s.label}</a>`)
     .join('');
@@ -139,6 +172,6 @@ export function renderIndexContent() {
   applyCardColors();
 
   document
-    .querySelectorAll('a, .project-card, .album-card, .gallery-item, button')
+    .querySelectorAll('a, .project-card, .album-card, .gallery-item, .illustration-item, button')
     .forEach(attachCursor);
 }

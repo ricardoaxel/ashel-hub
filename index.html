@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="css/components/discography.css" />
     <link rel="stylesheet" href="css/components/featured-player.css" />
     <link rel="stylesheet" href="css/components/detail.css" />
+    <link rel="stylesheet" href="css/components/illustration.css" />
     <link rel="stylesheet" href="css/effects.css" />
     <link rel="stylesheet" href="css/responsive.css" />
     <script
@@ -76,6 +77,7 @@
       <div class="header-right">
         <ul class="nav-links">
           <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+          <li><a href="#illustrations" data-i18n="nav.illustrations">Illustration Art</a></li>
           <li><a href="#gallery" data-i18n="nav.gallery">Gallery</a></li>
           <li><a href="#about" data-i18n="nav.about">About</a></li>
           <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
@@ -96,6 +98,9 @@
     <main>
       <section class="hero">
         <canvas id="wave-canvas"></canvas>
+        <div class="hero-illustration-bg" id="hero-illustration-bg-1"></div>
+        <div class="hero-illustration-bg" id="hero-illustration-bg-2"></div>
+        <div class="hero-illustration-overlay"></div>
         <div class="hero-bubbles" id="hero-bubbles"></div>
         <div class="hero-content">
           <h1 class="hero-title">
@@ -104,6 +109,10 @@
           <p class="hero-tagline" id="hero-tagline"></p>
         </div>
         <div class="hero-scroll"><span data-i18n="site.scrollHint">Scroll</span> ↓</div>
+        <div class="hero-illustration-label" id="hero-illustration-label">
+          <span class="hero-illustration-label-text">ILLUSTRATION</span>
+          <span class="hero-illustration-counter" id="hero-illustration-counter">00/00</span>
+        </div>
       </section>
 
       <div class="marquee">
@@ -116,6 +125,14 @@
           <span class="count" id="project-count"></span>
         </div>
         <div class="projects-list" id="projects-grid"></div>
+      </section>
+
+      <section id="illustrations">
+        <div class="section-label">
+          <span data-i18n="labels.illustrationsSection">Illustration Art</span>
+          <span class="count" id="illustrations-count">00</span>
+        </div>
+        <div class="illustrations-grid" id="illustrations-grid"></div>
       </section>
 
       <section id="gallery">
@@ -150,6 +167,19 @@
         <div class="social-links" id="social-links"></div>
       </section>
     </main>
+
+    <div id="gallery-modal" class="gallery-modal">
+      <button class="modal-close" aria-label="Close">&#10005;</button>
+      <button class="modal-btn modal-prev">&larr;</button>
+      <div class="modal-image-wrap">
+        <img class="modal-image" src="" alt="" />
+        <div class="modal-meta">
+          <span class="modal-counter"></span>
+          <span class="modal-caption"></span>
+        </div>
+      </div>
+      <button class="modal-btn modal-next">&rarr;</button>
+    </div>
 
     <footer class="footer">
       <p>&copy; 2026 Ashel</p>

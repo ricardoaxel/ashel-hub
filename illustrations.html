@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Illustrations | Ashel</title>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap"
+    />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components/cursor.css" />
+    <link rel="stylesheet" href="css/components/nav.css" />
+    <link rel="stylesheet" href="css/components/modal.css" />
+    <link rel="stylesheet" href="css/components/illustration.css" />
+    <link rel="stylesheet" href="css/components/illustration-detail.css" />
+    <link rel="stylesheet" href="css/effects.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <script type="module" src="js/app/main.js"></script>
+  </head>
+  <body class="scanlines">
+    <div
+      id="page-loader"
+      style="
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        background: #050505;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <div
+        class="loading"
+        style="border: none; padding: 0; opacity: 0; transition: opacity 0.3s"
+        id="loader-text"
+      >
+        Loading
+      </div>
+    </div>
+    <script>
+      var _ld = new URLSearchParams(window.location.search).get('locale');
+      try {
+        _ld = _ld || localStorage.getItem('locale');
+      } catch (e) {}
+      _ld = _ld || navigator.language;
+      document.getElementById('loader-text').textContent = _ld.startsWith('es')
+        ? 'Cargando'
+        : 'Loading';
+      window._loaderTextTimer = setTimeout(function () {
+        var t = document.getElementById('loader-text');
+        if (t) t.style.opacity = '1';
+      }, 500);
+    </script>
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+    <div class="noise"></div>
+    <div class="grid-bg"></div>
+
+    <header class="header">
+      <a href="index.html" class="logo">Ashel</a>
+      <div class="header-right">
+        <ul class="nav-links">
+          <li><a href="index.html#projects" data-i18n="nav.projects">Projects</a></li>
+          <li><a href="index.html#illustrations" data-i18n="nav.illustrations">Illustrations</a></li>
+          <li><a href="index.html#gallery" data-i18n="nav.gallery">Gallery</a></li>
+          <li><a href="index.html#about" data-i18n="nav.about">About</a></li>
+          <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+        <div class="lang-toggle" id="lang-toggle">
+          <span class="lang-option" data-lang="en">EN</span>
+          <span class="lang-separator">|</span>
+          <span class="lang-option" data-lang="es">ES</span>
+        </div>
+      </div>
+      <button class="mobile-menu-btn" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
+    <main id="illustrations-content"></main>
+
+    <div id="gallery-modal" class="gallery-modal">
+      <button class="modal-close" aria-label="Close">&#10005;</button>
+      <button class="modal-btn modal-prev">&larr;</button>
+      <div class="modal-image-wrap">
+        <img class="modal-image" src="" alt="" />
+        <div class="modal-meta">
+          <span class="modal-counter"></span>
+          <span class="modal-caption"></span>
+        </div>
+      </div>
+      <button class="modal-btn modal-next">&rarr;</button>
+    </div>
+
+    <footer class="footer">
+      <p>&copy; 2026 Ashel</p>
+      <p data-i18n="site.builtWith">Built with obsession</p>
+    </footer>
+    <script>
+      (function () {
+        if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
+        var d = document.querySelector('.cursor-dot'),
+          r = document.querySelector('.cursor-ring');
+        if (!d || !r) return;
+        document.addEventListener('mousemove', function (e) {
+          d.style.transform = 'translate(' + (e.clientX - 3) + 'px,' + (e.clientY - 3) + 'px)';
+          r.style.transform = 'translate(' + (e.clientX - 15) + 'px,' + (e.clientY - 15) + 'px)';
+        });
+      })();
+    </script>
+  </body>
+</html>

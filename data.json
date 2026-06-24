@@ -55,6 +55,30 @@
       }
     ]
   },
+  "illustrations": [
+    { "src": "assets/images/illustrations/illustration-01.jpg", "caption": "" },
+    { "src": "assets/images/illustrations/illustration-02.jpg", "caption": "" },
+    { "src": "assets/images/illustrations/illustration-03.jpg", "caption": "" },
+    { "src": "assets/images/illustrations/illustration-04.jpg", "caption": "" },
+    { "src": "assets/images/illustrations/illustration-05.jpg", "caption": "" },
+    { "src": "assets/images/illustrations/illustration-06.jpg", "caption": "" },
+    { "src": "assets/images/illustrations/illustration-07.jpg", "caption": "" },
+    { "src": "assets/images/illustrations/illustration-08.jpg", "caption": "" },
+    { "src": "assets/images/illustrations/illustration-09.jpg", "caption": "" },
+    { "src": "assets/images/illustrations/illustration-10.jpg", "caption": "" },
+    { "src": "assets/images/illustrations/illustration-11.jpg", "caption": "" },
+    { "src": "assets/images/illustrations/illustration-12.jpg", "caption": "" },
+    { "src": "assets/images/illustrations/illustration-13.jpg", "caption": "" },
+    { "src": "assets/images/illustrations/illustration-14.jpg", "caption": "" },
+    { "src": "assets/images/illustrations/illustration-15.jpg", "caption": "" },
+    { "src": "assets/images/illustrations/illustration-16.jpg", "caption": "" },
+    { "src": "assets/images/illustrations/illustration-17.jpg", "caption": "" },
+    { "src": "assets/images/illustrations/illustration-18.jpg", "caption": "" },
+    { "src": "assets/images/illustrations/illustration-19.jpg", "caption": "" },
+    { "src": "assets/images/illustrations/illustration-20.jpg", "caption": "" },
+    { "src": "assets/images/illustrations/illustration-21.jpg", "caption": "" },
+    { "src": "assets/images/illustrations/illustration-22.jpg", "caption": "" }
+  ],
   "projects": [
     {
       "id": "oshira",
