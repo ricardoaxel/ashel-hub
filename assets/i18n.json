@@ -142,16 +142,16 @@
       ]
     },
     "nav": {
-      "projects": "Proyectos",
+      "projects": "Música",
       "gallery": "Galería",
-      "illustrations": "Ilustraciones/Foto",
+      "illustrations": "Visual",
       "about": "Acerca de",
       "contact": "Contacto"
     },
     "labels": {
-      "projectsSection": "Proyectos / Bandas",
+      "projectsSection": "Música",
       "galleryLabel": "Galería",
-      "illustrationsSection": "Ilustraciones/Foto",
+      "illustrationsSection": "Visual",
       "illustrationLabel": "Ilustración",
       "aboutLabel": "Acerca de",
       "contactLabel": "Contacto / Enlaces",
