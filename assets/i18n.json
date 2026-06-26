@@ -39,7 +39,13 @@
       "location": "Location",
       "socialLinks": "Social Links",
       "email": "Email",
-      "emailDesc": "For collaborations, bookings, or just to say hi."
+      "emailDesc": "For collaborations, bookings, or just to say hi.",
+      "releaseTypes": {
+        "Album": "Album",
+        "EP": "EP",
+        "Single": "Single",
+        "Cover": "Cover"
+      }
     },
     "stats": {
       "projects": "Projects",
@@ -161,7 +167,13 @@
       "location": "Ubicación",
       "socialLinks": "Redes Sociales",
       "email": "Email",
-      "emailDesc": "Para colaboraciones, reservas, o simplemente para saludar."
+      "emailDesc": "Para colaboraciones, reservas, o simplemente para saludar.",
+      "releaseTypes": {
+        "Album": "Álbum",
+        "EP": "EP",
+        "Single": "Sencillo",
+        "Cover": "Cover"
+      }
     },
     "stats": {
       "projects": "Proyectos",

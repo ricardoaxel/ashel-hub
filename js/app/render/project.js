@@ -76,7 +76,7 @@ export function renderProjectContent() {
             .filter((t) => grouped[t])
             .map(
               (t) => `
-          <optgroup label="${t}">
+          <optgroup label="${t.labels?.releaseTypes?.[t] || t}">
             ${grouped[t].map((r) => `<option value="${r.name}" ${r.name === defaultFeatured.name ? 'selected' : ''}>${r.name} (${r.year})</option>`).join('')}
           </optgroup>`
             )
@@ -91,7 +91,7 @@ export function renderProjectContent() {
       <a href="${r.url}" target="_blank" class="album-card">
         <img src="${r.cover}" alt="${r.name}" class="album-cover" loading="lazy" decoding="async">
         <div class="album-info">
-          <span class="album-type">${r.type}</span>
+          <span class="album-type">${t.labels?.releaseTypes?.[r.type] || r.type}</span>
           <p class="album-name">${r.name}</p>
           <p class="album-year">${r.year}</p>
         </div>
