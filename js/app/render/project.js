@@ -78,11 +78,11 @@ export function renderProjectContent() {
         <label>${t.site?.albumLabel || 'Release'}</label>
         <select id="album-selector">
           ${typeOrder
-            .filter((t) => grouped[t])
+            .filter((typeName) => grouped[typeName])
             .map(
-              (t) => `
-          <optgroup label="${t.labels?.releaseTypes?.[t] || t}">
-            ${grouped[t].map((r) => `<option value="${r.name}" ${r.name === defaultFeatured.name ? 'selected' : ''}>${r.name} (${translateDate(r.year, t)})</option>`).join('')}
+              (typeName) => `
+          <optgroup label="${t.labels?.releaseTypes?.[typeName] || typeName}">
+            ${grouped[typeName].map((r) => `<option value="${r.name}" ${r.name === defaultFeatured.name ? 'selected' : ''}>${r.name} (${translateDate(r.year, t)})</option>`).join('')}
           </optgroup>`
             )
             .join('')}
