@@ -112,11 +112,13 @@ export function renderIndexContent() {
     const j = Math.floor(Math.random() * (i + 1));
     [allPhotos[i], allPhotos[j]] = [allPhotos[j], allPhotos[i]];
   }
+  const galleryPreviewCount = Math.min(9, allPhotos.length);
   document.getElementById('gallery-count').textContent = String(allPhotos.length).padStart(
     2,
     '0'
   );
   const galleryHtml = allPhotos
+    .slice(0, galleryPreviewCount)
     .map(
       (photo, i) => `
       <div class="gallery-item" data-label="${photo.projectName}" data-index="${i}">
@@ -129,6 +131,31 @@ export function renderIndexContent() {
     const index = parseInt(el.dataset.index, 10);
     el.addEventListener('click', () => openModal(allPhotos, index));
   });
+  if (allPhotos.length > galleryPreviewCount) {
+    const grid = document.getElementById('gallery-grid');
+    const showMore = document.createElement('div');
+    showMore.className = 'illustration-show-more';
+    showMore.innerHTML = `<a href="#" id="gallery-show-more">VIEW ALL <span class="count">${String(allPhotos.length).padStart(2, '0')}</span></a>`;
+    grid.parentNode.appendChild(showMore);
+    showMore.querySelector('a').addEventListener('click', (e) => {
+      e.preventDefault();
+      showMore.remove();
+      const remaining = allPhotos.slice(galleryPreviewCount);
+      const extraHtml = remaining
+        .map(
+          (photo, i) => `
+        <div class="gallery-item" data-label="${photo.projectName}" data-index="${galleryPreviewCount + i}">
+          <img src="${photo.src}" alt="${photo.caption || photo.projectName}" loading="lazy" decoding="async">
+        </div>`
+        )
+        .join('');
+      grid.insertAdjacentHTML('beforeend', extraHtml);
+      document.querySelectorAll('.gallery-item').forEach((el) => {
+        const index = parseInt(el.dataset.index, 10);
+        el.addEventListener('click', () => openModal(allPhotos, index));
+      });
+    });
+  }
 
   document.getElementById('illustrations-count').textContent = String(data.illustrations.length).padStart(
     2,
