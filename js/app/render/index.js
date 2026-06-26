@@ -87,7 +87,7 @@ export function renderIndexContent() {
             </div>
             <div class="tl-labels">
               <span class="tl-year">${p.yearsActive.start}</span>
-              <span class="tl-year">${p.yearsActive.end || 'present'}</span>
+              <span class="tl-year">${p.yearsActive.end || t.labels?.present || 'Present'}</span>
             </div>
           </div>` : ''}
           <h2 class="project-name">${p.name}</h2>

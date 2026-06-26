@@ -138,7 +138,7 @@ export function renderProjectContent() {
             </div>
             <div class="tl-labels">
               <span class="tl-year">${project.yearsActive.start}</span>
-              <span class="tl-year">${project.yearsActive.end || 'Present'}</span>
+              <span class="tl-year">${project.yearsActive.end || t.labels?.present || 'Present'}</span>
             </div>
           </div>` : ''}
           <div class="detail-genres">${genresHtml}</div>
