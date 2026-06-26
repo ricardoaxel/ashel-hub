@@ -84,7 +84,7 @@
       "id": "oshira",
       "name": "Oshira",
       "cover": "assets/images/oshira.jpg",
-      "genres": ["Dark Screamo", "Post-Hardcore", "Post-Metal", "Math Rock", "Skramz"],
+      "genres": ["Screamo", "Post-Hardcore", "Post-Metal", "Math Rock", "Skramz"],
       "location": "Mexico City, Mexico",
       "yearsActive": { "start": 2023, "end": null },
       "badge": "New Release",
