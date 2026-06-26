@@ -40,6 +40,11 @@
       "socialLinks": "Social Links",
       "email": "Email",
       "emailDesc": "For collaborations, bookings, or just to say hi.",
+      "months": {
+        "Jan": "Jan", "Feb": "Feb", "Mar": "Mar", "Apr": "Apr",
+        "May": "May", "Jun": "Jun", "Jul": "Jul", "Aug": "Aug",
+        "Sep": "Sep", "Oct": "Oct", "Nov": "Nov", "Dec": "Dec"
+      },
       "releaseTypes": {
         "Album": "Album",
         "EP": "EP",
@@ -168,6 +173,11 @@
       "socialLinks": "Redes Sociales",
       "email": "Email",
       "emailDesc": "Para colaboraciones, reservas, o simplemente para saludar.",
+      "months": {
+        "Jan": "Ene", "Feb": "Feb", "Mar": "Mar", "Apr": "Abr",
+        "May": "May", "Jun": "Jun", "Jul": "Jul", "Aug": "Ago",
+        "Sep": "Sep", "Oct": "Oct", "Nov": "Nov", "Dec": "Dic"
+      },
       "releaseTypes": {
         "Album": "Álbum",
         "EP": "EP",

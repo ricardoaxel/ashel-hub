@@ -13,6 +13,11 @@ export function setCurrentProject(id) {
   currentProject = data?.projects.find((p) => p.id === id) || null;
 }
 
+function translateDate(dateStr, t) {
+  if (!dateStr || !t?.labels?.months) return dateStr;
+  return dateStr.replace(/\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\b/g, (m) => t.labels.months[m] || m);
+}
+
 export function renderProjectContent() {
   const i18nData = getI18nData();
   const siteData = getSiteData();
@@ -47,7 +52,7 @@ export function renderProjectContent() {
       <section class="featured-release" id="featured-section">
         <div class="section-label" style="border: none; padding: 0; margin-bottom: 2rem;">
           <span>${t.site?.featuredRelease || 'Featured Release'}</span>
-          <span class="count">${release.year}</span>
+          <span class="count">${translateDate(release.year, t)}</span>
         </div>
         <h2>${t.site?.nowPlaying || 'Now Playing'}</h2>
         <h3>${release.name}</h3>
@@ -77,7 +82,7 @@ export function renderProjectContent() {
             .map(
               (t) => `
           <optgroup label="${t.labels?.releaseTypes?.[t] || t}">
-            ${grouped[t].map((r) => `<option value="${r.name}" ${r.name === defaultFeatured.name ? 'selected' : ''}>${r.name} (${r.year})</option>`).join('')}
+            ${grouped[t].map((r) => `<option value="${r.name}" ${r.name === defaultFeatured.name ? 'selected' : ''}>${r.name} (${translateDate(r.year, t)})</option>`).join('')}
           </optgroup>`
             )
             .join('')}
@@ -93,7 +98,7 @@ export function renderProjectContent() {
         <div class="album-info">
           <span class="album-type">${t.labels?.releaseTypes?.[r.type] || r.type}</span>
           <p class="album-name">${r.name}</p>
-          <p class="album-year">${r.year}</p>
+          <p class="album-year">${translateDate(r.year, t)}</p>
         </div>
       </a>`
     )
