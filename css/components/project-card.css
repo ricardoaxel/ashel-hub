@@ -181,9 +181,19 @@
 }
 
 /* ── Project Timeline ── */
-.project-timeline,
+.project-timeline {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2rem;
+}
+
 .detail-timeline {
   margin-top: 1rem;
+  margin-bottom: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
@@ -223,8 +233,12 @@
   color: var(--text-muted);
 }
 
-.project-timeline {
-  max-width: 240px;
+.project-timeline .tl-track {
+  width: 100px;
+}
+
+.project-timeline .tl-labels {
+  width: 100px;
 }
 
 .detail-timeline {

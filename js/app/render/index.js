@@ -78,10 +78,6 @@ export function renderIndexContent() {
         </div>
         <div class="project-info">
           <span class="project-number">${String(i + 1).padStart(2, '0')}</span>
-          <h2 class="project-name">${p.name}</h2>
-          <div class="project-genres">
-            ${p.genres.map((g) => `<span class="genre-tag">${g}</span>`).join('')}
-          </div>
           ${p.yearsActive ? `
           <div class="project-timeline">
             <div class="tl-track">
@@ -94,6 +90,10 @@ export function renderIndexContent() {
               <span class="tl-year">${p.yearsActive.end || 'present'}</span>
             </div>
           </div>` : ''}
+          <h2 class="project-name">${p.name}</h2>
+          <div class="project-genres">
+            ${p.genres.map((g) => `<span class="genre-tag">${g}</span>`).join('')}
+          </div>
           <p class="project-desc">${t.projects?.[p.id]?.shortDescription || p.shortDescription}</p>
           <span class="project-arrow">→</span>
         </div>
