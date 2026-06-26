@@ -82,6 +82,18 @@ export function renderIndexContent() {
           <div class="project-genres">
             ${p.genres.map((g) => `<span class="genre-tag">${g}</span>`).join('')}
           </div>
+          ${p.yearsActive ? `
+          <div class="project-timeline">
+            <div class="tl-track">
+              <span class="tl-dot"></span>
+              <span class="tl-line"></span>
+              <span class="tl-dot"></span>
+            </div>
+            <div class="tl-labels">
+              <span class="tl-year">${p.yearsActive.start}</span>
+              <span class="tl-year">${p.yearsActive.end || 'present'}</span>
+            </div>
+          </div>` : ''}
           <p class="project-desc">${t.projects?.[p.id]?.shortDescription || p.shortDescription}</p>
           <span class="project-arrow">→</span>
         </div>

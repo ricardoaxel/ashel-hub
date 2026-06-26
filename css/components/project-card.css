@@ -180,6 +180,62 @@
   transform: translateX(0.5rem);
 }
 
+/* ── Project Timeline ── */
+.project-timeline,
+.detail-timeline {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.tl-track {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.tl-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--section-accent, var(--accent));
+  flex-shrink: 0;
+}
+
+.tl-line {
+  flex: 1;
+  height: 1px;
+  background: var(--section-accent, var(--accent));
+  opacity: 0.35;
+}
+
+.tl-labels {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tl-year {
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.project-timeline {
+  max-width: 240px;
+}
+
+.detail-timeline {
+  max-width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.detail-timeline .tl-track {
+  max-width: 320px;
+}
+
 .project-badge {
   position: absolute;
   top: 1rem;

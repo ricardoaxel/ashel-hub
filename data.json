@@ -86,6 +86,7 @@
       "cover": "assets/images/oshira.jpg",
       "genres": ["Dark Screamo", "Post-Hardcore", "Post-Metal", "Math Rock", "Skramz"],
       "location": "Mexico City, Mexico",
+      "yearsActive": { "start": 2023, "end": null },
       "badge": "New Release",
       "shortDescription": "Dark screamo duo with Manuel Espinoza. Debut EP \"Vorágine\" mastered by Brad Boatright. For fans of Portrayal of Guilt, Respire, Saetia.",
       "description": [
@@ -227,6 +228,7 @@
         "Noise"
       ],
       "location": "Mexico City, Mexico",
+      "yearsActive": { "start": 2012, "end": null },
       "badge": null,
       "shortDescription": "Post-(Rock/Metal) (Shoe/Black)-gaze one man band. 8 releases since 2012 spanning blackgaze, shoegaze, slowcore, ambient, and psychedelic.",
       "description": [
@@ -421,6 +423,7 @@
       "cover": "assets/images/rdusp.jpg",
       "genres": ["Math Rock", "Emo", "Screamo", "Mathcore", "Alternative Rock"],
       "location": "Mexico City, Mexico",
+      "yearsActive": { "start": 2017, "end": 2018 },
       "badge": null,
       "shortDescription": "Math rock con huevos. 4-piece band with Mauricio Narváez, Ivan Luna \"Chapu\", and Arturo Macías. Formed in mid-2017.",
       "description": [
@@ -564,6 +567,7 @@
       "cover": "assets/images/ashel-solo.jpg",
       "genres": ["Ambient", "Post-Rock", "Experimental", "Shoegaze", "Math Rock", "Lo-Fi"],
       "location": "Mexico City, Mexico",
+      "yearsActive": { "start": 2017, "end": null },
       "badge": null,
       "shortDescription": "Personal solo project for ambient experiments, post-rock compositions, math rock, and covers. Plus guitar improvisations on YouTube.",
       "description": [
@@ -687,6 +691,7 @@
       "cover": "assets/images/hostem.jpg",
       "genres": ["Thrash Metal", "Hardcore Punk", "Heavy Metal", "Alternative Metal"],
       "location": "Tlalnepantla, Mexico",
+      "yearsActive": { "start": 2014, "end": 2016 },
       "badge": null,
       "shortDescription": "Thrash/hardcore band from Tlalnepantla. Self-titled debut EP with 4 tracks. Raziel, Sebastián, Diego, Alec, and Ashel.",
       "description": [

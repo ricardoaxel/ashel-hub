@@ -131,6 +131,18 @@ export function renderProjectContent() {
           <h1>${project.name}</h1>
           <div class="detail-genres">${genresHtml}</div>
           <p class="detail-location">${t.labels?.location || 'Location'}: ${project.location}</p>
+          ${project.yearsActive ? `
+          <div class="detail-timeline">
+            <div class="tl-track">
+              <span class="tl-dot"></span>
+              <span class="tl-line"></span>
+              <span class="tl-dot"></span>
+            </div>
+            <div class="tl-labels">
+              <span class="tl-year">${project.yearsActive.start}</span>
+              <span class="tl-year">${project.yearsActive.end || 'Present'}</span>
+            </div>
+          </div>` : ''}
           ${descriptionHtml}
           ${selectorHtml}
           <div class="detail-members">
