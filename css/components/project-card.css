@@ -192,10 +192,12 @@
 }
 
 .detail-timeline {
-  margin-top: 1rem;
-  margin-bottom: 1.5rem;
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   gap: 0.2rem;
 }
 
@@ -241,13 +243,12 @@
   width: 100px;
 }
 
-.detail-timeline {
-  max-width: 100%;
-  margin-bottom: 1.5rem;
+.detail-timeline .tl-track {
+  width: 160px;
 }
 
-.detail-timeline .tl-track {
-  max-width: 320px;
+.detail-timeline .tl-labels {
+  width: 160px;
 }
 
 .project-badge {

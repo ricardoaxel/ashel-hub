@@ -129,8 +129,6 @@ export function renderProjectContent() {
         </div>
         <div class="detail-info">
           <h1>${project.name}</h1>
-          <div class="detail-genres">${genresHtml}</div>
-          <p class="detail-location">${t.labels?.location || 'Location'}: ${project.location}</p>
           ${project.yearsActive ? `
           <div class="detail-timeline">
             <div class="tl-track">
@@ -143,6 +141,8 @@ export function renderProjectContent() {
               <span class="tl-year">${project.yearsActive.end || 'Present'}</span>
             </div>
           </div>` : ''}
+          <div class="detail-genres">${genresHtml}</div>
+          <p class="detail-location">${t.labels?.location || 'Location'}: ${project.location}</p>
           ${descriptionHtml}
           ${selectorHtml}
           <div class="detail-members">
