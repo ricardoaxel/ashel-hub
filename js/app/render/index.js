@@ -23,7 +23,6 @@ export function applyCardColors() {
   const data = getSiteData();
   if (!data) return;
   const cards = document.querySelectorAll('.project-card');
-  const items = document.querySelectorAll('.gallery-item');
   data.projects.forEach((project, index) => {
     const colors = colorCache[project.id];
     if (!colors) return;
@@ -37,11 +36,6 @@ export function applyCardColors() {
       card.querySelectorAll('.genre-tag').forEach((g) => {
         g.style.borderColor = colors[0];
       });
-    }
-    const item = items[index];
-    if (item) {
-      item.style.setProperty('--section-accent', colors[0]);
-      item.style.setProperty('--section-accent-secondary', colors[1]);
     }
   });
   updateHeroColors();
@@ -106,20 +100,35 @@ export function renderIndexContent() {
     2,
     '0'
   );
-  document.getElementById('gallery-count').textContent = String(data.projects.length).padStart(
+  const allPhotos = [];
+  data.projects.forEach((p) => {
+    if (p.photos) {
+      p.photos.forEach((photo) => {
+        allPhotos.push({ ...photo, projectName: p.name });
+      });
+    }
+  });
+  for (let i = allPhotos.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [allPhotos[i], allPhotos[j]] = [allPhotos[j], allPhotos[i]];
+  }
+  document.getElementById('gallery-count').textContent = String(allPhotos.length).padStart(
     2,
     '0'
   );
-
-  const galleryHtml = data.projects
+  const galleryHtml = allPhotos
     .map(
-      (p) => `
-      <div class="gallery-item" data-label="${p.name}">
-        <img src="${p.cover}" alt="${p.name}" loading="lazy" decoding="async">
+      (photo, i) => `
+      <div class="gallery-item" data-label="${photo.projectName}" data-index="${i}">
+        <img src="${photo.src}" alt="${photo.caption || photo.projectName}" loading="lazy" decoding="async">
       </div>`
     )
     .join('');
   document.getElementById('gallery-grid').innerHTML = galleryHtml;
+  document.querySelectorAll('.gallery-item').forEach((el) => {
+    const index = parseInt(el.dataset.index, 10);
+    el.addEventListener('click', () => openModal(allPhotos, index));
+  });
 
   document.getElementById('illustrations-count').textContent = String(data.illustrations.length).padStart(
     2,
