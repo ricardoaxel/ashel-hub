@@ -1,6 +1,6 @@
 import { getSiteData, getI18nData } from '../data.js';
 import { getLocale } from '../i18n.js';
-import { attachCursor } from '../cursor.js';
+import { attachCursor, refreshCursorColor } from '../cursor.js';
 import { colorCache, getColorFallback, extractColors, applyProjectColors } from '../colors.js';
 import { openModal } from '../modal.js';
 
@@ -48,6 +48,15 @@ export function renderProjectContent() {
   function renderFeatured(release) {
     if (!release) return '';
     const desc = projT.releases?.[release.name] || release.description;
+    const tracks = release.tracks;
+    const tracklistHtml = tracks?.length
+      ? `<div class="tracklist">
+          <h4>${t.site?.tracklist || 'Tracklist'}</h4>
+          <ol>
+            ${tracks.map((tr) => `<li>${tr}</li>`).join('')}
+          </ol>
+        </div>`
+      : '';
     return `
       <section class="featured-release" id="featured-section">
         <div class="section-label" style="border: none; padding: 0; margin-bottom: 2rem;">
@@ -58,6 +67,7 @@ export function renderProjectContent() {
         <h3>${release.name}</h3>
         ${desc ? `<p>${desc}</p>` : ''}
         ${release.embed ? `<div class="detail-player-section">${release.embed}</div>` : ''}
+        ${tracklistHtml}
       </section>`;
   }
 
@@ -208,7 +218,30 @@ export function renderProjectContent() {
           )
           .join('')}
       </div>
-    </section>`;
+    </section>
+
+    ${
+      project.videos?.length
+        ? `
+    <section class="project-videos">
+      <div class="section-label" style="border: none; padding: 0; margin-bottom: 2rem;">
+        <span>${t.site?.videos || 'Videos'}</span>
+        <span class="count">${String(project.videos.length).padStart(2, '0')}</span>
+      </div>
+      <div class="videos-grid">
+        ${project.videos
+          .map(
+            (v, i) => `
+          <div class="video-card" data-video-index="${i}">
+            <iframe src="https://www.youtube.com/embed/${v.videoId}" frameborder="0" allowfullscreen loading="lazy" style="position:absolute;inset:0;width:100%;height:100%" title="${v.title}"></iframe>
+          </div>
+        `
+          )
+          .join('')}
+      </div>
+    </section>`
+        : ''
+    }`;
 
   document.querySelectorAll('a, button, .album-card, .photo-card').forEach(attachCursor);
 
@@ -221,6 +254,11 @@ export function renderProjectContent() {
       if (!items[index].caption && items[index].src?.startsWith('data:')) return;
       openModal(items, index);
     });
+  });
+
+  document.querySelectorAll('.video-card').forEach((card) => {
+    const index = parseInt(card.dataset.videoIndex, 10);
+    card.addEventListener('click', () => openModal(project.videos, index));
   });
 
   const selector = document.getElementById('album-selector');
@@ -236,6 +274,12 @@ export function renderProjectContent() {
           root.setProperty('--section-accent', colors[0]);
           root.setProperty('--section-accent-secondary', colors[1]);
           root.setProperty('--section-accent-tertiary', colors[2]);
+          const iframe = document.querySelector('.detail-player-section iframe');
+          if (iframe) {
+            const hex = colors[0].replace('#', '');
+            iframe.src = iframe.src.replace(/linkcol=[a-f0-9]{6}/i, `linkcol=${hex}`);
+          }
+          refreshCursorColor();
         })
         .catch(() => {});
     }
@@ -247,15 +291,36 @@ export function renderProjectContent() {
     root.setProperty('--section-accent', colors[0]);
     root.setProperty('--section-accent-secondary', colors[1]);
     root.setProperty('--section-accent-tertiary', colors[2]);
+    updateEmbedColor(colors[0]);
+    refreshCursorColor();
   } else {
     const fallback = getColorFallback(project);
     const root = document.documentElement.style;
     root.setProperty('--section-accent', fallback[0]);
     root.setProperty('--section-accent-secondary', fallback[1]);
     root.setProperty('--section-accent-tertiary', fallback[2]);
+    updateEmbedColor(fallback[0]);
+    refreshCursorColor();
   }
 
   extractColors(project.cover)
-    .then((extracted) => applyProjectColors(project.id, extracted))
-    .catch(() => applyProjectColors(project.id, getColorFallback(project)));
+    .then((extracted) => {
+      applyProjectColors(project.id, extracted);
+      updateEmbedColor(extracted[0]);
+      refreshCursorColor();
+    })
+    .catch(() => {
+      const fb = getColorFallback(project);
+      applyProjectColors(project.id, fb);
+      updateEmbedColor(fb[0]);
+      refreshCursorColor();
+    });
+}
+
+function updateEmbedColor(color) {
+  const iframe = document.querySelector('.detail-player-section iframe');
+  if (iframe) {
+    const hex = color.replace('#', '');
+    iframe.src = iframe.src.replace(/linkcol=[a-f0-9]{6}/i, `linkcol=${hex}`);
+  }
 }

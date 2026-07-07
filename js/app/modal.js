@@ -1,5 +1,6 @@
 let modalEl = null;
 let imgEl = null;
+let videoEl = null;
 let captionEl = null;
 let counterEl = null;
 let items = [];
@@ -7,9 +8,17 @@ let currentIndex = 0;
 
 function show() {
   const item = items[currentIndex];
-  imgEl.src = item.src;
-  imgEl.alt = item.caption || '';
-  captionEl.textContent = item.caption || '';
+  const isVideo = !!item.videoId;
+  imgEl.style.display = isVideo ? 'none' : '';
+  videoEl.style.display = isVideo ? '' : 'none';
+  if (isVideo) {
+    videoEl.src = `https://www.youtube.com/embed/${item.videoId}?autoplay=1`;
+    videoEl.title = item.title || '';
+  } else {
+    imgEl.src = item.src;
+    imgEl.alt = item.caption || '';
+  }
+  captionEl.textContent = item.caption || item.title || '';
   counterEl.textContent = `${currentIndex + 1} / ${items.length}`;
 }
 
@@ -24,6 +33,9 @@ function open(newItems, index) {
 function close() {
   modalEl.classList.remove('active');
   document.body.style.overflow = '';
+  videoEl.src = '';
+  videoEl.style.display = 'none';
+  imgEl.style.display = '';
 }
 
 function prev() {
@@ -52,8 +64,11 @@ export function initModal() {
   if (!modalEl) return;
 
   imgEl = modalEl.querySelector('.modal-image');
+  videoEl = modalEl.querySelector('.modal-video');
   captionEl = modalEl.querySelector('.modal-caption');
   counterEl = modalEl.querySelector('.modal-counter');
+
+  videoEl.style.display = 'none';
 
   modalEl.querySelector('.modal-close')?.addEventListener('click', close);
   modalEl.querySelector('.modal-prev')?.addEventListener('click', prev);

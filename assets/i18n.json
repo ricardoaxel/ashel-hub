@@ -6,10 +6,12 @@
       "scrollHint": "Scroll",
       "backToProjects": "Back to Projects",
       "nowPlaying": "Now Playing",
+      "tracklist": "Tracklist",
       "featuredRelease": "Featured Release",
       "discography": "Discography",
       "photos": "Photos",
       "flyers": "Flyers",
+      "videos": "Videos",
       "albumLabel": "Release",
       "members": "Members",
       "loading": "Loading",
@@ -32,6 +34,7 @@
       "galleryLabel": "Gallery",
       "illustrationsSection": "Illustrations/Photo",
       "illustrationLabel": "Visual",
+      "viewAll": "View All",
       "present": "Present",
       "aboutLabel": "About",
       "contactLabel": "Contact / Links",
@@ -39,11 +42,19 @@
       "location": "Location",
       "socialLinks": "Social Links",
       "email": "Email",
-      "emailDesc": "For collaborations, bookings, or just to say hi.",
       "months": {
-        "Jan": "Jan", "Feb": "Feb", "Mar": "Mar", "Apr": "Apr",
-        "May": "May", "Jun": "Jun", "Jul": "Jul", "Aug": "Aug",
-        "Sep": "Sep", "Oct": "Oct", "Nov": "Nov", "Dec": "Dec"
+        "Jan": "Jan",
+        "Feb": "Feb",
+        "Mar": "Mar",
+        "Apr": "Apr",
+        "May": "May",
+        "Jun": "Jun",
+        "Jul": "Jul",
+        "Aug": "Aug",
+        "Sep": "Sep",
+        "Oct": "Oct",
+        "Nov": "Nov",
+        "Dec": "Dec"
       },
       "releaseTypes": {
         "Album": "Album",
@@ -69,13 +80,13 @@
           "Ashel": "Guitar, Vocals"
         },
         "releases": {
-          "Vorágine": "Six-track EP addressing identity, fear, and the pressure of uncertainty. Tracks: \"Umbral\" (ambient intro), \"Saber Desaparecer\", \"Punto Ciego\", \"Sigilo\", \"Vorágine\", and \"Fisura\"."
+          "Vorágine": "EP addressing identity, fear, and the pressure of uncertainty."
         }
       },
       "dotzd": {
         "shortDescription": "Solo post-(rock/metal) (shoe/black)-gaze project. 8 releases since 2012 spanning blackgaze, shoegaze, slowcore, ambient, and psychedelia.",
         "description": [
-"Ashel's solo project where blackgaze, post-rock, and shoegaze merge into soundscapes ranging from serene introspection to walls of distortion. Eight releases since 2012 exploring duality — day and night, change and the eternal.",
+          "Ashel's solo project where blackgaze, post-rock, and shoegaze merge into soundscapes ranging from serene introspection to walls of distortion. Eight releases since 2012 exploring duality — day and night, change and the eternal.",
           "The sound spans blackgaze, shoegaze, slowcore, psychedelia, ambient, and noise — everything needed to express the duality that is a constant in life. \"Tempo\" was produced at Echo Bravo Studio. \"Empero\" features Carlo Ixcamparij on drums, marking the first collaboration on a Dotzd release."
         ],
         "members": {
@@ -83,7 +94,7 @@
           "Carlo Ixcamparij": "Drums (Empero, 2024)"
         },
         "releases": {
-          "Empero": "\"Empero\" represents a long-awaited release, forged through a complicated journey and numerous revisions. Written and recorded during 2020, the album features Carlo Ixcamparij on drums — a first for Dotzd. Tracks: \"Viento\", \"Memorias del tiempo\", and \"Empero\".",
+          "Empero": "\"Empero\" represents a long-awaited release, forged through a complicated journey and numerous revisions. Written and recorded during 2020, the album features Carlo Ixcamparij on drums — a first for Dotzd.",
           "Tempo": "Produced at Echo Bravo Studio, Tempo explores the passage of time through layers of guitar textures and hypnotic rhythms."
         }
       },
@@ -99,7 +110,7 @@
           "Arturo Macías \"サクヒン\"": "Guitar"
         },
         "releases": {
-          "Valle Bravo": "6 tracks of math rock/emo/screamo energy. \"Shiba Inu\", \"Siempre la misma fórmula\", \"Debería irme pronto\", \"Sin memoria\", \"NES (Nada es suficiente)\", and \"Escultores\"."
+          "Valle Bravo": "Math rock/emo/screamo energy."
         }
       },
       "ashel-solo": {
@@ -111,23 +122,7 @@
           "Ashel": "All instruments, production, mixing, mastering"
         },
         "releases": {
-          "El caos es la naturaleza de las cosas...": "4 tracks of ambient/post-rock/experimental. Includes \"Esencia\", \"Copo\", \"Meow\", and \"Camp\" (Delta Sleep cover)."
-        }
-      },
-      "hostem": {
-        "shortDescription": "Thrash/hardcore band from Tlalnepantla. Debut self-titled EP with 4 tracks. Raziel, Sebastián, Diego, Alec, and Ashel.",
-        "description": [
-          "Thrash/hardcore band from Tlalnepantla. Raw and relentless energy with 4 tracks spanning from social critique to dark fantasy. Debut self-titled EP recorded at Diego's house, mixed by Ashel. Lyrics by Diego and Raziel, with special thanks to Aldo \"Hacha Loca\" López."
-        ],
-        "members": {
-          "Raziel": "Vocals (lyrics)",
-          "Sebastián": "Drums",
-          "Diego": "Guitar (lyrics)",
-          "Alec": "Bass",
-          "Ashel": "Guitar (mixing)"
-        },
-        "releases": {
-          "Hostem": "4 tracks of thrash/hardcore fury. \"Incursion\", \"Hacha Loca\", \"Porquería Social\", and \"Cursed Souls\"."
+          "El caos es la naturaleza de las cosas...": "Ambient/post-rock/experimental."
         }
       }
     }
@@ -139,18 +134,20 @@
       "scrollHint": "Desplázate",
       "backToProjects": "Volver a Proyectos",
       "nowPlaying": "Reproduciendo",
+      "tracklist": "Tracklist",
       "featuredRelease": "Lanzamiento Destacado",
       "discography": "Discografía",
       "photos": "Fotos",
       "flyers": "Flyers",
+      "videos": "Videos",
       "albumLabel": "Lanzamiento",
       "members": "Miembros",
       "loading": "Cargando",
       "notFound": "Proyecto no encontrado",
-      "builtWith": "Hecho con obsesión",
+      "builtWith": "En busca del sentido",
       "bio": [
-        "Multiinstrumentista, guitarrista y productor de la Ciudad de México. Activo en múltiples proyectos que abarcan blackgaze, post-rock, math rock, screamo, thrash metal y música ambient.",
-        "Se encarga de la producción, mezcla, mastering y diseño en la mayoría de proyectos, grabando en estudios caseros y Echo Bravo Studio."
+        "Músico, productor, artista de la Ciudad de México. Activo en múltiples proyectos que abarcan una variedad de géneros entre post-rock, shoegaze, screamo, ambient, etc.",
+        "Grabado en estudios caseros bajo el nombre de Echo Bravo Studio."
       ]
     },
     "nav": {
@@ -165,6 +162,7 @@
       "galleryLabel": "Galería",
       "illustrationsSection": "Visual",
       "illustrationLabel": "Visual",
+      "viewAll": "Ver Todas",
       "present": "Presente",
       "aboutLabel": "Acerca de",
       "contactLabel": "Contacto / Enlaces",
@@ -172,11 +170,19 @@
       "location": "Ubicación",
       "socialLinks": "Redes Sociales",
       "email": "Email",
-      "emailDesc": "Para colaboraciones, reservas, o simplemente para saludar.",
       "months": {
-        "Jan": "Ene", "Feb": "Feb", "Mar": "Mar", "Apr": "Abr",
-        "May": "May", "Jun": "Jun", "Jul": "Jul", "Aug": "Ago",
-        "Sep": "Sep", "Oct": "Oct", "Nov": "Nov", "Dec": "Dic"
+        "Jan": "Ene",
+        "Feb": "Feb",
+        "Mar": "Mar",
+        "Apr": "Abr",
+        "May": "May",
+        "Jun": "Jun",
+        "Jul": "Jul",
+        "Aug": "Ago",
+        "Sep": "Sep",
+        "Oct": "Oct",
+        "Nov": "Nov",
+        "Dec": "Dic"
       },
       "releaseTypes": {
         "Album": "Álbum",
@@ -202,7 +208,7 @@
           "Ashel": "Guitarra, Voz"
         },
         "releases": {
-          "Vorágine": "EP de seis temas que aborda la identidad, el miedo y la presión de la incertidumbre. Temas: \"Umbral\" (intro ambient), \"Saber Desaparecer\", \"Punto Ciego\", \"Sigilo\", \"Vorágine\" y \"Fisura\"."
+          "Vorágine": "EP que aborda la identidad, el miedo y la presión de la incertidumbre."
         }
       },
       "dotzd": {
@@ -216,7 +222,7 @@
           "Carlo Ixcamparij": "Batería (Empero, 2024)"
         },
         "releases": {
-          "Empero": "\"Empero\" representa un lanzamiento largamente esperado, forjado a través de un complicado viaje y numerosas revisiones. Escrito y grabado durante 2020, el álbum cuenta con Carlo Ixcamparij en la batería — una primera vez para Dotzd. Temas: \"Viento\", \"Memorias del tiempo\" y \"Empero\".",
+          "Empero": "\"Empero\" representa un lanzamiento largamente esperado, forjado a través de un complicado viaje y numerosas revisiones. Escrito y grabado durante 2020, el álbum cuenta con Carlo Ixcamparij en la batería — una primera vez para Dotzd.",
           "Tempo": "Producido en Echo Bravo Studio, Tempo explora el paso del tiempo a través de capas de texturas de guitarra y ritmos hipnóticos."
         }
       },
@@ -232,7 +238,7 @@
           "Arturo Macías \"サクヒン\"": "Guitarra"
         },
         "releases": {
-          "Valle Bravo": "6 temas de energía math rock/emo/screamo. \"Shiba Inu\", \"Siempre la misma fórmula\", \"Debería irme pronto\", \"Sin memoria\", \"NES (Nada es suficiente)\" y \"Escultores\"."
+          "Valle Bravo": "Energía math rock/emo/screamo."
         }
       },
       "ashel-solo": {
@@ -244,23 +250,7 @@
           "Ashel": "Todos los instrumentos, producción, mezcla, masterización"
         },
         "releases": {
-          "El caos es la naturaleza de las cosas...": "4 temas de ambient/post-rock/experimental. Incluye \"Esencia\", \"Copo\", \"Meow\" y \"Camp\" (cover de Delta Sleep)."
-        }
-      },
-      "hostem": {
-        "shortDescription": "Banda de thrash/hardcore de Tlalnepantla (2014-2016). EP debut homónimo con 4 temas. Raziel, Sebastián, Diego, Alec y Ashel.",
-        "description": [
-          "Banda de thrash/hardcore de Tlalnepantla. Energía cruda e implacable con 4 temas que abarcan desde crítica social hasta fantasía oscura. EP debut homónimo grabado en casa de Diego, mezclado por Ashel. Letras de Diego y Raziel, con agradecimiento especial a Aldo \"Hacha Loca\" López."
-        ],
-        "members": {
-          "Raziel": "Voz (letras)",
-          "Sebastián": "Batería",
-          "Diego": "Guitarra (letras)",
-          "Alec": "Bajo",
-          "Ashel": "Guitarra (mezcla)"
-        },
-        "releases": {
-          "Hostem": "4 temas de furia thrash/hardcore. \"Incursion\", \"Hacha Loca\", \"Porquería Social\" y \"Cursed Souls\"."
+          "El caos es la naturaleza de las cosas...": "Ambient/post-rock/experimental."
         }
       }
     }

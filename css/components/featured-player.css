@@ -29,6 +29,28 @@
   max-width: 600px;
 }
 
+.tracklist {
+  margin-top: 1.5rem;
+}
+
+.tracklist h4 {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--section-accent, var(--text-muted));
+  margin-bottom: 0.5rem;
+}
+
+.tracklist ol {
+  list-style: decimal;
+  padding-left: 1.1rem;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
 .detail-player-section iframe {
   width: 100%;
   max-width: 800px;

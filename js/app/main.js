@@ -89,12 +89,16 @@ loadData()
   })
   .catch((err) => {
     console.error('Failed to load data:', err);
+    const locale = (navigator.language.startsWith('es') ? 'es' : 'en');
+    const msg = locale === 'es' ? 'Error al cargar datos' : 'Error loading data';
     if (isProjectPage) {
       document.getElementById('project-content').innerHTML =
-        '<div class="loading">Error loading data</div>';
+        `<div class="loading">${msg}</div>`;
     } else if (isIllustrationPage) {
       document.getElementById('illustrations-content').innerHTML =
-        '<div class="loading">Error loading data</div>';
+        `<div class="loading">${msg}</div>`;
+    } else {
+      document.body.innerHTML = `<div class="loading" style="padding:10rem 2rem;text-align:center;font-family:var(--mono);color:var(--text-dim)">${msg}</div>`;
     }
     hidePageLoader();
   });

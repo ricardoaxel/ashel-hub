@@ -135,7 +135,7 @@ export function renderIndexContent() {
     const grid = document.getElementById('gallery-grid');
     const showMore = document.createElement('div');
     showMore.className = 'illustration-show-more';
-    showMore.innerHTML = `<a href="#" id="gallery-show-more">VIEW ALL <span class="count">${String(allPhotos.length).padStart(2, '0')}</span></a>`;
+    showMore.innerHTML = `<a href="#" id="gallery-show-more">${t.labels?.viewAll || 'VIEW ALL'} <span class="count">${String(allPhotos.length).padStart(2, '0')}</span></a>`;
     grid.parentNode.appendChild(showMore);
     showMore.querySelector('a').addEventListener('click', (e) => {
       e.preventDefault();
@@ -179,7 +179,7 @@ export function renderIndexContent() {
   if (totalCount > previewCount) {
     const showMore = document.createElement('div');
     showMore.className = 'illustration-show-more';
-    showMore.innerHTML = `<a href="illustrations.html">VIEW ALL <span class="count">${String(totalCount).padStart(2, '0')}</span></a>`;
+    showMore.innerHTML = `<a href="illustrations.html">${t.labels?.viewAll || 'VIEW ALL'} <span class="count">${String(totalCount).padStart(2, '0')}</span></a>`;
     grid.parentNode.appendChild(showMore);
   }
 
@@ -187,6 +187,26 @@ export function renderIndexContent() {
   document.querySelectorAll('.illustration-item').forEach((el) => {
     const index = parseInt(el.dataset.index, 10);
     el.addEventListener('click', () => openModal(dataIllustrations, index));
+  });
+
+  const allVideos = data.projects.flatMap((p) =>
+    (p.videos || []).map((v) => ({ ...v, projectName: p.name, projectId: p.id }))
+  );
+  const videoPreviewCount = Math.min(6, allVideos.length);
+  document.getElementById('videos-count').textContent = String(allVideos.length).padStart(2, '0');
+  const videosHtml = allVideos
+    .slice(0, videoPreviewCount)
+    .map(
+      (v, i) => `
+      <div class="video-card" data-video-index="${i}">
+        <iframe src="https://www.youtube.com/embed/${v.videoId}" frameborder="0" allowfullscreen loading="lazy" style="position:absolute;inset:0;width:100%;height:100%" title="${v.title}"></iframe>
+      </div>`
+    )
+    .join('');
+  document.getElementById('videos-grid').innerHTML = videosHtml;
+  document.querySelectorAll('.video-card').forEach((el) => {
+    const index = parseInt(el.dataset.videoIndex, 10);
+    el.addEventListener('click', () => openModal(allVideos, index));
   });
 
   const socialHtml = data.site.social

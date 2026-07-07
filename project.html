@@ -25,8 +25,10 @@
     <link rel="stylesheet" href="css/components/modal.css" />
     <link rel="stylesheet" href="css/components/featured-player.css" />
     <link rel="stylesheet" href="css/components/detail.css" />
+    <link rel="stylesheet" href="css/components/videos.css" />
     <link rel="stylesheet" href="css/effects.css" />
     <link rel="stylesheet" href="css/responsive.css" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <script>
       (function () {
         try {
@@ -46,7 +48,7 @@
       defer
       src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"
     ></script>
-    <script type="module" src="js/app/main.js"></script>
+    <script type="module" src="js/app/main.js?v=2"></script>
   </head>
   <body class="scanlines">
     <div
@@ -117,6 +119,7 @@
       <button class="modal-btn modal-prev">&larr;</button>
       <div class="modal-image-wrap">
         <img class="modal-image" src="" alt="" />
+        <iframe class="modal-video" src="" frameborder="0" allow="autoplay" allowfullscreen></iframe>
         <div class="modal-meta">
           <span class="modal-counter"></span>
           <span class="modal-caption"></span>

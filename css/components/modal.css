@@ -39,6 +39,13 @@
   object-fit: contain;
 }
 
+.modal-video {
+  width: 80vw;
+  max-width: 960px;
+  aspect-ratio: 16 / 9;
+  border: none;
+}
+
 .modal-meta {
   display: flex;
   align-items: center;
@@ -161,6 +168,10 @@
   .modal-image {
     max-width: 92vw;
     max-height: 65vh;
+  }
+
+  .modal-video {
+    width: 92vw;
   }
 
   .modal-meta {

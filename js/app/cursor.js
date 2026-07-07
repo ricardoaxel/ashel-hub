@@ -75,12 +75,10 @@ function getMostVisibleCard() {
 }
 
 function applyCursorColor() {
-  if (fallbackColor === '#ff2d55') {
-    const rootAccent = document.documentElement.style.getPropertyValue('--section-accent').trim();
-    if (rootAccent) fallbackColor = rootAccent;
-  }
-  if (fallbackColor !== currentSectionColor) {
-    currentSectionColor = fallbackColor;
+  const rootAccent = document.documentElement.style.getPropertyValue('--section-accent').trim();
+  const target = fallbackColor !== '#ff2d55' ? fallbackColor : (rootAccent || '#ff2d55');
+  if (target !== currentSectionColor) {
+    currentSectionColor = target;
     cursorRing.style.borderColor = currentSectionColor;
   }
 }
@@ -104,4 +102,9 @@ export function attachCursor(el) {
     cursorRing.style.height = '36px';
     cursorRing.style.borderColor = currentSectionColor;
   });
+}
+
+export function refreshCursorColor() {
+  fallbackColor = '#ff2d55';
+  applyCursorColor();
 }

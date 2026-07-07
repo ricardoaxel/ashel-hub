@@ -8,7 +8,7 @@
     ],
     "stats": [
       {
-        "number": "5",
+        "number": "4",
         "label": "Projects"
       },
       {
@@ -23,70 +23,133 @@
     "social": [
       {
         "label": "Dotzd",
-        "url": "https://dotzd.bandcamp.com"
+        "url": "https://www.instagram.com/dotzd_mx/"
       },
       {
         "label": "Oshira",
-        "url": "https://oshira.bandcamp.com"
+        "url": "https://www.instagram.com/oshira._/"
       },
       {
         "label": "Ashel",
-        "url": "https://ashel.bandcamp.com"
-      },
-      {
-        "label": "Hostem",
-        "url": "https://hostem.bandcamp.com"
+        "url": "https://www.instagram.com/ashel_/"
       },
       {
         "label": "RdUSP",
-        "url": "https://recuerdosdeunsuenoperdido.bandcamp.com"
+        "url": "https://www.instagram.com/recuerdosperdidos4/"
       },
       {
         "label": "YouTube",
         "url": "https://www.youtube.com/@ashel6708"
-      },
-      {
-        "label": "Instagram",
-        "url": "https://www.instagram.com/dotzd_mx/"
-      },
-      {
-        "label": "Facebook",
-        "url": "https://www.facebook.com/Dotzdmx/"
       }
     ]
   },
   "illustrations": [
-    { "src": "assets/images/illustrations/illustration-01.jpg", "caption": "" },
-    { "src": "assets/images/illustrations/illustration-02.jpg", "caption": "" },
-    { "src": "assets/images/illustrations/illustration-03.jpg", "caption": "" },
-    { "src": "assets/images/illustrations/illustration-04.jpg", "caption": "" },
-    { "src": "assets/images/illustrations/illustration-05.jpg", "caption": "" },
-    { "src": "assets/images/illustrations/illustration-06.jpg", "caption": "" },
-    { "src": "assets/images/illustrations/illustration-07.jpg", "caption": "" },
-    { "src": "assets/images/illustrations/illustration-08.jpg", "caption": "" },
-    { "src": "assets/images/illustrations/illustration-09.jpg", "caption": "" },
-    { "src": "assets/images/illustrations/illustration-10.jpg", "caption": "" },
-    { "src": "assets/images/illustrations/illustration-11.jpg", "caption": "" },
-    { "src": "assets/images/illustrations/illustration-12.jpg", "caption": "" },
-    { "src": "assets/images/illustrations/illustration-13.jpg", "caption": "" },
-    { "src": "assets/images/illustrations/illustration-14.jpg", "caption": "" },
-    { "src": "assets/images/illustrations/illustration-15.jpg", "caption": "" },
-    { "src": "assets/images/illustrations/illustration-16.jpg", "caption": "" },
-    { "src": "assets/images/illustrations/illustration-17.jpg", "caption": "" },
-    { "src": "assets/images/illustrations/illustration-18.jpg", "caption": "" },
-    { "src": "assets/images/illustrations/illustration-19.jpg", "caption": "" },
-    { "src": "assets/images/illustrations/illustration-20.jpg", "caption": "" },
-    { "src": "assets/images/illustrations/illustration-21.jpg", "caption": "" },
-    { "src": "assets/images/illustrations/illustration-22.jpg", "caption": "" }
+    {
+      "src": "assets/images/illustrations/illustration-01.jpg",
+      "caption": ""
+    },
+    {
+      "src": "assets/images/illustrations/illustration-02.jpg",
+      "caption": ""
+    },
+    {
+      "src": "assets/images/illustrations/illustration-03.jpg",
+      "caption": ""
+    },
+    {
+      "src": "assets/images/illustrations/illustration-04.jpg",
+      "caption": ""
+    },
+    {
+      "src": "assets/images/illustrations/illustration-05.jpg",
+      "caption": ""
+    },
+    {
+      "src": "assets/images/illustrations/illustration-06.jpg",
+      "caption": ""
+    },
+    {
+      "src": "assets/images/illustrations/illustration-07.jpg",
+      "caption": ""
+    },
+    {
+      "src": "assets/images/illustrations/illustration-08.jpg",
+      "caption": ""
+    },
+    {
+      "src": "assets/images/illustrations/illustration-09.jpg",
+      "caption": ""
+    },
+    {
+      "src": "assets/images/illustrations/illustration-10.jpg",
+      "caption": ""
+    },
+    {
+      "src": "assets/images/illustrations/illustration-11.jpg",
+      "caption": ""
+    },
+    {
+      "src": "assets/images/illustrations/illustration-12.jpg",
+      "caption": ""
+    },
+    {
+      "src": "assets/images/illustrations/illustration-13.jpg",
+      "caption": ""
+    },
+    {
+      "src": "assets/images/illustrations/illustration-14.jpg",
+      "caption": ""
+    },
+    {
+      "src": "assets/images/illustrations/illustration-15.jpg",
+      "caption": ""
+    },
+    {
+      "src": "assets/images/illustrations/illustration-16.jpg",
+      "caption": ""
+    },
+    {
+      "src": "assets/images/illustrations/illustration-17.jpg",
+      "caption": ""
+    },
+    {
+      "src": "assets/images/illustrations/illustration-18.jpg",
+      "caption": ""
+    },
+    {
+      "src": "assets/images/illustrations/illustration-19.jpg",
+      "caption": ""
+    },
+    {
+      "src": "assets/images/illustrations/illustration-20.jpg",
+      "caption": ""
+    },
+    {
+      "src": "assets/images/illustrations/illustration-21.jpg",
+      "caption": ""
+    },
+    {
+      "src": "assets/images/illustrations/illustration-22.jpg",
+      "caption": ""
+    }
   ],
   "projects": [
     {
       "id": "oshira",
       "name": "Oshira",
       "cover": "assets/images/oshira.jpg",
-      "genres": ["Screamo", "Post-Hardcore", "Post-Metal", "Math Rock", "Skramz"],
+      "genres": [
+        "Screamo",
+        "Post-Hardcore",
+        "Post-Metal",
+        "Math Rock",
+        "Skramz"
+      ],
       "location": "Mexico City, Mexico",
-      "yearsActive": { "start": 2023, "end": null },
+      "yearsActive": {
+        "start": 2023,
+        "end": null
+      },
       "badge": "New Release",
       "shortDescription": "Dark screamo duo with Manuel Espinoza. Debut EP \"Vorágine\" mastered by Brad Boatright. For fans of Portrayal of Guilt, Respire, Saetia.",
       "description": [
@@ -105,8 +168,20 @@
       ],
       "links": [
         {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/oshira._/"
+        },
+        {
           "label": "Bandcamp",
           "url": "https://oshira.bandcamp.com"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@OshiraBand"
+        },
+        {
+          "label": "Facebook",
+          "url": "https://www.facebook.com/oshiraband/"
         }
       ],
       "flyers": [
@@ -192,8 +267,16 @@
           "cover": "assets/images/oshira-voragine.jpg",
           "url": "https://oshira.bandcamp.com/album/vor-gine",
           "featured": true,
-          "description": "Six-track EP tackling identity, fear, and the pressure of uncertainty. Tracks: \"Umbral\" (ambient intro), \"Saber Desaparecer,\" \"Punto Ciego,\" \"Sigilo,\" \"Vorágine,\" and \"Fisura.\"",
-          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=749502210/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://oshira.bandcamp.com/album/vor-gine\">Vorágine de Oshira</a></iframe>"
+          "description": "EP tackling identity, fear, and the pressure of uncertainty.",
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=749502210/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://oshira.bandcamp.com/album/vor-gine\">Vorágine de Oshira</a></iframe>",
+          "tracks": [
+            "Umbral",
+            "Saber Desaparecer",
+            "Punto Ciego",
+            "Sigilo",
+            "Vorágine",
+            "Fisura"
+          ]
         },
         {
           "type": "Single",
@@ -201,7 +284,10 @@
           "year": "May 2025",
           "cover": "assets/images/oshira-fisura.jpg",
           "url": "https://oshira.bandcamp.com/track/fisura",
-          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/track=2053584578/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://oshira.bandcamp.com/track/fisura\">Fisura de Oshira</a></iframe>"
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/track=2053584578/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://oshira.bandcamp.com/track/fisura\">Fisura de Oshira</a></iframe>",
+          "tracks": [
+            "Fisura"
+          ]
         },
         {
           "type": "Single",
@@ -209,7 +295,30 @@
           "year": "Oct 2023",
           "cover": "assets/images/oshira-saber.jpg",
           "url": "https://oshira.bandcamp.com/track/saber-desaparecer",
-          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/track=2425945566/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://oshira.bandcamp.com/track/saber-desaparecer\">Saber Desaparecer de Oshira</a></iframe>"
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/track=2425945566/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://oshira.bandcamp.com/track/saber-desaparecer\">Saber Desaparecer de Oshira</a></iframe>",
+          "tracks": [
+            "Saber Desaparecer"
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "title": "Oshira -en vivo- Nov 28, 2025",
+          "url": "https://www.youtube.com/watch?v=tgQpE0uCzvk",
+          "thumbnail": "https://i1.ytimg.com/vi/tgQpE0uCzvk/mqdefault.jpg",
+          "videoId": "tgQpE0uCzvk"
+        },
+        {
+          "title": "Oshira – Vorágine (Full Album) [Screamo / Post-Metal]",
+          "url": "https://www.youtube.com/watch?v=02b0v0MRp0E",
+          "thumbnail": "https://i1.ytimg.com/vi/02b0v0MRp0E/mqdefault.jpg",
+          "videoId": "02b0v0MRp0E"
+        },
+        {
+          "title": "Oshira @HouseOfVansCDMX",
+          "url": "https://www.youtube.com/watch?v=P3Su8qOp81g",
+          "thumbnail": "https://i1.ytimg.com/vi/P3Su8qOp81g/mqdefault.jpg",
+          "videoId": "P3Su8qOp81g"
         }
       ]
     },
@@ -228,11 +337,14 @@
         "Noise"
       ],
       "location": "Mexico City, Mexico",
-      "yearsActive": { "start": 2012, "end": null },
+      "yearsActive": {
+        "start": 2012,
+        "end": null
+      },
       "badge": null,
       "shortDescription": "Post-(Rock/Metal) (Shoe/Black)-gaze one man band. 8 releases since 2012 spanning blackgaze, shoegaze, slowcore, ambient, and psychedelic.",
       "description": [
-"Ashel's solo project where blackgaze, post-rock, and shoegaze merge into soundscapes ranging from serene introspection to walls of distortion. Eight releases since 2012 exploring duality — day and night, change and the eternal.",
+        "Ashel's solo project where blackgaze, post-rock, and shoegaze merge into soundscapes ranging from serene introspection to walls of distortion. Eight releases since 2012 exploring duality — day and night, change and the eternal.",
         "The sound spans blackgaze, shoegaze, slowcore, psychedelia, ambient, and noise — whatever it takes to express the feeling of duality that is a constant in life. \"Tempo\" was produced at Echo Bravo Studio. \"Empero\" features Carlo Ixcamparij on drums, marking the first collaboration on a Dotzd release."
       ],
       "members": [
@@ -247,12 +359,16 @@
       ],
       "links": [
         {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/dotzd_mx/"
+        },
+        {
           "label": "Bandcamp",
           "url": "https://dotzd.bandcamp.com"
         },
         {
-          "label": "Instagram",
-          "url": "https://www.instagram.com/dotzd_mx/"
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@dotzd3667"
         },
         {
           "label": "Facebook",
@@ -354,8 +470,13 @@
           "year": "Nov 2024",
           "cover": "assets/images/dotzd-empero.jpg",
           "url": "https://dotzd.bandcamp.com/album/empero",
-          "description": "\"Empero\" represents a long-awaited release forged through a complicated journey and numerous revisions. Written and recorded during 2020, the album features Carlo Ixcamparij on drums — a first for Dotzd. Tracks: \"Viento,\" \"Memorias del tiempo,\" and \"Empero.\"",
-          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=1611461477/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://dotzd.bandcamp.com/album/empero\">Empero de Dotzd</a></iframe>"
+          "description": "\"Empero\" represents a long-awaited release forged through a complicated journey and numerous revisions. Written and recorded during 2020, the album features Carlo Ixcamparij on drums — a first for Dotzd.",
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=1611461477/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://dotzd.bandcamp.com/album/empero\">Empero de Dotzd</a></iframe>",
+          "tracks": [
+            "Viento",
+            "Memorias del tiempo",
+            "Empero"
+          ]
         },
         {
           "type": "Album",
@@ -365,7 +486,17 @@
           "url": "https://dotzd.bandcamp.com/album/tempo",
           "featured": true,
           "description": "Produced at Echo Bravo Studio, Tempo explores the passage of time through layered guitar textures and hypnotic rhythms.",
-          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=1711198430/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://dotzd.bandcamp.com/album/tempo\">Tempo de Dotzd</a></iframe>"
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=1711198430/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://dotzd.bandcamp.com/album/tempo\">Tempo de Dotzd</a></iframe>",
+          "tracks": [
+            "Alba",
+            "Destello",
+            "Punta Cometa",
+            "Capicua",
+            "Los Anhelos",
+            "Febrero 2028 - Ocaso",
+            "Plétora",
+            "Suspiro"
+          ]
         },
         {
           "type": "Album",
@@ -373,7 +504,14 @@
           "year": "Jul 2018",
           "cover": "assets/images/dotzd-fantasia.jpg",
           "url": "https://dotzd.bandcamp.com/album/fantasia",
-          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=3427377961/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://dotzd.bandcamp.com/album/fantasia\">Fantasia de Dotzd</a></iframe>"
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=3427377961/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://dotzd.bandcamp.com/album/fantasia\">Fantasia de Dotzd</a></iframe>",
+          "tracks": [
+            "Nonawa.",
+            "..Wonder..",
+            "Sune...",
+            "Copo",
+            "Palpitar"
+          ]
         },
         {
           "type": "Album",
@@ -381,7 +519,15 @@
           "year": "Apr 2016",
           "cover": "assets/images/dotzd-sonar.jpg",
           "url": "https://dotzd.bandcamp.com/album/so-ar",
-          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=784210837/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://dotzd.bandcamp.com/album/so-ar\">Soñar de Dotzd</a></iframe>"
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=784210837/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://dotzd.bandcamp.com/album/so-ar\">Soñar de Dotzd</a></iframe>",
+          "tracks": [
+            "...",
+            "Soñar",
+            "Sinestesia",
+            "Interludio",
+            "Lala",
+            "Frost"
+          ]
         },
         {
           "type": "Album",
@@ -389,7 +535,11 @@
           "year": "Jan 2015",
           "cover": "assets/images/dotzd-frost.jpg",
           "url": "https://dotzd.bandcamp.com/album/frost",
-          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=2122656871/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://dotzd.bandcamp.com/album/frost\">Frost de Dotzd</a></iframe>"
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=2122656871/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://dotzd.bandcamp.com/album/frost\">Frost de Dotzd</a></iframe>",
+          "tracks": [
+            "I",
+            "II"
+          ]
         },
         {
           "type": "Album",
@@ -397,7 +547,15 @@
           "year": "Jul 2014",
           "cover": "assets/images/dotzd-reveries.jpg",
           "url": "https://dotzd.bandcamp.com/album/reveries",
-          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=2859234241/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://dotzd.bandcamp.com/album/reveries\">Reveries de Dotzd</a></iframe>"
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=2859234241/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://dotzd.bandcamp.com/album/reveries\">Reveries de Dotzd</a></iframe>",
+          "tracks": [
+            "Volar",
+            "Dive",
+            "Narwhals",
+            "Routinary Nigths",
+            "Shine",
+            "Finale - Ashes"
+          ]
         },
         {
           "type": "Single",
@@ -405,7 +563,10 @@
           "year": "Feb 2013",
           "cover": "assets/images/dotzd-routinary.jpg",
           "url": "https://dotzd.bandcamp.com/track/routinary-nights-single",
-          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/track=4117948276/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://dotzd.bandcamp.com/track/routinary-nights-single\">Routinary Nights de Dotzd</a></iframe>"
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/track=4117948276/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://dotzd.bandcamp.com/track/routinary-nights-single\">Routinary Nights de Dotzd</a></iframe>",
+          "tracks": [
+            "Routinary Nights"
+          ]
         },
         {
           "type": "Single",
@@ -413,7 +574,48 @@
           "year": "Oct 2012",
           "cover": "assets/images/dotzd-greytness.jpg",
           "url": "https://dotzd.bandcamp.com/track/greytness",
-          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/track=408570213/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://dotzd.bandcamp.com/track/greytness\">Greytness de Dotzd</a></iframe>"
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/track=408570213/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://dotzd.bandcamp.com/track/greytness\">Greytness de Dotzd</a></iframe>",
+          "tracks": [
+            "Greytness"
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "title": "Dotzd - \"Tempo\" FULL ALBUM (Post Rock / Post Black Metal / Shoegaze)",
+          "url": "https://www.youtube.com/watch?v=hhHny5db55o",
+          "thumbnail": "https://i1.ytimg.com/vi/hhHny5db55o/mqdefault.jpg",
+          "videoId": "hhHny5db55o"
+        },
+        {
+          "title": "Dotzd - \"Punta Cometa\" (Post Rock / Post Metal)",
+          "url": "https://www.youtube.com/watch?v=kf5MddvGQfY",
+          "thumbnail": "https://i4.ytimg.com/vi/kf5MddvGQfY/mqdefault.jpg",
+          "videoId": "kf5MddvGQfY"
+        },
+        {
+          "title": "Dotzd - Alba (Post Rock / Blackgaze)",
+          "url": "https://www.youtube.com/watch?v=Xpq4Ng2l7S8",
+          "thumbnail": "https://i1.ytimg.com/vi/Xpq4Ng2l7S8/mqdefault.jpg",
+          "videoId": "Xpq4Ng2l7S8"
+        },
+        {
+          "title": "Dotzd - \"Plétora\" (Post Black Metal / Blackgaze)",
+          "url": "https://www.youtube.com/watch?v=IJsh90SAs20",
+          "thumbnail": "https://i2.ytimg.com/vi/IJsh90SAs20/mqdefault.jpg",
+          "videoId": "IJsh90SAs20"
+        },
+        {
+          "title": "Dotzd - \"Destello\" (Shoegaze/Math-Rock)",
+          "url": "https://www.youtube.com/watch?v=P36pkwBFJi8",
+          "thumbnail": "https://i1.ytimg.com/vi/P36pkwBFJi8/mqdefault.jpg",
+          "videoId": "P36pkwBFJi8"
+        },
+        {
+          "title": "Dotzd - Fantasia (FULL)",
+          "url": "https://www.youtube.com/watch?v=Hly3eq73BsU",
+          "thumbnail": "https://i1.ytimg.com/vi/Hly3eq73BsU/mqdefault.jpg",
+          "videoId": "Hly3eq73BsU"
         }
       ]
     },
@@ -421,9 +623,18 @@
       "id": "rdusp",
       "name": "Recuerdos de un Sueño Perdido",
       "cover": "assets/images/rdusp.jpg",
-      "genres": ["Math Rock", "Emo", "Screamo", "Mathcore", "Alternative Rock"],
+      "genres": [
+        "Math Rock",
+        "Emo",
+        "Screamo",
+        "Mathcore",
+        "Alternative Rock"
+      ],
       "location": "Mexico City, Mexico",
-      "yearsActive": { "start": 2017, "end": 2018 },
+      "yearsActive": {
+        "start": 2017,
+        "end": 2018
+      },
       "badge": null,
       "shortDescription": "Math rock con huevos. 4-piece band with Mauricio Narváez, Ivan Luna \"Chapu\", and Arturo Macías. Formed in mid-2017.",
       "description": [
@@ -449,8 +660,16 @@
       ],
       "links": [
         {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/recuerdosperdidos4/"
+        },
+        {
           "label": "Bandcamp",
           "url": "https://recuerdosdeunsuenoperdido.bandcamp.com"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@recuerdosdeunsuenoperdido1098"
         },
         {
           "label": "Facebook",
@@ -556,8 +775,42 @@
           "cover": "assets/images/rdusp-vallebravo.jpg",
           "url": "https://recuerdosdeunsuenoperdido.bandcamp.com/album/valle-bravo",
           "featured": true,
-          "description": "6 tracks of math rock/emo/screamo energy. \"Shiba Inu,\" \"Siempre la misma fórmula,\" \"Debería irme pronto,\" \"Sin memoria,\" \"NES (Nada es suficiente),\" and \"Escultores.\"",
-          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=4249046441/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://recuerdosdeunsuenoperdido.bandcamp.com/album/valle-bravo\">Valle Bravo de Recuerdos de un Sueño Perdido</a></iframe>"
+          "description": "Math rock/emo/screamo energy.",
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=4249046441/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://recuerdosdeunsuenoperdido.bandcamp.com/album/valle-bravo\">Valle Bravo de Recuerdos de un Sueño Perdido</a></iframe>",
+          "tracks": [
+            "Shiba Inu",
+            "Siempre la misma fórmula",
+            "Debería irme pronto",
+            "Sin memoria",
+            "NES (Nada es suficiente)",
+            "Escultores"
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "title": "Recuerdos de un Sueño Perdido - \"Valle Bravo\" (FULL)",
+          "url": "https://www.youtube.com/watch?v=SGJFzJpts1E",
+          "thumbnail": "https://i4.ytimg.com/vi/SGJFzJpts1E/mqdefault.jpg",
+          "videoId": "SGJFzJpts1E"
+        },
+        {
+          "title": "Recuerdos de un Sueño Perdido - \"Shiba Inu\"",
+          "url": "https://www.youtube.com/watch?v=5W_TXq7qqxw",
+          "thumbnail": "https://i2.ytimg.com/vi/5W_TXq7qqxw/mqdefault.jpg",
+          "videoId": "5W_TXq7qqxw"
+        },
+        {
+          "title": "Recuerdos de un Sueño Perdido - Escultores (en vivo)",
+          "url": "https://www.youtube.com/watch?v=Vr1crul22dA",
+          "thumbnail": "https://i3.ytimg.com/vi/Vr1crul22dA/mqdefault.jpg",
+          "videoId": "Vr1crul22dA"
+        },
+        {
+          "title": "Recuerdos 2 (Demos)",
+          "url": "https://www.youtube.com/watch?v=k_Oxt71gmoU",
+          "thumbnail": "https://i4.ytimg.com/vi/k_Oxt71gmoU/mqdefault.jpg",
+          "videoId": "k_Oxt71gmoU"
         }
       ]
     },
@@ -565,9 +818,19 @@
       "id": "ashel-solo",
       "name": "Ashel (Solo)",
       "cover": "assets/images/ashel-solo.jpg",
-      "genres": ["Ambient", "Post-Rock", "Experimental", "Shoegaze", "Math Rock", "Lo-Fi"],
+      "genres": [
+        "Ambient",
+        "Post-Rock",
+        "Experimental",
+        "Shoegaze",
+        "Math Rock",
+        "Lo-Fi"
+      ],
       "location": "Mexico City, Mexico",
-      "yearsActive": { "start": 2017, "end": null },
+      "yearsActive": {
+        "start": 2017,
+        "end": null
+      },
       "badge": null,
       "shortDescription": "Personal solo project for ambient experiments, post-rock compositions, math rock, and covers. Plus guitar improvisations on YouTube.",
       "description": [
@@ -581,12 +844,16 @@
       ],
       "links": [
         {
-          "label": "Bandcamp",
-          "url": "https://ashel.bandcamp.com"
+          "label": "Instagram",
+          "url": "https://www.instagram.com/ashel_/"
         },
         {
           "label": "YouTube",
           "url": "https://www.youtube.com/@ashel6708"
+        },
+        {
+          "label": "Bandcamp",
+          "url": "https://ashel.bandcamp.com"
         },
         {
           "label": "Facebook",
@@ -631,7 +898,10 @@
           "year": "Apr 2021",
           "cover": "assets/images/ashel-nuvens.jpg",
           "url": "https://ashel.bandcamp.com/track/as-nuvens",
-          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/track=3972556095/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://ashel.bandcamp.com/track/as-nuvens\">As nuvens de Ashel</a></iframe>"
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/track=3972556095/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://ashel.bandcamp.com/track/as-nuvens\">As nuvens de Ashel</a></iframe>",
+          "tracks": [
+            "As nuvens"
+          ]
         },
         {
           "type": "Single",
@@ -639,7 +909,10 @@
           "year": "Dec 2019",
           "cover": "assets/images/ashel-ambient1.jpg",
           "url": "https://ashel.bandcamp.com/track/ambient-experiment-i",
-          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/track=3672356285/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://ashel.bandcamp.com/track/ambient-experiment-i\">Ambient Experiment I de Ashel</a></iframe>"
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/track=3672356285/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://ashel.bandcamp.com/track/ambient-experiment-i\">Ambient Experiment I de Ashel</a></iframe>",
+          "tracks": [
+            "Ambient Experiment I"
+          ]
         },
         {
           "type": "Cover",
@@ -647,7 +920,10 @@
           "year": "Jan 2019",
           "cover": "assets/images/ashel-one.jpg",
           "url": "https://ashel.bandcamp.com/track/one-metallica-ambient-post-rock-cover",
-          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/track=1646022460/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://ashel.bandcamp.com/track/one-metallica-ambient-post-rock-cover\">ONE (Metallica Ambient/Post Rock Cover) de Ashel</a></iframe>"
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/track=1646022460/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://ashel.bandcamp.com/track/one-metallica-ambient-post-rock-cover\">ONE (Metallica Ambient/Post Rock Cover) de Ashel</a></iframe>",
+          "tracks": [
+            "ONE (Metallica Ambient/Post Rock Cover)"
+          ]
         },
         {
           "type": "Single",
@@ -655,7 +931,10 @@
           "year": "Aug 2018",
           "cover": "assets/images/ashel-deltasleep.jpg",
           "url": "https://ashel.bandcamp.com/track/-",
-          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/track=3630002421/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://ashel.bandcamp.com/track/-\">____* de Ashel, AxLxFx</a></iframe>"
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/track=3630002421/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://ashel.bandcamp.com/track/-\">____* de Ashel, AxLxFx</a></iframe>",
+          "tracks": [
+            "____* (ft. AxLxFx)"
+          ]
         },
         {
           "type": "Single",
@@ -663,7 +942,10 @@
           "year": "Oct 2017",
           "cover": "assets/images/rdusp-demo.jpg",
           "url": "https://ashel.bandcamp.com/track/nunca-se-detiene",
-          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/track=3763479818/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://ashel.bandcamp.com/track/nunca-se-detiene\">nunca se detiene de Ashel</a></iframe>"
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/track=3763479818/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://ashel.bandcamp.com/track/nunca-se-detiene\">nunca se detiene de Ashel</a></iframe>",
+          "tracks": [
+            "nunca se detiene"
+          ]
         },
         {
           "type": "EP",
@@ -672,8 +954,14 @@
           "cover": "assets/images/ashel-solo-cover.jpg",
           "url": "https://ashel.bandcamp.com/album/el-caos-es-la-naturaleza-de-las-cosas-y-el-orden-es-la-naturaleza-de-lo-sint-tico",
           "featured": true,
-          "description": "4 tracks of ambient/post-rock/experimental. Includes \"Esencia,\" \"Copo,\" \"Meow,\" and \"Camp\" (Delta Sleep cover).",
-          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=2138101426/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://ashel.bandcamp.com/album/el-caos-es-la-naturaleza-de-las-cosas-y-el-orden-es-la-naturaleza-de-lo-sint-tico\">El caos es la naturaleza de las cosas... de Ashel (Solo)</a></iframe>"
+          "description": "Ambient/post-rock/experimental.",
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=2138101426/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://ashel.bandcamp.com/album/el-caos-es-la-naturaleza-de-las-cosas-y-el-orden-es-la-naturaleza-de-lo-sint-tico\">El caos es la naturaleza de las cosas... de Ashel (Solo)</a></iframe>",
+          "tracks": [
+            "Esencia",
+            "Copo",
+            "Meow",
+            "Camp (Delta Sleep cover)"
+          ]
         },
         {
           "type": "Single",
@@ -681,233 +969,48 @@
           "year": "May 2017",
           "cover": "assets/images/ashel-math.jpg",
           "url": "https://ashel.bandcamp.com/track/copo",
-          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/track=1912851689/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://ashel.bandcamp.com/track/copo\">Copo. de Ashel</a></iframe>"
-        }
-      ]
-    },
-    {
-      "id": "hostem",
-      "name": "Hostem",
-      "cover": "assets/images/hostem.jpg",
-      "genres": ["Thrash Metal", "Hardcore Punk", "Heavy Metal", "Alternative Metal"],
-      "location": "Tlalnepantla, Mexico",
-      "yearsActive": { "start": 2014, "end": 2016 },
-      "badge": null,
-      "shortDescription": "Thrash/hardcore band from Tlalnepantla. Self-titled debut EP with 4 tracks. Raziel, Sebastián, Diego, Alec, and Ashel.",
-      "description": [
-        "Thrash/hardcore band from Tlalnepantla. Raw, unrelenting energy with 4 tracks covering themes from social critique to dark fantasy. Self-titled debut EP recorded at Diego's house, mixed by Ashel. Lyrics by Diego and Raziel, with special thanks to Aldo \"Hacha Loca\" López."
-      ],
-      "members": [
-        {
-          "name": "Raziel",
-          "role": "Vocals (lyrics)"
-        },
-        {
-          "name": "Sebastián",
-          "role": "Drums"
-        },
-        {
-          "name": "Diego",
-          "role": "Guitar (lyrics)"
-        },
-        {
-          "name": "Alec",
-          "role": "Bass"
-        },
-        {
-          "name": "Ashel",
-          "role": "Guitar (mixing)"
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/track=1912851689/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://ashel.bandcamp.com/track/copo\">Copo. de Ashel</a></iframe>",
+          "tracks": [
+            "Copo"
+          ]
         }
       ],
-      "links": [
+      "videos": [
         {
-          "label": "Bandcamp",
-          "url": "https://hostem.bandcamp.com"
-        }
-      ],
-      "flyers": [
-        {
-          "src": "assets/images/projects/hostem-flyer-08.jpg",
-          "caption": "Hostem at El Chetumal Productions — Mar 8, 2014",
-          "date": "2014-03-08"
+          "title": "Ambientally Football (American Football - Never Meant Ambient Remix)",
+          "url": "https://www.youtube.com/watch?v=AC3vzfyiV3E",
+          "thumbnail": "https://i2.ytimg.com/vi/AC3vzfyiV3E/mqdefault.jpg",
+          "videoId": "AC3vzfyiV3E"
         },
         {
-          "src": "assets/images/projects/hostem-flyer-12.jpg",
-          "caption": "Hostem — Aug 29, 2014",
-          "date": "2014-08-29"
+          "title": "Billie Eilish - when the party's over (Ambient/Shoegaze/Post-Rock version)",
+          "url": "https://www.youtube.com/watch?v=-mpTy9BQFWA",
+          "thumbnail": "https://i2.ytimg.com/vi/-mpTy9BQFWA/mqdefault.jpg",
+          "videoId": "-mpTy9BQFWA"
         },
         {
-          "src": "assets/images/projects/hostem-flyer-16.jpg",
-          "caption": "Manikie, Bullshit, Hostem & The Homes Ska Club at CCH Vallejo — Nov 27, 2014",
-          "date": "2014-11-27"
+          "title": "Stoner/Doom Octave Fuzz pedal sounds POG2 + Proco RAT",
+          "url": "https://www.youtube.com/watch?v=7zsYK3rSovw",
+          "thumbnail": "https://i4.ytimg.com/vi/7zsYK3rSovw/mqdefault.jpg",
+          "videoId": "7zsYK3rSovw"
         },
         {
-          "src": "assets/images/projects/hostem-flyer-23.jpg",
-          "caption": "Hostem at Multiforo 246 — Jul 11, 2015",
-          "date": "2015-07-11"
+          "title": "Ashel - As nuvens",
+          "url": "https://www.youtube.com/watch?v=gwr1aztXM28",
+          "thumbnail": "https://i4.ytimg.com/vi/gwr1aztXM28/mqdefault.jpg",
+          "videoId": "gwr1aztXM28"
         },
         {
-          "src": "assets/images/projects/hostem-flyer-24.jpg",
-          "caption": "Fullius Day 2015 feat. Hostem at Cosa Nostra MX — Oct 23, 2015",
-          "date": "2015-10-23"
+          "title": "Chemtrails Over The Air (Lana Del Rey Ambient Remix)",
+          "url": "https://www.youtube.com/watch?v=A-HosnWjTig",
+          "thumbnail": "https://i2.ytimg.com/vi/A-HosnWjTig/mqdefault.jpg",
+          "videoId": "A-HosnWjTig"
         },
         {
-          "src": "assets/images/projects/hostem-flyer-01.jpg",
-          "caption": "Hostem — Guerra de Bandas festival"
-        },
-        {
-          "src": "assets/images/projects/hostem-flyer-02.jpg",
-          "caption": "Hostem — Peña"
-        },
-        {
-          "src": "assets/images/projects/hostem-flyer-03.jpg",
-          "caption": "Hostem flyer"
-        },
-        {
-          "src": "assets/images/projects/hostem-flyer-04.jpg",
-          "caption": "El Fest sin nombre feat. Hostem"
-        },
-        {
-          "src": "assets/images/projects/hostem-flyer-05.jpg",
-          "caption": "Satelucore feat. Hostem at Comonfort #8"
-        },
-        {
-          "src": "assets/images/projects/hostem-flyer-06.jpg",
-          "caption": "Hostem & Vecino? at Real de Atizapán"
-        },
-        {
-          "src": "assets/images/projects/hostem-flyer-07.jpg",
-          "caption": "Roopa, No Why & Hostem"
-        },
-        {
-          "src": "assets/images/projects/hostem-flyer-09.jpg",
-          "caption": "Hostem flyer"
-        },
-        {
-          "src": "assets/images/projects/hostem-flyer-10.jpg",
-          "caption": "Hecho en Casa 2 feat. Hostem"
-        },
-        {
-          "src": "assets/images/projects/hostem-flyer-11.jpg",
-          "caption": "Hostem at Valle Dorado"
-        },
-        {
-          "src": "assets/images/projects/hostem-flyer-13.jpg",
-          "caption": "Hostem at Real de Atizapán"
-        },
-        {
-          "src": "assets/images/projects/hostem-flyer-14.jpg",
-          "caption": "Hostem & No Way at Plaza Gigi"
-        },
-        {
-          "src": "assets/images/projects/hostem-flyer-15.jpg",
-          "caption": "Hostem — Eje Satelite"
-        },
-        {
-          "src": "assets/images/projects/hostem-flyer-17.jpg",
-          "caption": "Hostem flyer"
-        },
-        {
-          "src": "assets/images/projects/hostem-flyer-18.jpg",
-          "caption": "Hostem at Billar La Buchaca"
-        },
-        {
-          "src": "assets/images/projects/hostem-flyer-19.jpg",
-          "caption": "Hostem — Lexice, Vecino, Pescador"
-        },
-        {
-          "src": "assets/images/projects/hostem-flyer-20.jpg",
-          "caption": "Rock in the Roof feat. Hostem"
-        },
-        {
-          "src": "assets/images/projects/hostem-flyer-21.jpg",
-          "caption": "Hostem flyer"
-        },
-        {
-          "src": "assets/images/projects/hostem-flyer-22.jpg",
-          "caption": "Hostem flyer"
-        },
-        {
-          "src": "assets/images/projects/hostem-flyer-25.jpg",
-          "caption": "Ezkizofrenia Prods feat. Hostem"
-        }
-      ],
-      "photos": [
-        {
-          "src": "assets/images/projects/hostem-fb-1.jpg",
-          "caption": "Hostem Facebook photo"
-        },
-        {
-          "src": "assets/images/projects/hostem-fb-2.jpg",
-          "caption": "Hostem Facebook photo"
-        },
-        {
-          "src": "assets/images/projects/hostem-fb-3.jpg",
-          "caption": "Hostem Facebook photo"
-        },
-        {
-          "src": "assets/images/projects/hostem-fb-4.jpg",
-          "caption": "Hostem Facebook photo"
-        },
-        {
-          "src": "assets/images/projects/hostem-fb-5.jpg",
-          "caption": "Hostem Facebook photo"
-        },
-        {
-          "src": "assets/images/projects/hostem-fb-6.jpg",
-          "caption": "Hostem Facebook photo"
-        },
-        {
-          "src": "assets/images/projects/hostem-fb-7.jpg",
-          "caption": "Hostem Facebook photo"
-        },
-        {
-          "src": "assets/images/projects/hostem-fb-8.jpg",
-          "caption": "Hostem Facebook photo"
-        },
-        {
-          "src": "assets/images/projects/hostem-fb-9.jpg",
-          "caption": "Hostem Facebook photo"
-        },
-        {
-          "src": "assets/images/projects/hostem-fb-10.jpg",
-          "caption": "Hostem Facebook photo"
-        },
-        {
-          "src": "assets/images/projects/hostem-fb-11.jpg",
-          "caption": "Hostem Facebook photo"
-        },
-        {
-          "src": "assets/images/projects/hostem-fb-12.jpg",
-          "caption": "Hostem Facebook photo"
-        },
-        {
-          "src": "assets/images/projects/hostem-fb-13.jpg",
-          "caption": "Hostem Facebook photo"
-        },
-        {
-          "src": "assets/images/projects/hostem-fb-14.jpg",
-          "caption": "Hostem Facebook photo"
-        }
-      ],
-      "releases": [
-        {
-          "type": "EP",
-          "name": "Hostem",
-          "year": "Jan 2016",
-          "cover": "assets/images/hostem-ep.jpg",
-          "url": "https://hostem.bandcamp.com/album/hostem",
-          "featured": true,
-          "description": "4 tracks of thrash/hardcore fury. \"Incursion,\" \"Hacha Loca,\" \"Porquería Social,\" and \"Cursed Souls.\"",
-          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=3623026714/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://hostem.bandcamp.com/album/hostem\">Hostem de Hostem</a></iframe>"
-        },
-        {
-          "type": "Single",
-          "name": "The Fragmented One",
-          "year": "Sep 2015",
-          "cover": "assets/images/ashel-improv.jpg",
-          "url": "https://hostem.bandcamp.com/track/the-fragmented-one",
-          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/track=2273985887/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://hostem.bandcamp.com/track/the-fragmented-one\">The Fragmented One de Hostem</a></iframe>"
+          "title": "Flux Echo - Horizon Devices",
+          "url": "https://www.youtube.com/watch?v=h-zm24B_gto",
+          "thumbnail": "https://i1.ytimg.com/vi/h-zm24B_gto/mqdefault.jpg",
+          "videoId": "h-zm24B_gto"
         }
       ]
     }

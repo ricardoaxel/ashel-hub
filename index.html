@@ -25,13 +25,15 @@
     <link rel="stylesheet" href="css/components/modal.css" />
     <link rel="stylesheet" href="css/components/detail.css" />
     <link rel="stylesheet" href="css/components/illustration.css" />
+    <link rel="stylesheet" href="css/components/videos.css" />
     <link rel="stylesheet" href="css/effects.css" />
     <link rel="stylesheet" href="css/responsive.css" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <script
       defer
       src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"
     ></script>
-    <script type="module" src="js/app/main.js"></script>
+    <script type="module" src="js/app/main.js?v=2"></script>
   </head>
   <body class="scanlines">
     <div
@@ -144,6 +146,14 @@
         <div class="gallery-grid" id="gallery-grid"></div>
       </section>
 
+      <section id="videos">
+        <div class="section-label">
+          <span data-i18n="site.videos">Videos</span>
+          <span class="count" id="videos-count">00</span>
+        </div>
+        <div class="videos-grid" id="videos-grid"></div>
+      </section>
+
       <section id="about">
         <div class="section-label">
           <span data-i18n="labels.aboutLabel">About</span>
@@ -162,9 +172,6 @@
           <span data-i18n="labels.contactLabel">Contact / Links</span>
           <span class="count">∞</span>
         </div>
-        <p class="contact-subtitle" data-i18n="labels.emailDesc">
-          For collaborations, bookings, or just to say hi
-        </p>
         <div class="social-links" id="social-links"></div>
       </section>
     </main>
@@ -174,6 +181,7 @@
       <button class="modal-btn modal-prev">&larr;</button>
       <div class="modal-image-wrap">
         <img class="modal-image" src="" alt="" />
+        <iframe class="modal-video" src="" frameborder="0" allow="autoplay" allowfullscreen></iframe>
         <div class="modal-meta">
           <span class="modal-counter"></span>
           <span class="modal-caption"></span>

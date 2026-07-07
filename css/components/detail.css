@@ -23,7 +23,7 @@
 
 .detail-hero {
   display: grid;
-  grid-template-columns: 400px 1fr;
+  grid-template-columns: minmax(280px, 380px) 1fr;
   gap: 0;
   align-items: start;
   border: 1px solid var(--border);
@@ -50,28 +50,42 @@
 }
 
 .detail-left .featured-release {
-  padding: 1.5rem;
+  padding: 1rem 1.25rem;
   border-bottom: none;
 }
 
 .detail-left .featured-release .section-label {
   padding: 0;
-  margin-bottom: 1rem;
-}
-
-.detail-left .featured-release h2 {
-  font-size: 0.6rem;
   margin-bottom: 0.5rem;
 }
 
+.detail-left .featured-release h2 {
+  font-size: 0.55rem;
+  margin-bottom: 0.4rem;
+}
+
 .detail-left .featured-release h3 {
-  font-size: 1.25rem;
-  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .detail-left .featured-release p {
-  font-size: 0.7rem;
-  margin-bottom: 1rem;
+  font-size: 0.65rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.detail-left .detail-player-section iframe {
+  height: 100px;
+}
+
+.detail-left .tracklist {
+  margin-top: 0.75rem;
+}
+
+.detail-left .tracklist ol {
+  line-height: 1.4;
+  font-size: 0.6rem;
 }
 
 .detail-info h1 {
