@@ -36,7 +36,7 @@ export function renderOtherContent() {
               <div class="embed-area">${renderEmbed(item)}</div>
               <div class="card-info">
                 <h3 class="card-title">${item.title}</h3>
-                ${item.description ? `<p class="card-desc">${item.description}</p>` : ''}
+                ${(t.labels?.otherDescs?.[item.title] || item.description) ? `<p class="card-desc">${t.labels?.otherDescs?.[item.title] || item.description}</p>` : ''}
                 <a href="${item.url}" target="_blank" class="card-link">${t.labels?.visitLink || 'Visit →'}</a>
               </div>
             </div>`

@@ -36,6 +36,10 @@
       "galleryLabel": "Gallery",
       "otherSection": "Other Projects",
       "visitLink": "Visit →",
+      "otherDescs": {
+        "Masiosare — Osier": "Sludge/black/post-metal. All instruments by Ashel. Free download.",
+        "Lorem Ipsum — [†π]": "Noise, lo-fi, experimental tracks from 2015."
+      },
       "illustrationsSection": "Illustrations/Photo",
       "illustrationLabel": "Visual",
       "viewAll": "View All",
@@ -184,6 +188,10 @@
       "galleryLabel": "Galería",
       "otherSection": "Otros Proyectos",
       "visitLink": "Visitar →",
+      "otherDescs": {
+        "Masiosare — Osier": "Sludge/black/post-metal. Todos los instrumentos por Ashel. Descarga gratuita.",
+        "Lorem Ipsum — [†π]": "Noise, lo-fi, experimental. Pistas de 2015."
+      },
       "illustrationsSection": "Visual",
       "illustrationLabel": "Visual",
       "viewAll": "Ver Todas",
