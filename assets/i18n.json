@@ -17,6 +17,7 @@
       "loading": "Loading",
       "notFound": "Project not found",
       "builtWith": "Built with obsession",
+      "otherDesc": "Side projects, collaborations, experiments, and other odds & ends.",
       "bio": [
         "Multi-instrumentalist, guitarist, and producer from Mexico City. Active across multiple projects spanning blackgaze, post-rock, math rock, screamo, thrash metal, and ambient music.",
         "Handles production, mixing, mastering, and design across most projects, recording at home studios and Echo Bravo Studio."
@@ -26,12 +27,15 @@
       "projects": "Projects",
       "gallery": "Gallery",
       "illustrations": "Illustrations/Photo",
+      "other": "Other",
       "about": "About",
       "contact": "Contact"
     },
     "labels": {
       "projectsSection": "Projects / Bands",
       "galleryLabel": "Gallery",
+      "otherSection": "Other Projects",
+      "visitLink": "Visit →",
       "illustrationsSection": "Illustrations/Photo",
       "illustrationLabel": "Visual",
       "viewAll": "View All",
@@ -161,6 +165,7 @@
       "loading": "Cargando",
       "notFound": "Proyecto no encontrado",
       "builtWith": "En busca del sentido",
+      "otherDesc": "Proyectos alternos, colaboraciones, experimentos y demás.",
       "bio": [
         "Músico, productor, artista de la Ciudad de México. Activo en múltiples proyectos que abarcan una variedad de géneros entre post-rock, shoegaze, screamo, ambient, etc.",
         "Grabado en estudios caseros bajo el nombre de Echo Bravo Studio."
@@ -170,12 +175,15 @@
       "projects": "Música",
       "gallery": "Galería",
       "illustrations": "Visual",
+      "other": "Otros",
       "about": "Acerca de",
       "contact": "Contacto"
     },
     "labels": {
       "projectsSection": "Música",
       "galleryLabel": "Galería",
+      "otherSection": "Otros Proyectos",
+      "visitLink": "Visitar →",
       "illustrationsSection": "Visual",
       "illustrationLabel": "Visual",
       "viewAll": "Ver Todas",
