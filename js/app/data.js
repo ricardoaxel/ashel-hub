@@ -8,21 +8,18 @@ let loadPromise = null;
  */
 export async function loadData() {
   if (loadPromise) return loadPromise;
-  loadPromise = Promise.all([
+  loadPromise = _load().catch(() => _load());
+  return loadPromise;
+}
+
+async function _load() {
+  const [site, i18n] = await Promise.all([
     fetch('data.json').then((r) => r.json()),
     fetch('assets/i18n.json').then((r) => r.json()),
-  ]).then(
-    ([site, i18n]) => {
-      siteData = site;
-      i18nData = i18n;
-      return { siteData, i18nData };
-    },
-    (err) => {
-      loadPromise = null;
-      throw err;
-    }
-  );
-  return loadPromise;
+  ]);
+  siteData = site;
+  i18nData = i18n;
+  return { siteData, i18nData };
 }
 
 /** Returns cached site data (data.json). */

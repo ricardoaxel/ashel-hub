@@ -320,7 +320,10 @@
           "thumbnail": "https://i1.ytimg.com/vi/P3Su8qOp81g/mqdefault.jpg",
           "videoId": "P3Su8qOp81g"
         }
-      ]
+      ],
+      "accent": "#cc2233",
+      "accentSecondary": "#ee4455",
+      "accentTertiary": "#881122"
     },
     {
       "id": "dotzd",
@@ -617,7 +620,10 @@
           "thumbnail": "https://i1.ytimg.com/vi/Hly3eq73BsU/mqdefault.jpg",
           "videoId": "Hly3eq73BsU"
         }
-      ]
+      ],
+      "accent": "#5555aa",
+      "accentSecondary": "#7777cc",
+      "accentTertiary": "#333388"
     },
     {
       "id": "rdusp",
@@ -812,7 +818,10 @@
           "thumbnail": "https://i4.ytimg.com/vi/k_Oxt71gmoU/mqdefault.jpg",
           "videoId": "k_Oxt71gmoU"
         }
-      ]
+      ],
+      "accent": "#dd6600",
+      "accentSecondary": "#ff8833",
+      "accentTertiary": "#aa4400"
     },
     {
       "id": "ashel-solo",
@@ -1012,7 +1021,10 @@
           "thumbnail": "https://i1.ytimg.com/vi/h-zm24B_gto/mqdefault.jpg",
           "videoId": "h-zm24B_gto"
         }
-      ]
+      ],
+      "accent": "#228855",
+      "accentSecondary": "#44aa77",
+      "accentTertiary": "#116644"
     }
   ]
 }
