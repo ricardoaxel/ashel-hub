@@ -75,6 +75,7 @@ function getMostVisibleCard() {
 }
 
 function applyCursorColor() {
+  if (!cursorRing) return;
   const rootAccent = document.documentElement.style.getPropertyValue('--section-accent').trim();
   const target = fallbackColor !== '#ff2d55' ? fallbackColor : (rootAccent || '#ff2d55');
   if (target !== currentSectionColor) {
