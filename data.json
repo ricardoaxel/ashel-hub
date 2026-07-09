@@ -1321,6 +1321,14 @@
       "url": "https://www.youtube.com/watch?v=yejlTlo4sSs",
       "thumbnail": "https://i1.ytimg.com/vi/yejlTlo4sSs/mqdefault.jpg",
       "videoId": "yejlTlo4sSs"
+    },
+    {
+      "title": "Maquetas viejas, trabajos raros, etc",
+      "type": "soundcloud",
+      "description": "Viejas grabaciones, experimentos, maquetas y cosas raras.",
+      "url": "https://soundcloud.com/elchetumal",
+      "thumbnail": "https://i1.sndcdn.com/avatars-000045978544-c3ozp9-t500x500.jpg",
+      "embed": "<iframe width=\"100%\" height=\"450\" scrolling=\"no\" frameborder=\"no\" allow=\"autoplay; encrypted-media\" src=\"https://w.soundcloud.com/player/?visual=true&url=https%3A%2F%2Fapi.soundcloud.com%2Fusers%2F10112958&show_artwork=true\"></iframe>"
     }
   ]
 }

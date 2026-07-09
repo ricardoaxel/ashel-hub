@@ -15,7 +15,7 @@ export function renderOtherContent() {
   }
 
   function renderEmbed(item) {
-    if (item.type === 'bandcamp' && item.embed) return item.embed;
+    if (item.embed) return item.embed;
     if (item.type === 'youtube' && item.videoId)
       return `<iframe src="https://www.youtube.com/embed/${item.videoId}" frameborder="0" allowfullscreen loading="lazy"></iframe>`;
     return `<span style="font-family:var(--mono);font-size:0.7rem;color:var(--text-muted)">${item.type}</span>`;
