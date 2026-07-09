@@ -17,8 +17,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 300px;
-  overflow: hidden;
+  min-height: 340px;
   background: #000;
 }
 
