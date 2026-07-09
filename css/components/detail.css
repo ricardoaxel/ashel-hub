@@ -222,3 +222,24 @@
   border-color: var(--section-accent, var(--accent));
   color: var(--bg);
 }
+
+.btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border-strong);
+  color: var(--text-dim);
+  text-decoration: none;
+  transition:
+    background 0.3s,
+    border-color 0.3s,
+    color 0.3s;
+}
+
+.btn-icon:hover {
+  background: var(--section-accent, var(--accent));
+  border-color: var(--section-accent, var(--accent));
+  color: var(--bg);
+}

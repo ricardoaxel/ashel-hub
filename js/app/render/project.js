@@ -39,7 +39,16 @@ export function renderProjectContent() {
     .map((m) => `<li><strong>${m.name}</strong> — ${projT.members?.[m.name] || m.role}</li>`)
     .join('');
   const linksHtml = project.links
-    .map((l) => `<a href="${l.url}" target="_blank" class="btn-small">${l.label}</a>`)
+    .map((l) => {
+      const icons = {
+        Instagram: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1"/></svg>',
+        YouTube: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><rect x="2" y="5" width="20" height="14" rx="3"/><polygon points="10,8 10,16 17,12" fill="currentColor" stroke="none"/></svg>',
+        Bandcamp: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><polygon points="3,16 8.5,8 21,8" fill="currentColor" stroke="none" opacity="0.3"/><polygon points="3,16 8.5,8 21,8" stroke="currentColor" fill="none"/></svg>',
+        Facebook: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>',
+      };
+      const svg = icons[l.label] || '';
+      return `<a href="${l.url}" target="_blank" class="btn-icon" title="${l.label}">${svg}</a>`;
+    })
     .join('');
   const descriptionHtml = (projT.description || project.description)
     .map((p) => `<p class="detail-description">${p}</p>`)
