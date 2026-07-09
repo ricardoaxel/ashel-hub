@@ -124,15 +124,22 @@ export function renderIndexContent() {
     const minYear = allReleases[0].year;
     const maxYear = allReleases[allReleases.length - 1].year;
     const yearSpan = maxYear - minYear || 1;
+    const total = allReleases.length;
 
     // Build unique sorted years list
     const years = [...new Set(allReleases.map((r) => r.year))].sort();
 
-    // Position each release based on year range
-    const coverItems = allReleases.map((r) => {
-      const pct = (((r.year - minYear) / yearSpan) * 100).toFixed(1);
-      return { ...r, pct };
-    });
+    // Equal spacing for releases
+    const coverItems = allReleases.map((r, i) => ({
+      ...r,
+      pct: total > 1 ? ((i / (total - 1)) * 100).toFixed(1) : '50',
+    }));
+
+    // Equal spacing for years
+    const yearItems = years.map((y, i) => ({
+      year: y,
+      pct: years.length > 1 ? ((i / (years.length - 1)) * 100).toFixed(1) : '50',
+    }));
 
     const timelineHtml = `
       <div class="release-timeline">
@@ -143,15 +150,14 @@ export function renderIndexContent() {
             <span class="tl-rail-dot"></span>
           </div>
 
-          ${years
-            .map((y) => {
-              const pct = (((y - minYear) / yearSpan) * 100).toFixed(1);
-              return `
-          <span class="tl-year-tick" style="left:${pct}%">
-            <span class="tl-year-tick-label">${y}</span>
+          ${yearItems
+            .map(
+              (y) => `
+          <span class="tl-year-tick" style="left:${y.pct}%">
+            <span class="tl-year-tick-label">${y.year}</span>
             <span class="tl-year-tick-line"></span>
-          </span>`;
-            })
+          </span>`
+            )
             .join('')}
 
           ${coverItems
