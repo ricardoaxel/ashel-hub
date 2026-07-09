@@ -280,10 +280,16 @@ export function renderProjectContent() {
       setTimeout(() => {
         section.outerHTML = renderFeatured(selected);
         if (cover) cover.src = selected.cover;
+        const player = document.querySelector('.detail-player-section');
+        if (player) player.classList.add('loading');
         setTimeout(() => {
           document.querySelector('.detail-cover')?.classList.remove('fade-out');
           document.getElementById('featured-section')?.classList.remove('fade-out');
         }, 30);
+        setTimeout(() => {
+          const p = document.querySelector('.detail-player-section');
+          if (p) p.classList.remove('loading');
+        }, 600);
         extractColors(selected.cover)
           .then((colors) => {
             const root = document.documentElement.style;
