@@ -32,9 +32,9 @@ export function renderOtherContent() {
         ${items.map((item, i) => `
           <div class="other-detail-card" style="border:1px solid var(--border);background:var(--bg)">
             ${item.type === 'bandcamp' && item.embed ? `
-            <div style="padding:1.5rem;background:#000">${item.embed}</div>` : item.type === 'youtube' && item.videoId ? `
-            <div style="line-height:0"><iframe src="https://www.youtube.com/embed/${item.videoId}" frameborder="0" allowfullscreen loading="lazy" style="width:100%;aspect-ratio:16/9;display:block"></iframe></div>` : `
-            <div style="padding:3rem 1.5rem;text-align:center;font-family:var(--mono);font-size:0.7rem;color:var(--text-muted);background:var(--surface)">${item.type}</div>`}
+            <div>${item.embed}</div>` : item.type === 'youtube' && item.videoId ? `
+            <div><iframe src="https://www.youtube.com/embed/${item.videoId}" frameborder="0" allowfullscreen loading="lazy"></iframe></div>` : `
+            <div style="text-align:center;font-family:var(--mono);font-size:0.7rem;color:var(--text-muted)">${item.type}</div>`}
             <div style="padding:1.5rem;border-top:1px solid var(--border)">
               <h3 style="font-family:var(--serif);font-size:1.1rem;font-weight:700;margin-bottom:0.5rem">${item.title}</h3>
               ${item.description ? `<p style="font-family:var(--mono);font-size:0.75rem;color:var(--text-dim);line-height:1.6;margin-bottom:1rem">${item.description}</p>` : ''}
