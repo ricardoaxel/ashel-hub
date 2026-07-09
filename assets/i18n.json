@@ -124,6 +124,22 @@
         "releases": {
           "El caos es la naturaleza de las cosas...": "Ambient/post-rock/experimental."
         }
+      },
+      "hostem": {
+        "shortDescription": "Thrash/hardcore band from Tlalnepantla. Debut self-titled EP with 4 tracks. Raziel, Sebastián, Diego, Alec, and Ashel.",
+        "description": [
+          "Thrash/hardcore band from Tlalnepantla. Raw and relentless energy with 4 tracks spanning from social critique to dark fantasy. Debut self-titled EP recorded at Diego's house, mixed by Ashel. Lyrics by Diego and Raziel, with special thanks to Aldo \"Hacha Loca\" López."
+        ],
+        "members": {
+          "Raziel": "Vocals (lyrics)",
+          "Sebastián": "Drums",
+          "Diego": "Guitar (lyrics)",
+          "Alec": "Bass",
+          "Ashel": "Guitar (mixing)"
+        },
+        "releases": {
+          "Hostem": "4 tracks of thrash/hardcore fury. \"Incursion\", \"Hacha Loca\", \"Porquería Social\", and \"Cursed Souls\"."
+        }
       }
     }
   },
@@ -251,6 +267,22 @@
         },
         "releases": {
           "El caos es la naturaleza de las cosas...": "Ambient/post-rock/experimental."
+        }
+      },
+      "hostem": {
+        "shortDescription": "Banda de thrash/hardcore de Tlalnepantla (2014-2016). EP debut homónimo con 4 temas. Raziel, Sebastián, Diego, Alec y Ashel.",
+        "description": [
+          "Banda de thrash/hardcore de Tlalnepantla. Energía cruda e implacable con 4 temas que abarcan desde crítica social hasta fantasía oscura. EP debut homónimo grabado en casa de Diego, mezclado por Ashel. Letras de Diego y Raziel, con agradecimiento especial a Aldo \"Hacha Loca\" López."
+        ],
+        "members": {
+          "Raziel": "Voz (letras)",
+          "Sebastián": "Batería",
+          "Diego": "Guitarra (letras)",
+          "Alec": "Bajo",
+          "Ashel": "Guitarra (mezcla)"
+        },
+        "releases": {
+          "Hostem": "4 temas de furia thrash/hardcore. \"Incursion\", \"Hacha Loca\", \"Porquería Social\" y \"Cursed Souls\"."
         }
       }
     }

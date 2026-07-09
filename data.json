@@ -8,7 +8,7 @@
     ],
     "stats": [
       {
-        "number": "4",
+        "number": "5",
         "label": "Projects"
       },
       {
@@ -1031,6 +1031,240 @@
       "accent": "#228855",
       "accentSecondary": "#44aa77",
       "accentTertiary": "#116644"
+    },
+    {
+      "id": "hostem",
+      "name": "Hostem",
+      "cover": "assets/images/hostem.jpg",
+      "genres": [
+        "Thrash Metal",
+        "Hardcore Punk",
+        "Heavy Metal",
+        "Alternative Metal"
+      ],
+      "location": "Tlalnepantla, Mexico",
+      "yearsActive": {
+        "start": 2014,
+        "end": 2016
+      },
+      "badge": null,
+      "shortDescription": "Thrash/hardcore band from Tlalnepantla. Self-titled debut EP with 4 tracks. Raziel, Sebastián, Diego, Alec, and Ashel.",
+      "description": [
+        "Thrash/hardcore band from Tlalnepantla. Raw, unrelenting energy with 4 tracks covering themes from social critique to dark fantasy. Self-titled debut EP recorded at Diego's house, mixed by Ashel. Lyrics by Diego and Raziel, with special thanks to Aldo \"Hacha Loca\" López."
+      ],
+      "members": [
+        {
+          "name": "Raziel",
+          "role": "Vocals (lyrics)"
+        },
+        {
+          "name": "Sebastián",
+          "role": "Drums"
+        },
+        {
+          "name": "Diego",
+          "role": "Guitar (lyrics)"
+        },
+        {
+          "name": "Alec",
+          "role": "Bass"
+        },
+        {
+          "name": "Ashel",
+          "role": "Guitar (mixing)"
+        }
+      ],
+      "links": [
+        {
+          "label": "Bandcamp",
+          "url": "https://hostem.bandcamp.com"
+        }
+      ],
+      "flyers": [
+        {
+          "src": "assets/images/projects/hostem-flyer-08.jpg",
+          "caption": "Hostem at El Chetumal Productions — Mar 8, 2014",
+          "date": "2014-03-08"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-12.jpg",
+          "caption": "Hostem — Aug 29, 2014",
+          "date": "2014-08-29"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-16.jpg",
+          "caption": "Manikie, Bullshit, Hostem & The Homes Ska Club at CCH Vallejo — Nov 27, 2014",
+          "date": "2014-11-27"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-23.jpg",
+          "caption": "Hostem at Multiforo 246 — Jul 11, 2015",
+          "date": "2015-07-11"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-24.jpg",
+          "caption": "Fullius Day 2015 feat. Hostem at Cosa Nostra MX — Oct 23, 2015",
+          "date": "2015-10-23"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-01.jpg",
+          "caption": "Hostem — Guerra de Bandas festival"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-02.jpg",
+          "caption": "Hostem — Peña"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-03.jpg",
+          "caption": "Hostem flyer"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-04.jpg",
+          "caption": "El Fest sin nombre feat. Hostem"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-05.jpg",
+          "caption": "Satelucore feat. Hostem at Comonfort #8"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-06.jpg",
+          "caption": "Hostem & Vecino? at Real de Atizapán"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-07.jpg",
+          "caption": "Roopa, No Why & Hostem"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-09.jpg",
+          "caption": "Hostem flyer"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-10.jpg",
+          "caption": "Hecho en Casa 2 feat. Hostem"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-11.jpg",
+          "caption": "Hostem at Valle Dorado"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-13.jpg",
+          "caption": "Hostem at Real de Atizapán"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-14.jpg",
+          "caption": "Hostem & No Way at Plaza Gigi"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-15.jpg",
+          "caption": "Hostem — Eje Satelite"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-17.jpg",
+          "caption": "Hostem flyer"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-18.jpg",
+          "caption": "Hostem at Billar La Buchaca"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-19.jpg",
+          "caption": "Hostem — Lexice, Vecino, Pescador"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-20.jpg",
+          "caption": "Rock in the Roof feat. Hostem"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-21.jpg",
+          "caption": "Hostem flyer"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-22.jpg",
+          "caption": "Hostem flyer"
+        },
+        {
+          "src": "assets/images/projects/hostem-flyer-25.jpg",
+          "caption": "Ezkizofrenia Prods feat. Hostem"
+        }
+      ],
+      "photos": [
+        {
+          "src": "assets/images/projects/hostem-fb-1.jpg",
+          "caption": "Hostem Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/hostem-fb-2.jpg",
+          "caption": "Hostem Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/hostem-fb-3.jpg",
+          "caption": "Hostem Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/hostem-fb-4.jpg",
+          "caption": "Hostem Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/hostem-fb-5.jpg",
+          "caption": "Hostem Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/hostem-fb-6.jpg",
+          "caption": "Hostem Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/hostem-fb-7.jpg",
+          "caption": "Hostem Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/hostem-fb-8.jpg",
+          "caption": "Hostem Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/hostem-fb-9.jpg",
+          "caption": "Hostem Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/hostem-fb-10.jpg",
+          "caption": "Hostem Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/hostem-fb-11.jpg",
+          "caption": "Hostem Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/hostem-fb-12.jpg",
+          "caption": "Hostem Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/hostem-fb-13.jpg",
+          "caption": "Hostem Facebook photo"
+        },
+        {
+          "src": "assets/images/projects/hostem-fb-14.jpg",
+          "caption": "Hostem Facebook photo"
+        }
+      ],
+      "releases": [
+        {
+          "type": "EP",
+          "name": "Hostem",
+          "year": "Jan 2016",
+          "cover": "assets/images/hostem-ep.jpg",
+          "url": "https://hostem.bandcamp.com/album/hostem",
+          "featured": true,
+          "description": "4 tracks of thrash/hardcore fury. \"Incursion,\" \"Hacha Loca,\" \"Porquería Social,\" and \"Cursed Souls.\"",
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=3623026714/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://hostem.bandcamp.com/album/hostem\">Hostem de Hostem</a></iframe>"
+        },
+        {
+          "type": "Single",
+          "name": "The Fragmented One",
+          "year": "Sep 2015",
+          "cover": "assets/images/ashel-improv.jpg",
+          "url": "https://hostem.bandcamp.com/track/the-fragmented-one",
+          "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/track=2273985887/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://hostem.bandcamp.com/track/the-fragmented-one\">The Fragmented One de Hostem</a></iframe>"
+        }
+      ]
     }
   ]
 }
