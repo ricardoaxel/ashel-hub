@@ -1330,5 +1330,49 @@
       "thumbnail": "https://i1.sndcdn.com/avatars-000045978544-c3ozp9-t500x500.jpg",
       "embed": "<iframe width=\"100%\" height=\"450\" scrolling=\"no\" frameborder=\"no\" allow=\"autoplay; encrypted-media\" src=\"https://w.soundcloud.com/player/?visual=true&url=https%3A%2F%2Fapi.soundcloud.com%2Fusers%2F10112958&show_artwork=true\"></iframe>"
     }
+  ],
+  "liveSessions": [
+    {
+      "title": "Endless — Sesiones Sonoras",
+      "url": "https://www.youtube.com/watch?v=zU8eAtVPP-w",
+      "thumbnail": "https://i1.ytimg.com/vi/zU8eAtVPP-w/mqdefault.jpg",
+      "videoId": "zU8eAtVPP-w"
+    },
+    {
+      "title": "Vinnum Sabbathi — Sesiones Sonoras",
+      "url": "https://www.youtube.com/watch?v=T-EbsA1RVjc",
+      "thumbnail": "https://i1.ytimg.com/vi/T-EbsA1RVjc/mqdefault.jpg",
+      "videoId": "T-EbsA1RVjc"
+    },
+    {
+      "title": "Sunset Images — Sesiones Sonoras",
+      "url": "https://www.youtube.com/watch?v=bBzG7ItTfm4",
+      "thumbnail": "https://i1.ytimg.com/vi/bBzG7ItTfm4/mqdefault.jpg",
+      "videoId": "bBzG7ItTfm4"
+    },
+    {
+      "title": "Point Decster — Sesiones Sonoras",
+      "url": "https://www.youtube.com/watch?v=L9twH8phmLk",
+      "thumbnail": "https://i1.ytimg.com/vi/L9twH8phmLk/mqdefault.jpg",
+      "videoId": "L9twH8phmLk"
+    },
+    {
+      "title": "Belafonte Sensacional — Sesiones Sonoras",
+      "url": "https://www.youtube.com/watch?v=IvpuyKIZnnk",
+      "thumbnail": "https://i1.ytimg.com/vi/IvpuyKIZnnk/mqdefault.jpg",
+      "videoId": "IvpuyKIZnnk"
+    },
+    {
+      "title": "Concepción Huerta — Sesiones Sonoras",
+      "url": "https://www.youtube.com/watch?v=ltZrV7LN6O4",
+      "thumbnail": "https://i1.ytimg.com/vi/ltZrV7LN6O4/mqdefault.jpg",
+      "videoId": "ltZrV7LN6O4"
+    },
+    {
+      "title": "Muuk — Sesiones Sonoras",
+      "url": "https://www.youtube.com/watch?v=xL8ETsjZtGs",
+      "thumbnail": "https://i1.ytimg.com/vi/xL8ETsjZtGs/mqdefault.jpg",
+      "videoId": "xL8ETsjZtGs"
+    }
   ]
 }

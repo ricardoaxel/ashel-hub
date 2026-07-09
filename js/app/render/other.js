@@ -9,6 +9,7 @@ export function renderOtherContent() {
   if (!i18nData || !siteData) return;
   const t = i18nData[currentLocale] || i18nData.en;
   const items = siteData.other;
+  const liveSessions = siteData.liveSessions || [];
   if (!items || items.length === 0) {
     window.location.href = 'index.html';
     return;
@@ -60,6 +61,34 @@ export function renderOtherContent() {
         .join('')
     : '';
 
+  const liveHtml = liveSessions.length
+    ? `
+    <div style="padding:3rem 2rem 4rem;border-top:1px solid var(--border)">
+      <div class="section-label" style="border:none;padding:0;margin-bottom:1rem">
+        <span>Sesiones en vivo</span>
+        <span class="count">${String(liveSessions.length).padStart(2, '0')}</span>
+      </div>
+      <p style="font-family:var(--mono);font-size:0.75rem;color:var(--text-dim);line-height:1.6;margin-bottom:2rem;max-width:600px">
+        Participación en grabación y mezcla de las siguientes sesiones en vivo.
+      </p>
+      <div class="live-grid">
+        ${liveSessions
+          .map(
+            (s) => `
+          <div class="live-card">
+            <div class="live-video">
+              <iframe src="https://www.youtube.com/embed/${s.videoId}" frameborder="0" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="live-info">
+              <span class="live-title">${s.title}</span>
+            </div>
+          </div>`
+          )
+          .join('')}
+      </div>
+    </div>`
+    : '';
+
   document.getElementById('other-content').innerHTML = `
     <div class="detail-header" style="padding-bottom:2rem">
       <a href="index.html#projects" class="back-link">&larr; ${t.site?.backToProjects || 'Back to Projects'}</a>
@@ -75,6 +104,7 @@ export function renderOtherContent() {
     </div>
     ${gridHtml}
     ${scHtml}
+    ${liveHtml}
   `;
 
   document.querySelectorAll('a, button').forEach(attachCursor);
