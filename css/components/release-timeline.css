@@ -7,21 +7,20 @@
   overflow-x: auto;
   overflow-y: visible;
   -webkit-overflow-scrolling: touch;
-  padding: 0 0 1rem;
+  padding-bottom: 0.5rem;
 }
 
 .tl-rail {
   position: relative;
-  min-width: 650px;
-  height: 100px;
+  height: 80px;
 }
 
-/* ── Track: dot — line — dot pattern ── */
+/* ── Track: dot — line — dot ── */
 .tl-rail-track {
   position: absolute;
   left: 0;
   right: 0;
-  top: 28px;
+  top: 44px;
   display: flex;
   align-items: center;
 }
@@ -38,33 +37,33 @@
   flex: 1;
   height: 1px;
   background: var(--accent);
-  opacity: 0.35;
+  opacity: 0.3;
 }
 
-/* ── Year labels ── */
+/* ── Years (positioned absolutely) ── */
 .tl-rail-years {
   position: absolute;
   left: 0;
   right: 0;
-  top: 36px;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 3px;
+  top: 52px;
+  height: 20px;
 }
 
 .tl-rail-year {
+  position: absolute;
   font-family: var(--mono);
   font-size: 0.5rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-muted);
+  transform: translateX(-50%);
   white-space: nowrap;
 }
 
-/* ── Release items (covers hang from the line) ── */
+/* ── Release items ── */
 .tl-item {
   position: absolute;
-  top: 28px;
+  top: 44px;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
@@ -75,40 +74,40 @@
 
 .tl-pin {
   width: 1px;
-  height: 16px;
+  height: 14px;
   background: var(--accent);
   opacity: 0.2;
   flex-shrink: 0;
 }
 
 .tl-cover {
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background-size: cover;
   background-position: center;
   display: block;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .tl-item:hover .tl-cover {
-  transform: scale(1.4);
+  transform: scale(1.5);
   box-shadow: 0 4px 16px rgba(255, 45, 85, 0.3);
 }
 
 /* ── Hover tooltip ── */
 .tl-item-label {
   position: absolute;
-  bottom: calc(100% + 38px);
+  bottom: calc(100% + 18px);
   white-space: nowrap;
   text-align: center;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease;
   background: var(--bg);
-  padding: 0.3rem 0.5rem;
+  padding: 0.25rem 0.5rem;
   border: 1px solid var(--accent);
   z-index: 10;
 }
@@ -140,37 +139,32 @@
   }
 
   .tl-rail {
-    min-width: 500px;
-    height: 80px;
+    height: 65px;
   }
 
   .tl-rail-track {
-    top: 20px;
+    top: 34px;
   }
 
   .tl-rail-years {
-    top: 28px;
-  }
-
-  .tl-rail-year {
-    font-size: 0.45rem;
+    top: 42px;
   }
 
   .tl-item {
-    top: 20px;
+    top: 34px;
   }
 
   .tl-cover {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
   }
 
   .tl-pin {
-    height: 12px;
+    height: 10px;
   }
 
   .tl-item-label {
-    bottom: calc(100% + 30px);
+    bottom: calc(100% + 14px);
     padding: 0.2rem 0.35rem;
   }
 

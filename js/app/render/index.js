@@ -147,7 +147,7 @@ export function renderIndexContent() {
               ${years
                 .map((y) => {
                   const pct = (((y - minYear) / yearSpan) * 100).toFixed(1);
-                  return `<span class="tl-rail-year" style="margin-left:${pct}%">${y}</span>`;
+                  return `<span class="tl-rail-year" style="left:${pct}%">${y}</span>`;
                 })
                 .join('')}
             </div>
