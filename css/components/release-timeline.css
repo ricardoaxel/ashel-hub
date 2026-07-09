@@ -147,16 +147,15 @@
 /* ── Mobile: compact horizontal scrollable strip ── */
 @media (max-width: 768px) {
   .release-timeline {
-    padding: 1rem 0 0.75rem;
+    padding: 1rem 0.75rem 0.75rem;
     display: block;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .release-timeline > .tl-rail {
     width: 100%;
     min-width: unset;
     margin: 0;
-    padding: 0 0.5rem;
     box-sizing: border-box;
   }
 
