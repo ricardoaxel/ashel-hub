@@ -170,9 +170,6 @@ export function renderIndexContent() {
 
     const projectsSection = document.getElementById('projects');
     const grid = document.getElementById('projects-grid');
-
-    const projectsSection = document.getElementById('projects');
-    const grid = document.getElementById('projects-grid');
     if (projectsSection && grid) {
       grid.insertAdjacentHTML('beforebegin', timelineHtml);
     }
