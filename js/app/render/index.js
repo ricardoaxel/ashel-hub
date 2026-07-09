@@ -100,6 +100,32 @@ export function renderIndexContent() {
     2,
     '0'
   );
+
+  // Render "other" items as compact cards
+  const otherItems = data.other || [];
+  if (otherItems.length) {
+    const grid = document.getElementById('projects-grid');
+    const otherHtml = otherItems
+      .map(
+        (item, i) => `
+      <a href="${item.url}" target="_blank" class="project-card other-card" data-index="${i}">
+        <div class="project-cover-wrap other-cover-wrap">
+          <div class="other-card-type">${item.type === 'bandcamp' ? 'bandcamp' : item.type === 'youtube' ? 'video' : 'link'}</div>
+        </div>
+        <div class="project-info other-info">
+          <div>
+            <span class="project-number" style="color:var(--text-muted)">${String(data.projects.length + i + 1).padStart(2, '0')}</span>
+            <h2 class="project-name" style="font-size:clamp(1rem,2vw,1.5rem);margin:0.5rem 0">${item.title}</h2>
+            ${item.description ? `<p class="project-desc" style="font-size:0.65rem;margin-top:0.5rem;padding-left:0;border:none">${item.description}</p>` : ''}
+          </div>
+          <span class="project-arrow" style="position:static;align-self:flex-end">→</span>
+        </div>
+      </a>`
+      )
+      .join('');
+    grid.insertAdjacentHTML('beforeend', otherHtml);
+  }
+
   const allPhotos = [];
   data.projects.forEach((p) => {
     if (p.photos) {
