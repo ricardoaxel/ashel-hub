@@ -147,50 +147,53 @@
 /* ── Mobile: compact horizontal scrollable strip ── */
 @media (max-width: 768px) {
   .release-timeline {
-    padding: 1rem 1.25rem 0.75rem;
+    padding: 1rem 0 0.75rem;
     display: block;
-    overflow: visible;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
   }
 
   .release-timeline > .tl-rail {
-    width: 100%;
-    min-width: unset;
+    width: auto;
+    min-width: 650px;
     margin: 0;
+    padding: 0 1.25rem;
     box-sizing: border-box;
   }
 
   .tl-rail {
-    height: 48px;
+    height: 70px;
     margin: 0;
   }
 
   .tl-rail-track {
-    top: 16px;
+    top: 24px;
   }
 
   .tl-year-tick {
-    top: 16px;
+    top: 24px;
   }
 
   .tl-year-tick-label {
-    font-size: 0.35rem;
+    font-size: 0.45rem;
   }
 
   .tl-year-tick-line {
-    height: 3px;
+    height: 5px;
   }
 
   .tl-item {
-    bottom: calc(100% - 16px);
+    bottom: calc(100% - 24px);
   }
 
   .tl-cover {
-    width: 14px;
-    height: 14px;
+    width: 28px;
+    height: 28px;
   }
 
   .tl-pin {
-    height: 6px;
+    height: 10px;
   }
 
   .tl-item-label {
@@ -198,7 +201,7 @@
   }
 
   .tl-rail-dot {
-    width: 3px;
-    height: 3px;
+    width: 4px;
+    height: 4px;
   }
 }
