@@ -1,5 +1,6 @@
 import { getSiteData, getI18nData } from '../data.js';
 import { getLocale } from '../i18n.js';
+import { openModal } from '../modal.js';
 import { attachCursor } from '../cursor.js';
 
 export function renderOtherContent() {
@@ -71,17 +72,12 @@ export function renderOtherContent() {
       <p style="font-family:var(--mono);font-size:0.75rem;color:var(--text-dim);line-height:1.6;margin-bottom:2rem">
         ${t.site?.liveSessionsDesc || 'Participación en grabación y mezcla de las siguientes sesiones en vivo.'}
       </p>
-      <div class="live-grid">
+      <div class="videos-grid live-grid">
         ${liveSessions
           .map(
-            (s) => `
-          <div class="live-card">
-            <div class="live-video">
-              <iframe src="https://www.youtube.com/embed/${s.videoId}" frameborder="0" allowfullscreen loading="lazy"></iframe>
-            </div>
-            <div class="live-info">
-              <span class="live-title">${s.title}</span>
-            </div>
+            (s, i) => `
+          <div class="video-card" data-live-index="${i}">
+            <iframe src="https://www.youtube.com/embed/${s.videoId}" frameborder="0" allowfullscreen loading="lazy" style="position:absolute;inset:0;width:100%;height:100%" title="${s.title}"></iframe>
           </div>`
           )
           .join('')}
@@ -106,6 +102,11 @@ export function renderOtherContent() {
     ${scHtml}
     ${liveHtml}
   `;
+
+  document.querySelectorAll('.video-card[data-live-index]').forEach((el) => {
+    const index = parseInt(el.dataset.liveIndex, 10);
+    el.addEventListener('click', () => openModal(liveSessions, index));
+  });
 
   document.querySelectorAll('a, button').forEach(attachCursor);
 }
