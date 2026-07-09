@@ -186,6 +186,16 @@
 
   .detail-cover {
     max-width: 300px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .detail-left .featured-release {
+    text-align: center;
+  }
+
+  .detail-left .featured-release .tracklist {
+    text-align: left;
   }
 
   .back-link {
