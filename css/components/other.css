@@ -72,6 +72,18 @@
   opacity: 0.7;
 }
 
+.soundcloud-wrap {
+  max-width: 700px;
+  background: #000;
+  border: 1px solid var(--border);
+}
+
+.soundcloud-wrap iframe {
+  display: block;
+  width: 100%;
+  border: none;
+}
+
 @media (max-width: 768px) {
   .other-detail-grid {
     grid-template-columns: 1fr;

@@ -21,19 +21,44 @@ export function renderOtherContent() {
     return `<span style="font-family:var(--mono);font-size:0.7rem;color:var(--text-muted)">${item.type}</span>`;
   }
 
-  const cardsHtml = items
-    .map(
-      (item) => `
-      <div class="other-detail-card">
-        <div class="embed-area">${renderEmbed(item)}</div>
-        <div class="card-info">
-          <h3 class="card-title">${item.title}</h3>
-          ${item.description ? `<p class="card-desc">${item.description}</p>` : ''}
-          <a href="${item.url}" target="_blank" class="card-link">${t.labels?.visitLink || 'Visit →'}</a>
+  const gridItems = items.filter((item) => item.type !== 'soundcloud');
+  const scItems = items.filter((item) => item.type === 'soundcloud');
+
+  const gridHtml = gridItems.length
+    ? `<div style="padding:0 2rem">
+        <div class="other-detail-grid">
+          ${gridItems
+            .map(
+              (item) => `
+            <div class="other-detail-card">
+              <div class="embed-area">${renderEmbed(item)}</div>
+              <div class="card-info">
+                <h3 class="card-title">${item.title}</h3>
+                ${item.description ? `<p class="card-desc">${item.description}</p>` : ''}
+                <a href="${item.url}" target="_blank" class="card-link">${t.labels?.visitLink || 'Visit →'}</a>
+              </div>
+            </div>`
+            )
+            .join('')}
         </div>
       </div>`
-    )
-    .join('');
+    : '';
+
+  const scHtml = scItems.length
+    ? scItems
+        .map(
+          (item) => `
+      <div style="padding:3rem 2rem 4rem">
+        <div class="section-label" style="border:none;padding:0;margin-bottom:1.5rem">
+          <span>${item.title}</span>
+        </div>
+        <div class="soundcloud-wrap">
+          ${item.embed ? item.embed.replace('height="450"', 'height="600"') : ''}
+        </div>
+      </div>`
+        )
+        .join('')
+    : '';
 
   document.getElementById('other-content').innerHTML = `
     <div class="detail-header" style="padding-bottom:2rem">
@@ -48,9 +73,8 @@ export function renderOtherContent() {
         </p>
       </div>
     </div>
-    <div style="padding:0 2rem 4rem">
-      <div class="other-detail-grid">${cardsHtml}</div>
-    </div>
+    ${gridHtml}
+    ${scHtml}
   `;
 
   document.querySelectorAll('a, button').forEach(attachCursor);
