@@ -123,45 +123,45 @@ export function renderIndexContent() {
   if (allReleases.length) {
     const minYear = allReleases[0].year;
     const maxYear = allReleases[allReleases.length - 1].year;
+    const yearSpan = maxYear - minYear || 1;
 
-    // Group releases by year
-    const byYear = {};
-    allReleases.forEach((r) => {
-      if (!byYear[r.year]) byYear[r.year] = [];
-      byYear[r.year].push(r);
+    // Build unique sorted years list
+    const years = [...new Set(allReleases.map((r) => r.year))].sort();
+
+    // Position each release based on year range
+    const coverItems = allReleases.map((r) => {
+      const pct = (((r.year - minYear) / yearSpan) * 100).toFixed(1);
+      return { ...r, pct };
     });
 
     const timelineHtml = `
       <div class="release-timeline">
-        <div class="tl-header">
-          <span class="tl-header-label">Discography timeline</span>
-          <span class="tl-header-range">${minYear} — ${maxYear}</span>
-        </div>
-        <div class="tl-strip-wrap">
-          <div class="tl-strip">
-            ${Object.keys(byYear)
-              .sort()
-              .map((year) => `
-            <div class="tl-year-group">
-              <div class="tl-year-head">
-                <span class="tl-year-label">${year}</span>
-                <span class="tl-year-line"></span>
-              </div>
-              <div class="tl-releases">
-                ${byYear[year]
-                  .map(
-                    (r) => `
-                <a href="${r.url}" target="_blank" class="tl-item">
-                  <span class="tl-item-label">
-                    <span class="tl-item-proj">${r.projectName}</span>
-                    <span class="tl-item-name">${r.name}</span>
-                  </span>
-                  <span class="tl-cover" style="background-image:url(${r.cover})"></span>
-                </a>`
-                  )
-                  .join('')}
-              </div>
-            </div>`
+        <div class="tl-scroll">
+          <div class="tl-rail">
+            <div class="tl-rail-track">
+              <span class="tl-rail-dot"></span>
+              <span class="tl-rail-line"></span>
+              <span class="tl-rail-dot"></span>
+            </div>
+            <div class="tl-rail-years">
+              ${years
+                .map((y) => {
+                  const pct = (((y - minYear) / yearSpan) * 100).toFixed(1);
+                  return `<span class="tl-rail-year" style="margin-left:${pct}%">${y}</span>`;
+                })
+                .join('')}
+            </div>
+            ${coverItems
+              .map(
+                (r) => `
+            <a href="${r.url}" target="_blank" class="tl-item" style="left:${r.pct}%">
+              <span class="tl-item-label">
+                <span class="tl-item-proj">${r.projectName}</span>
+                <span class="tl-item-name">${r.name}</span>
+              </span>
+              <span class="tl-pin"></span>
+              <span class="tl-cover" style="background-image:url(${r.cover})"></span>
+            </a>`
               )
               .join('')}
           </div>
