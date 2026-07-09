@@ -149,52 +149,62 @@
 
 @media (max-width: 768px) {
   .release-timeline {
-    padding: 1rem 1.25rem 0.75rem;
+    padding: 1rem 0 0.75rem;
+    display: block;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .release-timeline > .tl-rail {
+    width: auto;
+    min-width: 650px;
+    margin: 0 1.25rem;
   }
 
   .tl-rail {
-    height: 50px;
-    margin: 0 4px;
+    height: 70px;
   }
 
   .tl-rail-track {
-    top: 20px;
+    top: 28px;
   }
 
   .tl-year-tick {
-    top: 20px;
+    top: 28px;
   }
 
   .tl-year-tick-label {
-    font-size: 0.4rem;
+    font-size: 0.45rem;
   }
 
   .tl-year-tick-line {
-    height: 4px;
+    height: 6px;
   }
 
   .tl-item {
-    bottom: calc(100% - 20px);
+    bottom: calc(100% - 28px);
   }
 
   .tl-cover {
-    width: 20px;
-    height: 20px;
+    width: 28px;
+    height: 28px;
   }
 
   .tl-pin {
-    height: 8px;
+    height: 10px;
   }
 
   .tl-item-label {
-    padding: 0.1rem 0.25rem;
+    bottom: calc(100% + 20px);
+    padding: 0.2rem 0.35rem;
   }
 
   .tl-item-proj {
-    font-size: 0.35rem;
+    font-size: 0.45rem;
   }
 
   .tl-item-name {
-    font-size: 0.3rem;
+    font-size: 0.4rem;
   }
 }
