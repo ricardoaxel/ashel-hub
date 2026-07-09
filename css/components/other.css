@@ -1,0 +1,23 @@
+.other-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  max-width: 800px;
+}
+
+.other-detail-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.other-detail-card > div:first-child {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .other-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}

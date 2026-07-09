@@ -81,11 +81,10 @@
   color: var(--section-accent, var(--accent));
 }
 
-/* ── Other / Side Projects Compact Card ── */
+/* ── Extras Card (compact, half height) ── */
 .other-card {
   grid-template-columns: 80px 1fr;
   min-height: 0;
-  cursor: default;
 }
 
 .other-cover-wrap {
@@ -98,53 +97,58 @@
 }
 
 .other-badge {
-  font-size: 1.2rem;
+  font-family: var(--serif);
+  font-size: 1.5rem;
   color: var(--text-muted);
 }
 
-.other-info {
+.other-card .other-info {
   padding: 0.75rem 1.25rem !important;
 }
 
-.other-info .project-name {
-  font-size: clamp(0.9rem, 1.5vw, 1.2rem);
-  margin: 0 0 0.5rem 0;
+.other-card .project-name {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  margin: 0.25rem 0 0 0;
 }
 
-.other-links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.other-card .project-timeline {
+  top: 0.75rem;
+  right: 1.25rem;
 }
 
-.other-links li {
-  font-family: var(--mono);
-  font-size: 0.65rem;
-  padding: 0.25rem 0;
-  border-bottom: 1px solid var(--border);
+.other-card .tl-track {
+  width: 80px;
 }
 
-.other-links li:last-child {
-  border-bottom: none;
+.other-card .tl-labels {
+  width: 80px;
 }
 
-.other-links a {
-  color: var(--text-dim);
-  text-decoration: none;
-  transition: color 0.2s;
-  display: block;
+.other-card .project-arrow {
+  bottom: 0.75rem;
+  right: 1.25rem;
+  font-size: 1rem;
 }
 
-.other-links a:hover {
-  color: var(--section-accent, var(--accent));
+.other-card:hover .other-cover-wrap {
+  background: var(--section-accent, var(--accent));
+  transition: background 0.3s;
+}
+
+.other-card:hover .other-badge {
+  color: var(--bg);
+  transition: color 0.3s;
 }
 
 @media (max-width: 768px) {
   .other-card {
-    grid-template-columns: 40px 1fr;
+    grid-template-columns: 50px 1fr;
   }
-  .other-info {
+  .other-card .other-info {
     padding: 0.5rem 0.75rem !important;
+  }
+  .other-card .project-timeline {
+    display: none;
   }
 }
 

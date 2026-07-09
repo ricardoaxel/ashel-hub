@@ -101,27 +101,27 @@ export function renderIndexContent() {
     '0'
   );
 
-  // Single compact card for extras/other projects
-  const otherItems = data.other || [];
-  if (otherItems.length) {
+  // Single compact card linking to extras page
+  const otherCount = (data.other || []).length;
+  if (otherCount) {
     const grid = document.getElementById('projects-grid');
     const otherHtml = `
-      <div class="project-card other-card">
+      <a href="other.html" class="project-card other-card">
         <div class="project-cover-wrap other-cover-wrap">
           <div class="other-badge">✦</div>
         </div>
         <div class="project-info other-info">
           <div>
             <span class="project-number">${String(data.projects.length + 1).padStart(2, '0')}</span>
+            <div class="project-timeline">
+              <div class="tl-track"><span class="tl-dot"></span><span class="tl-line"></span><span class="tl-dot"></span></div>
+              <div class="tl-labels"><span class="tl-year">misc</span><span class="tl-year">${String(otherCount).padStart(2, '0')}</span></div>
+            </div>
             <h2 class="project-name">Extras</h2>
-            <ul class="other-links">
-              ${otherItems.map((item) => `
-                <li><a href="${item.url}" target="_blank">${item.title}</a></li>
-              `).join('')}
-            </ul>
           </div>
+          <span class="project-arrow">→</span>
         </div>
-      </div>`;
+      </a>`;
     grid.insertAdjacentHTML('beforeend', otherHtml);
   }
 
