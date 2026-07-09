@@ -2,35 +2,46 @@ let siteData = null;
 let i18nData = null;
 let loadPromise = null;
 
-/**
- * Fetches data.json and i18n.json, caches the result.
- * Subsequent calls return the cached promise.
- */
+function fetchJSON(url, signal) {
+  return fetch(url, { signal }).then((r) => {
+    if (!r.ok) throw new Error(`HTTP ${r.status} for ${url}`);
+    return r.json();
+  });
+}
+
 export async function loadData() {
   if (loadPromise) return loadPromise;
-  loadPromise = _load().catch(() => _load());
+  loadPromise = _load().catch(() => {
+    loadPromise = null;
+    return _load();
+  });
   return loadPromise;
 }
 
 async function _load() {
-  const [site, i18n] = await Promise.all([
-    fetch('data.json').then((r) => r.json()),
-    fetch('assets/i18n.json').then((r) => r.json()),
-  ]);
-  siteData = site;
-  i18nData = i18n;
-  return { siteData, i18nData };
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 10000);
+  try {
+    const [site, i18n] = await Promise.all([
+      fetchJSON('data.json', ctrl.signal),
+      fetchJSON('assets/i18n.json', ctrl.signal),
+    ]);
+    siteData = site;
+    i18nData = i18n;
+    return { siteData, i18nData };
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
-/** Returns cached site data (data.json). */
 export function getSiteData() {
   return siteData;
 }
-/** Returns cached i18n data (i18n.json). */
+
 export function getI18nData() {
   return i18nData;
 }
-/** Looks up a project by id from cached site data. */
+
 export function getProject(id) {
   return siteData?.projects.find((p) => p.id === id) || null;
 }
