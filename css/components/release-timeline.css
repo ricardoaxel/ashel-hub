@@ -1,6 +1,6 @@
 .release-timeline {
   position: relative;
-  padding: 3rem 2rem 1.5rem;
+  padding: 2.5rem 2rem 1.5rem;
   overflow-x: auto;
   overflow-y: visible;
   border-bottom: 1px solid var(--border);
@@ -9,42 +9,23 @@
 .tl-inner {
   position: relative;
   min-width: 600px;
-  height: 180px;
+  height: 140px;
 }
 
-/* ── Track line ── */
 .tl-track-line {
   position: absolute;
   left: 0;
   right: 0;
-  top: 50%;
-  height: 3px;
+  top: 28px;
+  height: 2px;
   background: var(--accent);
-  transform: translateY(-50%);
-  border-radius: 2px;
-  opacity: 0.5;
-  box-shadow: 0 0 8px rgba(255, 45, 85, 0.25);
+  opacity: 0.35;
 }
 
-.tl-track-line::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--accent) 15%,
-    var(--accent) 85%,
-    transparent 100%
-  );
-  opacity: 0.3;
-}
-
-/* ── Release dot ── */
 .tl-dot-wrap {
   position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  top: 28px;
+  transform: translate(-50%, 0);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,80 +33,71 @@
   z-index: 3;
 }
 
+.tl-connector {
+  width: 1px;
+  height: 12px;
+  background: var(--accent);
+  opacity: 0.25;
+  flex-shrink: 0;
+}
+
 .tl-dot-img {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  border-radius: 0;
   background-size: cover;
   background-position: center;
-  border: 2px solid var(--accent);
-  transition:
-    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.35s ease;
+  border: 1px solid var(--border-strong);
+  transition: border-color 0.3s;
   flex-shrink: 0;
-  box-shadow: 0 0 0 2px var(--bg);
+  margin-top: 2px;
 }
 
 .tl-dot-wrap:hover .tl-dot-img {
-  transform: scale(1.6);
-  box-shadow:
-    0 0 0 2px var(--bg),
-    0 0 20px rgba(255, 45, 85, 0.4);
-  z-index: 10;
+  border-color: var(--accent);
+  outline: 1px solid var(--accent);
+  outline-offset: 1px;
 }
 
-/* ── Hover label (appears above) ── */
 .tl-dot-label {
   position: absolute;
-  bottom: calc(100% + 8px);
+  top: calc(100% + 4px);
   white-space: nowrap;
   text-align: center;
-  opacity: 0;
   pointer-events: none;
-  transition: opacity 0.25s ease, transform 0.25s ease;
-  transform: translateY(4px);
-  background: var(--bg);
-  padding: 0.35rem 0.65rem;
-  border: 1px solid var(--accent);
-  border-radius: 4px;
   z-index: 10;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
-}
-
-.tl-dot-wrap:hover .tl-dot-label {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .tl-proj {
   display: block;
   font-family: var(--mono);
-  font-size: 0.55rem;
+  font-size: 0.5rem;
   color: var(--accent);
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  line-height: 1.2;
 }
 
 .tl-name {
   display: block;
   font-family: var(--mono);
-  font-size: 0.5rem;
+  font-size: 0.45rem;
   color: var(--text-dim);
   margin-top: 1px;
+  line-height: 1.2;
 }
 
-/* ── Years ── */
 .tl-years-row {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0;
-  height: 24px;
+  top: 0;
+  height: 28px;
 }
 
 .tl-year-mark {
   position: absolute;
-  bottom: 0;
+  top: 0;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
@@ -136,7 +108,7 @@
   width: 1px;
   height: 6px;
   background: var(--accent);
-  opacity: 0.3;
+  opacity: 0.2;
 }
 
 .tl-year-label {
@@ -144,14 +116,7 @@
   font-size: 0.55rem;
   color: var(--text-muted);
   letter-spacing: 0.05em;
-  margin-top: 2px;
-}
-
-/* ── First / last dot visual anchors ── */
-.tl-dot-wrap:first-child .tl-dot-img,
-.tl-dot-wrap:last-child .tl-dot-img {
-  width: 32px;
-  height: 32px;
+  margin-top: 8px;
 }
 
 @media (max-width: 768px) {
@@ -161,34 +126,40 @@
 
   .tl-inner {
     min-width: 500px;
-    height: 130px;
+    height: 110px;
+  }
+
+  .tl-track-line {
+    top: 20px;
+  }
+
+  .tl-dot-wrap {
+    top: 20px;
   }
 
   .tl-dot-img {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
   }
 
-  .tl-dot-label {
-    padding: 0.2rem 0.4rem;
-    bottom: calc(100% + 6px);
-  }
-
-  .tl-proj {
-    font-size: 0.45rem;
-  }
-
-  .tl-name {
-    font-size: 0.4rem;
+  .tl-years-row {
+    height: 20px;
   }
 
   .tl-year-label {
     font-size: 0.45rem;
+    margin-top: 5px;
   }
 
-  .tl-dot-wrap:first-child .tl-dot-img,
-  .tl-dot-wrap:last-child .tl-dot-img {
-    width: 26px;
-    height: 26px;
+  .tl-proj {
+    font-size: 0.4rem;
+  }
+
+  .tl-name {
+    font-size: 0.35rem;
+  }
+
+  .tl-years-row {
+    top: 0;
   }
 }
