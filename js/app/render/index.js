@@ -166,7 +166,7 @@ export function renderIndexContent() {
           <a href="${r.url}" target="_blank" class="tl-item" style="left:${r.pct}%">
             <span class="tl-item-label">
               <span class="tl-item-proj">${r.projectName}</span>
-              <span class="tl-item-name">${r.name}</span>
+              <span class="tl-item-name">${r.name} (${r.year})</span>
             </span>
             <span class="tl-pin"></span>
             <span class="tl-cover" style="background-image:url(${r.cover})"></span>
