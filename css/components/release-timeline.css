@@ -2,6 +2,12 @@
   padding: 2.5rem 2rem 2rem;
   border-bottom: 1px solid var(--border);
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.release-timeline > .tl-rail {
+  width: 69%;
 }
 
 .tl-rail {
