@@ -62,12 +62,10 @@ loadData()
         hidePageLoader();
       } else if (isOtherPage) {
         renderOtherContent();
+        initModal();
         document.title = `Extras | Ashel`;
         hidePageLoader();
-  } else if (isOtherPage) {
-    const el = document.getElementById('other-content');
-    if (el) el.innerHTML = `<div class="loading">${text}</div>`;
-  } else {
+      } else {
         renderIndexContent();
         initModal();
         initIllustration();
@@ -115,6 +113,9 @@ function showError(msg) {
     if (el) el.innerHTML = `<div class="loading">${text}</div>`;
   } else if (isIllustrationPage) {
     const el = document.getElementById('illustrations-content');
+    if (el) el.innerHTML = `<div class="loading">${text}</div>`;
+  } else if (isOtherPage) {
+    const el = document.getElementById('other-content');
     if (el) el.innerHTML = `<div class="loading">${text}</div>`;
   } else {
     document.body.innerHTML = `<div class="loading" style="padding:10rem 2rem;text-align:center;font-family:var(--mono);color:var(--text-dim)">${text}</div>`;

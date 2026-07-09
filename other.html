@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="css/components/cursor.css" />
     <link rel="stylesheet" href="css/components/nav.css" />
     <link rel="stylesheet" href="css/components/modal.css" />
+    <link rel="stylesheet" href="css/components/videos.css" />
     <link rel="stylesheet" href="css/components/other.css" />
     <link rel="stylesheet" href="css/components/detail.css" />
     <link rel="stylesheet" href="css/effects.css" />
@@ -85,6 +86,20 @@
     </header>
 
     <main id="other-content"></main>
+
+    <div id="gallery-modal" class="gallery-modal">
+      <button class="modal-close" aria-label="Close">&#10005;</button>
+      <button class="modal-btn modal-prev">&larr;</button>
+      <div class="modal-image-wrap">
+        <img class="modal-image" src="" alt="" />
+        <iframe class="modal-video" src="" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+        <div class="modal-meta">
+          <span class="modal-counter"></span>
+          <span class="modal-caption"></span>
+        </div>
+      </div>
+      <button class="modal-btn modal-next">&rarr;</button>
+    </div>
 
     <footer class="footer">
       <p>&copy; 2026 Ashel</p>
