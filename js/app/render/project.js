@@ -264,6 +264,9 @@ export function renderProjectContent() {
     if (section && selected) {
       section.outerHTML = renderFeatured(selected);
       document.querySelector('.detail-cover').src = selected.cover;
+      const url = new URL(window.location);
+      url.searchParams.set('album', selected.name);
+      window.history.replaceState({}, '', url);
       extractColors(selected.cover)
         .then((colors) => {
           const root = document.documentElement.style;
