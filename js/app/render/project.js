@@ -302,26 +302,45 @@ export function renderProjectContent() {
   // Auto-select album from URL param
   const albumParam = new URLSearchParams(window.location.search).get('album');
   const sel = document.getElementById('album-selector');
-  if (albumParam && sel) {
-    const match = project.releases.find((r) => r.name === albumParam);
-    if (match) {
-      sel.value = match.name;
-      sel.dispatchEvent(new Event('change'));
+  const autoAlbum = albumParam && sel && project.releases.find((r) => r.name === albumParam);
+  if (autoAlbum) {
+    sel.value = autoAlbum.name;
+    // Directly apply album colors instead of dispatching event
+    const section = document.getElementById('featured-section');
+    if (section) {
+      section.outerHTML = renderFeatured(autoAlbum);
+      document.querySelector('.detail-cover').src = autoAlbum.cover;
+      extractColors(autoAlbum.cover)
+        .then((colors) => {
+          const root = document.documentElement.style;
+          root.setProperty('--section-accent', colors[0]);
+          root.setProperty('--section-accent-secondary', colors[1]);
+          root.setProperty('--section-accent-tertiary', colors[2]);
+          const iframe = document.querySelector('.detail-player-section iframe');
+          if (iframe) {
+            const hex = colors[0].replace('#', '');
+            iframe.src = iframe.src.replace(/linkcol=[a-f0-9]{6}/i, `linkcol=${hex}`);
+          }
+          refreshCursorColor();
+        })
+        .catch(() => {});
     }
   }
 
-  extractColors(project.cover)
-    .then((extracted) => {
-      applyProjectColors(project.id, extracted);
-      updateEmbedColor(extracted[0]);
-      refreshCursorColor();
-    })
-    .catch(() => {
-      const fb = getColorFallback(project);
-      applyProjectColors(project.id, fb);
-      updateEmbedColor(fb[0]);
-      refreshCursorColor();
-    });
+  if (!autoAlbum) {
+    extractColors(project.cover)
+      .then((extracted) => {
+        applyProjectColors(project.id, extracted);
+        updateEmbedColor(extracted[0]);
+        refreshCursorColor();
+      })
+      .catch(() => {
+        const fb = getColorFallback(project);
+        applyProjectColors(project.id, fb);
+        updateEmbedColor(fb[0]);
+        refreshCursorColor();
+      });
+  }
 }
 
 function updateEmbedColor(color) {
