@@ -53,7 +53,7 @@ export function renderOtherContent() {
           <span>${item.title}</span>
         </div>
         <div class="soundcloud-wrap">
-          ${item.embed ? item.embed.replace('height="450"', 'height="600"') : ''}
+          ${item.embed ? item.embed.replace('height="450"', 'height="350"') : ''}
         </div>
       </div>`
         )
