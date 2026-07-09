@@ -1,18 +1,13 @@
 .release-timeline {
   padding: 2.5rem 2rem 2rem;
   border-bottom: 1px solid var(--border);
-}
-
-.tl-scroll {
-  overflow-x: auto;
-  overflow-y: visible;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 0.5rem;
+  overflow: hidden;
 }
 
 .tl-rail {
   position: relative;
-  height: 80px;
+  height: 100px;
+  margin: 0 6px;
 }
 
 /* ── Track: dot — line — dot ── */
@@ -40,23 +35,32 @@
   opacity: 0.3;
 }
 
-/* ── Years (positioned absolutely) ── */
-.tl-rail-years {
+/* ── Year ticks ON the line ── */
+.tl-year-tick {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 52px;
-  height: 20px;
+  top: 44px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
 }
 
-.tl-rail-year {
-  position: absolute;
+.tl-year-tick-line {
+  width: 1px;
+  height: 8px;
+  background: var(--accent);
+  opacity: 0.25;
+  flex-shrink: 0;
+}
+
+.tl-year-tick-label {
   font-family: var(--mono);
   font-size: 0.5rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-muted);
-  transform: translateX(-50%);
+  margin-bottom: 10px;
   white-space: nowrap;
 }
 
@@ -81,8 +85,8 @@
 }
 
 .tl-cover {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   background-size: cover;
   background-position: center;
@@ -139,24 +143,34 @@
   }
 
   .tl-rail {
-    height: 65px;
+    height: 75px;
+    margin: 0 4px;
   }
 
   .tl-rail-track {
-    top: 34px;
+    top: 32px;
   }
 
-  .tl-rail-years {
-    top: 42px;
+  .tl-year-tick {
+    top: 32px;
+  }
+
+  .tl-year-tick-label {
+    font-size: 0.45rem;
+    margin-bottom: 6px;
+  }
+
+  .tl-year-tick-line {
+    height: 6px;
   }
 
   .tl-item {
-    top: 34px;
+    top: 32px;
   }
 
   .tl-cover {
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
   }
 
   .tl-pin {

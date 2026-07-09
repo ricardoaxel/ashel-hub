@@ -136,35 +136,37 @@ export function renderIndexContent() {
 
     const timelineHtml = `
       <div class="release-timeline">
-        <div class="tl-scroll">
-          <div class="tl-rail">
-            <div class="tl-rail-track">
-              <span class="tl-rail-dot"></span>
-              <span class="tl-rail-line"></span>
-              <span class="tl-rail-dot"></span>
-            </div>
-            <div class="tl-rail-years">
-              ${years
-                .map((y) => {
-                  const pct = (((y - minYear) / yearSpan) * 100).toFixed(1);
-                  return `<span class="tl-rail-year" style="left:${pct}%">${y}</span>`;
-                })
-                .join('')}
-            </div>
-            ${coverItems
-              .map(
-                (r) => `
-            <a href="${r.url}" target="_blank" class="tl-item" style="left:${r.pct}%">
-              <span class="tl-item-label">
-                <span class="tl-item-proj">${r.projectName}</span>
-                <span class="tl-item-name">${r.name}</span>
-              </span>
-              <span class="tl-pin"></span>
-              <span class="tl-cover" style="background-image:url(${r.cover})"></span>
-            </a>`
-              )
-              .join('')}
+        <div class="tl-rail">
+          <div class="tl-rail-track">
+            <span class="tl-rail-dot"></span>
+            <span class="tl-rail-line"></span>
+            <span class="tl-rail-dot"></span>
           </div>
+
+          ${years
+            .map((y) => {
+              const pct = (((y - minYear) / yearSpan) * 100).toFixed(1);
+              return `
+          <span class="tl-year-tick" style="left:${pct}%">
+            <span class="tl-year-tick-label">${y}</span>
+            <span class="tl-year-tick-line"></span>
+          </span>`;
+            })
+            .join('')}
+
+          ${coverItems
+            .map(
+              (r) => `
+          <a href="${r.url}" target="_blank" class="tl-item" style="left:${r.pct}%">
+            <span class="tl-item-label">
+              <span class="tl-item-proj">${r.projectName}</span>
+              <span class="tl-item-name">${r.name}</span>
+            </span>
+            <span class="tl-pin"></span>
+            <span class="tl-cover" style="background-image:url(${r.cover})"></span>
+          </a>`
+            )
+            .join('')}
         </div>
       </div>`;
 
