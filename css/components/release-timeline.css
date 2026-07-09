@@ -1,9 +1,10 @@
 .release-timeline {
   padding: 1.5rem 2rem 1rem;
   border-bottom: 1px solid var(--border);
-  overflow: hidden;
   display: flex;
   justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 
 .release-timeline > .tl-rail {
@@ -12,8 +13,9 @@
 
 .tl-rail {
   position: relative;
-  height: 60px;
+  height: 70px;
   margin: 0 6px;
+  overflow: visible;
 }
 
 .tl-rail-track {
@@ -120,7 +122,7 @@
   transition: opacity 0.2s ease;
   background: transparent;
   padding: 0.15rem 0.35rem;
-  z-index: 10;
+  z-index: 20;
 }
 
 .tl-item:hover .tl-item-label {
