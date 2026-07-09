@@ -1,13 +1,20 @@
+/* ── Desktop Timeline ── */
+.tl-desktop {
+  display: block;
+}
+
+.tl-mobile {
+  display: none;
+}
+
 .release-timeline {
   padding: 1.5rem 2rem 1rem;
   border-bottom: 1px solid var(--border);
   display: flex;
   justify-content: center;
-  position: relative;
-  z-index: 1;
 }
 
-.release-timeline > .tl-rail {
+.release-timeline > .tl-desktop {
   width: 69%;
 }
 
@@ -15,7 +22,6 @@
   position: relative;
   height: 70px;
   margin: 0 6px;
-  overflow: visible;
 }
 
 .tl-rail-track {
@@ -147,64 +153,135 @@
   margin-top: 0;
 }
 
+/* ── Mobile Vertical Timeline ── */
 @media (max-width: 768px) {
-  .release-timeline {
-    padding: 1rem 0 0.75rem;
+  .tl-desktop {
+    display: none;
+  }
+
+  .tl-mobile {
     display: block;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
   }
 
-  .release-timeline > .tl-rail {
-    width: auto;
-    min-width: 650px;
-    margin: 0 1.25rem;
+  .release-timeline {
+    padding: 1.5rem 0 1rem;
+    display: block;
   }
 
-  .tl-rail {
-    height: 70px;
+  .tl-mobile {
+    padding: 0 1.25rem;
   }
 
-  .tl-rail-track {
-    top: 28px;
+  .tl-m-year {
+    display: flex;
+    gap: 1rem;
+    position: relative;
   }
 
-  .tl-year-tick {
-    top: 28px;
+  .tl-m-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20px;
+    flex-shrink: 0;
+    padding-top: 4px;
   }
 
-  .tl-year-tick-label {
-    font-size: 0.45rem;
+  .tl-m-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+    z-index: 2;
   }
 
-  .tl-year-tick-line {
-    height: 6px;
+  .tl-m-bar {
+    width: 1px;
+    flex: 1;
+    background: var(--accent);
+    opacity: 0.2;
+    min-height: 1rem;
   }
 
-  .tl-item {
-    bottom: calc(100% - 28px);
+  .tl-m-line-end {
+    padding-top: 0;
+    margin-top: -0.5rem;
   }
 
-  .tl-cover {
-    width: 28px;
-    height: 28px;
+  .tl-m-line-end .tl-m-dot {
+    width: 4px;
+    height: 4px;
+    opacity: 0.3;
   }
 
-  .tl-pin {
-    height: 10px;
+  .tl-m-content {
+    flex: 1;
+    padding-bottom: 1.5rem;
+    min-height: 0;
   }
 
-  .tl-item-label {
-    bottom: calc(100% + 20px);
-    padding: 0.2rem 0.35rem;
+  .tl-m-year-label {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    display: block;
   }
 
-  .tl-item-proj {
-    font-size: 0.45rem;
+  .tl-m-covers {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
-  .tl-item-name {
-    font-size: 0.4rem;
+  .tl-m-cover-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    padding: 0.4rem 0.5rem;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s;
+  }
+
+  .tl-m-cover-wrap:hover {
+    border-color: var(--accent);
+  }
+
+  .tl-m-cover {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .tl-m-meta {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .tl-m-proj {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .tl-m-name {
+    font-family: var(--mono);
+    font-size: 0.5rem;
+    color: var(--text-dim);
+    margin-top: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
