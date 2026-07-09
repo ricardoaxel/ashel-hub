@@ -141,79 +141,39 @@ export function renderIndexContent() {
       pct: years.length > 1 ? ((i / (years.length - 1)) * 100).toFixed(1) : '50',
     }));
 
-    // Build mobile vertical timeline (grouped by year)
-    const mobileTimelineHtml = `
-      <div class="tl-mobile">
-        ${yearItems
-          .map(
-            (y) => `
-        <div class="tl-m-year">
-          <div class="tl-m-line">
-            <span class="tl-m-dot"></span>
-            <span class="tl-m-bar"></span>
-          </div>
-          <div class="tl-m-content">
-            <span class="tl-m-year-label">${y.year}</span>
-            <div class="tl-m-covers">
-              ${coverItems
-                .filter((r) => r.year === y.year)
-                .map(
-                  (r) => `
-              <a href="${r.url}" target="_blank" class="tl-m-cover-wrap">
-                <span class="tl-m-cover" style="background-image:url(${r.cover})"></span>
-                <span class="tl-m-meta">
-                  <span class="tl-m-proj">${r.projectName}</span>
-                  <span class="tl-m-name">${r.name}</span>
-                </span>
-              </a>`
-                )
-                .join('')}
-            </div>
-          </div>
-        </div>`
-          )
-          .join('')}
-        <div class="tl-m-line tl-m-line-end">
-          <span class="tl-m-dot"></span>
-        </div>
-      </div>`;
-
     const timelineHtml = `
       <div class="release-timeline" id="release-timeline">
-        <div class="tl-desktop">
-          <div class="tl-rail">
-            <div class="tl-rail-track">
-              <span class="tl-rail-dot"></span>
-              <span class="tl-rail-line"></span>
-              <span class="tl-rail-dot"></span>
-            </div>
-
-            ${yearItems
-              .map(
-                (y) => `
-            <span class="tl-year-tick" style="left:${y.pct}%">
-              <span class="tl-year-tick-label">${y.year}</span>
-              <span class="tl-year-tick-line"></span>
-            </span>`
-              )
-              .join('')}
-
-            ${coverItems
-              .map(
-                (r) => `
-            <a href="${r.url}" target="_blank" class="tl-item" style="left:${r.pct}%">
-              <span class="tl-item-label">
-                <span class="tl-item-proj">${r.projectName}</span>
-                <span class="tl-item-name">${r.name} (${r.year})</span>
-              </span>
-              <span class="tl-pin"></span>
-              <span class="tl-cover" style="background-image:url(${r.cover})"></span>
-            </a>`
-              )
-              .join('')}
+        <div class="tl-rail">
+          <div class="tl-rail-track">
+            <span class="tl-rail-dot"></span>
+            <span class="tl-rail-line"></span>
+            <span class="tl-rail-dot"></span>
           </div>
+
+          ${yearItems
+            .map(
+              (y) => `
+          <span class="tl-year-tick" style="left:${y.pct}%">
+            <span class="tl-year-tick-label">${y.year}</span>
+            <span class="tl-year-tick-line"></span>
+          </span>`
+            )
+            .join('')}
+
+          ${coverItems
+            .map(
+              (r) => `
+          <a href="${r.url}" target="_blank" class="tl-item" style="left:${r.pct}%">
+            <span class="tl-item-label">
+              <span class="tl-item-proj">${r.projectName}</span>
+              <span class="tl-item-name">${r.name} (${r.year})</span>
+            </span>
+            <span class="tl-pin"></span>
+            <span class="tl-cover" style="background-image:url(${r.cover})"></span>
+          </a>`
+            )
+            .join('')}
         </div>
-        ${mobileTimelineHtml}
       </div>`;
 
     const projectsSection = document.getElementById('projects');
