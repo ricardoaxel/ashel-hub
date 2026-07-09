@@ -101,10 +101,11 @@ export function renderIndexContent() {
     '0'
   );
 
-  // ── Release Timeline ──
+  // ── Release Timeline (Albums & EPs only) ──
   const allReleases = [];
   data.projects.forEach((p) => {
     (p.releases || []).forEach((r) => {
+      if (r.type === 'Single' || r.type === 'Cover') return;
       let year = 0;
       try { year = parseInt((r.year || '').split(' ').pop()) || 0; } catch (_) {}
       allReleases.push({
