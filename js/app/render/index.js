@@ -129,16 +129,16 @@ export function renderIndexContent() {
     // Build unique sorted years list
     const years = [...new Set(allReleases.map((r) => r.year))].sort();
 
-    // Equal spacing for releases
+    // Equal spacing for releases (4% to 96% to avoid edge clipping)
     const coverItems = allReleases.map((r, i) => ({
       ...r,
-      pct: total > 1 ? ((i / (total - 1)) * 100).toFixed(1) : '50',
+      pct: total > 1 ? (4 + (i / (total - 1)) * 92).toFixed(1) : '50',
     }));
 
-    // Equal spacing for years
+    // Equal spacing for years (4% to 96% to avoid edge clipping)
     const yearItems = years.map((y, i) => ({
       year: y,
-      pct: years.length > 1 ? ((i / (years.length - 1)) * 100).toFixed(1) : '50',
+      pct: years.length > 1 ? (4 + (i / (years.length - 1)) * 92).toFixed(1) : '50',
     }));
 
     const timelineHtml = `
