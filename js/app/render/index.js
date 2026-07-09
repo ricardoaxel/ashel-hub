@@ -101,6 +101,69 @@ export function renderIndexContent() {
     '0'
   );
 
+  // ── Release Timeline ──
+  const allReleases = [];
+  data.projects.forEach((p) => {
+    (p.releases || []).forEach((r) => {
+      let year = 0;
+      try { year = parseInt((r.year || '').split(' ').pop()) || 0; } catch (_) {}
+      allReleases.push({
+        project: p.id,
+        projectName: p.name,
+        name: r.name,
+        year,
+        cover: r.cover,
+        url: r.url,
+      });
+    });
+  });
+  allReleases.sort((a, b) => a.year - b.year || a.name.localeCompare(b.name));
+
+  if (allReleases.length) {
+    const minYear = allReleases[0].year;
+    const maxYear = allReleases[allReleases.length - 1].year;
+    const yearRange = maxYear - minYear || 1;
+
+    const timelineHtml = `
+      <div class="release-timeline" id="release-timeline">
+        <div class="tl-dots-row">
+          ${allReleases
+            .map((r, i) => {
+              const pct = ((i / (allReleases.length - 1)) * 100).toFixed(1);
+              return `
+            <a href="${r.url}" target="_blank" class="tl-dot-wrap" style="left:${pct}%">
+              <span class="tl-dot-img" style="background-image:url(${r.cover})"></span>
+              <span class="tl-dot-label">
+                <span class="tl-proj">${r.projectName}</span>
+                <span class="tl-name">${r.name}</span>
+              </span>
+            </a>`;
+            })
+            .join('')}
+        </div>
+        <div class="tl-track-line"></div>
+        <div class="tl-years-row">
+          ${(() => {
+            let years = '';
+            for (let y = minYear; y <= maxYear; y++) {
+              const pct = (((y - minYear) / yearRange) * 100).toFixed(1);
+              years += `<span class="tl-year-mark" style="left:${pct}%">
+                <span class="tl-year-tick"></span>
+                <span class="tl-year-label">${y}</span>
+              </span>`;
+            }
+            return years;
+          })()}
+        </div>
+      </div>`;
+
+    const projectsSection = document.getElementById('projects');
+    const grid = document.getElementById('projects-grid');
+    if (projectsSection && grid) {
+      grid.insertAdjacentHTML('beforebegin', timelineHtml);
+    }
+  }
+
   // Single compact card linking to extras page
   const otherCount = (data.other || []).length;
   if (otherCount) {
