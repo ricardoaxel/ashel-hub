@@ -270,26 +270,35 @@ export function renderProjectContent() {
   selector?.addEventListener('change', () => {
     const selected = project.releases.find((r) => r.name === selector.value);
     const section = document.getElementById('featured-section');
+    const cover = document.querySelector('.detail-cover');
     if (section && selected) {
-      section.outerHTML = renderFeatured(selected);
-      document.querySelector('.detail-cover').src = selected.cover;
+      cover?.classList.add('fade-out');
+      section.classList.add('fade-out');
       const url = new URL(window.location);
       url.searchParams.set('album', selected.name);
       window.history.replaceState({}, '', url);
-      extractColors(selected.cover)
-        .then((colors) => {
-          const root = document.documentElement.style;
-          root.setProperty('--section-accent', colors[0]);
-          root.setProperty('--section-accent-secondary', colors[1]);
-          root.setProperty('--section-accent-tertiary', colors[2]);
-          const iframe = document.querySelector('.detail-player-section iframe');
-          if (iframe) {
-            const hex = colors[0].replace('#', '');
-            iframe.src = iframe.src.replace(/linkcol=[a-f0-9]{6}/i, `linkcol=${hex}`);
-          }
-          refreshCursorColor();
-        })
-        .catch(() => {});
+      setTimeout(() => {
+        section.outerHTML = renderFeatured(selected);
+        if (cover) cover.src = selected.cover;
+        setTimeout(() => {
+          document.querySelector('.detail-cover')?.classList.remove('fade-out');
+          document.getElementById('featured-section')?.classList.remove('fade-out');
+        }, 30);
+        extractColors(selected.cover)
+          .then((colors) => {
+            const root = document.documentElement.style;
+            root.setProperty('--section-accent', colors[0]);
+            root.setProperty('--section-accent-secondary', colors[1]);
+            root.setProperty('--section-accent-tertiary', colors[2]);
+            const iframe = document.querySelector('.detail-player-section iframe');
+            if (iframe) {
+              const hex = colors[0].replace('#', '');
+              iframe.src = iframe.src.replace(/linkcol=[a-f0-9]{6}/i, `linkcol=${hex}`);
+            }
+            refreshCursorColor();
+          })
+          .catch(() => {});
+      }, 200);
     }
   });
 
