@@ -17,8 +17,8 @@
 
 .tl-rail-track {
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 6%;
+  right: 6%;
   top: 24px;
   display: flex;
   align-items: center;
