@@ -1264,6 +1264,44 @@
           "url": "https://hostem.bandcamp.com/track/the-fragmented-one",
           "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/track=2273985887/size=large/bgcol=0a0a0a/linkcol=ff2d55/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://hostem.bandcamp.com/track/the-fragmented-one\">The Fragmented One de Hostem</a></iframe>"
         }
+      ],
+      "videos": [
+        {
+          "title": "Hostem - The Fragmented One - Ensayo",
+          "url": "https://www.youtube.com/watch?v=wP4OqmWaOkM",
+          "thumbnail": "https://i1.ytimg.com/vi/wP4OqmWaOkM/mqdefault.jpg",
+          "videoId": "wP4OqmWaOkM"
+        },
+        {
+          "title": "Nueva [Ensayo 2]",
+          "url": "https://www.youtube.com/watch?v=JAG3B_rTBBQ",
+          "thumbnail": "https://i1.ytimg.com/vi/JAG3B_rTBBQ/mqdefault.jpg",
+          "videoId": "JAG3B_rTBBQ"
+        },
+        {
+          "title": "Hostem -Llevado por el Viento @José Cuervo Salón",
+          "url": "https://www.youtube.com/watch?v=3twC9WPnB5Q",
+          "thumbnail": "https://i1.ytimg.com/vi/3twC9WPnB5Q/mqdefault.jpg",
+          "videoId": "3twC9WPnB5Q"
+        },
+        {
+          "title": "Hostem en vivo Marzo, 2015.",
+          "url": "https://www.youtube.com/watch?v=f0QWb4lkMZc",
+          "thumbnail": "https://i1.ytimg.com/vi/f0QWb4lkMZc/mqdefault.jpg",
+          "videoId": "f0QWb4lkMZc"
+        },
+        {
+          "title": "Hostem - \"The Fragmented One\" Live Session",
+          "url": "https://www.youtube.com/watch?v=-hQDytUl-xo",
+          "thumbnail": "https://i1.ytimg.com/vi/-hQDytUl-xo/mqdefault.jpg",
+          "videoId": "-hQDytUl-xo"
+        },
+        {
+          "title": "Cursed Souls (Instrumental) - Hostem, casa de Diego.",
+          "url": "https://www.youtube.com/watch?v=7ruE37NeJ9w",
+          "thumbnail": "https://i1.ytimg.com/vi/7ruE37NeJ9w/mqdefault.jpg",
+          "videoId": "7ruE37NeJ9w"
+        }
       ]
     }
   ]
