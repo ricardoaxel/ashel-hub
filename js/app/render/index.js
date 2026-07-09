@@ -134,6 +134,7 @@ export function renderIndexContent() {
               const pct = ((i / (allReleases.length - 1)) * 100).toFixed(1);
               return `
             <a href="${r.url}" target="_blank" class="tl-dot-wrap" style="left:${pct}%">
+              <span class="tl-pin"></span>
               <span class="tl-dot-img" style="background-image:url(${r.cover})"></span>
               <span class="tl-dot-label">
                 <span class="tl-proj">${r.projectName}</span>
