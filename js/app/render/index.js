@@ -127,7 +127,8 @@ export function renderIndexContent() {
 
     const timelineHtml = `
       <div class="release-timeline" id="release-timeline">
-        <div class="tl-dots-row">
+        <div class="tl-inner">
+          <div class="tl-track-line"></div>
           ${allReleases
             .map((r, i) => {
               const pct = ((i / (allReleases.length - 1)) * 100).toFixed(1);
@@ -141,20 +142,19 @@ export function renderIndexContent() {
             </a>`;
             })
             .join('')}
-        </div>
-        <div class="tl-track-line"></div>
-        <div class="tl-years-row">
-          ${(() => {
-            let years = '';
-            for (let y = minYear; y <= maxYear; y++) {
-              const pct = (((y - minYear) / yearRange) * 100).toFixed(1);
-              years += `<span class="tl-year-mark" style="left:${pct}%">
-                <span class="tl-year-tick"></span>
-                <span class="tl-year-label">${y}</span>
-              </span>`;
-            }
-            return years;
-          })()}
+          <div class="tl-years-row">
+            ${(() => {
+              let years = '';
+              for (let y = minYear; y <= maxYear; y++) {
+                const pct = (((y - minYear) / yearRange) * 100).toFixed(1);
+                years += `<span class="tl-year-mark" style="left:${pct}%">
+                  <span class="tl-year-tick"></span>
+                  <span class="tl-year-label">${y}</span>
+                </span>`;
+              }
+              return years;
+            })()}
+          </div>
         </div>
       </div>`;
 
