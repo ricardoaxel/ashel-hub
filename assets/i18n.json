@@ -18,6 +18,7 @@
       "notFound": "Project not found",
       "builtWith": "Built with obsession",
       "otherDesc": "Side projects, collaborations, experiments, and other odds & ends.",
+      "liveSessionsDesc": "Participación en grabación y mezcla de las siguientes sesiones en vivo.",
       "bio": [
         "Multi-instrumentalist, guitarist, and producer from Mexico City. Active across multiple projects spanning blackgaze, post-rock, math rock, screamo, thrash metal, and ambient music.",
         "Handles production, mixing, mastering, and design across most projects, recording at home studios and Echo Bravo Studio."
@@ -165,6 +166,7 @@
       "notFound": "Proyecto no encontrado",
       "builtWith": "En busca del sentido",
       "otherDesc": "Proyectos alternos, colaboraciones, experimentos y demás.",
+      "liveSessionsDesc": "Participación en grabación y mezcla de las siguientes sesiones en vivo.",
       "bio": [
         "Músico, productor, artista de la Ciudad de México. Activo en múltiples proyectos que abarcan una variedad de géneros entre post-rock, shoegaze, screamo, ambient, etc.",
         "Grabado en estudios caseros bajo el nombre de Echo Bravo Studio."

@@ -65,11 +65,11 @@ export function renderOtherContent() {
     ? `
     <div style="padding:3rem 2rem 4rem;border-top:1px solid var(--border)">
       <div class="section-label" style="border:none;padding:0;margin-bottom:1rem">
-        <span>Sesiones en vivo</span>
+        <span>${t.site?.liveSessions || 'Sesiones en vivo'}</span>
         <span class="count">${String(liveSessions.length).padStart(2, '0')}</span>
       </div>
-      <p style="font-family:var(--mono);font-size:0.75rem;color:var(--text-dim);line-height:1.6;margin-bottom:2rem;max-width:600px">
-        Participación en grabación y mezcla de las siguientes sesiones en vivo.
+      <p style="font-family:var(--mono);font-size:0.75rem;color:var(--text-dim);line-height:1.6;margin-bottom:2rem">
+        ${t.site?.liveSessionsDesc || 'Participación en grabación y mezcla de las siguientes sesiones en vivo.'}
       </p>
       <div class="live-grid">
         ${liveSessions
@@ -97,7 +97,7 @@ export function renderOtherContent() {
           <span>${t.labels?.otherSection || 'Extras'}</span>
           <span class="count">${String(items.length).padStart(2, '0')}</span>
         </div>
-        <p style="font-family:var(--mono);font-size:0.8rem;color:var(--text-dim);line-height:1.8;margin-top:1rem;max-width:600px">
+        <p style="font-family:var(--mono);font-size:0.8rem;color:var(--text-dim);line-height:1.8;margin-top:1rem">
           ${t.site?.otherDesc || 'Side projects, collaborations, experiments, and other odds & ends.'}
         </p>
       </div>
