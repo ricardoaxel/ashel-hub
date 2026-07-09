@@ -1,191 +1,181 @@
 .release-timeline {
-  position: relative;
-  padding: 3rem 2rem 2.5rem;
-  overflow-x: auto;
-  overflow-y: visible;
+  padding: 2.5rem 2rem 2rem;
   border-bottom: 1px solid var(--border);
 }
 
-.tl-inner {
+.tl-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.tl-header-label {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.tl-header-range {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+
+/* ── Scrollable strip ── */
+.tl-strip-wrap {
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.5rem;
+}
+
+.tl-strip {
+  display: flex;
+  gap: 0;
+  min-width: fit-content;
   position: relative;
-  min-width: 600px;
-  height: 220px;
 }
 
-/* ── Track line ── */
-.tl-track-line {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 70px;
+/* ── Year group ── */
+.tl-year-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.tl-year-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  padding: 0 0.75rem;
+  position: relative;
+}
+
+.tl-year-label {
+  font-family: var(--serif);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.tl-year-line {
+  width: 2rem;
   height: 1px;
-  background: var(--accent);
-  opacity: 0.3;
+  background: var(--border);
 }
 
-/* ── Dots row (covers sit above the line) ── */
-.tl-dot-wrap {
-  position: absolute;
-  top: 70px;
-  transform: translate(-50%, 0);
+/* ── Releases row ── */
+.tl-releases {
+  display: flex;
+  gap: 2px;
+}
+
+/* ── Album cover item ── */
+.tl-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-decoration: none;
-  z-index: 3;
+  width: 48px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
 }
 
-.tl-dot-img {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
+.tl-item:hover {
+  transform: translateY(-4px);
+  z-index: 5;
+}
+
+.tl-cover {
+  width: 44px;
+  height: 44px;
   background-size: cover;
   background-position: center;
-  border: 2px solid var(--accent);
-  transition:
-    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.3s ease;
+  display: block;
   flex-shrink: 0;
-  margin-top: -17px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border);
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.tl-dot-wrap:hover .tl-dot-img {
-  transform: scale(1.5);
-  box-shadow: 0 4px 20px rgba(255, 45, 85, 0.35);
-  z-index: 10;
+.tl-item:hover .tl-cover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 16px rgba(255, 45, 85, 0.2);
 }
 
-/* ── Hover tooltip ── */
-.tl-dot-label {
+.tl-item-label {
   position: absolute;
-  bottom: calc(100% + 10px);
+  bottom: calc(100% + 6px);
   white-space: nowrap;
   text-align: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  transform: translateY(4px);
+  transition: opacity 0.2s ease;
   background: var(--bg);
-  padding: 0.4rem 0.75rem;
+  padding: 0.3rem 0.5rem;
   border: 1px solid var(--accent);
   z-index: 10;
 }
 
-.tl-dot-wrap:hover .tl-dot-label {
+.tl-item:hover .tl-item-label {
   opacity: 1;
-  transform: translateY(0);
 }
 
-.tl-proj {
+.tl-item-proj {
   display: block;
   font-family: var(--mono);
-  font-size: 0.55rem;
+  font-size: 0.5rem;
   color: var(--accent);
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
 
-.tl-name {
+.tl-item-name {
   display: block;
   font-family: var(--mono);
-  font-size: 0.5rem;
+  font-size: 0.45rem;
   color: var(--text-dim);
-  margin-top: 2px;
-}
-
-/* ── Vertical connector from line to dot ── */
-.tl-pin {
-  width: 1px;
-  height: 12px;
-  background: var(--accent);
-  opacity: 0.2;
-  flex-shrink: 0;
-  margin-top: -1px;
-}
-
-/* ── Years row (below the line) ── */
-.tl-years-row {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 83px;
-  height: 40px;
-}
-
-.tl-year-mark {
-  position: absolute;
-  top: 0;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.tl-year-tick {
-  width: 1px;
-  height: 6px;
-  background: var(--accent);
-  opacity: 0.2;
-}
-
-.tl-year-label {
-  font-family: var(--mono);
-  font-size: 0.6rem;
-  color: var(--text-muted);
-  letter-spacing: 0.08em;
-  margin-top: 4px;
-  font-weight: 700;
-}
-
-/* ── Section count override ── */
-#release-timeline + .projects-list {
-  border-top: none;
+  margin-top: 1px;
 }
 
 @media (max-width: 768px) {
   .release-timeline {
-    padding: 2rem 1.25rem 2rem;
+    padding: 2rem 1.25rem 1.5rem;
   }
 
-  .tl-inner {
-    min-width: 500px;
-    height: 160px;
+  .tl-item {
+    width: 40px;
   }
 
-  .tl-track-line {
-    top: 50px;
-  }
-
-  .tl-dot-wrap {
-    top: 50px;
-  }
-
-  .tl-dot-img {
-    width: 26px;
-    height: 26px;
-    margin-top: -13px;
-  }
-
-  .tl-years-row {
-    top: 62px;
-    height: 30px;
+  .tl-cover {
+    width: 36px;
+    height: 36px;
   }
 
   .tl-year-label {
-    font-size: 0.5rem;
+    font-size: 0.7rem;
   }
 
-  .tl-dot-label {
-    padding: 0.25rem 0.5rem;
-    bottom: calc(100% + 6px);
+  .tl-year-head {
+    padding: 0 0.5rem;
   }
 
-  .tl-proj {
-    font-size: 0.45rem;
+  .tl-item-label {
+    padding: 0.2rem 0.35rem;
   }
 
-  .tl-name {
+  .tl-item-proj {
     font-size: 0.4rem;
+  }
+
+  .tl-item-name {
+    font-size: 0.35rem;
   }
 }

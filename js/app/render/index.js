@@ -101,7 +101,7 @@ export function renderIndexContent() {
     '0'
   );
 
-  // ── Release Timeline (Albums & EPs only) ──
+  // ── Release Timeline ──
   const allReleases = [];
   data.projects.forEach((p) => {
     (p.releases || []).forEach((r) => {
@@ -123,41 +123,53 @@ export function renderIndexContent() {
   if (allReleases.length) {
     const minYear = allReleases[0].year;
     const maxYear = allReleases[allReleases.length - 1].year;
-    const yearRange = maxYear - minYear || 1;
+
+    // Group releases by year
+    const byYear = {};
+    allReleases.forEach((r) => {
+      if (!byYear[r.year]) byYear[r.year] = [];
+      byYear[r.year].push(r);
+    });
 
     const timelineHtml = `
-      <div class="release-timeline" id="release-timeline">
-        <div class="tl-inner">
-          <div class="tl-track-line"></div>
-          ${allReleases
-            .map((r, i) => {
-              const pct = ((i / (allReleases.length - 1)) * 100).toFixed(1);
-              return `
-            <a href="${r.url}" target="_blank" class="tl-dot-wrap" style="left:${pct}%">
-              <span class="tl-pin"></span>
-              <span class="tl-dot-img" style="background-image:url(${r.cover})"></span>
-              <span class="tl-dot-label">
-                <span class="tl-proj">${r.projectName}</span>
-                <span class="tl-name">${r.name}</span>
-              </span>
-            </a>`;
-            })
-            .join('')}
-          <div class="tl-years-row">
-            ${(() => {
-              let years = '';
-              for (let y = minYear; y <= maxYear; y++) {
-                const pct = (((y - minYear) / yearRange) * 100).toFixed(1);
-                years += `<span class="tl-year-mark" style="left:${pct}%">
-                  <span class="tl-year-tick"></span>
-                  <span class="tl-year-label">${y}</span>
-                </span>`;
-              }
-              return years;
-            })()}
+      <div class="release-timeline">
+        <div class="tl-header">
+          <span class="tl-header-label">Discography timeline</span>
+          <span class="tl-header-range">${minYear} — ${maxYear}</span>
+        </div>
+        <div class="tl-strip-wrap">
+          <div class="tl-strip">
+            ${Object.keys(byYear)
+              .sort()
+              .map((year) => `
+            <div class="tl-year-group">
+              <div class="tl-year-head">
+                <span class="tl-year-label">${year}</span>
+                <span class="tl-year-line"></span>
+              </div>
+              <div class="tl-releases">
+                ${byYear[year]
+                  .map(
+                    (r) => `
+                <a href="${r.url}" target="_blank" class="tl-item">
+                  <span class="tl-item-label">
+                    <span class="tl-item-proj">${r.projectName}</span>
+                    <span class="tl-item-name">${r.name}</span>
+                  </span>
+                  <span class="tl-cover" style="background-image:url(${r.cover})"></span>
+                </a>`
+                  )
+                  .join('')}
+              </div>
+            </div>`
+              )
+              .join('')}
           </div>
         </div>
       </div>`;
+
+    const projectsSection = document.getElementById('projects');
+    const grid = document.getElementById('projects-grid');
 
     const projectsSection = document.getElementById('projects');
     const grid = document.getElementById('projects-grid');
