@@ -101,28 +101,27 @@ export function renderIndexContent() {
     '0'
   );
 
-  // Render "other" items as compact cards
+  // Single compact card for extras/other projects
   const otherItems = data.other || [];
   if (otherItems.length) {
     const grid = document.getElementById('projects-grid');
-    const otherHtml = otherItems
-      .map(
-        (item, i) => `
-      <a href="${item.url}" target="_blank" class="project-card other-card" data-index="${i}">
+    const otherHtml = `
+      <div class="project-card other-card">
         <div class="project-cover-wrap other-cover-wrap">
-          <div class="other-card-type">${item.type === 'bandcamp' ? 'bandcamp' : item.type === 'youtube' ? 'video' : 'link'}</div>
+          <div class="other-badge">✦</div>
         </div>
         <div class="project-info other-info">
           <div>
-            <span class="project-number" style="color:var(--text-muted)">${String(data.projects.length + i + 1).padStart(2, '0')}</span>
-            <h2 class="project-name" style="font-size:clamp(1rem,2vw,1.5rem);margin:0.5rem 0">${item.title}</h2>
-            ${item.description ? `<p class="project-desc" style="font-size:0.65rem;margin-top:0.5rem;padding-left:0;border:none">${item.description}</p>` : ''}
+            <span class="project-number">${String(data.projects.length + 1).padStart(2, '0')}</span>
+            <h2 class="project-name">Extras</h2>
+            <ul class="other-links">
+              ${otherItems.map((item) => `
+                <li><a href="${item.url}" target="_blank">${item.title}</a></li>
+              `).join('')}
+            </ul>
           </div>
-          <span class="project-arrow" style="position:static;align-self:flex-end">→</span>
         </div>
-      </a>`
-      )
-      .join('');
+      </div>`;
     grid.insertAdjacentHTML('beforeend', otherHtml);
   }
 
