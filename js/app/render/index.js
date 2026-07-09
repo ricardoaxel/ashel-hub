@@ -163,7 +163,7 @@ export function renderIndexContent() {
           ${coverItems
             .map(
               (r) => `
-          <a href="${r.url}" target="_blank" class="tl-item" style="left:${r.pct}%">
+          <a href="project.html?id=${r.project}&album=${encodeURIComponent(r.name)}" class="tl-item" style="left:${r.pct}%">
             <span class="tl-item-label">
               <span class="tl-item-proj">${r.projectName}</span>
               <span class="tl-item-name">${r.name} (${r.year})</span>

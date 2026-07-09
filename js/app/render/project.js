@@ -299,6 +299,17 @@ export function renderProjectContent() {
     refreshCursorColor();
   }
 
+  // Auto-select album from URL param
+  const albumParam = new URLSearchParams(window.location.search).get('album');
+  const sel = document.getElementById('album-selector');
+  if (albumParam && sel) {
+    const match = project.releases.find((r) => r.name === albumParam);
+    if (match) {
+      sel.value = match.name;
+      sel.dispatchEvent(new Event('change'));
+    }
+  }
+
   extractColors(project.cover)
     .then((extracted) => {
       applyProjectColors(project.id, extracted);
