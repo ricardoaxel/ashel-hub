@@ -37,71 +37,80 @@ if (!isProjectPage && !isIllustrationPage) initWaveCanvas(getHeroColors);
 
 loadData()
   .then(() => {
-    applyTranslations();
+    try {
+      applyTranslations();
 
-    if (isProjectPage) {
-      const projectId = params.get('id');
-      if (!projectId) {
-        window.location.href = 'index.html';
-        return;
+      if (isProjectPage) {
+        const projectId = params.get('id');
+        if (!projectId) {
+          window.location.href = 'index.html';
+          return;
+        }
+        setCurrentProject(projectId);
+        renderProjectContent();
+        initModal();
+        const p = getProject(projectId);
+        if (p) document.title = `${p.name} | Ashel`;
+        hidePageLoader();
+      } else if (isIllustrationPage) {
+        renderIllustrationsContent();
+        initModal();
+        document.title = `Illustrations | Ashel`;
+        hidePageLoader();
+      } else {
+        renderIndexContent();
+        initModal();
+        initIllustration();
+        initBubbles(getSiteData());
+        hidePageLoader();
       }
-      setCurrentProject(projectId);
-      renderProjectContent();
-      initModal();
-      const p = getProject(projectId);
-      if (p) document.title = `${p.name} | Ashel`;
-      hidePageLoader();
-    } else if (isIllustrationPage) {
-      renderIllustrationsContent();
-      initModal();
-      document.title = `Illustrations | Ashel`;
-      hidePageLoader();
-    } else {
-      renderIndexContent();
-      initModal();
-      initIllustration();
-      initBubbles(getSiteData());
-      hidePageLoader();
-    }
 
-    const siteData = getSiteData();
-    if (!isProjectPage && !isIllustrationPage && siteData?.projects?.[0]?.cover) {
-      const preload = document.createElement('link');
-      preload.rel = 'preload';
-      preload.as = 'image';
-      preload.href = siteData.projects[0].cover;
-      document.head.appendChild(preload);
-    }
-    if (siteData && !isIllustrationPage) {
-      const extractionPromises = siteData.projects.map((project) =>
-        extractColors(project.cover)
-          .then((colors) => {
-            colorCache[project.id] = colors;
-            if (!isProjectPage) applyCardColors();
-          })
-          .catch(() => {
-            colorCache[project.id] = getColorFallback(project);
-            if (!isProjectPage) applyCardColors();
-          })
-      );
-      Promise.all(extractionPromises).then(() => saveColorCache());
+      const siteData = getSiteData();
+      if (!isProjectPage && !isIllustrationPage && siteData?.projects?.[0]?.cover) {
+        const preload = document.createElement('link');
+        preload.rel = 'preload';
+        preload.as = 'image';
+        preload.href = siteData.projects[0].cover;
+        document.head.appendChild(preload);
+      }
+      if (siteData && !isIllustrationPage) {
+        const extractionPromises = siteData.projects.map((project) =>
+          extractColors(project.cover)
+            .then((colors) => {
+              colorCache[project.id] = colors;
+              if (!isProjectPage) applyCardColors();
+            })
+            .catch(() => {
+              colorCache[project.id] = getColorFallback(project);
+              if (!isProjectPage) applyCardColors();
+            })
+        );
+        Promise.all(extractionPromises).then(() => saveColorCache());
+      }
+    } catch (renderErr) {
+      console.error('Render error:', renderErr);
+      showError('Render error: ' + renderErr.message);
     }
   })
   .catch((err) => {
     console.error('Failed to load data:', err);
-    const locale = (navigator.language.startsWith('es') ? 'es' : 'en');
-    const msg = locale === 'es' ? 'Error al cargar datos' : 'Error loading data';
-    if (isProjectPage) {
-      document.getElementById('project-content').innerHTML =
-        `<div class="loading">${msg}</div>`;
-    } else if (isIllustrationPage) {
-      document.getElementById('illustrations-content').innerHTML =
-        `<div class="loading">${msg}</div>`;
-    } else {
-      document.body.innerHTML = `<div class="loading" style="padding:10rem 2rem;text-align:center;font-family:var(--mono);color:var(--text-dim)">${msg}</div>`;
-    }
-    hidePageLoader();
+    showError('Error loading data: ' + err.message);
   });
+
+function showError(msg) {
+  const locale = navigator.language.startsWith('es') ? 'es' : 'en';
+  const text = locale === 'es' ? 'Error: ' + msg : 'Error: ' + msg;
+  if (isProjectPage) {
+    const el = document.getElementById('project-content');
+    if (el) el.innerHTML = `<div class="loading">${text}</div>`;
+  } else if (isIllustrationPage) {
+    const el = document.getElementById('illustrations-content');
+    if (el) el.innerHTML = `<div class="loading">${text}</div>`;
+  } else {
+    document.body.innerHTML = `<div class="loading" style="padding:10rem 2rem;text-align:center;font-family:var(--mono);color:var(--text-dim)">${text}</div>`;
+  }
+  hidePageLoader();
+}
 
 initLangToggle();
 onLocaleChange(reRender);
