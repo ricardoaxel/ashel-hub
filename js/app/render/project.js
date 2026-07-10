@@ -209,14 +209,13 @@ export function renderProjectContent() {
         <span>${t.site?.flyers || 'Flyers'}</span>
         <span class="count">${String(flyersCount).padStart(2, '0')}</span>
       </div>
-      <div class="photos-grid" id="flyers-grid">
+      <div class="illustrations-grid" id="flyers-grid">
         ${sortedFlyers
           .slice(0, 6)
           .map(
             (f, i) => `
-          <div class="photo-card" data-type="flyers" data-index="${i}">
+          <div class="illustration-item" data-label="${(f.caption || '').replace(/"/g, '&quot;')}" data-type="flyers" data-index="${i}">
             <img src="${f.src}" alt="${f.caption || ''}" loading="lazy" decoding="async">
-            ${f.caption ? `<span class="photo-caption">${f.caption}</span>` : ''}
           </div>
         `
           )
@@ -265,19 +264,23 @@ export function renderProjectContent() {
     const extraHtml = remaining
       .map(
         (f, i) => `
-      <div class="photo-card" data-type="flyers" data-index="${6 + i}">
+      <div class="illustration-item" data-label="${(f.caption || '').replace(/"/g, '&quot;')}" data-type="flyers" data-index="${6 + i}">
         <img src="${f.src}" alt="${f.caption || ''}" loading="lazy" decoding="async">
-        ${f.caption ? `<span class="photo-caption">${f.caption}</span>` : ''}
       </div>`
       )
       .join('');
     grid.insertAdjacentHTML('beforeend', extraHtml);
     showMoreBtn.remove();
-    // Attach modal click handlers to new cards
-    document.querySelectorAll('#flyers-grid .photo-card').forEach((card) => {
+    document.querySelectorAll('#flyers-grid .illustration-item').forEach((card) => {
       const index = parseInt(card.dataset.index, 10);
       card.addEventListener('click', () => openModal(sortedFlyers, index));
     });
+  });
+
+  // Flyers modal click handler
+  document.querySelectorAll('#flyers-grid .illustration-item').forEach((card) => {
+    const index = parseInt(card.dataset.index, 10);
+    card.addEventListener('click', () => openModal(sortedFlyers, index));
   });
 
   document.querySelectorAll('.photo-card').forEach((card) => {
