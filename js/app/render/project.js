@@ -280,27 +280,16 @@ export function renderProjectContent() {
       setTimeout(() => {
         section.outerHTML = renderFeatured(selected);
         if (cover) cover.src = selected.cover;
-        const player = document.querySelector('.detail-player-section');
-        if (player) player.classList.add('loading');
         setTimeout(() => {
           document.querySelector('.detail-cover')?.classList.remove('fade-out');
           document.getElementById('featured-section')?.classList.remove('fade-out');
         }, 30);
-        setTimeout(() => {
-          const p = document.querySelector('.detail-player-section');
-          if (p) p.classList.remove('loading');
-        }, 600);
         extractColors(selected.cover)
           .then((colors) => {
             const root = document.documentElement.style;
             root.setProperty('--section-accent', colors[0]);
             root.setProperty('--section-accent-secondary', colors[1]);
             root.setProperty('--section-accent-tertiary', colors[2]);
-            const iframe = document.querySelector('.detail-player-section iframe');
-            if (iframe) {
-              const hex = colors[0].replace('#', '');
-              iframe.src = iframe.src.replace(/linkcol=[a-f0-9]{6}/i, `linkcol=${hex}`);
-            }
             refreshCursorColor();
           })
           .catch(() => {});
@@ -314,7 +303,6 @@ export function renderProjectContent() {
     root.setProperty('--section-accent', colors[0]);
     root.setProperty('--section-accent-secondary', colors[1]);
     root.setProperty('--section-accent-tertiary', colors[2]);
-    updateEmbedColor(colors[0]);
     refreshCursorColor();
   } else {
     const fallback = getColorFallback(project);
@@ -322,7 +310,6 @@ export function renderProjectContent() {
     root.setProperty('--section-accent', fallback[0]);
     root.setProperty('--section-accent-secondary', fallback[1]);
     root.setProperty('--section-accent-tertiary', fallback[2]);
-    updateEmbedColor(fallback[0]);
     refreshCursorColor();
   }
 
@@ -343,11 +330,6 @@ export function renderProjectContent() {
           root.setProperty('--section-accent', colors[0]);
           root.setProperty('--section-accent-secondary', colors[1]);
           root.setProperty('--section-accent-tertiary', colors[2]);
-          const iframe = document.querySelector('.detail-player-section iframe');
-          if (iframe) {
-            const hex = colors[0].replace('#', '');
-            iframe.src = iframe.src.replace(/linkcol=[a-f0-9]{6}/i, `linkcol=${hex}`);
-          }
           refreshCursorColor();
         })
         .catch(() => {});
@@ -358,22 +340,12 @@ export function renderProjectContent() {
     extractColors(project.cover)
       .then((extracted) => {
         applyProjectColors(project.id, extracted);
-        updateEmbedColor(extracted[0]);
         refreshCursorColor();
       })
       .catch(() => {
         const fb = getColorFallback(project);
         applyProjectColors(project.id, fb);
-        updateEmbedColor(fb[0]);
         refreshCursorColor();
       });
-  }
-}
-
-function updateEmbedColor(color) {
-  const iframe = document.querySelector('.detail-player-section iframe');
-  if (iframe) {
-    const hex = color.replace('#', '');
-    iframe.src = iframe.src.replace(/linkcol=[a-f0-9]{6}/i, `linkcol=${hex}`);
   }
 }

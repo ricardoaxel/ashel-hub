@@ -51,24 +51,11 @@
   line-height: 1.6;
 }
 
-.detail-player-section {
-  position: relative;
-}
-
 .detail-player-section iframe {
   width: 100%;
   max-width: 800px;
   border: none;
   height: 120px;
-}
-
-.detail-player-section.loading::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--bg);
-  z-index: 2;
-  transition: opacity 0.3s;
 }
 
 @media (max-width: 768px) {
