@@ -180,13 +180,14 @@ export function renderProjectContent() {
     ${
       project.photos?.length
         ? `
-    <section class="project-photos">
+    <section class="project-photos" id="photos-section">
       <div class="section-label" style="border: none; padding: 0; margin-bottom: 2rem;">
         <span>${t.site?.photos || 'Photos'}</span>
         <span class="count">${String(project.photos.length).padStart(2, '0')}</span>
       </div>
-      <div class="photos-grid">
+      <div class="photos-grid" id="photos-grid">
         ${project.photos
+          .slice(0, 6)
           .map(
             (p, i) => `
           <div class="photo-card" data-type="photos" data-index="${i}">
@@ -197,6 +198,11 @@ export function renderProjectContent() {
           )
           .join('')}
       </div>
+      ${
+        project.photos.length > 6
+          ? `<div class="illustration-show-more"><a href="#" id="photos-show-more">${t.labels?.viewAll || 'VIEW ALL'} <span class="count">${String(project.photos.length).padStart(2, '0')}</span></a></div>`
+          : ''
+      }
     </section>`
         : ''
     }
@@ -277,7 +283,54 @@ export function renderProjectContent() {
     });
   });
 
-  // Flyers modal click handler
+  // Photos show more
+  const photosBtn = document.getElementById('photos-show-more');
+  photosBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    const grid = document.getElementById('photos-grid');
+    if (!grid) return;
+    const remaining = project.photos.slice(6);
+    const extraHtml = remaining
+      .map(
+        (p, i) => `
+      <div class="photo-card" data-type="photos" data-index="${6 + i}">
+        <img src="${p.src}" alt="${p.caption || ''}" loading="lazy" decoding="async">
+        ${p.caption ? `<span class="photo-caption">${p.caption}</span>` : ''}
+      </div>`
+      )
+      .join('');
+    grid.insertAdjacentHTML('beforeend', extraHtml);
+    photosBtn.remove();
+    document.querySelectorAll('#photos-grid .photo-card').forEach((card) => {
+      const index = parseInt(card.dataset.index, 10);
+      card.addEventListener('click', () => openModal(project.photos, index));
+    });
+  });
+
+  // Flyers show more
+  const showMoreBtn = document.getElementById('flyers-show-more');
+  showMoreBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    const grid = document.getElementById('flyers-grid');
+    if (!grid) return;
+    const remaining = sortedFlyers.slice(6);
+    const extraHtml = remaining
+      .map(
+        (f, i) => `
+      <div class="illustration-item" data-label="${(f.caption || '').replace(/"/g, '&quot;')}" data-type="flyers" data-index="${6 + i}">
+        <img src="${f.src}" alt="${f.caption || ''}" loading="lazy" decoding="async">
+      </div>`
+      )
+      .join('');
+    grid.insertAdjacentHTML('beforeend', extraHtml);
+    showMoreBtn.remove();
+    document.querySelectorAll('#flyers-grid .illustration-item').forEach((card) => {
+      const index = parseInt(card.dataset.index, 10);
+      card.addEventListener('click', () => openModal(sortedFlyers, index));
+    });
+  });
+
+  // Flyers initial click handler
   document.querySelectorAll('#flyers-grid .illustration-item').forEach((card) => {
     const index = parseInt(card.dataset.index, 10);
     card.addEventListener('click', () => openModal(sortedFlyers, index));
