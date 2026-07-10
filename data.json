@@ -186,30 +186,20 @@
       ],
       "flyers": [
         {
-          "src": "assets/images/projects/oshira-flyer-02.jpg",
-          "caption": "Golpear También, Oshira, SVN NYSIDE & Who Cares at Capitan Gallo — Jan 26, 2024",
-          "date": "2024-01-26"
-        },
-        {
-          "src": "assets/images/projects/oshira-flyer-03.jpg",
-          "caption": "Expedición a las Estrellas feat. Oshira at Sangriento — Mar 16, 2024",
-          "date": "2024-03-16"
-        },
-        {
-          "src": "assets/images/projects/oshira-flyer-01.jpg",
-          "caption": "Cumpleaños Martiyaki feat. Oshira at Denso Rock"
-        },
-        {
-          "src": "assets/images/projects/oshira-flyer-04.jpg",
+          "src": "assets/images/projects/oshira-ss-Screenshot 2026-06-17 at 6.41.01 p.m..png",
           "caption": "Oshira flyer"
         },
         {
-          "src": "assets/images/projects/oshira-flyer-05.jpg",
-          "caption": "La División del Norte feat. Oshira at Denso Rock"
+          "src": "assets/images/projects/oshira-ss-Screenshot 2026-06-17 at 6.40.37 p.m..png",
+          "caption": "Next Era show en vivo feat. Oshira"
         },
         {
-          "src": "assets/images/projects/oshira-flyer-06.jpg",
-          "caption": "Oshira flyer"
+          "src": "assets/images/projects/oshira-ss-Screenshot 2026-06-17 at 6.39.28 p.m..png",
+          "caption": "Nebulosa, Días Dazed, Dandelion, Nada & Oshira at Medellín 143"
+        },
+        {
+          "src": "assets/images/projects/oshira-ss-Screenshot 2026-06-17 at 6.39.07 p.m..png",
+          "caption": "Oshira at Hipódromo, Cuauhtémoc"
         },
         {
           "src": "assets/images/projects/oshira-ss-Screenshot 2026-06-17 at 6.39.56 p.m..png",
@@ -217,20 +207,30 @@
           "date": "2025-11-14"
         },
         {
-          "src": "assets/images/projects/oshira-ss-Screenshot 2026-06-17 at 6.39.07 p.m..png",
-          "caption": "Oshira at Hipódromo, Cuauhtémoc"
-        },
-        {
-          "src": "assets/images/projects/oshira-ss-Screenshot 2026-06-17 at 6.39.28 p.m..png",
-          "caption": "Nebulosa, Días Dazed, Dandelion, Nada & Oshira at Medellín 143"
-        },
-        {
-          "src": "assets/images/projects/oshira-ss-Screenshot 2026-06-17 at 6.40.37 p.m..png",
-          "caption": "Next Era show en vivo feat. Oshira"
-        },
-        {
-          "src": "assets/images/projects/oshira-ss-Screenshot 2026-06-17 at 6.41.01 p.m..png",
+          "src": "assets/images/projects/oshira-flyer-06.jpg",
           "caption": "Oshira flyer"
+        },
+        {
+          "src": "assets/images/projects/oshira-flyer-05.jpg",
+          "caption": "La División del Norte feat. Oshira at Denso Rock"
+        },
+        {
+          "src": "assets/images/projects/oshira-flyer-04.jpg",
+          "caption": "Oshira flyer"
+        },
+        {
+          "src": "assets/images/projects/oshira-flyer-01.jpg",
+          "caption": "Cumpleaños Martiyaki feat. Oshira at Denso Rock"
+        },
+        {
+          "src": "assets/images/projects/oshira-flyer-03.jpg",
+          "caption": "Expedición a las Estrellas feat. Oshira at Sangriento — Mar 16, 2024",
+          "date": "2024-03-16"
+        },
+        {
+          "src": "assets/images/projects/oshira-flyer-02.jpg",
+          "caption": "Golpear También, Oshira, SVN NYSIDE & Who Cares at Capitan Gallo — Jan 26, 2024",
+          "date": "2024-01-26"
         }
       ],
       "photos": [
