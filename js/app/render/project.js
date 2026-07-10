@@ -128,7 +128,7 @@ export function renderProjectContent() {
         if (!a.date && !b.date) return 0;
         if (!a.date) return 1;
         if (!b.date) return -1;
-        return new Date(a.date) - new Date(b.date);
+        return new Date(b.date) - new Date(a.date);
       })
     : [];
 
