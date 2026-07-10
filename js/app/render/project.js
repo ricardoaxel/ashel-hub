@@ -185,8 +185,9 @@ export function renderProjectContent() {
         <span>${t.site?.photos || 'Photos'}</span>
         <span class="count">${String(project.photos.length).padStart(2, '0')}</span>
       </div>
-      <div class="photos-grid">
+      <div class="photos-grid" id="photos-grid">
         ${project.photos
+          .slice(0, 6)
           .map(
             (p, i) => `
           <div class="photo-card" data-type="photos" data-index="${i}">
@@ -197,6 +198,11 @@ export function renderProjectContent() {
           )
           .join('')}
       </div>
+      ${
+        project.photos.length > 6
+          ? `<div class="illustration-show-more"><a href="#" id="photos-show-more">${t.labels?.viewAll || 'VIEW ALL'} <span class="count">${String(project.photos.length).padStart(2, '0')}</span></a></div>`
+          : ''
+      }
     </section>`
         : ''
     }
@@ -254,6 +260,26 @@ export function renderProjectContent() {
     }`;
 
   document.querySelectorAll('a, button, .album-card, .photo-card').forEach(attachCursor);
+
+  // Photos show more
+  const photosBtn = document.getElementById('photos-show-more');
+  photosBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    const grid = document.getElementById('photos-grid');
+    if (!grid) return;
+    const remaining = project.photos.slice(6);
+    const extraHtml = remaining
+      .map(
+        (p, i) => `
+      <div class="photo-card" data-type="photos" data-index="${6 + i}">
+        <img src="${p.src}" alt="${p.caption || ''}" loading="lazy" decoding="async">
+        ${p.caption ? `<span class="photo-caption">${p.caption}</span>` : ''}
+      </div>`
+      )
+      .join('');
+    grid.insertAdjacentHTML('beforeend', extraHtml);
+    photosBtn.remove();
+  });
 
   const showMoreBtn = document.getElementById('flyers-show-more');
   showMoreBtn?.addEventListener('click', (e) => {
