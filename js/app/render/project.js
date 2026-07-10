@@ -204,13 +204,14 @@ export function renderProjectContent() {
     ${
       sortedFlyers.length
         ? `
-    <section class="project-photos">
+    <section class="project-photos" id="flyers-section">
       <div class="section-label" style="border: none; padding: 0; margin-bottom: 2rem;">
         <span>${t.site?.flyers || 'Flyers'}</span>
         <span class="count">${String(flyersCount).padStart(2, '0')}</span>
       </div>
-      <div class="photos-grid">
+      <div class="photos-grid" id="flyers-grid">
         ${sortedFlyers
+          .slice(0, 6)
           .map(
             (f, i) => `
           <div class="photo-card" data-type="flyers" data-index="${i}">
@@ -221,6 +222,11 @@ export function renderProjectContent() {
           )
           .join('')}
       </div>
+      ${
+        sortedFlyers.length > 6
+          ? `<div class="illustration-show-more"><a href="#" id="flyers-show-more">${t.labels?.viewAll || 'VIEW ALL'} <span class="count">${String(sortedFlyers.length).padStart(2, '0')}</span></a></div>`
+          : ''
+      }
     </section>`
         : ''
     }
@@ -249,6 +255,30 @@ export function renderProjectContent() {
     }`;
 
   document.querySelectorAll('a, button, .album-card, .photo-card').forEach(attachCursor);
+
+  const showMoreBtn = document.getElementById('flyers-show-more');
+  showMoreBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    const grid = document.getElementById('flyers-grid');
+    if (!grid) return;
+    const remaining = sortedFlyers.slice(6);
+    const extraHtml = remaining
+      .map(
+        (f, i) => `
+      <div class="photo-card" data-type="flyers" data-index="${6 + i}">
+        <img src="${f.src}" alt="${f.caption || ''}" loading="lazy" decoding="async">
+        ${f.caption ? `<span class="photo-caption">${f.caption}</span>` : ''}
+      </div>`
+      )
+      .join('');
+    grid.insertAdjacentHTML('beforeend', extraHtml);
+    showMoreBtn.remove();
+    // Attach modal click handlers to new cards
+    document.querySelectorAll('#flyers-grid .photo-card').forEach((card) => {
+      const index = parseInt(card.dataset.index, 10);
+      card.addEventListener('click', () => openModal(sortedFlyers, index));
+    });
+  });
 
   document.querySelectorAll('.photo-card').forEach((card) => {
     card.addEventListener('click', () => {
