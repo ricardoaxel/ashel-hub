@@ -51,6 +51,10 @@
   line-height: 1.6;
 }
 
+.detail-player-section {
+  position: relative;
+}
+
 .detail-player-section iframe {
   width: 100%;
   max-width: 800px;
@@ -59,15 +63,44 @@
   display: block;
 }
 
+@keyframes skeletonShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
 .player-ghost {
   width: 100%;
   max-width: 800px;
   height: 120px;
-  background: var(--bg);
   position: absolute;
   inset: 0;
   z-index: 2;
   transition: opacity 0.4s ease;
+  background: linear-gradient(
+    90deg,
+    var(--bg) 25%,
+    var(--surface) 37%,
+    var(--bg) 63%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.2s ease-in-out infinite;
+}
+
+.player-ghost::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  right: 1rem;
+  height: 12px;
+  background: var(--surface);
+  border-radius: 2px;
+  transform: translateY(-50%);
+  opacity: 0.5;
 }
 
 .player-ghost.hide {
@@ -88,11 +121,17 @@
     font-size: 0.7rem;
   }
 
-.detail-player-section {
-  position: relative;
-}
-
-.detail-player-section iframe {
+  .detail-player-section iframe {
     height: 100px;
+  }
+
+  .player-ghost {
+    height: 100px;
+  }
+
+  .player-ghost::after {
+    height: 10px;
+    left: 0.75rem;
+    right: 0.75rem;
   }
 }
