@@ -429,6 +429,12 @@ export function renderProjectContent() {
         refreshCursorColor();
       });
   }
+
+  // Hide skeleton ghost after initial load
+  setTimeout(() => {
+    const g = document.querySelector('.player-ghost');
+    if (g) g.classList.add('hide');
+  }, 120);
 }
 
 function updateEmbedColor(color) {
