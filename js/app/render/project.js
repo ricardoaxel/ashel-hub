@@ -287,7 +287,7 @@ export function renderProjectContent() {
         setTimeout(() => {
           const g = document.querySelector('.player-ghost');
           if (g) g.classList.add('hide');
-        }, 400);
+        }, 250);
         extractColors(selected.cover)
           .then((colors) => {
             const root = document.documentElement.style;
