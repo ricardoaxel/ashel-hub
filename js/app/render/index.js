@@ -296,9 +296,17 @@ export function renderIndexContent() {
     el.addEventListener('click', () => openModal(dataIllustrations, index));
   });
 
-  const allVideos = data.projects.flatMap((p) =>
-    (p.videos || []).map((v) => ({ ...v, projectName: p.name, projectId: p.id }))
-  );
+  const mainIds = data.site.mainVideos || [];
+  const allVideos = [];
+  mainIds.forEach((id) => {
+    for (const p of data.projects) {
+      const v = (p.videos || []).find((v) => v.videoId === id);
+      if (v) {
+        allVideos.push({ ...v, projectName: p.name, projectId: p.id });
+        break;
+      }
+    }
+  });
   const videoPreviewCount = Math.min(6, allVideos.length);
   document.getElementById('videos-count').textContent = String(allVideos.length).padStart(2, '0');
   const videosHtml = allVideos
