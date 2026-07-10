@@ -75,7 +75,7 @@ export function renderProjectContent() {
         <h2>${t.site?.nowPlaying || 'Now Playing'}</h2>
         <h3>${release.name}</h3>
         ${desc ? `<p>${desc}</p>` : ''}
-        ${release.embed ? `<div class="detail-player-section">${release.embed}</div>` : ''}
+        ${release.embed ? `<div class="detail-player-section">${release.embed}<div class="player-ghost"></div></div>` : ''}
         ${tracklistHtml}
       </section>`;
   }
@@ -284,6 +284,10 @@ export function renderProjectContent() {
           document.querySelector('.detail-cover')?.classList.remove('fade-out');
           document.getElementById('featured-section')?.classList.remove('fade-out');
         }, 30);
+        setTimeout(() => {
+          const g = document.querySelector('.player-ghost');
+          if (g) g.classList.add('hide');
+        }, 400);
         extractColors(selected.cover)
           .then((colors) => {
             const root = document.documentElement.style;
@@ -331,6 +335,10 @@ export function renderProjectContent() {
     if (section) {
       section.outerHTML = renderFeatured(autoAlbum);
       document.querySelector('.detail-cover').src = autoAlbum.cover;
+      setTimeout(() => {
+        const g = document.querySelector('.player-ghost');
+        if (g) g.classList.add('hide');
+      }, 400);
       extractColors(autoAlbum.cover)
         .then((colors) => {
           const root = document.documentElement.style;
