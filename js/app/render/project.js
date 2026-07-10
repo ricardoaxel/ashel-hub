@@ -301,10 +301,6 @@ export function renderProjectContent() {
       .join('');
     grid.insertAdjacentHTML('beforeend', extraHtml);
     photosBtn.remove();
-    document.querySelectorAll('#photos-grid .photo-card').forEach((card) => {
-      const index = parseInt(card.dataset.index, 10);
-      card.addEventListener('click', () => openModal(project.photos, index));
-    });
   });
 
   // Flyers show more
@@ -324,10 +320,6 @@ export function renderProjectContent() {
       .join('');
     grid.insertAdjacentHTML('beforeend', extraHtml);
     showMoreBtn.remove();
-    document.querySelectorAll('#flyers-grid .illustration-item').forEach((card) => {
-      const index = parseInt(card.dataset.index, 10);
-      card.addEventListener('click', () => openModal(sortedFlyers, index));
-    });
   });
 
   // Flyers initial click handler
