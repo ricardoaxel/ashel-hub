@@ -7,10 +7,11 @@ let items = [];
 let currentIndex = 0;
 
 function show() {
-  const item = items[currentIndex];
+  const item = items?.[currentIndex];
+  if (!item) return;
   const isVideo = !!item.videoId;
-  imgEl.style.display = isVideo ? 'none' : '';
-  videoEl.style.display = isVideo ? '' : 'none';
+  if (imgEl) imgEl.style.display = isVideo ? 'none' : '';
+  if (videoEl) videoEl.style.display = isVideo ? '' : 'none';
   if (isVideo) {
     videoEl.src = `https://www.youtube.com/embed/${item.videoId}?autoplay=1`;
     videoEl.title = item.title || '';
@@ -31,11 +32,12 @@ function open(newItems, index) {
 }
 
 function close() {
-  modalEl.classList.remove('active');
+  try {
+    modalEl?.classList.remove('active');
+    if (videoEl) { videoEl.src = ''; videoEl.style.display = 'none'; }
+    if (imgEl) imgEl.style.display = '';
+  } catch (_) {}
   document.body.style.overflow = '';
-  videoEl.src = '';
-  videoEl.style.display = 'none';
-  imgEl.style.display = '';
 }
 
 function prev() {

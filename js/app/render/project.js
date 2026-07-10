@@ -265,37 +265,43 @@ export function renderProjectContent() {
   const photosBtn = document.getElementById('photos-show-more');
   photosBtn?.addEventListener('click', (e) => {
     e.preventDefault();
-    const grid = document.getElementById('photos-grid');
-    if (!grid) return;
-    const remaining = project.photos.slice(6);
-    const extraHtml = remaining
-      .map(
-        (p, i) => `
+    try {
+      const grid = document.getElementById('photos-grid');
+      if (!grid) return;
+      const remaining = project.photos.slice(6);
+      const extraHtml = remaining
+        .map(
+          (p, i) => `
       <div class="photo-card" data-type="photos" data-index="${6 + i}">
         <img src="${p.src}" alt="${p.caption || ''}" loading="lazy" decoding="async">
         ${p.caption ? `<span class="photo-caption">${p.caption}</span>` : ''}
       </div>`
-      )
-      .join('');
-    grid.insertAdjacentHTML('beforeend', extraHtml);
-    photosBtn.remove();
+        )
+        .join('');
+      grid.insertAdjacentHTML('beforeend', extraHtml);
+      photosBtn.remove();
+    } catch (_) {}
   });
 
   const showMoreBtn = document.getElementById('flyers-show-more');
   showMoreBtn?.addEventListener('click', (e) => {
     e.preventDefault();
-    const grid = document.getElementById('flyers-grid');
-    if (!grid) return;
-    const remaining = sortedFlyers.slice(6);
-    const extraHtml = remaining
-      .map(
-        (f, i) => `
+    try {
+      const grid = document.getElementById('flyers-grid');
+      if (!grid) return;
+      const remaining = sortedFlyers.slice(6);
+      const extraHtml = remaining
+        .map(
+          (f, i) => `
       <div class="illustration-item" data-label="${(f.caption || '').replace(/"/g, '&quot;')}" data-type="flyers" data-index="${6 + i}">
         <img src="${f.src}" alt="${f.caption || ''}" loading="lazy" decoding="async">
       </div>`
-      )
-      .join('');
-    grid.insertAdjacentHTML('beforeend', extraHtml);
+        )
+        .join('');
+      grid.insertAdjacentHTML('beforeend', extraHtml);
+      showMoreBtn.remove();
+    } catch (_) {}
+  });
     showMoreBtn.remove();
     document.querySelectorAll('#flyers-grid .illustration-item').forEach((card) => {
       const index = parseInt(card.dataset.index, 10);
