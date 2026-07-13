@@ -49,6 +49,33 @@
       "7Ye80vde_iw",
       "qPLjeVKSujE",
       "wP4OqmWaOkM"
+    ],
+    "definingTracks": [
+      {
+        "project": "oshira",
+        "album": "Vorágine",
+        "label": "Oshira — Vorágine (2026)"
+      },
+      {
+        "project": "dotzd",
+        "album": "Empero",
+        "label": "Dotzd — Empero (2024)"
+      },
+      {
+        "project": "rdusp",
+        "album": "Valle Bravo",
+        "label": "RdUSP — Valle Bravo (2018)"
+      },
+      {
+        "project": "hostem",
+        "album": "Hostem",
+        "label": "Hostem — Hostem (2016)"
+      },
+      {
+        "project": "ashel-solo",
+        "album": "El caos es la naturaleza de las cosas...",
+        "label": "Ashel — El caos (2017)"
+      }
     ]
   },
   "illustrations": [

@@ -1,0 +1,94 @@
+.defining-strip {
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.def-label {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.def-track-list {
+  display: flex;
+  gap: 0;
+  align-items: center;
+}
+
+.def-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  position: relative;
+  margin: 0 0.5rem;
+}
+
+.def-cover {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.def-item:hover .def-cover {
+  transform: scale(1.6);
+  box-shadow: 0 3px 12px rgba(255, 45, 85, 0.35);
+}
+
+.def-tip {
+  position: absolute;
+  top: calc(100% + 6px);
+  white-space: nowrap;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  background: transparent;
+  padding: 0.15rem 0.35rem;
+  z-index: 10;
+}
+
+.def-item:hover .def-tip {
+  opacity: 1;
+}
+
+.def-proj {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.45rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.def-name {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.4rem;
+  color: var(--text-dim);
+  margin-top: 1px;
+}
+
+@media (max-width: 768px) {
+  .defining-strip {
+    padding: 1rem 1.25rem;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .def-cover {
+    width: 22px;
+    height: 22px;
+  }
+}
