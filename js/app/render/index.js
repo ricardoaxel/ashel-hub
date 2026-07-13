@@ -51,33 +51,6 @@ export function renderIndexContent() {
 
   document.getElementById('hero-tagline').textContent = t.site?.subtitle || data.site.subtitle;
 
-  // ── Defining Tracks Strip ──
-  const defTracks = data.site?.definingTracks || [];
-  const defStrip = document.getElementById('defining-strip');
-  if (defStrip && defTracks.length) {
-    const items = defTracks.map((dt) => {
-      const p = data.projects.find((pr) => pr.id === dt.project);
-      const release = p?.releases.find((r) => r.name === dt.album);
-      return { ...dt, cover: release?.cover || p?.cover, projectName: p?.name };
-    });
-    defStrip.innerHTML = `
-      <div class="def-label">5 canciones que me definen</div>
-      <div class="def-track-list">
-        ${items
-          .map(
-            (item, i) => `
-        <a href="project.html?id=${item.project}&album=${encodeURIComponent(item.album)}" class="def-item" title="${item.label}">
-          <span class="def-cover" style="background-image:url(${item.cover})"></span>
-          <span class="def-tip">
-            <span class="def-proj">${item.projectName}</span>
-            <span class="def-name">${item.album}</span>
-          </span>
-        </a>`
-          )
-          .join('')}
-      </div>`;
-  }
-
   const marqueeItems = data.projects
     .map(
       (p) =>
