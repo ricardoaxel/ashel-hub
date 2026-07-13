@@ -302,12 +302,6 @@ export function renderProjectContent() {
       showMoreBtn.remove();
     } catch (_) {}
   });
-    showMoreBtn.remove();
-    document.querySelectorAll('#flyers-grid .illustration-item').forEach((card) => {
-      const index = parseInt(card.dataset.index, 10);
-      card.addEventListener('click', () => openModal(sortedFlyers, index));
-    });
-  });
 
   // Flyers modal click handler
   document.querySelectorAll('#flyers-grid .illustration-item').forEach((card) => {
