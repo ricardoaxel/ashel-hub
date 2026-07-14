@@ -16,7 +16,7 @@ export function initMobileMenu() {
         nav.style.right = '0';
         nav.style.bottom = '0';
         nav.style.background = '#000';
-        nav.style.zIndex = '99999';
+        nav.style.zIndex = '99';
       } else {
         const header = document.querySelector('.header-right');
         if (header) {
