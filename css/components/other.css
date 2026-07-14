@@ -80,3 +80,25 @@
   width: 100%;
   border: none;
 }
+
+@media (max-width: 768px) {
+  .other-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .other-detail-card > .embed-area {
+    min-height: 280px;
+  }
+
+  .other-detail-card > .card-info {
+    padding: 1rem;
+  }
+
+  .other-detail-card > .card-info .card-title {
+    font-size: 1rem;
+  }
+
+  .other-detail-card > .card-info .card-desc {
+    font-size: 0.65rem;
+  }
+}
