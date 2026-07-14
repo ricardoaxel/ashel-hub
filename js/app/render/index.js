@@ -272,7 +272,6 @@ export function renderIndexContent() {
     '0'
   );
 
-  const isMobile = window.innerWidth <= 768;
   const previewCount = Math.min(isMobile ? 3 : 6, data.illustrations.length);
   const illustrationsHtml = data.illustrations
           .slice(0, isMobile ? 3 : 6)
