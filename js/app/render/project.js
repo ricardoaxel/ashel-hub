@@ -187,7 +187,7 @@ export function renderProjectContent() {
       </div>
       <div class="photos-grid" id="photos-grid">
         ${project.photos
-          .slice(0, 6)
+          .slice(0, photoPreview)
           .map(
             (p, i) => `
           <div class="photo-card" data-type="photos" data-index="${i}">
@@ -199,7 +199,7 @@ export function renderProjectContent() {
           .join('')}
       </div>
       ${
-        project.photos.length > 6
+        project.photos.length > photoPreview
           ? `<div class="illustration-show-more"><a href="#" id="photos-show-more">${t.labels?.viewAll || 'VIEW ALL'} <span class="count">${String(project.photos.length).padStart(2, '0')}</span></a></div>`
           : ''
       }
@@ -217,7 +217,7 @@ export function renderProjectContent() {
       </div>
       <div class="illustrations-grid" id="flyers-grid">
         ${sortedFlyers
-          .slice(0, 6)
+          .slice(0, flyerPreview)
           .map(
             (f, i) => `
           <div class="illustration-item" data-label="${(f.caption || '').replace(/"/g, '&quot;')}" data-type="flyers" data-index="${i}">
@@ -228,7 +228,7 @@ export function renderProjectContent() {
           .join('')}
       </div>
       ${
-        sortedFlyers.length > 6
+        sortedFlyers.length > flyerPreview
           ? `<div class="illustration-show-more"><a href="#" id="flyers-show-more">${t.labels?.viewAll || 'VIEW ALL'} <span class="count">${String(sortedFlyers.length).padStart(2, '0')}</span></a></div>`
           : ''
       }
@@ -262,17 +262,17 @@ export function renderProjectContent() {
   document.querySelectorAll('a, button, .album-card, .photo-card').forEach(attachCursor);
 
   // Photos show more
+  const isMobile = window.innerWidth <= 768;
+  const photoPreview = isMobile ? 3 : 6;
+  const flyerPreview = isMobile ? 3 : 6;
   const photosBtn = document.getElementById('photos-show-more');
   photosBtn?.addEventListener('click', (e) => {
-    e.preventDefault();
-    try {
-      const grid = document.getElementById('photos-grid');
       if (!grid) return;
-      const remaining = project.photos.slice(6);
+      const remaining = project.photos.slice(photoPreview);
       const extraHtml = remaining
         .map(
           (p, i) => `
-      <div class="photo-card" data-type="photos" data-index="${6 + i}">
+      <div class="photo-card" data-type="photos" data-index="${photoPreview + i}">
         <img src="${p.src}" alt="${p.caption || ''}" loading="lazy" decoding="async">
         ${p.caption ? `<span class="photo-caption">${p.caption}</span>` : ''}
       </div>`
@@ -289,11 +289,11 @@ export function renderProjectContent() {
     try {
       const grid = document.getElementById('flyers-grid');
       if (!grid) return;
-      const remaining = sortedFlyers.slice(6);
+      const remaining = sortedFlyers.slice(flyerPreview);
       const extraHtml = remaining
         .map(
           (f, i) => `
-      <div class="illustration-item" data-label="${(f.caption || '').replace(/"/g, '&quot;')}" data-type="flyers" data-index="${6 + i}">
+      <div class="illustration-item" data-label="${(f.caption || '').replace(/"/g, '&quot;')}" data-type="flyers" data-index="${flyerPreview + i}">
         <img src="${f.src}" alt="${f.caption || ''}" loading="lazy" decoding="async">
       </div>`
         )

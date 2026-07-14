@@ -271,9 +271,10 @@ export function renderIndexContent() {
     '0'
   );
 
-  const previewCount = Math.min(6, data.illustrations.length);
+  const isMobile = window.innerWidth <= 768;
+  const previewCount = Math.min(isMobile ? 3 : 6, data.illustrations.length);
   const illustrationsHtml = data.illustrations
-    .slice(0, previewCount)
+          .slice(0, isMobile ? 3 : 6)
     .map(
       (item, i) => `
       <div class="illustration-item" data-label="${t.labels?.illustration || 'Illustration'} ${String(i + 1).padStart(2, '0')}" data-index="${i}">
