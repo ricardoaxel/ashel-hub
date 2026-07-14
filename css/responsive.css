@@ -40,59 +40,112 @@
 
   .nav-links {
     position: fixed;
-    top: 0;
+    top: auto;
     left: 0;
     right: 0;
     bottom: 0;
+    height: 75vh;
     isolation: isolate;
     mix-blend-mode: normal !important;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     gap: 0;
-    transform: translateX(100%);
+    transform: translateY(100%);
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 99999;
     background: none;
-    padding: 0;
+    padding: 2rem 0 1rem;
   }
 
   .nav-links.active {
-    transform: translateX(0);
+    transform: translateY(0);
     background: none;
   }
 
   .nav-links li {
     width: 100%;
-    text-align: center;
+    text-align: left;
+    padding: 0 2.5rem;
   }
 
   .nav-links a {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     font-family: var(--serif);
     font-weight: 700;
     letter-spacing: -0.02em;
     color: var(--text);
-    display: block;
-    padding: 0.6rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.7rem 0;
     position: relative;
     text-decoration: none;
-    transition: color 0.3s;
+    border-left: 3px solid transparent;
+    padding-left: 1rem;
+    transition: border-color 0.3s, color 0.3s;
   }
 
-  .nav-links a::after {
+  .nav-links a:active {
+    border-left-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* Separator between menu items */
+  .nav-links li::after {
     content: '';
     display: block;
-    width: 0;
-    height: 2px;
-    background: var(--accent);
-    margin: 0 auto;
-    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    height: 1px;
+    background: var(--border);
+    opacity: 0.5;
+    margin-top: 0;
   }
 
-  .nav-links a:hover::after,
-  .nav-links a:active::after {
-    width: 60px;
+  .nav-links li:last-child::after {
+    display: none;
+  }
+
+  /* Close zone indicator */
+  .nav-links.active::before {
+    content: '✕';
+    position: absolute;
+    top: 0.75rem;
+    right: 2rem;
+    font-family: var(--mono);
+    font-size: 1rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  /* Lang toggle integrated in nav */
+  .nav-links .nav-lang {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1.5rem 2.5rem 0;
+    margin-top: auto;
+  }
+
+  .nav-links .nav-lang span {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    transition: color 0.2s;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .nav-links .nav-lang span:hover,
+  .nav-links .nav-lang span:active {
+    color: var(--accent);
+  }
+
+  .nav-links .nav-lang .sep {
+    color: var(--border);
+    cursor: default;
   }
 
   .mobile-menu-btn {
