@@ -49,11 +49,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    gap: 0;
     transform: translateX(100%);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 99999;
     background: none;
+    padding: 0;
+    counter-reset: nav-item;
   }
 
   .nav-links.active {
@@ -61,11 +63,64 @@
     background: none;
   }
 
+  .nav-links li {
+    counter-increment: nav-item;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav-links.active li {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .nav-links li:nth-child(1) { transition-delay: 0.05s; }
+  .nav-links li:nth-child(2) { transition-delay: 0.12s; }
+  .nav-links li:nth-child(3) { transition-delay: 0.19s; }
+  .nav-links li:nth-child(4) { transition-delay: 0.26s; }
+  .nav-links li:nth-child(5) { transition-delay: 0.33s; }
+
   .nav-links a {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-family: var(--serif);
-    letter-spacing: 0;
+    letter-spacing: -0.02em;
     color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 1.5rem;
+    position: relative;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .nav-links a::before {
+    content: counter(nav-item);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    opacity: 0.5;
+    min-width: 1.5rem;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav-links a:hover::after,
+  .nav-links a:active::after {
+    transform: scaleX(1);
   }
 
   .mobile-menu-btn {
@@ -77,10 +132,9 @@
     position: fixed;
     bottom: 1rem;
     right: 1rem;
-    z-index: 1002;
+    z-index: 100000;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 4px;
     padding: 0.4rem 0.75rem;
   }
 
