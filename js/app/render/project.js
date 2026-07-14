@@ -23,6 +23,9 @@ export function renderProjectContent() {
   const siteData = getSiteData();
   const currentLocale = getLocale();
   const t = i18nData?.[currentLocale] || i18nData?.en || {};
+  const isMobile = window.innerWidth <= 768;
+  const photoPreview = isMobile ? 3 : 6;
+  const flyerPreview = isMobile ? 3 : 6;
   if (!i18nData || !siteData || !currentProject) {
     document.getElementById('project-content').innerHTML = `
       <div class="container" style="padding-top: 120px; text-align: center;">
@@ -262,9 +265,6 @@ export function renderProjectContent() {
   document.querySelectorAll('a, button, .album-card, .photo-card').forEach(attachCursor);
 
   // Photos show more
-  const isMobile = window.innerWidth <= 768;
-  const photoPreview = isMobile ? 3 : 6;
-  const flyerPreview = isMobile ? 3 : 6;
   const photosBtn = document.getElementById('photos-show-more');
   photosBtn?.addEventListener('click', (e) => {
     e.preventDefault();
