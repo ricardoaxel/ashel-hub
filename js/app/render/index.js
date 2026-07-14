@@ -197,9 +197,9 @@ export function renderIndexContent() {
             <span class="project-number">${String(data.projects.length + 1).padStart(2, '0')}</span>
             <div class="project-timeline">
               <div class="tl-track"><span class="tl-dot"></span><span class="tl-line"></span><span class="tl-dot"></span></div>
-              <div class="tl-labels"><span class="tl-year">misc</span><span class="tl-year">${String(otherCount).padStart(2, '0')}</span></div>
+              <div class="tl-labels"><span class="tl-year">${t.site?.otherLabel || 'misc'}</span><span class="tl-year">${String(otherCount).padStart(2, '0')}</span></div>
             </div>
-            <h2 class="project-name">Extras</h2>
+            <h2 class="project-name">${t.labels?.otherSection || 'Extras'}</h2>
           </div>
           <span class="project-arrow">→</span>
         </div>
@@ -274,7 +274,7 @@ export function renderIndexContent() {
     .slice(0, previewCount)
     .map(
       (item, i) => `
-      <div class="illustration-item" data-label="Illustration ${String(i + 1).padStart(2, '0')}" data-index="${i}">
+      <div class="illustration-item" data-label="${t.labels?.illustration || 'Illustration'} ${String(i + 1).padStart(2, '0')}" data-index="${i}">
         <img src="${item.src}" alt="" loading="lazy" decoding="async">
       </div>`
     )

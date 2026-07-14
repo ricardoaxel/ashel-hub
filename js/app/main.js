@@ -1,4 +1,4 @@
-import { loadData, getSiteData, getProject } from './data.js';
+import { loadData, getSiteData, getI18nData, getProject } from './data.js';
 import { applyTranslations, initLangToggle, onLocaleChange } from './i18n.js';
 import { initCursor } from './cursor.js';
 import { initMobileMenu } from './mobile-menu.js';
@@ -42,6 +42,9 @@ loadData()
   .then(() => {
     try {
       applyTranslations();
+      const i18n = getI18nData();
+      const loc = navigator.language.startsWith('es') ? 'es' : 'en';
+      const tPage = i18n?.[loc] || i18n?.en || {};
 
       if (isProjectPage) {
         const projectId = params.get('id');
@@ -58,12 +61,12 @@ loadData()
       } else if (isIllustrationPage) {
         renderIllustrationsContent();
         initModal();
-        document.title = `Illustrations | Ashel`;
+        document.title = `${tPage.labels?.illustrationsSection || 'Illustrations'} | Ashel`;
         hidePageLoader();
       } else if (isOtherPage) {
         renderOtherContent();
         initModal();
-        document.title = `Extras | Ashel`;
+        document.title = `${tPage.labels?.otherSection || 'Extras'} | Ashel`;
         hidePageLoader();
       } else {
         renderIndexContent();
@@ -97,17 +100,22 @@ loadData()
       }
     } catch (renderErr) {
       console.error('Render error:', renderErr);
-      showError('Render error: ' + renderErr.message);
+      showError('renderError');
     }
   })
   .catch((err) => {
     console.error('Failed to load data:', err);
-    showError('Error loading data: ' + err.message);
+    showError('dataError');
   });
 
-function showError(msg) {
+function showError(type) {
   const locale = navigator.language.startsWith('es') ? 'es' : 'en';
-  const text = locale === 'es' ? 'Error: ' + msg : 'Error: ' + msg;
+  const i18n = getI18nData();
+  const t = (i18n?.[locale] || i18n?.en || {});
+  const fallbacks = { renderError: 'Render error', dataError: 'Error loading data' };
+  const msg = t.site?.[type === 'renderError' ? 'errorRender' : 'errorData'] || fallbacks[type] || 'Unknown error';
+  const prefix = locale === 'es' ? 'Error: ' : 'Error: ';
+  const text = prefix + msg;
   if (isProjectPage) {
     const el = document.getElementById('project-content');
     if (el) el.innerHTML = `<div class="loading">${text}</div>`;
