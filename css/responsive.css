@@ -85,23 +85,10 @@
     letter-spacing: -0.02em;
     color: var(--text);
     text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
+    display: block;
     padding: 0.4rem 0;
     position: relative;
     transition: color 0.3s;
-  }
-
-  .nav-links a::before {
-    content: '';
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    background: var(--accent);
-    flex-shrink: 0;
-    transition: width 0.3s, opacity 0.3s;
-    opacity: 0.4;
   }
 
   .nav-links a:active {
