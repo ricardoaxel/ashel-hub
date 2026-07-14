@@ -221,7 +221,8 @@ export function renderIndexContent() {
     const j = Math.floor(Math.random() * (i + 1));
     [allPhotos[i], allPhotos[j]] = [allPhotos[j], allPhotos[i]];
   }
-  const galleryPreviewCount = Math.min(9, allPhotos.length);
+  const isMobile = window.innerWidth <= 768;
+  const galleryPreviewCount = Math.min(isMobile ? 6 : 9, allPhotos.length);
   document.getElementById('gallery-count').textContent = String(allPhotos.length).padStart(
     2,
     '0'
@@ -310,7 +311,7 @@ export function renderIndexContent() {
       }
     }
   });
-  const videoPreviewCount = Math.min(6, allVideos.length);
+  const videoPreviewCount = Math.min(isMobile ? 3 : 6, allVideos.length);
   document.getElementById('videos-count').textContent = String(allVideos.length).padStart(2, '0');
   const videosHtml = allVideos
     .slice(0, videoPreviewCount)

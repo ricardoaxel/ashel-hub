@@ -15,7 +15,6 @@ export function initMobileMenu() {
         nav.style.left = '0';
         nav.style.right = '0';
         nav.style.bottom = '0';
-        nav.style.background = 'rgba(0, 0, 0, 0.8)';
         nav.style.zIndex = '99';
       } else {
         const header = document.querySelector('.header-right');
@@ -27,7 +26,6 @@ export function initMobileMenu() {
           nav.style.left = '';
           nav.style.right = '';
           nav.style.bottom = '';
-          nav.style.background = '';
           nav.style.zIndex = '';
         }
       }
@@ -52,7 +50,6 @@ export function initMobileMenu() {
             nav.style.left = '';
             nav.style.right = '';
             nav.style.bottom = '';
-            nav.style.background = '';
             nav.style.zIndex = '';
           }
         }
