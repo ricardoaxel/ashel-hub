@@ -267,6 +267,9 @@ export function renderProjectContent() {
   const flyerPreview = isMobile ? 3 : 6;
   const photosBtn = document.getElementById('photos-show-more');
   photosBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    try {
+      const grid = document.getElementById('photos-grid');
       if (!grid) return;
       const remaining = project.photos.slice(photoPreview);
       const extraHtml = remaining
