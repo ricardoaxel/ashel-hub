@@ -179,6 +179,8 @@ export function renderIndexContent() {
     const projectsSection = document.getElementById('projects');
     const grid = document.getElementById('projects-grid');
     if (projectsSection && grid) {
+      const old = document.getElementById('release-timeline');
+      if (old) old.remove();
       grid.insertAdjacentHTML('beforebegin', timelineHtml);
     }
   }
