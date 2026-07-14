@@ -45,6 +45,7 @@
     right: 0;
     bottom: 0;
     background: #000;
+    mix-blend-mode: normal;
     flex-direction: column;
     justify-content: center;
     align-items: center;
