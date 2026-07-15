@@ -36,17 +36,6 @@
   padding: 3rem;
 }
 
-.detail-cover {
-  width: 100%;
-  aspect-ratio: 1;
-  display: block;
-  transition: opacity 0.2s ease;
-}
-
-.detail-cover.fade-out {
-  opacity: 0;
-}
-
 .featured-release {
   transition: opacity 0.2s ease;
 }

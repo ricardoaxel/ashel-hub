@@ -332,18 +332,14 @@ export function renderProjectContent() {
   selector?.addEventListener('change', () => {
     const selected = project.releases.find((r) => r.name === selector.value);
     const section = document.getElementById('featured-section');
-    const cover = document.querySelector('.detail-cover');
     if (section && selected) {
-      cover?.classList.add('fade-out');
       section.classList.add('fade-out');
       const url = new URL(window.location);
       url.searchParams.set('album', selected.name);
       window.history.replaceState({}, '', url);
       setTimeout(() => {
         section.outerHTML = renderFeatured(selected);
-        if (cover) cover.src = selected.cover;
         setTimeout(() => {
-          document.querySelector('.detail-cover')?.classList.remove('fade-out');
           document.getElementById('featured-section')?.classList.remove('fade-out');
         }, 30);
         setTimeout(() => {
@@ -396,7 +392,6 @@ export function renderProjectContent() {
     const section = document.getElementById('featured-section');
     if (section) {
       section.outerHTML = renderFeatured(autoAlbum);
-      document.querySelector('.detail-cover').src = autoAlbum.cover;
       setTimeout(() => {
         const g = document.querySelector('.player-ghost');
         if (g) g.classList.add('hide');
