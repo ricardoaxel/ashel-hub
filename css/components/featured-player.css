@@ -55,6 +55,16 @@
   position: relative;
 }
 
+.album-cover-featured {
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border);
+}
+
 .detail-player-section iframe {
   width: 100%;
   max-width: 800px;

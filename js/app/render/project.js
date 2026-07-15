@@ -77,6 +77,7 @@ export function renderProjectContent() {
         </div>
         <h2>${t.site?.nowPlaying || 'Now Playing'}</h2>
         <h3>${release.name}</h3>
+        <img src="${release.cover}" alt="${release.name}" class="album-cover-featured" loading="lazy">
         ${desc ? `<p>${desc}</p>` : ''}
         ${release.embed ? `<div class="detail-player-section">${release.embed}<div class="player-ghost"></div></div>` : ''}
         ${tracklistHtml}
@@ -332,7 +333,6 @@ export function renderProjectContent() {
   selector?.addEventListener('change', () => {
     const selected = project.releases.find((r) => r.name === selector.value);
     const section = document.getElementById('featured-section');
-    const cover = document.querySelector('.detail-cover');
     if (section && selected) {
       section.classList.add('fade-out');
       const url = new URL(window.location);
@@ -340,7 +340,6 @@ export function renderProjectContent() {
       window.history.replaceState({}, '', url);
       setTimeout(() => {
         section.outerHTML = renderFeatured(selected);
-        if (cover) cover.src = selected.cover;
         setTimeout(() => {
           document.getElementById('featured-section')?.classList.remove('fade-out');
         }, 30);
@@ -394,7 +393,6 @@ export function renderProjectContent() {
     const section = document.getElementById('featured-section');
     if (section) {
       section.outerHTML = renderFeatured(autoAlbum);
-      document.querySelector('.detail-cover').src = autoAlbum.cover;
       setTimeout(() => {
         const g = document.querySelector('.player-ghost');
         if (g) g.classList.add('hide');
