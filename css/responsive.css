@@ -235,21 +235,14 @@
 
   .detail-left .featured-release {
     order: 2;
-    padding: 1rem 0;
+    padding: 1rem 1.25rem;
   }
 
   .detail-left .featured-release .album-cover-featured {
-    border-left: none;
-    border-right: none;
+    width: calc(100% + 2.5rem);
+    margin-left: -1.25rem;
+    border: none;
     margin-bottom: 1rem;
-  }
-
-  .detail-left .featured-release .section-label,
-  .detail-left .featured-release h2,
-  .detail-left .featured-release h3,
-  .detail-left .featured-release p {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
   }
 
   .detail-left .featured-release .section-label {
