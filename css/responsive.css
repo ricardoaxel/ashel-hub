@@ -224,6 +224,11 @@
 
   .detail-cover {
     order: -1;
+    width: 100%;
+    margin: 0;
+    display: block;
+    border: none;
+    border-bottom: 1px solid var(--border);
   }
 
   .detail-info {
@@ -251,9 +256,6 @@
   }
 
   .detail-left .featured-release .album-cover-featured {
-    width: calc(100% + 2.5rem);
-    margin-left: -1.25rem;
-    border: none;
     margin-bottom: 1rem;
   }
 
@@ -295,9 +297,7 @@
   }
 
   .detail-cover {
-    max-width: 300px;
-    margin: 0 auto;
-    display: block;
+    width: 100%;
   }
 
   .detail-left .featured-release {
