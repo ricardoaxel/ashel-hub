@@ -249,6 +249,10 @@ export function renderIndexContent() {
     grid.parentNode.appendChild(showMore);
     showMore.querySelector('a').addEventListener('click', (e) => {
       e.preventDefault();
+      if (isMobile) {
+        openModal(allPhotos, galleryPreviewCount);
+        return;
+      }
       showMore.remove();
       const remaining = allPhotos.slice(galleryPreviewCount);
       const extraHtml = remaining
