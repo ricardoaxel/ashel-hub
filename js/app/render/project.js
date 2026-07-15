@@ -270,6 +270,10 @@ export function renderProjectContent() {
   photosBtn?.addEventListener('click', (e) => {
     e.preventDefault();
     try {
+      if (isMobile) {
+        openModal(project.photos, photoPreview);
+        return;
+      }
       const grid = document.getElementById('photos-grid');
       if (!grid) return;
       const remaining = project.photos.slice(photoPreview);
@@ -291,6 +295,10 @@ export function renderProjectContent() {
   showMoreBtn?.addEventListener('click', (e) => {
     e.preventDefault();
     try {
+      if (isMobile) {
+        openModal(sortedFlyers, flyerPreview);
+        return;
+      }
       const grid = document.getElementById('flyers-grid');
       if (!grid) return;
       const remaining = sortedFlyers.slice(flyerPreview);
