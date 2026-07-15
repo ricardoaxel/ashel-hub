@@ -46,6 +46,13 @@
   display: block;
 }
 
+/* Show project cover only on mobile */
+@media (min-width: 769px) {
+  .detail-cover {
+    display: none;
+  }
+}
+
 .featured-release.fade-out {
   opacity: 0;
 }
