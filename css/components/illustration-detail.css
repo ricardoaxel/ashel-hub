@@ -96,9 +96,11 @@
 }
 
 .ill-desc {
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   color: var(--text-muted);
-  margin: 0.3rem 0 0;
+  margin: 0;
+  max-width: 480px;
+  line-height: 1.5;
 }
 
 .ill-grid {

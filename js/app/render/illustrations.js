@@ -26,7 +26,6 @@ export function renderIllustrationsContent() {
     <div class="ill-section">
       <div class="ill-header">
         <div>
-          <h2>${t.labels?.illustrationsSection || 'Illustrations'} <span class="count">${String(items.length).padStart(2, '0')}</span></h2>
           <p class="ill-desc">${t.site?.visualsDesc || ''}</p>
         </div>
         <a href="index.html" class="page-back">← ${t.site?.backToProjects || 'Back'}</a>
