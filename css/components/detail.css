@@ -40,6 +40,12 @@
   transition: opacity 0.2s ease;
 }
 
+.detail-cover {
+  width: 100%;
+  aspect-ratio: 1;
+  display: block;
+}
+
 .featured-release.fade-out {
   opacity: 0;
 }
