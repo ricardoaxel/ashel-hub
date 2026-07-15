@@ -248,6 +248,11 @@
   .album-selector-wrap {
     order: 99;
     margin-top: 1rem;
+    width: 100%;
+  }
+
+  .album-selector-wrap select {
+    width: 100%;
   }
 
   .detail-left .featured-release {
