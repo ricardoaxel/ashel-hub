@@ -284,6 +284,11 @@
     margin-bottom: 0.5rem;
   }
 
+  .detail-left .featured-release h2,
+  .detail-left .featured-release h3 {
+    display: none;
+  }
+
   .detail-left .detail-player-section iframe {
     height: 100px;
   }
