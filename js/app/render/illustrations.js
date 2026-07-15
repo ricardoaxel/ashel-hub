@@ -21,13 +21,11 @@ export function renderIllustrationsContent() {
       <div class="ill-hero-content">
         <div class="ill-hero-sub">${t.labels?.illustrationsSection || 'Illustrations'} <span class="count">${String(items.length).padStart(2, '0')}</span></div>
         <h1 class="ill-hero-title">${t.labels?.illustrationsSection || 'Illustrations'}</h1>
+        <p class="ill-hero-desc">${t.site?.visualsDesc || ''}</p>
       </div>
     </div>
     <div class="ill-section">
       <div class="ill-header">
-        <div>
-          <p class="ill-desc">${t.site?.visualsDesc || ''}</p>
-        </div>
         <a href="index.html" class="page-back">← ${t.site?.backToProjects || 'Back'}</a>
       </div>
       <div class="ill-grid" id="ill-grid">
