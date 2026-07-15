@@ -20,6 +20,7 @@
       "otherDesc": "Side projects, collaborations, experiments, and other odds & ends.",
       "otherLabel": "misc",
       "liveSessionsDesc": "Participation in the recording and mixing of the following live sessions.",
+      "visualsDesc": "Drawings, photos, flyers, etc. I've made over the years.",
       "errorRender": "Render error",
       "errorData": "Error loading data",
       "bio": [
@@ -176,6 +177,7 @@
       "otherDesc": "Proyectos alternos, colaboraciones, experimentos y demás.",
       "otherLabel": "varios",
       "liveSessionsDesc": "Participación en grabación y mezcla de las siguientes sesiones en vivo.",
+      "visualsDesc": "Dibujos, fotos, flyers, etc. que he hecho a lo largo de los años.",
       "errorRender": "Error al renderizar",
       "errorData": "Error al cargar datos",
       "bio": [
