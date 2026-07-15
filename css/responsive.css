@@ -246,7 +246,18 @@
   }
 
   .detail-left .featured-release .section-label {
-    margin-bottom: 0.5rem;
+    display: none;
+  }
+
+  .mobile-year {
+    display: inline;
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-left: 0.5rem;
   }
 
   .detail-left .featured-release h2 {

@@ -75,7 +75,7 @@ export function renderProjectContent() {
           <span>${t.site?.featuredRelease || 'Featured Release'}</span>
           <span class="count">${translateDate(release.year, t)}</span>
         </div>
-        <h2>${t.site?.nowPlaying || 'Now Playing'}</h2>
+        <h2>${t.site?.nowPlaying || 'Now Playing'} <span class="mobile-year">${translateDate(release.year, t)}</span></h2>
         <h3>${release.name}</h3>
         <img src="${release.cover}" alt="${release.name}" class="album-cover-featured" loading="lazy">
         ${desc ? `<p>${desc}</p>` : ''}

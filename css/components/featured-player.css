@@ -64,6 +64,10 @@
   border: 1px solid var(--border);
 }
 
+.mobile-year {
+  display: none;
+}
+
 .detail-player-section iframe {
   width: 100%;
   max-width: 800px;
