@@ -26,8 +26,19 @@ function hidePageLoader() {
   }
   loader.style.transition = 'opacity 0.35s ease';
   loader.style.opacity = '0';
-  setTimeout(() => loader.remove(), 350);
+  setTimeout(() => {
+    loader.remove();
+    const saved = sessionStorage.getItem('scrollPos');
+    if (saved) {
+      sessionStorage.removeItem('scrollPos');
+      requestAnimationFrame(() => window.scrollTo(0, parseInt(saved, 10)));
+    }
+  }, 350);
 }
+
+window.addEventListener('beforeunload', () => {
+  sessionStorage.setItem('scrollPos', window.scrollY);
+});
 
 function reRender() {
   if (isProjectPage) renderProjectContent();
