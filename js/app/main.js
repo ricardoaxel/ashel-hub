@@ -109,7 +109,7 @@ loadData()
   });
 
 function showError(type) {
-  const locale = navigator.language.startsWith('es') ? 'es' : 'en';
+  const locale = navigator.language.startsWith('en') ? 'en' : 'es';
   const i18n = getI18nData();
   const t = (i18n?.[locale] || i18n?.en || {});
   const fallbacks = { renderError: 'Render error', dataError: 'Error loading data' };

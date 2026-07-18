@@ -4,7 +4,7 @@ const params = new URLSearchParams(window.location.search);
 let currentLocale =
   params.get('locale') ||
   localStorage.getItem('locale') ||
-  (navigator.language.startsWith('es') ? 'es' : 'en');
+  (navigator.language.startsWith('en') ? 'en' : 'es');
 let localeListeners = [];
 
 /** Returns the current locale code (e.g. 'en', 'es'). */
