@@ -61,6 +61,30 @@ function handleKeydown(e) {
   if (e.key === 'ArrowRight') next();
 }
 
+let touchStartX = 0;
+let touchStartY = 0;
+
+function handleTouchStart(e) {
+  touchStartX = e.changedTouches[0].screenX;
+  touchStartY = e.changedTouches[0].screenY;
+}
+
+function handleTouchEnd(e) {
+  const dx = e.changedTouches[0].screenX - touchStartX;
+  const dy = e.changedTouches[0].screenY - touchStartY;
+  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+    if (dx < 0) next();
+    else prev();
+  }
+}
+
+function handleImageClick(e) {
+  const rect = e.currentTarget.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  if (x < rect.width / 3) prev();
+  else if (x > rect.width * 2 / 3) next();
+}
+
 export function initModal() {
   modalEl = document.getElementById('gallery-modal');
   if (!modalEl) return;
@@ -75,6 +99,11 @@ export function initModal() {
   modalEl.querySelector('.modal-close')?.addEventListener('click', close);
   modalEl.querySelector('.modal-prev')?.addEventListener('click', prev);
   modalEl.querySelector('.modal-next')?.addEventListener('click', next);
+
+  modalEl.addEventListener('touchstart', handleTouchStart, { passive: true });
+  modalEl.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+  imgEl?.addEventListener('click', handleImageClick);
 
   modalEl.addEventListener('click', (e) => {
     if (e.target === modalEl) close();
