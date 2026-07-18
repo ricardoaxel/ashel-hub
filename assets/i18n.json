@@ -16,7 +16,7 @@
       "members": "Members",
       "loading": "Loading",
       "notFound": "Project not found",
-      "builtWith": "Built with obsession",
+      "builtWith": "In search of meaning",
       "otherDesc": "Side projects, collaborations, experiments, and other odds & ends.",
       "otherLabel": "misc",
       "liveSessionsDesc": "Participation in the recording and mixing of the following live sessions.",
@@ -139,9 +139,9 @@
         }
       },
       "hostem": {
-        "shortDescription": "Thrash/hardcore band from Tlalnepantla. Debut self-titled EP with 4 tracks. Raziel, Sebastián, Diego, Alec, and Ashel.",
+        "shortDescription": "Thrash/hardcore band from Tlalnepantla (2014-2016). Debut self-titled EP with 4 tracks. Raziel, Sebastián, Diego, Alec, and Ashel.",
         "description": [
-          "Thrash/hardcore band from Tlalnepantla. Raw and relentless energy with 4 tracks spanning from social critique to dark fantasy. Debut self-titled EP recorded at Diego's house, mixed by Ashel. Lyrics by Diego and Raziel, with special thanks to Aldo \"Hacha Loca\" López."
+          "Thrash/hardcore band from Tlalnepantla. Debut self-titled EP recorded at Diego's house, mixed by Ashel. Lyrics by Diego and Raziel, with special thanks to Aldo \"Hacha Loca\" López."
         ],
         "members": {
           "Raziel": "Vocals (lyrics)",
