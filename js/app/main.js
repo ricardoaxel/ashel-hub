@@ -17,16 +17,6 @@ const isIllustrationPage = window.location.pathname.includes('illustrations.html
 const isOtherPage = window.location.pathname.includes('other.html');
 const params = new URLSearchParams(window.location.search);
 
-const scrollRestoreKey = 'scrollPos_' + window.location.pathname;
-
-function restoreScroll() {
-  const saved = sessionStorage.getItem(scrollRestoreKey);
-  if (saved) {
-    sessionStorage.removeItem(scrollRestoreKey);
-    window.scrollTo(0, parseInt(saved, 10));
-  }
-}
-
 function hidePageLoader() {
   const loader = document.getElementById('page-loader');
   if (!loader) return;
@@ -36,11 +26,18 @@ function hidePageLoader() {
   }
   loader.style.transition = 'opacity 0.35s ease';
   loader.style.opacity = '0';
-  setTimeout(() => loader.remove(), 350);
+  setTimeout(() => {
+    loader.remove();
+    const saved = sessionStorage.getItem('scrollPos');
+    if (saved) {
+      sessionStorage.removeItem('scrollPos');
+      requestAnimationFrame(() => window.scrollTo(0, parseInt(saved, 10)));
+    }
+  }, 350);
 }
 
 window.addEventListener('beforeunload', () => {
-  sessionStorage.setItem(scrollRestoreKey, window.scrollY);
+  sessionStorage.setItem('scrollPos', window.scrollY);
 });
 
 function reRender() {
@@ -71,26 +68,22 @@ loadData()
         initModal();
         const p = getProject(projectId);
         if (p) document.title = `${p.name} | Ashel`;
-        restoreScroll();
         hidePageLoader();
       } else if (isIllustrationPage) {
         renderIllustrationsContent();
         initModal();
         document.title = `${tPage.labels?.illustrationsSection || 'Illustrations'} | Ashel`;
-        restoreScroll();
         hidePageLoader();
       } else if (isOtherPage) {
         renderOtherContent();
         initModal();
         document.title = `${tPage.labels?.otherSection || 'Extras'} | Ashel`;
-        restoreScroll();
         hidePageLoader();
       } else {
         renderIndexContent();
         initModal();
         initIllustration();
         initBubbles(getSiteData());
-        restoreScroll();
         hidePageLoader();
       }
 
