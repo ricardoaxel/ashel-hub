@@ -11,6 +11,16 @@
   transition: background 0.25s ease, opacity 0.25s ease;
 }
 
+html.modal-open {
+  overflow: hidden;
+  height: 100%;
+}
+
+html.modal-open body {
+  overflow: hidden;
+  height: 100%;
+}
+
 .gallery-modal.active {
   background: rgba(5, 5, 5, 0.94);
   opacity: 1;
