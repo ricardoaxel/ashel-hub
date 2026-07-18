@@ -13,12 +13,10 @@
 
 html.modal-open {
   overflow: hidden;
-  height: 100%;
 }
 
 html.modal-open body {
   overflow: hidden;
-  height: 100%;
 }
 
 .gallery-modal.active {
