@@ -23,7 +23,10 @@ function scrollKey() {
   return 'scrollPos:' + location.pathname + location.search;
 }
 
+let isReRendering = false;
+
 function saveScroll() {
+  if (isReRendering) return;
   try { sessionStorage.setItem(scrollKey(), String(window.scrollY)); } catch (_) {}
 }
 
@@ -44,7 +47,7 @@ function restoreScroll() {
 
 let scrollTimer = null;
 function throttleSave() {
-  if (scrollTimer) return;
+  if (scrollTimer || isReRendering) return;
   scrollTimer = setTimeout(() => {
     scrollTimer = null;
     saveScroll();
@@ -79,10 +82,19 @@ function hidePageLoader() {
 }
 
 function reRender() {
+  isReRendering = true;
+  const savedY = window.scrollY;
+
   if (isProjectPage) renderProjectContent();
   else if (isIllustrationPage) renderIllustrationsContent();
   else if (isOtherPage) renderOtherContent();
   else renderIndexContent();
+
+  window.scrollTo({ top: savedY, behavior: 'instant' });
+  requestAnimationFrame(() => {
+    window.scrollTo({ top: savedY, behavior: 'instant' });
+    isReRendering = false;
+  });
 }
 
 if (!isProjectPage && !isIllustrationPage && !isOtherPage) initWaveCanvas(getHeroColors);
