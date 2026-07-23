@@ -243,10 +243,12 @@ export function renderIndexContent() {
   });
   if (allPhotos.length > galleryPreviewCount) {
     const grid = document.getElementById('gallery-grid');
+    const section = grid.parentNode;
+    section.querySelectorAll('.illustration-show-more').forEach((el) => el.remove());
     const showMore = document.createElement('div');
     showMore.className = 'illustration-show-more';
     showMore.innerHTML = `<a href="#" id="gallery-show-more">${t.labels?.viewAll || 'VIEW ALL'} <span class="count">${String(allPhotos.length).padStart(2, '0')}</span></a>`;
-    grid.parentNode.appendChild(showMore);
+    section.appendChild(showMore);
     showMore.querySelector('a').addEventListener('click', (e) => {
       e.preventDefault();
       if (isMobile) {
@@ -290,11 +292,13 @@ export function renderIndexContent() {
 
   const totalCount = data.illustrations.length;
   const grid = document.getElementById('illustrations-grid');
+  const section = grid.parentNode;
+  section.querySelectorAll('.illustration-show-more').forEach((el) => el.remove());
   if (totalCount > previewCount) {
     const showMore = document.createElement('div');
     showMore.className = 'illustration-show-more';
     showMore.innerHTML = `<a href="illustrations.html">${t.labels?.viewAll || 'VIEW ALL'} <span class="count">${String(totalCount).padStart(2, '0')}</span></a>`;
-    grid.parentNode.appendChild(showMore);
+    section.appendChild(showMore);
   }
 
   const dataIllustrations = data.illustrations;
