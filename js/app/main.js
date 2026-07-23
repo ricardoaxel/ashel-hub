@@ -17,6 +17,24 @@ const isIllustrationPage = window.location.pathname.includes('illustrations.html
 const isOtherPage = window.location.pathname.includes('other.html');
 const params = new URLSearchParams(window.location.search);
 
+const SCROLL_KEY = 'scrollPos_' + window.location.pathname + window.location.search;
+
+function saveScroll() {
+  try { sessionStorage.setItem(SCROLL_KEY, String(window.scrollY)); } catch (_) {}
+}
+
+function restoreScroll() {
+  try {
+    const saved = sessionStorage.getItem(SCROLL_KEY);
+    if (saved) {
+      sessionStorage.removeItem(SCROLL_KEY);
+      window.scrollTo(0, parseInt(saved, 10));
+    }
+  } catch (_) {}
+}
+
+window.addEventListener('pagehide', saveScroll);
+
 function hidePageLoader() {
   const loader = document.getElementById('page-loader');
   if (!loader) return;
@@ -57,22 +75,26 @@ loadData()
         initModal();
         const p = getProject(projectId);
         if (p) document.title = `${p.name} | Ashel`;
+        restoreScroll();
         hidePageLoader();
       } else if (isIllustrationPage) {
         renderIllustrationsContent();
         initModal();
         document.title = `${tPage.labels?.illustrationsSection || 'Illustrations'} | Ashel`;
+        restoreScroll();
         hidePageLoader();
       } else if (isOtherPage) {
         renderOtherContent();
         initModal();
         document.title = `${tPage.labels?.otherSection || 'Extras'} | Ashel`;
+        restoreScroll();
         hidePageLoader();
       } else {
         renderIndexContent();
         initModal();
         initIllustration();
         initBubbles(getSiteData());
+        restoreScroll();
         hidePageLoader();
       }
 
