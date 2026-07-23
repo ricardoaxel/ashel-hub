@@ -108,6 +108,7 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
   background: var(--border);
+  min-height: 100vh;
 }
 
 .ill-grid-item {

@@ -1,5 +1,6 @@
 .projects-list {
   border-top: 1px solid var(--border);
+  min-height: 100vh;
 }
 
 @keyframes cardFadeIn {
