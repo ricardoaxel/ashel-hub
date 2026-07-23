@@ -88,7 +88,7 @@ function reRender() {
   if (isProjectPage) renderProjectContent();
   else if (isIllustrationPage) renderIllustrationsContent();
   else if (isOtherPage) renderOtherContent();
-  else renderIndexContent();
+  else renderIndexContent(true);
 
   window.scrollTo({ top: savedY, behavior: 'instant' });
   requestAnimationFrame(() => {
