@@ -1,4 +1,4 @@
-import { loadData, getSiteData, getI18nData, getProject } from './data.js';
+import { loadData, getSiteData, getI18nData, getProject, abortPendingLoads } from './data.js';
 import { applyTranslations, initLangToggle, onLocaleChange } from './i18n.js';
 import { initCursor } from './cursor.js';
 import { initMobileMenu } from './mobile-menu.js';
@@ -17,23 +17,54 @@ const isIllustrationPage = window.location.pathname.includes('illustrations.html
 const isOtherPage = window.location.pathname.includes('other.html');
 const params = new URLSearchParams(window.location.search);
 
-const SCROLL_KEY = 'scrollPos_' + window.location.pathname + window.location.search;
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+function scrollKey() {
+  return 'scrollPos:' + location.pathname + location.search;
+}
 
 function saveScroll() {
-  try { sessionStorage.setItem(SCROLL_KEY, String(window.scrollY)); } catch (_) {}
+  try { sessionStorage.setItem(scrollKey(), String(window.scrollY)); } catch (_) {}
 }
 
 function restoreScroll() {
   try {
-    const saved = sessionStorage.getItem(SCROLL_KEY);
-    if (saved) {
-      sessionStorage.removeItem(SCROLL_KEY);
-      window.scrollTo(0, parseInt(saved, 10));
-    }
+    const saved = sessionStorage.getItem(scrollKey());
+    if (!saved) return;
+    sessionStorage.removeItem(scrollKey());
+    const y = parseInt(saved, 10);
+    if (y <= 0) return;
+    const apply = () => window.scrollTo({ top: y, behavior: 'instant' });
+    apply();
+    requestAnimationFrame(apply);
+    setTimeout(apply, 100);
+    setTimeout(apply, 300);
   } catch (_) {}
 }
 
-window.addEventListener('pagehide', saveScroll);
+let scrollTimer = null;
+function throttleSave() {
+  if (scrollTimer) return;
+  scrollTimer = setTimeout(() => {
+    scrollTimer = null;
+    saveScroll();
+  }, 150);
+}
+
+window.addEventListener('scroll', throttleSave, { passive: true });
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden') saveScroll();
+});
+
+window.addEventListener('pagehide', () => {
+  saveScroll();
+  abortPendingLoads();
+});
+
+window.addEventListener('pageshow', (e) => {
+  if (e.persisted) restoreScroll();
+});
 
 function hidePageLoader() {
   const loader = document.getElementById('page-loader');
