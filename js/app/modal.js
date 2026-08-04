@@ -9,12 +9,14 @@ let currentIndex = 0;
 let animating = false;
 let exitTimer = null;
 let enterTimer = null;
+let openGuard = false;
+let openGuardTimer = null;
 
 let touchStartX = 0;
 let touchStartY = 0;
 let touchMoved = false;
 
-function clearAnimationTimers() {
+function clearTimers() {
   if (exitTimer) {
     clearTimeout(exitTimer);
     exitTimer = null;
@@ -22,6 +24,10 @@ function clearAnimationTimers() {
   if (enterTimer) {
     clearTimeout(enterTimer);
     enterTimer = null;
+  }
+  if (openGuardTimer) {
+    clearTimeout(openGuardTimer);
+    openGuardTimer = null;
   }
 }
 
@@ -52,8 +58,9 @@ function show() {
 }
 
 function close() {
-  clearAnimationTimers();
+  clearTimers();
   animating = false;
+  openGuard = false;
 
   try {
     modalEl?.classList.remove('active');
@@ -63,18 +70,20 @@ function close() {
     }
     if (imgEl) {
       imgEl.style.display = '';
-      imgEl.className = 'modal-image';
+      imgEl.classList.remove('is-fading');
     }
   } catch (_) {}
 
   document.documentElement.classList.remove('modal-open');
 }
 
-function animateTo(newIndex, dir) {
+function animateTo(newIndex) {
   if (animating || newIndex < 0 || newIndex >= items.length) return;
   if (newIndex === currentIndex) return;
 
-  const isVideo = !!items[newIndex].videoId;
+  const nextItem = items[newIndex];
+  const isVideo = !!nextItem.videoId;
+
   if (isVideo) {
     currentIndex = newIndex;
     setContent();
@@ -82,38 +91,31 @@ function animateTo(newIndex, dir) {
   }
 
   animating = true;
-  const exitClass = dir === 'next' ? 'slide-out-left' : 'slide-out-right';
-  const enterClass = dir === 'next' ? 'slide-in-right' : 'slide-in-left';
-
-  imgEl.classList.add(exitClass);
+  imgEl.classList.add('is-fading');
 
   exitTimer = setTimeout(() => {
     currentIndex = newIndex;
-    const item = items[currentIndex];
-    imgEl.src = item.src;
-    imgEl.alt = item.caption || '';
-    captionEl.textContent = item.caption || item.title || '';
+    imgEl.src = nextItem.src;
+    imgEl.alt = nextItem.caption || '';
+    captionEl.textContent = nextItem.caption || nextItem.title || '';
     counterEl.textContent = `${currentIndex + 1} / ${items.length}`;
-
-    imgEl.classList.remove(exitClass);
-    imgEl.classList.add(enterClass);
+    imgEl.classList.remove('is-fading');
 
     enterTimer = setTimeout(() => {
-      imgEl.classList.remove(enterClass);
       animating = false;
       enterTimer = null;
     }, 250);
 
     exitTimer = null;
-  }, 200);
+  }, 250);
 }
 
 function prev() {
-  animateTo(currentIndex - 1, 'prev');
+  animateTo(currentIndex - 1);
 }
 
 function next() {
-  animateTo(currentIndex + 1, 'next');
+  animateTo(currentIndex + 1);
 }
 
 function handleKeydown(e) {
@@ -154,7 +156,7 @@ function handleTouchEnd(e) {
 }
 
 function handleImageClick(e) {
-  if (touchMoved) return;
+  if (openGuard || touchMoved) return;
 
   const rect = e.currentTarget.getBoundingClientRect();
   const x = e.clientX - rect.left;
@@ -194,12 +196,22 @@ export function initModal() {
 }
 
 export function openModal(newItems, index) {
-  clearAnimationTimers();
+  clearTimers();
   items = newItems;
   currentIndex = index;
   animating = false;
   touchMoved = false;
-  if (imgEl) imgEl.className = 'modal-image';
+  openGuard = true;
+
+  if (imgEl) {
+    imgEl.classList.remove('is-fading');
+  }
+
+  openGuardTimer = setTimeout(() => {
+    openGuard = false;
+    openGuardTimer = null;
+  }, 350);
+
   show();
 }
 
