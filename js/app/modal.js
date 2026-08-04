@@ -5,8 +5,10 @@ let captionEl = null;
 let counterEl = null;
 let items = [];
 let currentIndex = 0;
+let animating = false;
+let animPhase = '';
 
-function show() {
+function setContent() {
   const item = items?.[currentIndex];
   if (!item) return;
   const isVideo = !!item.videoId;
@@ -23,10 +25,8 @@ function show() {
   counterEl.textContent = `${currentIndex + 1} / ${items.length}`;
 }
 
-function open(newItems, index) {
-  items = newItems;
-  currentIndex = index;
-  show();
+function show() {
+  setContent();
   modalEl.classList.add('active');
   document.documentElement.classList.add('modal-open');
 }
@@ -34,31 +34,72 @@ function open(newItems, index) {
 function close() {
   try {
     modalEl?.classList.remove('active');
-    if (videoEl) { videoEl.src = ''; videoEl.style.display = 'none'; }
-    if (imgEl) imgEl.style.display = '';
+    if (videoEl) {
+      videoEl.src = '';
+      videoEl.style.display = 'none';
+    }
+    if (imgEl) {
+      imgEl.style.display = '';
+      imgEl.className = 'modal-image';
+    }
   } catch (_) {}
   document.documentElement.classList.remove('modal-open');
 }
 
-function prev() {
-  if (currentIndex > 0) {
-    currentIndex--;
-    show();
+function animateTo(newIndex, dir) {
+  if (animating || newIndex < 0 || newIndex >= items.length) return;
+  if (newIndex === currentIndex) return;
+
+  const isVideo = !!items[newIndex].videoId;
+  if (isVideo) {
+    currentIndex = newIndex;
+    setContent();
+    return;
   }
+
+  animating = true;
+  animPhase = 'exit';
+  const exitClass = dir === 'next' ? 'slide-out-left' : 'slide-out-right';
+  const enterClass = dir === 'next' ? 'slide-in-right' : 'slide-in-left';
+
+  imgEl.classList.add(exitClass);
+
+  imgEl.addEventListener('animationend', function onAnim() {
+    if (animPhase === 'exit') {
+      imgEl.removeEventListener('animationend', onAnim);
+
+      currentIndex = newIndex;
+      const item = items[currentIndex];
+      imgEl.src = item.src;
+      imgEl.alt = item.caption || '';
+      captionEl.textContent = item.caption || item.title || '';
+      counterEl.textContent = `${currentIndex + 1} / ${items.length}`;
+
+      imgEl.classList.remove(exitClass);
+      animPhase = 'enter';
+      imgEl.classList.add(enterClass);
+    } else {
+      imgEl.removeEventListener('animationend', onAnim);
+      imgEl.classList.remove(enterClass);
+      animPhase = '';
+      animating = false;
+    }
+  });
 }
 
-function next() {
-  if (currentIndex < items.length - 1) {
-    currentIndex++;
-    show();
-  }
+function prev(dir) {
+  animateTo(currentIndex - 1, dir || 'prev');
+}
+
+function next(dir) {
+  animateTo(currentIndex + 1, dir || 'next');
 }
 
 function handleKeydown(e) {
   if (!modalEl?.classList.contains('active')) return;
   if (e.key === 'Escape') close();
-  if (e.key === 'ArrowLeft') prev();
-  if (e.key === 'ArrowRight') next();
+  if (e.key === 'ArrowLeft') prev('prev');
+  if (e.key === 'ArrowRight') next('next');
 }
 
 let touchStartX = 0;
@@ -73,16 +114,16 @@ function handleTouchEnd(e) {
   const dx = e.changedTouches[0].screenX - touchStartX;
   const dy = e.changedTouches[0].screenY - touchStartY;
   if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
-    if (dx < 0) next();
-    else prev();
+    if (dx < 0) next('next');
+    else prev('prev');
   }
 }
 
 function handleImageClick(e) {
   const rect = e.currentTarget.getBoundingClientRect();
   const x = e.clientX - rect.left;
-  if (x < rect.width / 3) prev();
-  else if (x > rect.width * 2 / 3) next();
+  if (x < rect.width / 3) prev('prev');
+  else if (x > (rect.width * 2) / 3) next('next');
 }
 
 export function initModal() {
@@ -99,8 +140,8 @@ export function initModal() {
   videoEl.style.display = 'none';
 
   modalEl.querySelector('.modal-close')?.addEventListener('click', close);
-  modalEl.querySelector('.modal-prev')?.addEventListener('click', prev);
-  modalEl.querySelector('.modal-next')?.addEventListener('click', next);
+  modalEl.querySelector('.modal-prev')?.addEventListener('click', () => prev('prev'));
+  modalEl.querySelector('.modal-next')?.addEventListener('click', () => next('next'));
 
   modalEl.addEventListener('touchstart', handleTouchStart, { passive: true });
   modalEl.addEventListener('touchend', handleTouchEnd, { passive: true });
@@ -115,7 +156,11 @@ export function initModal() {
 }
 
 export function openModal(newItems, index) {
-  open(newItems, index);
+  items = newItems;
+  currentIndex = index;
+  animating = false;
+  if (imgEl) imgEl.className = 'modal-image';
+  show();
 }
 
 export function closeModal() {

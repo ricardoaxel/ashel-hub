@@ -8,7 +8,9 @@
   justify-content: center;
   opacity: 0;
   pointer-events: none;
-  transition: background 0.25s ease, opacity 0.25s ease;
+  transition:
+    background 0.25s ease,
+    opacity 0.25s ease;
 }
 
 html.modal-open {
@@ -45,6 +47,52 @@ html.modal-open body {
   max-width: 85vw;
   max-height: 80vh;
   object-fit: contain;
+}
+
+.modal-image.slide-out-left {
+  animation: modalSlideOutLeft 0.2s ease forwards;
+}
+.modal-image.slide-in-right {
+  animation: modalSlideInRight 0.25s ease forwards;
+}
+.modal-image.slide-out-right {
+  animation: modalSlideOutRight 0.2s ease forwards;
+}
+.modal-image.slide-in-left {
+  animation: modalSlideInLeft 0.25s ease forwards;
+}
+
+@keyframes modalSlideOutLeft {
+  to {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+}
+@keyframes modalSlideInRight {
+  from {
+    transform: translateX(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes modalSlideOutRight {
+  to {
+    transform: translateX(30px);
+    opacity: 0;
+  }
+}
+@keyframes modalSlideInLeft {
+  from {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 .modal-video {
@@ -118,14 +166,16 @@ html.modal-open body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 10;
+  z-index: 11;
   transition: all 0.2s;
   opacity: 0;
 }
 
 .gallery-modal.active .modal-close {
   opacity: 1;
-  transition: opacity 0.3s ease 0.45s, all 0.2s;
+  transition:
+    opacity 0.3s ease 0.45s,
+    all 0.2s;
 }
 
 .modal-close:hover {
@@ -148,7 +198,9 @@ html.modal-open body {
   font-family: var(--mono);
   line-height: 1;
   opacity: 0;
-  transition: color 0.2s, opacity 0.3s ease 0.45s;
+  transition:
+    color 0.2s,
+    opacity 0.3s ease 0.45s;
 }
 
 .gallery-modal.active .modal-btn {
@@ -203,24 +255,7 @@ html.modal-open body {
   }
 
   .modal-btn {
-    padding: 0;
-    font-size: 1.5rem;
-    width: 20%;
-    height: 100%;
-    top: 0;
-    transform: none;
-    background: rgba(5, 5, 5, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .modal-prev {
-    left: 0;
-  }
-
-  .modal-next {
-    right: 0;
+    display: none;
   }
 
   .modal-close {
