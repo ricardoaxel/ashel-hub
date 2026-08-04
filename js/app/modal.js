@@ -6,10 +6,24 @@ let counterEl = null;
 
 let items = [];
 let currentIndex = 0;
+let animating = false;
+let exitTimer = null;
+let enterTimer = null;
 
 let touchStartX = 0;
 let touchStartY = 0;
 let touchMoved = false;
+
+function clearAnimationTimers() {
+  if (exitTimer) {
+    clearTimeout(exitTimer);
+    exitTimer = null;
+  }
+  if (enterTimer) {
+    clearTimeout(enterTimer);
+    enterTimer = null;
+  }
+}
 
 function setContent() {
   const item = items?.[currentIndex];
@@ -38,6 +52,9 @@ function show() {
 }
 
 function close() {
+  clearAnimationTimers();
+  animating = false;
+
   try {
     modalEl?.classList.remove('active');
     if (videoEl) {
@@ -46,24 +63,57 @@ function close() {
     }
     if (imgEl) {
       imgEl.style.display = '';
+      imgEl.className = 'modal-image';
     }
   } catch (_) {}
+
   document.documentElement.classList.remove('modal-open');
 }
 
-function goTo(newIndex) {
-  if (newIndex < 0 || newIndex >= items.length) return;
+function animateTo(newIndex, dir) {
+  if (animating || newIndex < 0 || newIndex >= items.length) return;
   if (newIndex === currentIndex) return;
-  currentIndex = newIndex;
-  setContent();
+
+  const isVideo = !!items[newIndex].videoId;
+  if (isVideo) {
+    currentIndex = newIndex;
+    setContent();
+    return;
+  }
+
+  animating = true;
+  const exitClass = dir === 'next' ? 'slide-out-left' : 'slide-out-right';
+  const enterClass = dir === 'next' ? 'slide-in-right' : 'slide-in-left';
+
+  imgEl.classList.add(exitClass);
+
+  exitTimer = setTimeout(() => {
+    currentIndex = newIndex;
+    const item = items[currentIndex];
+    imgEl.src = item.src;
+    imgEl.alt = item.caption || '';
+    captionEl.textContent = item.caption || item.title || '';
+    counterEl.textContent = `${currentIndex + 1} / ${items.length}`;
+
+    imgEl.classList.remove(exitClass);
+    imgEl.classList.add(enterClass);
+
+    enterTimer = setTimeout(() => {
+      imgEl.classList.remove(enterClass);
+      animating = false;
+      enterTimer = null;
+    }, 250);
+
+    exitTimer = null;
+  }, 200);
 }
 
 function prev() {
-  goTo(currentIndex - 1);
+  animateTo(currentIndex - 1, 'prev');
 }
 
 function next() {
-  goTo(currentIndex + 1);
+  animateTo(currentIndex + 1, 'next');
 }
 
 function handleKeydown(e) {
@@ -103,6 +153,15 @@ function handleTouchEnd(e) {
   }
 }
 
+function handleImageClick(e) {
+  if (touchMoved) return;
+
+  const rect = e.currentTarget.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  if (x < rect.width / 3) prev();
+  else if (x > (rect.width * 2) / 3) next();
+}
+
 export function initModal() {
   modalEl = document.getElementById('gallery-modal');
   if (!modalEl) return;
@@ -124,6 +183,8 @@ export function initModal() {
   modalEl.addEventListener('touchmove', handleTouchMove, { passive: true });
   modalEl.addEventListener('touchend', handleTouchEnd, { passive: false });
 
+  imgEl?.addEventListener('click', handleImageClick);
+
   modalEl.addEventListener('click', (e) => {
     if (touchMoved) return;
     if (e.target === modalEl) close();
@@ -133,9 +194,12 @@ export function initModal() {
 }
 
 export function openModal(newItems, index) {
+  clearAnimationTimers();
   items = newItems;
   currentIndex = index;
+  animating = false;
   touchMoved = false;
+  if (imgEl) imgEl.className = 'modal-image';
   show();
 }
 
