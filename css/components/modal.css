@@ -47,12 +47,6 @@ html.modal-open body {
   max-width: 85vw;
   max-height: 80vh;
   object-fit: contain;
-  opacity: 1;
-  transition: opacity 0.25s ease;
-}
-
-.modal-image.is-fading {
-  opacity: 0;
 }
 
 .modal-video {

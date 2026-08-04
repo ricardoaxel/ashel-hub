@@ -6,30 +6,10 @@ let counterEl = null;
 
 let items = [];
 let currentIndex = 0;
-let animating = false;
-let exitTimer = null;
-let enterTimer = null;
-let openGuard = false;
-let openGuardTimer = null;
 
 let touchStartX = 0;
 let touchStartY = 0;
 let touchMoved = false;
-
-function clearTimers() {
-  if (exitTimer) {
-    clearTimeout(exitTimer);
-    exitTimer = null;
-  }
-  if (enterTimer) {
-    clearTimeout(enterTimer);
-    enterTimer = null;
-  }
-  if (openGuardTimer) {
-    clearTimeout(openGuardTimer);
-    openGuardTimer = null;
-  }
-}
 
 function setContent() {
   const item = items?.[currentIndex];
@@ -58,10 +38,6 @@ function show() {
 }
 
 function close() {
-  clearTimers();
-  animating = false;
-  openGuard = false;
-
   try {
     modalEl?.classList.remove('active');
     if (videoEl) {
@@ -70,52 +46,24 @@ function close() {
     }
     if (imgEl) {
       imgEl.style.display = '';
-      imgEl.classList.remove('is-fading');
     }
   } catch (_) {}
-
   document.documentElement.classList.remove('modal-open');
 }
 
-function animateTo(newIndex) {
-  if (animating || newIndex < 0 || newIndex >= items.length) return;
+function goTo(newIndex) {
+  if (newIndex < 0 || newIndex >= items.length) return;
   if (newIndex === currentIndex) return;
-
-  const nextItem = items[newIndex];
-  const isVideo = !!nextItem.videoId;
-
-  if (isVideo) {
-    currentIndex = newIndex;
-    setContent();
-    return;
-  }
-
-  animating = true;
-  imgEl.classList.add('is-fading');
-
-  exitTimer = setTimeout(() => {
-    currentIndex = newIndex;
-    imgEl.src = nextItem.src;
-    imgEl.alt = nextItem.caption || '';
-    captionEl.textContent = nextItem.caption || nextItem.title || '';
-    counterEl.textContent = `${currentIndex + 1} / ${items.length}`;
-    imgEl.classList.remove('is-fading');
-
-    enterTimer = setTimeout(() => {
-      animating = false;
-      enterTimer = null;
-    }, 250);
-
-    exitTimer = null;
-  }, 250);
+  currentIndex = newIndex;
+  setContent();
 }
 
 function prev() {
-  animateTo(currentIndex - 1);
+  goTo(currentIndex - 1);
 }
 
 function next() {
-  animateTo(currentIndex + 1);
+  goTo(currentIndex + 1);
 }
 
 function handleKeydown(e) {
@@ -155,15 +103,6 @@ function handleTouchEnd(e) {
   }
 }
 
-function handleImageClick(e) {
-  if (openGuard || touchMoved) return;
-
-  const rect = e.currentTarget.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  if (x < rect.width / 3) prev();
-  else if (x > (rect.width * 2) / 3) next();
-}
-
 export function initModal() {
   modalEl = document.getElementById('gallery-modal');
   if (!modalEl) return;
@@ -185,8 +124,6 @@ export function initModal() {
   modalEl.addEventListener('touchmove', handleTouchMove, { passive: true });
   modalEl.addEventListener('touchend', handleTouchEnd, { passive: false });
 
-  imgEl?.addEventListener('click', handleImageClick);
-
   modalEl.addEventListener('click', (e) => {
     if (touchMoved) return;
     if (e.target === modalEl) close();
@@ -196,22 +133,9 @@ export function initModal() {
 }
 
 export function openModal(newItems, index) {
-  clearTimers();
   items = newItems;
   currentIndex = index;
-  animating = false;
   touchMoved = false;
-  openGuard = true;
-
-  if (imgEl) {
-    imgEl.classList.remove('is-fading');
-  }
-
-  openGuardTimer = setTimeout(() => {
-    openGuard = false;
-    openGuardTimer = null;
-  }, 350);
-
   show();
 }
 
