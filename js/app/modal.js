@@ -6,26 +6,10 @@ let counterEl = null;
 
 let items = [];
 let currentIndex = 0;
-let animating = false;
-let exitTimer = null;
-let enterTimer = null;
 
-const SWIPE_THRESHOLD = 50;
-const MOVE_THRESHOLD = 10;
 let touchStartX = 0;
 let touchStartY = 0;
 let touchMoved = false;
-
-function clearAnimationTimers() {
-  if (exitTimer) {
-    clearTimeout(exitTimer);
-    exitTimer = null;
-  }
-  if (enterTimer) {
-    clearTimeout(enterTimer);
-    enterTimer = null;
-  }
-}
 
 function setContent() {
   const item = items?.[currentIndex];
@@ -54,9 +38,6 @@ function show() {
 }
 
 function close() {
-  clearAnimationTimers();
-  animating = false;
-
   try {
     modalEl?.classList.remove('active');
     if (videoEl) {
@@ -65,57 +46,24 @@ function close() {
     }
     if (imgEl) {
       imgEl.style.display = '';
-      imgEl.className = 'modal-image';
     }
   } catch (_) {}
-
   document.documentElement.classList.remove('modal-open');
 }
 
-function animateTo(newIndex, dir) {
-  if (animating || newIndex < 0 || newIndex >= items.length) return;
+function goTo(newIndex) {
+  if (newIndex < 0 || newIndex >= items.length) return;
   if (newIndex === currentIndex) return;
-
-  const isVideo = !!items[newIndex].videoId;
-  if (isVideo) {
-    currentIndex = newIndex;
-    setContent();
-    return;
-  }
-
-  animating = true;
-  const exitClass = dir === 'next' ? 'slide-out-left' : 'slide-out-right';
-  const enterClass = dir === 'next' ? 'slide-in-right' : 'slide-in-left';
-
-  imgEl.classList.add(exitClass);
-
-  exitTimer = setTimeout(() => {
-    currentIndex = newIndex;
-    const item = items[currentIndex];
-    imgEl.src = item.src;
-    imgEl.alt = item.caption || '';
-    captionEl.textContent = item.caption || item.title || '';
-    counterEl.textContent = `${currentIndex + 1} / ${items.length}`;
-
-    imgEl.classList.remove(exitClass);
-    imgEl.classList.add(enterClass);
-
-    enterTimer = setTimeout(() => {
-      imgEl.classList.remove(enterClass);
-      animating = false;
-      enterTimer = null;
-    }, 250);
-
-    exitTimer = null;
-  }, 200);
+  currentIndex = newIndex;
+  setContent();
 }
 
 function prev() {
-  animateTo(currentIndex - 1, 'prev');
+  goTo(currentIndex - 1);
 }
 
 function next() {
-  animateTo(currentIndex + 1, 'next');
+  goTo(currentIndex + 1);
 }
 
 function handleKeydown(e) {
@@ -126,15 +74,17 @@ function handleKeydown(e) {
 }
 
 function handleTouchStart(e) {
-  touchStartX = e.changedTouches[0].screenX;
-  touchStartY = e.changedTouches[0].screenY;
+  const t = e.changedTouches[0];
+  touchStartX = t.screenX;
+  touchStartY = t.screenY;
   touchMoved = false;
 }
 
 function handleTouchMove(e) {
-  const dx = e.changedTouches[0].screenX - touchStartX;
-  const dy = e.changedTouches[0].screenY - touchStartY;
-  if (Math.abs(dx) > MOVE_THRESHOLD || Math.abs(dy) > MOVE_THRESHOLD) {
+  const t = e.changedTouches[0];
+  const dx = Math.abs(t.screenX - touchStartX);
+  const dy = Math.abs(t.screenY - touchStartY);
+  if (dx > 20 || dy > 20) {
     touchMoved = true;
   }
 }
@@ -142,22 +92,15 @@ function handleTouchMove(e) {
 function handleTouchEnd(e) {
   if (!touchMoved) return;
 
-  const dx = e.changedTouches[0].screenX - touchStartX;
-  const dy = e.changedTouches[0].screenY - touchStartY;
+  const t = e.changedTouches[0];
+  const dx = t.screenX - touchStartX;
+  const dy = t.screenY - touchStartY;
 
-  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > SWIPE_THRESHOLD) {
+  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+    e.preventDefault();
     if (dx < 0) next();
     else prev();
   }
-}
-
-function handleImageClick(e) {
-  if (touchMoved) return;
-
-  const rect = e.currentTarget.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  if (x < rect.width / 3) prev();
-  else if (x > (rect.width * 2) / 3) next();
 }
 
 export function initModal() {
@@ -179,11 +122,10 @@ export function initModal() {
 
   modalEl.addEventListener('touchstart', handleTouchStart, { passive: true });
   modalEl.addEventListener('touchmove', handleTouchMove, { passive: true });
-  modalEl.addEventListener('touchend', handleTouchEnd, { passive: true });
-
-  imgEl?.addEventListener('click', handleImageClick);
+  modalEl.addEventListener('touchend', handleTouchEnd, { passive: false });
 
   modalEl.addEventListener('click', (e) => {
+    if (touchMoved) return;
     if (e.target === modalEl) close();
   });
 
@@ -191,11 +133,9 @@ export function initModal() {
 }
 
 export function openModal(newItems, index) {
-  clearAnimationTimers();
   items = newItems;
   currentIndex = index;
-  animating = false;
-  if (imgEl) imgEl.className = 'modal-image';
+  touchMoved = false;
   show();
 }
 
