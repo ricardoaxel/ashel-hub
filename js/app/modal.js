@@ -6,7 +6,6 @@ let counterEl = null;
 let items = [];
 let currentIndex = 0;
 let animating = false;
-let animPhase = '';
 
 function setContent() {
   const item = items?.[currentIndex];
@@ -58,33 +57,27 @@ function animateTo(newIndex, dir) {
   }
 
   animating = true;
-  animPhase = 'exit';
   const exitClass = dir === 'next' ? 'slide-out-left' : 'slide-out-right';
   const enterClass = dir === 'next' ? 'slide-in-right' : 'slide-in-left';
 
   imgEl.classList.add(exitClass);
 
-  imgEl.addEventListener('animationend', function onAnim() {
-    if (animPhase === 'exit') {
-      imgEl.removeEventListener('animationend', onAnim);
+  setTimeout(() => {
+    currentIndex = newIndex;
+    const item = items[currentIndex];
+    imgEl.src = item.src;
+    imgEl.alt = item.caption || '';
+    captionEl.textContent = item.caption || item.title || '';
+    counterEl.textContent = `${currentIndex + 1} / ${items.length}`;
 
-      currentIndex = newIndex;
-      const item = items[currentIndex];
-      imgEl.src = item.src;
-      imgEl.alt = item.caption || '';
-      captionEl.textContent = item.caption || item.title || '';
-      counterEl.textContent = `${currentIndex + 1} / ${items.length}`;
+    imgEl.classList.remove(exitClass);
+    imgEl.classList.add(enterClass);
 
-      imgEl.classList.remove(exitClass);
-      animPhase = 'enter';
-      imgEl.classList.add(enterClass);
-    } else {
-      imgEl.removeEventListener('animationend', onAnim);
+    setTimeout(() => {
       imgEl.classList.remove(enterClass);
-      animPhase = '';
       animating = false;
-    }
-  });
+    }, 250);
+  }, 200);
 }
 
 function prev(dir) {
