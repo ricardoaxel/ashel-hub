@@ -33,20 +33,12 @@
 }
 
 html {
-  scrollbar-width: thin;
-  scrollbar-color: var(--border-strong) var(--bg);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--border-strong);
+  display: none;
 }
 
 body {

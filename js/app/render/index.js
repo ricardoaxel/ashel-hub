@@ -89,7 +89,9 @@ export function renderIndexContent(isUpdate = false) {
           </div>
           <div class="project-info">
             <span class="project-number">${String(i + 1).padStart(2, '0')}</span>
-            ${p.yearsActive ? `
+            ${
+              p.yearsActive
+                ? `
             <div class="project-timeline">
               <div class="tl-track">
                 <span class="tl-dot"></span>
@@ -100,7 +102,9 @@ export function renderIndexContent(isUpdate = false) {
                 <span class="tl-year">${p.yearsActive.start}</span>
                 <span class="tl-year">${p.yearsActive.end || t.labels?.present || 'Present'}</span>
               </div>
-            </div>` : ''}
+            </div>`
+                : ''
+            }
             <h2 class="project-name">${p.name}</h2>
             <div class="project-genres">
               ${p.genres.map((g) => `<span class="genre-tag">${g}</span>`).join('')}
@@ -126,7 +130,9 @@ export function renderIndexContent(isUpdate = false) {
       (p.releases || []).forEach((r) => {
         if (r.type === 'Single' || r.type === 'Cover') return;
         let year = 0;
-        try { year = parseInt((r.year || '').split(' ').pop()) || 0; } catch (_) {}
+        try {
+          year = parseInt((r.year || '').split(' ').pop()) || 0;
+        } catch (_) {}
         allReleases.push({
           project: p.id,
           projectName: p.name,
@@ -252,11 +258,8 @@ export function renderIndexContent(isUpdate = false) {
     [allPhotos[i], allPhotos[j]] = [allPhotos[j], allPhotos[i]];
   }
   const isMobile = window.innerWidth <= 768;
-  const galleryPreviewCount = Math.min(isMobile ? 6 : 9, allPhotos.length);
-  document.getElementById('gallery-count').textContent = String(allPhotos.length).padStart(
-    2,
-    '0'
-  );
+  const galleryPreviewCount = Math.min(window.innerWidth <= 1024 ? 4 : 6, allPhotos.length);
+  document.getElementById('gallery-count').textContent = String(allPhotos.length).padStart(2, '0');
   if (!isUpdate) {
     const galleryHtml = allPhotos
       .slice(0, galleryPreviewCount)
@@ -311,19 +314,24 @@ export function renderIndexContent(isUpdate = false) {
     }
   }
 
-  document.getElementById('illustrations-count').textContent = String(data.illustrations.length).padStart(
-    2,
-    '0'
-  );
+  document.getElementById('illustrations-count').textContent = String(
+    data.illustrations.length
+  ).padStart(2, '0');
 
-  const previewCount = Math.min(isMobile ? 3 : 6, data.illustrations.length);
+  let previewCount = 12;
+  if (window.innerWidth <= 480) {
+    previewCount = 3;
+  } else if (window.innerWidth <= 1024) {
+    previewCount = 4;
+  }
+  previewCount = Math.min(previewCount, data.illustrations.length);
   const totalCount = data.illustrations.length;
   const illGrid = document.getElementById('illustrations-grid');
   const illSection = illGrid.parentNode;
 
   if (!isUpdate) {
     const illustrationsHtml = data.illustrations
-      .slice(0, isMobile ? 3 : 6)
+      .slice(0, previewCount)
       .map(
         (item, i) => `
         <div class="illustration-item" data-label="${t.labels?.illustration || 'Illustration'} ${String(i + 1).padStart(2, '0')}" data-index="${i}">
@@ -371,7 +379,13 @@ export function renderIndexContent(isUpdate = false) {
         }
       }
     });
-    const videoPreviewCount = Math.min(isMobile ? 3 : 6, allVideos.length);
+    let videoPreviewCount = 6;
+    if (window.innerWidth <= 768) {
+      videoPreviewCount = 3;
+    } else if (window.innerWidth <= 1024) {
+      videoPreviewCount = 4;
+    }
+    videoPreviewCount = Math.min(videoPreviewCount, allVideos.length);
     document.getElementById('videos-count').textContent = String(allVideos.length).padStart(2, '0');
     const videosHtml = allVideos
       .slice(0, videoPreviewCount)
