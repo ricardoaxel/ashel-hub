@@ -36,6 +36,7 @@ export function renderProjectContent() {
   }
   const project = currentProject;
   const projT = t.projects?.[project.id] || {};
+  const projectPhotos = project.photos?.map((p) => ({ ...p, projectName: project.name })) || [];
 
   const genresHtml = project.genres.map((g) => `<span class="genre-tag">${g}</span>`).join('');
   const membersHtml = project.members
@@ -195,8 +196,8 @@ export function renderProjectContent() {
           .map(
             (p, i) => `
           <div class="photo-card" data-type="photos" data-index="${i}">
-            <img src="${p.src}" alt="${p.caption || ''}" loading="lazy" decoding="async">
-            ${p.caption ? `<span class="photo-caption">${p.caption}</span>` : ''}
+            <img src="${p.src}" alt="${project.name}" loading="lazy" decoding="async">
+            <span class="photo-caption">${project.name}</span>
           </div>
         `
           )
@@ -271,7 +272,7 @@ export function renderProjectContent() {
     e.preventDefault();
     try {
       if (isMobile) {
-        openModal(project.photos, photoPreview);
+        openModal(projectPhotos, photoPreview);
         return;
       }
       const grid = document.getElementById('photos-grid');
@@ -281,8 +282,8 @@ export function renderProjectContent() {
         .map(
           (p, i) => `
       <div class="photo-card" data-type="photos" data-index="${photoPreview + i}">
-        <img src="${p.src}" alt="${p.caption || ''}" loading="lazy" decoding="async">
-        ${p.caption ? `<span class="photo-caption">${p.caption}</span>` : ''}
+        <img src="${p.src}" alt="${project.name}" loading="lazy" decoding="async">
+        <span class="photo-caption">${project.name}</span>
       </div>`
         )
         .join('');
@@ -325,7 +326,7 @@ export function renderProjectContent() {
     card.addEventListener('click', () => {
       const type = card.dataset.type;
       const index = parseInt(card.dataset.index);
-      const items = type === 'photos' ? project.photos : sortedFlyers;
+      const items = type === 'photos' ? projectPhotos : sortedFlyers;
       if (!items?.[index]) return;
       if (!items[index].caption && items[index].src?.startsWith('data:')) return;
       openModal(items, index);

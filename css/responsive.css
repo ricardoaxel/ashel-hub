@@ -455,16 +455,6 @@
     color: var(--text-dim);
   }
 
-  .modal-btn:hover {
-    color: var(--text-muted) !important;
-  }
-
-  .modal-close:hover {
-    background: none;
-    border-color: var(--border-strong);
-    color: var(--text-dim);
-  }
-
   .hero-illustration-label:hover {
     background: rgba(5, 5, 5, 0.5);
     border-color: var(--border);
@@ -532,19 +522,6 @@
   .detail-members {
     margin-top: 2rem;
     padding-top: 1.5rem;
-  }
-
-  .modal-close {
-    top: 0.75rem;
-    right: 0.75rem;
-    width: 2rem;
-    height: 2rem;
-    font-size: 0.85rem;
-  }
-
-  .modal-btn {
-    padding: 1.5rem 0.5rem;
-    font-size: 1rem;
   }
 
   .hero-illustration-label {

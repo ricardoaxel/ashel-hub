@@ -1,222 +1,191 @@
-.gallery-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: rgba(5, 5, 5, 0);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition:
-    background 0.25s ease,
-    opacity 0.25s ease;
+/* GLightbox dark theme — minimal, brutalist portfolio style
+   Patterns applied:
+   - Near-black overlay to focus attention (lightbox pattern)
+   - Large, always-reachable controls with visible hover/focus states
+   - Caption anchored at the bottom so it never fights the close button
+   - Generous image area with minimal chrome
+   - Touch-first on mobile: swipe gestures, no tiny arrows */
+
+.glightbox-ashel .goverlay {
+  background: rgba(5, 5, 5, 0.97);
 }
 
-html.modal-open {
-  overflow: hidden;
-}
-
-html.modal-open body {
-  overflow: hidden;
-}
-
-.gallery-modal.active {
-  background: rgba(5, 5, 5, 0.94);
-  opacity: 1;
-  pointer-events: all;
-}
-
-.modal-image-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  max-width: 85vw;
-  max-height: 90vh;
-  transform: translateY(110%);
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.gallery-modal.active .modal-image-wrap {
-  transform: translateY(0);
-}
-
-.modal-image {
-  display: block;
-  max-width: 85vw;
-  max-height: 80vh;
-  object-fit: contain;
-}
-
-.modal-video {
-  width: 80vw;
-  max-width: 960px;
-  aspect-ratio: 16 / 9;
-  border: none;
-}
-
-.modal-meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 0.65rem 0.75rem;
-  border-top: 2px solid var(--section-accent, var(--accent));
-  opacity: 0;
-  transition: opacity 0.3s ease 0.4s;
-}
-
-.gallery-modal.active .modal-meta {
-  opacity: 1;
-}
-
-.modal-counter {
-  font-family: var(--mono);
-  font-size: 0.6rem;
-  color: var(--text-muted);
-  letter-spacing: 0.15em;
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-}
-
-.modal-counter::before {
-  content: '';
-  width: 5px;
-  height: 5px;
-  background: var(--section-accent, var(--accent));
-  flex-shrink: 0;
-}
-
-.modal-caption {
-  font-family: var(--mono);
-  font-size: 0.6rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  text-align: right;
-  flex: 1;
-  margin-left: 1.5rem;
-}
-
-.modal-caption:empty {
-  display: none;
-}
-
-.modal-close {
-  position: fixed;
-  top: 1.25rem;
-  right: 1.25rem;
-  width: 2.5rem;
-  height: 2.5rem;
-  background: none;
-  border: 1px solid var(--border-strong);
-  color: var(--text-dim);
-  font-size: 1rem;
-  font-family: var(--mono);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 11;
-  transition: all 0.2s;
-  opacity: 0;
-}
-
-.gallery-modal.active .modal-close {
-  opacity: 1;
-  transition:
-    opacity 0.3s ease 0.45s,
-    all 0.2s;
-}
-
-.modal-close:hover {
-  background: var(--section-accent, var(--accent));
-  border-color: var(--section-accent, var(--accent));
-  color: var(--bg);
-}
-
-.modal-btn {
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 3rem 1.5rem;
-  z-index: 10;
-  font-family: var(--mono);
-  line-height: 1;
-  opacity: 0;
-  transition:
-    color 0.2s,
-    opacity 0.3s ease 0.45s;
-}
-
-.gallery-modal.active .modal-btn {
-  opacity: 1;
-}
-
-.modal-btn:hover {
+/* Navigation buttons */
+.glightbox-ashel .gbtn {
+  position: absolute;
   color: var(--text);
+  background: rgba(5, 5, 5, 0.35);
+  border: 1px solid transparent;
+  border-radius: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  opacity: 0.7;
 }
 
-.modal-prev {
-  left: 0;
+.glightbox-ashel .gbtn:hover,
+.glightbox-ashel .gbtn:focus {
+  opacity: 1;
+  background: rgba(17, 17, 17, 0.9);
+  border-color: var(--border);
 }
 
-.modal-next {
-  right: 0;
+.glightbox-ashel .gbtn svg {
+  fill: var(--text);
+  width: 26px;
+  height: 26px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.8));
+}
+
+.glightbox-ashel .gclose {
+  top: 1rem;
+  right: 1rem;
+  z-index: 1001;
+}
+
+.glightbox-ashel .gprev {
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+}
+
+.glightbox-ashel .gnext {
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
 }
 
 @media (max-width: 768px) {
-  .modal-image-wrap {
-    max-width: 92vw;
-    max-height: 75vh;
-  }
-
-  .modal-image {
-    max-width: 92vw;
-    max-height: 65vh;
-  }
-
-  .modal-video {
-    width: 92vw;
-  }
-
-  .modal-meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.25rem;
-    padding: 0.5rem 0.5rem;
-  }
-
-  .modal-caption {
-    text-align: left;
-    margin-left: 0;
-  }
-
-  .modal-counter {
-    font-size: 0.55rem;
-  }
-
-  .modal-caption {
-    font-size: 0.55rem;
-  }
-
-  .modal-btn {
+  .glightbox-ashel .gprev,
+  .glightbox-ashel .gnext {
     display: none;
   }
 
-  .modal-close {
+  .glightbox-ashel .gclose {
     top: 0.75rem;
     right: 0.75rem;
-    width: 2rem;
-    height: 2rem;
-    font-size: 0.85rem;
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* Caption anchored at the bottom, readable over any image */
+.glightbox-ashel .gslide-description {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  text-align: center;
+  padding: 3rem 1rem 1.25rem;
+  margin: 0;
+  width: 100%;
+  max-width: none;
+  background: linear-gradient(
+    to top,
+    rgba(5, 5, 5, 0.95) 0%,
+    rgba(5, 5, 5, 0.6) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.glightbox-ashel .gdesc-inner {
+  padding: 0;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.glightbox-ashel .gslide-title,
+.glightbox-ashel .gslide-desc {
+  color: var(--text);
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+.glightbox-ashel .gslide-title {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  opacity: 0.95;
+}
+
+.glightbox-ashel .gslide-desc {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  margin-top: 0.25rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .glightbox-ashel .gslide-description {
+    padding: 2.5rem 1rem 1rem;
+    text-align: center;
+  }
+
+  .glightbox-ashel .gdesc-inner {
+    max-width: 100%;
+    padding: 0 0.5rem;
+  }
+
+  .glightbox-ashel .gslide-title,
+  .glightbox-ashel .gslide-desc {
+    letter-spacing: 0.08em;
+  }
+
+  .glightbox-ashel .gslide-title {
+    font-size: 0.55rem;
+  }
+
+  .glightbox-ashel .gslide-desc {
+    font-size: 0.5rem;
+  }
+}
+
+.glightbox-ashel .gloader {
+  border: 2px solid var(--border-strong);
+  border-top-color: var(--accent);
+}
+
+.glightbox-ashel .gslide-media {
+  box-shadow: none;
+}
+
+.glightbox-ashel .gslide-image img {
+  max-height: 94vh;
+  max-width: 96vw;
+}
+
+.glightbox-ashel .ginner-container {
+  padding: 0;
+}
+
+/* Mobile tap zones: tap left/right side of the image to navigate */
+@media (max-width: 768px) {
+  .glightbox-ashel .gslide-inner-content {
+    position: relative;
+  }
+
+  .glightbox-ashel .glightbox-tap-zone {
+    position: absolute;
+    top: 20%;
+    bottom: 20%;
+    width: 25%;
+    z-index: 5;
+    pointer-events: auto;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .glightbox-ashel .glightbox-tap-zone-left {
+    left: 0;
+  }
+
+  .glightbox-ashel .glightbox-tap-zone-right {
+    right: 0;
   }
 }

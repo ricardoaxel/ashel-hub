@@ -29,7 +29,11 @@
     <link rel="stylesheet" href="css/components/videos.css" />
     <link rel="stylesheet" href="css/effects.css" />
     <link rel="stylesheet" href="css/responsive.css" />
-    <meta http-equiv="Cache-Control" content="no-cache">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css"
+    />
+    <meta http-equiv="Cache-Control" content="no-cache" />
     <script>
       (function () {
         try {
@@ -49,6 +53,7 @@
       defer
       src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
     <script type="module" src="js/app/main.js?v=2"></script>
   </head>
   <body class="scanlines">
@@ -114,20 +119,6 @@
     </header>
 
     <main id="project-content"></main>
-
-    <div id="gallery-modal" class="gallery-modal">
-      <button class="modal-close" aria-label="Close">&#10005;</button>
-      <button class="modal-btn modal-prev">&larr;</button>
-      <div class="modal-image-wrap">
-        <img class="modal-image" src="" alt="" />
-        <iframe class="modal-video" src="" frameborder="0" allow="autoplay" allowfullscreen></iframe>
-        <div class="modal-meta">
-          <span class="modal-counter"></span>
-          <span class="modal-caption"></span>
-        </div>
-      </div>
-      <button class="modal-btn modal-next">&rarr;</button>
-    </div>
 
     <footer class="footer">
       <p>&copy; 2026 Ashel</p>

@@ -266,7 +266,7 @@ export function renderIndexContent(isUpdate = false) {
       .map(
         (photo, i) => `
         <div class="gallery-item" data-label="${photo.projectName}" data-index="${i}">
-          <img src="${photo.src}" alt="${photo.caption || photo.projectName}" loading="lazy" decoding="async">
+          <img src="${photo.src}" alt="${photo.projectName}" loading="lazy" decoding="async">
         </div>`
       )
       .join('');
@@ -295,7 +295,7 @@ export function renderIndexContent(isUpdate = false) {
           .map(
             (photo, i) => `
           <div class="gallery-item" data-label="${photo.projectName}" data-index="${galleryPreviewCount + i}">
-            <img src="${photo.src}" alt="${photo.caption || photo.projectName}" loading="lazy" decoding="async">
+            <img src="${photo.src}" alt="${photo.projectName}" loading="lazy" decoding="async">
           </div>`
           )
           .join('');
