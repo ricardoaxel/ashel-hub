@@ -152,6 +152,13 @@
   display: none;
 }
 
+/* Fade custom chrome during GLightbox close so it doesn't outlast the image */
+.glightbox-container.glightbox-ashel.glightbox-closing .gbadge,
+.glightbox-container.glightbox-ashel.glightbox-closing .gcounter {
+  opacity: 0 !important;
+  transition: opacity 0.2s ease;
+}
+
 @media (max-width: 768px) {
   .glightbox-container.glightbox-ashel .gbadge {
     top: 0.6rem;
