@@ -82,6 +82,10 @@
 }
 
 @media (max-width: 768px) {
+  #other-content .detail-header {
+    margin-bottom: 1.5rem;
+  }
+
   .other-detail-grid {
     grid-template-columns: 1fr;
   }
