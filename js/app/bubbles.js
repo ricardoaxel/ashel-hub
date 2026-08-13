@@ -117,7 +117,7 @@ export function initBubbles(siteData) {
 
       const dist = Math.hypot(b.x - dim.w / 2, b.y - dim.h / 2);
       const maxDist = Math.max(dim.w, dim.h) * 0.6;
-      const baseOpacity = 0.35 + (1 - dist / maxDist) * 0.1;
+      const baseOpacity = 0.15 + (1 - dist / maxDist) * 0.08;
       const target = b.hovered ? 0.9 : baseOpacity;
       const current = parseFloat(b.el.style.opacity || baseOpacity);
       b.el.style.opacity = current + (target - current) * 0.08;
