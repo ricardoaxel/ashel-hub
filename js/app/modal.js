@@ -1,4 +1,6 @@
 let lightbox = null;
+let lbOpen = false;
+let lbPushed = false;
 
 function toSlide(item) {
   if (item.videoId || item.source === 'youtube' || item.type === 'video') {
@@ -79,6 +81,43 @@ function addMobileTapZones(slide) {
   inner.appendChild(makeZone('right'));
 }
 
+function syncControls() {
+  if (!lightbox) return;
+  const container = document.querySelector('.glightbox-container');
+  if (!container) return;
+
+  const index = lightbox.getActiveSlideIndex();
+  const total = lightbox.elements.length;
+  const element = lightbox.elements[index] || {};
+
+  let counter = container.querySelector('.gcounter');
+  if (!counter) {
+    counter = document.createElement('div');
+    counter.className = 'gcounter';
+    container.appendChild(counter);
+  }
+  counter.textContent = `${index + 1} / ${total}`;
+
+  // Title badge lives directly in the container (outside the slider) so it
+  // stays fixed while the slider animates during drag/keyboard navigation.
+  let badge = container.querySelector('.gbadge');
+  if (!badge) {
+    badge = document.createElement('div');
+    badge.className = 'gbadge';
+    container.appendChild(badge);
+  }
+  const title = element.title || '';
+  badge.textContent = title;
+  badge.classList.toggle('is-empty', !title);
+
+  container.classList.toggle('is-first', index === 0);
+  container.classList.toggle('is-last', index === total - 1);
+}
+
+function handlePopState() {
+  if (lbOpen) closeModal();
+}
+
 export function initModal() {
   lightbox = window.GLightbox({
     selector: null,
@@ -94,11 +133,31 @@ export function initModal() {
     skin: 'ashel',
     moreLength: 0,
     descPosition: 'bottom',
+    onOpen: () => {
+      lbOpen = true;
+      if (!lbPushed) {
+        lbPushed = true;
+        history.pushState({ _glightbox: true }, '');
+      }
+      syncControls();
+    },
+    onClose: () => {
+      lbOpen = false;
+      if (lbPushed) {
+        lbPushed = false;
+        if (history.state && history.state._glightbox) history.back();
+      }
+    },
     afterSlideLoad: (data) => {
       addMobileTapZones(data.slide);
+      syncControls();
+    },
+    afterSlideChange: () => {
+      syncControls();
     },
   });
   window._lightbox = lightbox;
+  window.addEventListener('popstate', handlePopState);
 }
 
 export function openModal(items, index = 0) {
@@ -108,5 +167,5 @@ export function openModal(items, index = 0) {
 }
 
 export function closeModal() {
-  lightbox?.close();
+  if (lightbox && document.querySelector('.glightbox-container')) lightbox.close();
 }

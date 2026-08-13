@@ -258,7 +258,8 @@ export function renderIndexContent(isUpdate = false) {
     [allPhotos[i], allPhotos[j]] = [allPhotos[j], allPhotos[i]];
   }
   const isMobile = window.innerWidth <= 768;
-  const galleryPreviewCount = Math.min(window.innerWidth <= 1024 ? 4 : 6, allPhotos.length);
+  const columns = isMobile ? 2 : 3;
+  const galleryPreviewCount = Math.min(columns * 2, allPhotos.length);
   document.getElementById('gallery-count').textContent = String(allPhotos.length).padStart(2, '0');
   if (!isUpdate) {
     const galleryHtml = allPhotos
@@ -318,13 +319,8 @@ export function renderIndexContent(isUpdate = false) {
     data.illustrations.length
   ).padStart(2, '0');
 
-  let previewCount = 12;
-  if (window.innerWidth <= 480) {
-    previewCount = 3;
-  } else if (window.innerWidth <= 1024) {
-    previewCount = 4;
-  }
-  previewCount = Math.min(previewCount, data.illustrations.length);
+  const illColumns = window.innerWidth <= 480 ? 1 : window.innerWidth <= 768 ? 2 : 4;
+  let previewCount = Math.min(illColumns * 2, data.illustrations.length);
   const totalCount = data.illustrations.length;
   const illGrid = document.getElementById('illustrations-grid');
   const illSection = illGrid.parentNode;

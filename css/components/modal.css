@@ -1,17 +1,18 @@
 /* GLightbox dark theme — minimal, brutalist portfolio style
    Patterns applied:
    - Near-black overlay to focus attention (lightbox pattern)
-   - Large, always-reachable controls with visible hover/focus states
-   - Caption anchored at the bottom so it never fights the close button
-   - Generous image area with minimal chrome
-   - Touch-first on mobile: swipe gestures, no tiny arrows */
+   - Photo title as a centered badge at the top
+   - Position counter (1 / n) at the bottom center, flanked by the prev/next arrows
+   - Edge-aware navigation: arrows hide when there is no photo on that side
+   - Close via outside click and via the mobile back button
+   - Touch-first on mobile: swipe gestures plus tap zones */
 
-.glightbox-ashel .goverlay {
+.glightbox-container.glightbox-ashel .goverlay {
   background: rgba(5, 5, 5, 0.97);
 }
 
 /* Navigation buttons */
-.glightbox-ashel .gbtn {
+.glightbox-container.glightbox-ashel .gbtn {
   position: absolute;
   color: var(--text);
   background: rgba(5, 5, 5, 0.35);
@@ -26,152 +27,166 @@
   opacity: 0.7;
 }
 
-.glightbox-ashel .gbtn:hover,
-.glightbox-ashel .gbtn:focus {
+.glightbox-container.glightbox-ashel .gbtn:hover,
+.glightbox-container.glightbox-ashel .gbtn:focus {
   opacity: 1;
   background: rgba(17, 17, 17, 0.9);
   border-color: var(--border);
 }
 
-.glightbox-ashel .gbtn svg {
+.glightbox-container.glightbox-ashel .gbtn svg {
   fill: var(--text);
   width: 26px;
   height: 26px;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.8));
 }
 
-.glightbox-ashel .gclose {
+.glightbox-container.glightbox-ashel .gclose {
   top: 1rem;
   right: 1rem;
-  z-index: 1001;
+  z-index: 99999;
 }
 
-.glightbox-ashel .gprev {
-  top: 50%;
-  left: 1rem;
-  transform: translateY(-50%);
+.glightbox-container.glightbox-ashel .gprev {
+  top: auto;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(calc(-50% - 4.25rem));
 }
 
-.glightbox-ashel .gnext {
-  top: 50%;
-  right: 1rem;
-  transform: translateY(-50%);
+.glightbox-container.glightbox-ashel .gnext {
+  top: auto;
+  bottom: 1.5rem;
+  right: 50%;
+  transform: translateX(calc(50% + 4.25rem));
+}
+
+/* Hide prev/next when there is no photo on that side (set via .is-first / .is-last) */
+.glightbox-container.glightbox-ashel.is-first .gprev,
+.glightbox-container.glightbox-ashel.is-last .gnext {
+  display: none;
 }
 
 @media (max-width: 768px) {
-  .glightbox-ashel .gprev,
-  .glightbox-ashel .gnext {
-    display: none;
+  .glightbox-container.glightbox-ashel .gprev,
+  .glightbox-container.glightbox-ashel .gnext {
+    width: 40px;
+    height: 40px;
+    bottom: 1.25rem;
+    transform: translateX(calc(-50% - 3.75rem));
   }
 
-  .glightbox-ashel .gclose {
+  .glightbox-container.glightbox-ashel .gnext {
+    transform: translateX(calc(50% + 3.75rem));
+  }
+
+  .glightbox-container.glightbox-ashel .gclose {
     top: 0.75rem;
     right: 0.75rem;
-    width: 44px;
-    height: 44px;
+    width: 28px;
+    height: 28px;
+  }
+
+  .glightbox-container.glightbox-ashel .gclose svg {
+    width: 14px;
+    height: 14px;
   }
 }
 
-/* Caption anchored at the bottom, readable over any image */
-.glightbox-ashel .gslide-description {
+/* Position counter (1 / n), centered between the arrows */
+.glightbox-container.glightbox-ashel .gcounter {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  text-align: center;
-  padding: 3rem 1rem 1.25rem;
-  margin: 0;
-  width: 100%;
-  max-width: none;
-  background: linear-gradient(
-    to top,
-    rgba(5, 5, 5, 0.95) 0%,
-    rgba(5, 5, 5, 0.6) 50%,
-    transparent 100%
-  );
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--text);
+  text-transform: uppercase;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
   pointer-events: none;
 }
 
-.glightbox-ashel .gdesc-inner {
-  padding: 0;
-  max-width: 960px;
-  margin: 0 auto;
+@media (max-width: 768px) {
+  .glightbox-container.glightbox-ashel .gcounter {
+    bottom: 1.25rem;
+    height: 40px;
+    font-size: 0.6rem;
+  }
 }
 
-.glightbox-ashel .gslide-title,
-.glightbox-ashel .gslide-desc {
-  color: var(--text);
+/* GLightbox's own caption is replaced by our .gbadge (rendered outside the
+   slider so it never moves with slide transitions/drag) */
+.glightbox-container.glightbox-ashel .gslide-description {
+  display: none !important;
+}
+
+/* Photo title as a centered badge at the top */
+.glightbox-container.glightbox-ashel .gbadge {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99999;
+  max-width: 70%;
+  padding: 0.5rem 1.1rem;
+  background: rgba(5, 5, 5, 0.6);
+  border: 1px solid var(--border);
   font-family: var(--mono);
+  font-size: 0.7rem;
+  line-height: 1.5;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin: 0;
+  text-align: center;
+  color: var(--text);
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+  pointer-events: none;
 }
 
-.glightbox-ashel .gslide-title {
-  font-size: 0.75rem;
-  line-height: 1.5;
-  opacity: 0.95;
-}
-
-.glightbox-ashel .gslide-desc {
-  font-size: 0.65rem;
-  color: var(--text-dim);
-  margin-top: 0.25rem;
-  line-height: 1.5;
+.glightbox-container.glightbox-ashel .gbadge.is-empty {
+  display: none;
 }
 
 @media (max-width: 768px) {
-  .glightbox-ashel .gslide-description {
-    padding: 2.5rem 1rem 1rem;
-    text-align: center;
-  }
-
-  .glightbox-ashel .gdesc-inner {
-    max-width: 100%;
-    padding: 0 0.5rem;
-  }
-
-  .glightbox-ashel .gslide-title,
-  .glightbox-ashel .gslide-desc {
-    letter-spacing: 0.08em;
-  }
-
-  .glightbox-ashel .gslide-title {
-    font-size: 0.55rem;
-  }
-
-  .glightbox-ashel .gslide-desc {
-    font-size: 0.5rem;
+  .glightbox-container.glightbox-ashel .gbadge {
+    top: 0.6rem;
+    padding: 0.4rem 0.85rem;
+    max-width: 72%;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
   }
 }
 
-.glightbox-ashel .gloader {
+.glightbox-container.glightbox-ashel .gloader {
   border: 2px solid var(--border-strong);
   border-top-color: var(--accent);
 }
 
-.glightbox-ashel .gslide-media {
+.glightbox-container.glightbox-ashel .gslide-media {
   box-shadow: none;
 }
 
-.glightbox-ashel .gslide-image img {
+.glightbox-container.glightbox-ashel .gslide-image img {
   max-height: 94vh;
   max-width: 96vw;
 }
 
-.glightbox-ashel .ginner-container {
+.glightbox-container.glightbox-ashel .ginner-container {
   padding: 0;
 }
 
 /* Mobile tap zones: tap left/right side of the image to navigate */
 @media (max-width: 768px) {
-  .glightbox-ashel .gslide-inner-content {
+  .glightbox-container.glightbox-ashel .gslide-inner-content {
     position: relative;
   }
 
-  .glightbox-ashel .glightbox-tap-zone {
+  .glightbox-container.glightbox-ashel .glightbox-tap-zone {
     position: absolute;
     top: 20%;
     bottom: 20%;
@@ -181,11 +196,11 @@
     -webkit-tap-highlight-color: transparent;
   }
 
-  .glightbox-ashel .glightbox-tap-zone-left {
+  .glightbox-container.glightbox-ashel .glightbox-tap-zone-left {
     left: 0;
   }
 
-  .glightbox-ashel .glightbox-tap-zone-right {
+  .glightbox-container.glightbox-ashel .glightbox-tap-zone-right {
     right: 0;
   }
 }
