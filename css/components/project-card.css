@@ -153,12 +153,11 @@
 
 @media (max-width: 768px) {
   .other-card {
-    grid-template-columns: 44px 1fr;
+    grid-template-columns: 1fr;
     margin-top: 3rem;
   }
   .other-card .other-cover-wrap {
-    aspect-ratio: auto;
-    min-height: 0;
+    display: none;
   }
   .other-badge {
     font-size: 1.1rem;
