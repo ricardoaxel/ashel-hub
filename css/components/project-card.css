@@ -112,6 +112,15 @@
   margin: 0.25rem 0 0 0;
 }
 
+.other-card .other-desc {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--text-dim);
+  margin: 0.35rem 0 0 0;
+  max-width: 90%;
+}
+
 .other-card .project-timeline {
   top: 0.75rem;
   right: 1.25rem;
@@ -143,13 +152,35 @@
 
 @media (max-width: 768px) {
   .other-card {
-    grid-template-columns: 50px 1fr;
+    grid-template-columns: 44px 1fr;
+  }
+  .other-card .other-cover-wrap {
+    aspect-ratio: auto;
+    min-height: 0;
+  }
+  .other-badge {
+    font-size: 1.1rem;
   }
   .other-card .other-info {
-    padding: 0.5rem 0.75rem !important;
+    padding: 0.4rem 0.6rem !important;
   }
   .other-card .project-timeline {
     display: none;
+  }
+  .other-card .project-name {
+    font-size: 0.95rem;
+    margin: 0.1rem 0 0 0;
+  }
+  .other-card .other-desc {
+    font-size: 0.65rem;
+    line-height: 1.35;
+    margin: 0.15rem 0 0 0;
+    max-width: 100%;
+  }
+  .other-card .project-arrow {
+    font-size: 0.85rem;
+    bottom: 0.4rem;
+    right: 0.6rem;
   }
 }
 

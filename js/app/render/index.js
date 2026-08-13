@@ -220,6 +220,10 @@ export function renderIndexContent(isUpdate = false) {
       if (otherLabel) otherLabel.textContent = t.site?.otherLabel || 'misc';
       const otherTitle = existingOther.querySelector('.project-name');
       if (otherTitle) otherTitle.textContent = t.labels?.otherSection || 'Extras';
+      const otherDesc = existingOther.querySelector('.other-desc');
+      if (otherDesc)
+        otherDesc.textContent =
+          t.site?.otherDesc || 'Side projects, collaborations, experiments, and other odds & ends.';
     } else {
       const otherHtml = `
         <a href="other.html" class="project-card other-card">
@@ -234,6 +238,7 @@ export function renderIndexContent(isUpdate = false) {
                 <div class="tl-labels"><span class="tl-year">${t.site?.otherLabel || 'misc'}</span><span class="tl-year">${String(otherCount).padStart(2, '0')}</span></div>
               </div>
               <h2 class="project-name">${t.labels?.otherSection || 'Extras'}</h2>
+              <p class="other-desc">${t.site?.otherDesc || 'Side projects, collaborations, experiments, and other odds & ends.'}</p>
             </div>
             <span class="project-arrow">→</span>
           </div>
