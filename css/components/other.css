@@ -23,7 +23,7 @@
 
 .other-detail-card > .embed-area iframe {
   width: 100%;
-  height: 100%;
+  height: 100% !important;
   border: none;
 }
 
@@ -87,7 +87,7 @@
   }
 
   .other-detail-card > .embed-area {
-    min-height: 280px;
+    min-height: 420px;
   }
 
   .other-detail-card > .card-info {
