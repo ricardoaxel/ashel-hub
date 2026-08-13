@@ -87,6 +87,7 @@
   grid-template-columns: 80px 1fr;
   min-height: 0;
   margin-bottom: 5rem;
+  border-top: 1px solid var(--border);
 }
 
 .other-cover-wrap {
