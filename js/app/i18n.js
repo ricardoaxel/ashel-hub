@@ -28,7 +28,9 @@ export function applyTranslations() {
     if (typeof value === 'string') el.textContent = value;
   });
   document.querySelectorAll('.lang-option').forEach((opt) => {
-    opt.classList.toggle('active', opt.dataset.lang === currentLocale);
+    const active = opt.dataset.lang === currentLocale;
+    opt.classList.toggle('active', active);
+    opt.setAttribute('aria-pressed', String(active));
   });
   document.documentElement.lang = currentLocale;
 }

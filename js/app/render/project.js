@@ -7,6 +7,20 @@ import { openModal } from '../modal.js';
 let currentProject = null;
 let currentProjectId = null;
 
+function makeAccessible(el, callback, label) {
+  if (!el) return;
+  el.setAttribute('role', 'button');
+  el.setAttribute('tabindex', '0');
+  if (label) el.setAttribute('aria-label', label);
+  el.addEventListener('click', callback);
+  el.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      callback();
+    }
+  });
+}
+
 export function setCurrentProject(id) {
   currentProjectId = id;
   const data = getSiteData();
@@ -15,7 +29,10 @@ export function setCurrentProject(id) {
 
 function translateDate(dateStr, t) {
   if (!dateStr || !t?.labels?.months) return dateStr;
-  return dateStr.replace(/\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\b/g, (m) => t.labels.months[m] || m);
+  return dateStr.replace(
+    /\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\b/g,
+    (m) => t.labels.months[m] || m
+  );
 }
 
 export function renderProjectContent() {
@@ -45,13 +62,17 @@ export function renderProjectContent() {
   const linksHtml = project.links
     .map((l) => {
       const icons = {
-        Instagram: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1"/></svg>',
-        YouTube: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><rect x="2" y="5" width="20" height="14" rx="3"/><polygon points="10,8 10,16 17,12" fill="currentColor" stroke="none"/></svg>',
-        Bandcamp: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><polygon points="3,16 8.5,8 21,8" fill="currentColor" stroke="none" opacity="0.3"/><polygon points="3,16 8.5,8 21,8" stroke="currentColor" fill="none"/></svg>',
-        Facebook: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>',
+        Instagram:
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1"/></svg>',
+        YouTube:
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><rect x="2" y="5" width="20" height="14" rx="3"/><polygon points="10,8 10,16 17,12" fill="currentColor" stroke="none"/></svg>',
+        Bandcamp:
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><polygon points="3,16 8.5,8 21,8" fill="currentColor" stroke="none" opacity="0.3"/><polygon points="3,16 8.5,8 21,8" stroke="currentColor" fill="none"/></svg>',
+        Facebook:
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>',
       };
       const svg = icons[l.label] || '';
-      return `<a href="${l.url}" target="_blank" class="btn-icon" title="${l.label}">${svg}</a>`;
+      return `<a href="${l.url}" target="_blank" rel="noopener noreferrer" class="btn-icon" title="${l.label}">${svg}</a>`;
     })
     .join('');
   const descriptionHtml = (projT.description || project.description)
@@ -72,7 +93,7 @@ export function renderProjectContent() {
       : '';
     return `
       <section class="featured-release" id="featured-section">
-        <div class="section-label" style="border: none; padding: 0; margin-bottom: 2rem;">
+        <div class="section-label bare" style="margin-bottom: 2rem;">
           <span>${t.site?.featuredRelease || 'Featured Release'}</span>
           <span class="count">${translateDate(release.year, t)}</span>
         </div>
@@ -117,7 +138,7 @@ export function renderProjectContent() {
   const releasesHtml = project.releases
     .map(
       (r) => `
-      <a href="${r.url}" target="_blank" class="album-card">
+      <a href="${r.url}" target="_blank" rel="noopener noreferrer" class="album-card">
         <img src="${r.cover}" alt="${r.name}" class="album-cover" loading="lazy" decoding="async">
         <div class="album-info">
           <span class="album-type">${t.labels?.releaseTypes?.[r.type] || r.type}</span>
@@ -149,7 +170,9 @@ export function renderProjectContent() {
         </div>
         <div class="detail-info">
           <h1>${project.name}</h1>
-          ${project.yearsActive ? `
+          ${
+            project.yearsActive
+              ? `
           <div class="detail-timeline">
             <div class="tl-track">
               <span class="tl-dot"></span>
@@ -160,7 +183,9 @@ export function renderProjectContent() {
               <span class="tl-year">${project.yearsActive.start}</span>
               <span class="tl-year">${project.yearsActive.end || t.labels?.present || 'Present'}</span>
             </div>
-          </div>` : ''}
+          </div>`
+              : ''
+          }
           <div class="detail-genres">${genresHtml}</div>
           <p class="detail-location">${t.labels?.location || 'Location'}: ${project.location}</p>
           ${descriptionHtml}
@@ -175,7 +200,7 @@ export function renderProjectContent() {
     </section>
 
     <section class="discography">
-      <div class="section-label" style="border: none; padding: 0; margin-bottom: 2rem;">
+      <div class="section-label bare" style="margin-bottom: 2rem;">
         <span>${t.site?.discography || 'Discography'}</span>
         <span class="count">${String(project.releases.length).padStart(2, '0')}</span>
       </div>
@@ -186,7 +211,7 @@ export function renderProjectContent() {
       project.photos?.length
         ? `
     <section class="project-photos">
-      <div class="section-label" style="border: none; padding: 0; margin-bottom: 2rem;">
+      <div class="section-label bare" style="margin-bottom: 2rem;">
         <span>${t.site?.photos || 'Photos'}</span>
         <span class="count">${String(project.photos.length).padStart(2, '0')}</span>
       </div>
@@ -195,7 +220,7 @@ export function renderProjectContent() {
           .slice(0, photoPreview)
           .map(
             (p, i) => `
-          <div class="photo-card" data-type="photos" data-index="${i}">
+          <div class="photo-card" data-type="photos" data-index="${i}" role="button" tabindex="0" aria-label="${t.site?.photos || 'Photo'} ${i + 1}: ${project.name}">
             <img src="${p.src}" alt="${project.name}" loading="lazy" decoding="async">
             <span class="photo-caption">${project.name}</span>
           </div>
@@ -216,7 +241,7 @@ export function renderProjectContent() {
       sortedFlyers.length
         ? `
     <section class="project-photos" id="flyers-section">
-      <div class="section-label" style="border: none; padding: 0; margin-bottom: 2rem;">
+      <div class="section-label bare" style="margin-bottom: 2rem;">
         <span>${t.site?.flyers || 'Flyers'}</span>
         <span class="count">${String(flyersCount).padStart(2, '0')}</span>
       </div>
@@ -225,7 +250,7 @@ export function renderProjectContent() {
           .slice(0, flyerPreview)
           .map(
             (f, i) => `
-          <div class="illustration-item" data-label="${(f.caption || '').replace(/"/g, '&quot;')}" data-type="flyers" data-index="${i}">
+          <div class="illustration-item" data-label="${(f.caption || '').replace(/"/g, '&quot;')}" data-type="flyers" data-index="${i}" role="button" tabindex="0" aria-label="${t.site?.flyers || 'Flyer'} ${i + 1}: ${(f.caption || '').replace(/"/g, '&quot;')}">
             <img src="${f.src}" alt="${f.caption || ''}" loading="lazy" decoding="async">
           </div>
         `
@@ -245,7 +270,7 @@ export function renderProjectContent() {
       project.videos?.length
         ? `
     <section class="project-videos">
-      <div class="section-label" style="border: none; padding: 0; margin-bottom: 2rem;">
+      <div class="section-label bare" style="margin-bottom: 2rem;">
         <span>${t.site?.videos || 'Videos'}</span>
         <span class="count">${String(project.videos.length).padStart(2, '0')}</span>
       </div>
@@ -253,8 +278,8 @@ export function renderProjectContent() {
         ${project.videos
           .map(
             (v, i) => `
-          <div class="video-card" data-video-index="${i}">
-            <iframe src="https://www.youtube.com/embed/${v.videoId}" frameborder="0" allowfullscreen loading="lazy" style="position:absolute;inset:0;width:100%;height:100%" title="${v.title}"></iframe>
+          <div class="video-card" data-video-index="${i}" role="button" tabindex="0" aria-label="${t.site?.videos || 'Video'}: ${v.title}">
+            <iframe src="https://www.youtube.com/embed/${v.videoId}" frameborder="0" allowfullscreen loading="lazy" style="position:absolute;inset:0;width:100%;height:100%" title="${v.title}" tabindex="-1"></iframe>
           </div>
         `
           )
@@ -281,7 +306,7 @@ export function renderProjectContent() {
       const extraHtml = remaining
         .map(
           (p, i) => `
-      <div class="photo-card" data-type="photos" data-index="${photoPreview + i}">
+      <div class="photo-card" data-type="photos" data-index="${photoPreview + i}" role="button" tabindex="0" aria-label="${t.site?.photos || 'Photo'} ${photoPreview + i + 1}: ${project.name}">
         <img src="${p.src}" alt="${project.name}" loading="lazy" decoding="async">
         <span class="photo-caption">${project.name}</span>
       </div>`
@@ -306,7 +331,7 @@ export function renderProjectContent() {
       const extraHtml = remaining
         .map(
           (f, i) => `
-      <div class="illustration-item" data-label="${(f.caption || '').replace(/"/g, '&quot;')}" data-type="flyers" data-index="${flyerPreview + i}">
+      <div class="illustration-item" data-label="${(f.caption || '').replace(/"/g, '&quot;')}" data-type="flyers" data-index="${flyerPreview + i}" role="button" tabindex="0" aria-label="${t.site?.flyers || 'Flyer'} ${flyerPreview + i + 1}: ${(f.caption || '').replace(/"/g, '&quot;')}">
         <img src="${f.src}" alt="${f.caption || ''}" loading="lazy" decoding="async">
       </div>`
         )
@@ -316,16 +341,16 @@ export function renderProjectContent() {
     } catch (_) {}
   });
 
-  // Flyers modal click handler
+  // Flyers modal handler
   document.querySelectorAll('#flyers-grid .illustration-item').forEach((card) => {
     const index = parseInt(card.dataset.index, 10);
-    card.addEventListener('click', () => openModal(sortedFlyers, index));
+    makeAccessible(card, () => openModal(sortedFlyers, index));
   });
 
   document.querySelectorAll('.photo-card').forEach((card) => {
-    card.addEventListener('click', () => {
+    makeAccessible(card, () => {
       const type = card.dataset.type;
-      const index = parseInt(card.dataset.index);
+      const index = parseInt(card.dataset.index, 10);
       const items = type === 'photos' ? projectPhotos : sortedFlyers;
       if (!items?.[index]) return;
       if (!items[index].caption && items[index].src?.startsWith('data:')) return;
@@ -335,7 +360,7 @@ export function renderProjectContent() {
 
   document.querySelectorAll('.video-card').forEach((card) => {
     const index = parseInt(card.dataset.videoIndex, 10);
-    card.addEventListener('click', () => openModal(project.videos, index));
+    makeAccessible(card, () => openModal(project.videos, index));
   });
 
   const selector = document.getElementById('album-selector');

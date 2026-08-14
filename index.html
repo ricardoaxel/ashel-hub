@@ -3,8 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ashel</title>
+    <title>Ashel — Musician & Producer Portfolio</title>
+    <meta name="description" content="Ashel — musician, producer, and artist from Mexico City. Portfolio of projects including Oshira, Dotzd, Recuerdos de un Sueño Perdido, Hostem, and solo work." />
+    <link rel="canonical" href="https://ashel.github.io/music-portfolio/" />
+    <meta property="og:title" content="Ashel — Musician & Producer Portfolio" />
+    <meta property="og:description" content="Musician, producer, and artist from Mexico City. Explore projects, releases, photos, and visual work." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ashel.github.io/music-portfolio/" />
+    <meta property="og:image" content="https://ashel.github.io/music-portfolio/assets/images/oshira.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ashel — Musician & Producer Portfolio" />
+    <meta name="twitter:description" content="Musician, producer, and artist from Mexico City. Explore projects, releases, photos, and visual work." />
+    <meta name="twitter:image" content="https://ashel.github.io/music-portfolio/assets/images/oshira.jpg" />
+    <meta http-equiv="Permissions-Policy" content="compute-pressure=()" />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -33,7 +46,6 @@
     <link rel="stylesheet" href="css/components/release-timeline.css" />
     <link rel="stylesheet" href="css/effects.css" />
     <link rel="stylesheet" href="css/responsive.css" />
-    <meta http-equiv="Cache-Control" content="no-cache" />
     <script
       defer
       src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"
@@ -91,10 +103,10 @@
           <li><a href="#about" data-i18n="nav.about">About</a></li>
           <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
         </ul>
-        <div class="lang-toggle" id="lang-toggle">
-          <span class="lang-option" data-lang="en">EN</span>
-          <span class="lang-separator">|</span>
-          <span class="lang-option" data-lang="es">ES</span>
+        <div class="lang-toggle" id="lang-toggle" role="group" aria-label="Language">
+          <button class="lang-option" type="button" data-lang="en" aria-pressed="false">EN</button>
+          <span class="lang-separator" aria-hidden="true">|</span>
+          <button class="lang-option" type="button" data-lang="es" aria-pressed="false">ES</button>
         </div>
       </div>
       <button class="mobile-menu-btn" aria-label="Toggle menu">
@@ -174,7 +186,7 @@
       </section>
 
       <section id="contact" class="contact">
-        <div class="section-label" style="border-bottom: none; padding-bottom: 0">
+        <div class="section-label flush">
           <span data-i18n="labels.contactLabel">Contact / Links</span>
           <span class="count">∞</span>
         </div>
@@ -186,17 +198,5 @@
       <p>&copy; 2026 Ashel</p>
       <p data-i18n="site.builtWith">Built with obsession</p>
     </footer>
-    <script>
-      (function () {
-        if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
-        var d = document.querySelector('.cursor-dot'),
-          r = document.querySelector('.cursor-ring');
-        if (!d || !r) return;
-        document.addEventListener('mousemove', function (e) {
-          d.style.transform = 'translate(' + (e.clientX - 3) + 'px,' + (e.clientY - 3) + 'px)';
-          r.style.transform = 'translate(' + (e.clientX - 15) + 'px,' + (e.clientY - 15) + 'px)';
-        });
-      })();
-    </script>
   </body>
 </html>

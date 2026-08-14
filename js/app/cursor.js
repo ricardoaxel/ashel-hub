@@ -22,6 +22,8 @@ export function initCursor() {
   cursorRing = document.querySelector('.cursor-ring');
   if (!cursorDot || !cursorRing) return;
 
+  document.body.classList.add('custom-cursor-active');
+
   cursorMouseX = window.innerWidth / 2;
   cursorMouseY = window.innerHeight / 2;
   cursorRingX = 0;

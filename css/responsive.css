@@ -301,8 +301,7 @@
     margin-bottom: 0.5rem;
   }
 
-  .detail-left .featured-release h2,
-  .detail-left .featured-release h3 {
+  .detail-left .featured-release h2 {
     display: none;
   }
 

@@ -1,3 +1,6 @@
 node_modules/
 *.log
 .DS_Store
+test-results/
+tests/audit-output/
+tests/screenshots/

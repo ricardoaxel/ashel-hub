@@ -6,6 +6,20 @@ import { openModal } from '../modal.js';
 
 let heroColors = ['#ff2d55', '#5856d6', '#00d4aa'];
 
+function makeAccessible(el, callback, label) {
+  if (!el) return;
+  el.setAttribute('role', 'button');
+  el.setAttribute('tabindex', '0');
+  if (label) el.setAttribute('aria-label', label);
+  el.addEventListener('click', callback);
+  el.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      callback();
+    }
+  });
+}
+
 export function getHeroColors() {
   return heroColors;
 }
@@ -271,7 +285,7 @@ export function renderIndexContent(isUpdate = false) {
       .slice(0, galleryPreviewCount)
       .map(
         (photo, i) => `
-        <div class="gallery-item" data-label="${photo.projectName}" data-index="${i}">
+        <div class="gallery-item" data-label="${photo.projectName}" data-index="${i}" role="button" tabindex="0" aria-label="${t.site?.photos || 'Photo'} ${i + 1}: ${photo.projectName}">
           <img src="${photo.src}" alt="${photo.projectName}" loading="lazy" decoding="async">
         </div>`
       )
@@ -279,7 +293,7 @@ export function renderIndexContent(isUpdate = false) {
     document.getElementById('gallery-grid').innerHTML = galleryHtml;
     document.querySelectorAll('.gallery-item').forEach((el) => {
       const index = parseInt(el.dataset.index, 10);
-      el.addEventListener('click', () => openModal(allPhotos, index));
+      makeAccessible(el, () => openModal(allPhotos, index));
     });
     if (allPhotos.length > galleryPreviewCount) {
       const galleryGrid = document.getElementById('gallery-grid');
@@ -308,7 +322,7 @@ export function renderIndexContent(isUpdate = false) {
         galleryGrid.insertAdjacentHTML('beforeend', extraHtml);
         document.querySelectorAll('.gallery-item').forEach((el) => {
           const index = parseInt(el.dataset.index, 10);
-          el.addEventListener('click', () => openModal(allPhotos, index));
+          makeAccessible(el, () => openModal(allPhotos, index));
         });
       });
     }
@@ -335,7 +349,7 @@ export function renderIndexContent(isUpdate = false) {
       .slice(0, previewCount)
       .map(
         (item, i) => `
-        <div class="illustration-item" data-label="${t.labels?.illustration || 'Illustration'} ${String(i + 1).padStart(2, '0')}" data-index="${i}">
+        <div class="illustration-item" data-label="${t.labels?.illustration || 'Illustration'} ${String(i + 1).padStart(2, '0')}" data-index="${i}" role="button" tabindex="0" aria-label="${t.labels?.illustration || 'Illustration'} ${String(i + 1).padStart(2, '0')}">
           <img src="${item.src}" alt="" loading="lazy" decoding="async">
         </div>`
       )
@@ -359,7 +373,7 @@ export function renderIndexContent(isUpdate = false) {
     const dataIllustrations = data.illustrations;
     document.querySelectorAll('.illustration-item').forEach((el) => {
       const index = parseInt(el.dataset.index, 10);
-      el.addEventListener('click', () => openModal(dataIllustrations, index));
+      makeAccessible(el, () => openModal(dataIllustrations, index));
     });
   } else {
     const illShowMore = illSection.querySelector('.illustration-show-more a');
@@ -392,19 +406,19 @@ export function renderIndexContent(isUpdate = false) {
       .slice(0, videoPreviewCount)
       .map(
         (v, i) => `
-        <div class="video-card" data-video-index="${i}">
-          <iframe src="https://www.youtube.com/embed/${v.videoId}" frameborder="0" allowfullscreen loading="lazy" style="position:absolute;inset:0;width:100%;height:100%" title="${v.title}"></iframe>
+        <div class="video-card" data-video-index="${i}" role="button" tabindex="0" aria-label="${t.site?.videos || 'Video'}: ${v.title}">
+          <iframe src="https://www.youtube.com/embed/${v.videoId}" frameborder="0" allowfullscreen loading="lazy" style="position:absolute;inset:0;width:100%;height:100%" title="${v.title}" tabindex="-1"></iframe>
         </div>`
       )
       .join('');
     document.getElementById('videos-grid').innerHTML = videosHtml;
     document.querySelectorAll('.video-card').forEach((el) => {
       const index = parseInt(el.dataset.videoIndex, 10);
-      el.addEventListener('click', () => openModal(allVideos, index));
+      makeAccessible(el, () => openModal(allVideos, index));
     });
 
     const socialHtml = data.site.social
-      .map((s) => `<a href="${s.url}" target="_blank">${s.label}</a>`)
+      .map((s) => `<a href="${s.url}" target="_blank" rel="noopener noreferrer">${s.label}</a>`)
       .join('');
     document.getElementById('social-links').innerHTML = socialHtml;
   }

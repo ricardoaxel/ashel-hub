@@ -3,6 +3,20 @@ import { getLocale } from '../i18n.js';
 import { openModal } from '../modal.js';
 import { attachCursor } from '../cursor.js';
 
+function makeAccessible(el, callback, label) {
+  if (!el) return;
+  el.setAttribute('role', 'button');
+  el.setAttribute('tabindex', '0');
+  if (label) el.setAttribute('aria-label', label);
+  el.addEventListener('click', callback);
+  el.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      callback();
+    }
+  });
+}
+
 export function renderIllustrationsContent() {
   const i18nData = getI18nData();
   const siteData = getSiteData();
@@ -26,13 +40,13 @@ export function renderIllustrationsContent() {
     </div>
     <div class="ill-section">
       <div class="ill-header">
-        <a href="index.html" class="page-back">← ${t.site?.backToProjects || 'Back'}</a>
+        <a href="index.html" class="back-link">&larr; ${t.site?.backToProjects || 'Back'}</a>
       </div>
       <div class="ill-grid" id="ill-grid">
         ${items
           .map(
             (item, i) => `
-          <div class="ill-grid-item" data-label="Illustration ${String(i + 1).padStart(2, '0')}" data-index="${i}">
+          <div class="ill-grid-item" data-label="Illustration ${String(i + 1).padStart(2, '0')}" data-index="${i}" role="button" tabindex="0" aria-label="${t.labels?.illustration || 'Illustration'} ${String(i + 1).padStart(2, '0')}">
             <img src="${item.src}" alt="" loading="lazy" decoding="async">
           </div>`
           )
@@ -43,7 +57,7 @@ export function renderIllustrationsContent() {
 
   document.querySelectorAll('.ill-grid-item').forEach((el) => {
     const index = parseInt(el.dataset.index, 10);
-    el.addEventListener('click', () => openModal(items, index));
+    makeAccessible(el, () => openModal(items, index));
   });
 
   document.querySelectorAll('a, .ill-grid-item, button').forEach(attachCursor);

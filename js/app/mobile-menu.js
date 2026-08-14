@@ -4,6 +4,12 @@ export function initMobileMenu() {
   if (!btn || !nav) return;
   let isAnimating = false;
 
+  function updateState(open) {
+    btn.setAttribute('aria-expanded', String(open));
+  }
+
+  updateState(false);
+
   function moveNavToBody() {
     document.body.appendChild(nav);
     nav.style.position = 'fixed';
@@ -31,6 +37,7 @@ export function initMobileMenu() {
     if (isAnimating) return;
     const opening = !nav.classList.contains('active');
     btn.classList.toggle('active');
+    updateState(opening);
 
     if (opening) {
       moveNavToBody();
@@ -56,6 +63,7 @@ export function initMobileMenu() {
         target.scrollIntoView({ behavior: 'smooth' });
         nav.classList.remove('active');
         btn.classList.remove('active');
+        updateState(false);
         isAnimating = true;
         setTimeout(() => {
           moveNavBack();

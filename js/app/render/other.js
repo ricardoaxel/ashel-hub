@@ -36,8 +36,8 @@ export function renderOtherContent() {
               <div class="embed-area">${renderEmbed(item)}</div>
               <div class="card-info">
                 <h3 class="card-title">${item.title}</h3>
-                ${(t.labels?.otherDescs?.[item.title] || item.description) ? `<p class="card-desc">${t.labels?.otherDescs?.[item.title] || item.description}</p>` : ''}
-                <a href="${item.url}" target="_blank" class="card-link">${t.labels?.visitLink || 'Visit →'}</a>
+                ${t.labels?.otherDescs?.[item.title] || item.description ? `<p class="card-desc">${t.labels?.otherDescs?.[item.title] || item.description}</p>` : ''}
+                <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="card-link">${t.labels?.visitLink || 'Visit →'}</a>
               </div>
             </div>`
             )
@@ -51,7 +51,7 @@ export function renderOtherContent() {
         .map(
           (item) => `
       <div style="padding:3rem 2rem 4rem">
-        <div class="section-label" style="border:none;padding:0;margin-bottom:1.5rem">
+        <div class="section-label bare" style="margin-bottom:1.5rem">
           <span>${item.title}</span>
         </div>
         <div class="soundcloud-wrap">
@@ -65,7 +65,7 @@ export function renderOtherContent() {
   const liveHtml = liveSessions.length
     ? `
     <div style="padding:3rem 2rem 4rem;border-top:1px solid var(--border)">
-      <div class="section-label" style="border:none;padding:0;margin-bottom:1rem">
+      <div class="section-label bare" style="margin-bottom:1rem">
         <span>${t.site?.liveSessions || 'Sesiones en vivo'}</span>
         <span class="count">${String(liveSessions.length).padStart(2, '0')}</span>
       </div>
@@ -76,8 +76,11 @@ export function renderOtherContent() {
         ${liveSessions
           .map(
             (s, i) => `
-          <div class="video-card" data-live-index="${i}">
-            <iframe src="https://www.youtube.com/embed/${s.videoId}" frameborder="0" allowfullscreen loading="lazy" style="position:absolute;inset:0;width:100%;height:100%" title="${s.title}"></iframe>
+          <div class="video-card video-facade" data-live-index="${i}" data-video-id="${s.videoId}" data-video-title="${(s.title || '').replace(/"/g, '&quot;')}" role="button" tabindex="0" aria-label="${t.site?.nowPlaying || 'Play'} ${(s.title || '').replace(/"/g, '&quot;')}">
+            <img src="https://i1.ytimg.com/vi/${s.videoId}/hqdefault.jpg" alt="" loading="lazy" decoding="async">
+            <span class="video-play" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="48" height="48"><path d="M8 5v14l11-7z"/></svg>
+            </span>
           </div>`
           )
           .join('')}
@@ -89,7 +92,7 @@ export function renderOtherContent() {
     <div class="detail-header" style="padding-bottom:2rem">
       <a href="index.html#projects" class="back-link">&larr; ${t.site?.backToProjects || 'Back to Projects'}</a>
       <div style="margin-top:2rem">
-        <div class="section-label" style="border:none;padding:0">
+        <div class="section-label bare">
           <span>${t.labels?.otherSection || 'Extras'}</span>
           <span class="count">${String(items.length).padStart(2, '0')}</span>
         </div>
@@ -105,7 +108,23 @@ export function renderOtherContent() {
 
   document.querySelectorAll('.video-card[data-live-index]').forEach((el) => {
     const index = parseInt(el.dataset.liveIndex, 10);
-    el.addEventListener('click', () => openModal(liveSessions, index));
+    if (el.classList.contains('video-facade')) {
+      const activate = () => {
+        const videoId = el.dataset.videoId;
+        const title = el.dataset.videoTitle || '';
+        el.classList.remove('video-facade');
+        el.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" style="position:absolute;inset:0;width:100%;height:100%" title="${title.replace(/"/g, '&quot;')}"></iframe>`;
+      };
+      el.addEventListener('click', activate);
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          activate();
+        }
+      });
+    } else {
+      el.addEventListener('click', () => openModal(liveSessions, index));
+    }
   });
 
   document.querySelectorAll('a, button').forEach(attachCursor);

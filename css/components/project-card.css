@@ -96,12 +96,18 @@
   justify-content: center;
   background: var(--surface);
   border-right: 1px solid var(--border);
+  transition: background 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .other-badge {
   font-family: var(--serif);
   font-size: 1.5rem;
   color: var(--text-muted);
+  transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.other-card .project-name {
+  transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .other-card .other-info {
@@ -143,12 +149,10 @@
 
 .other-card:hover .other-cover-wrap {
   background: var(--section-accent, var(--accent));
-  transition: background 0.3s;
 }
 
 .other-card:hover .other-badge {
   color: var(--bg);
-  transition: color 0.3s;
 }
 
 @media (max-width: 768px) {

@@ -52,6 +52,13 @@
   color: var(--text-dim);
   transition: color 0.2s;
   border-radius: 3px;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
 }
 
 .lang-option:hover {
@@ -60,6 +67,11 @@
 
 .lang-option.active {
   color: var(--section-accent, var(--accent));
+}
+
+.lang-option:focus-visible {
+  outline: 2px solid var(--section-accent, var(--accent));
+  outline-offset: 2px;
 }
 
 .lang-separator {

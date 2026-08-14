@@ -3,8 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Illustrations | Ashel</title>
+    <title>Illustrations & Photos | Ashel</title>
+    <meta name="description" content="Drawings, photos, flyers, and visual work by Ashel." />
+    <link rel="canonical" href="https://ashel.github.io/music-portfolio/illustrations.html" />
+    <meta property="og:title" content="Illustrations & Photos | Ashel" />
+    <meta property="og:description" content="Drawings, photos, flyers, and visual work by Ashel." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ashel.github.io/music-portfolio/illustrations.html" />
+    <meta property="og:image" content="https://ashel.github.io/music-portfolio/assets/images/oshira.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Illustrations & Photos | Ashel" />
+    <meta name="twitter:description" content="Drawings, photos, flyers, and visual work by Ashel." />
+    <meta name="twitter:image" content="https://ashel.github.io/music-portfolio/assets/images/oshira.jpg" />
+    <meta http-equiv="Permissions-Policy" content="compute-pressure=()" />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -79,10 +92,10 @@
           <li><a href="index.html#about" data-i18n="nav.about">About</a></li>
           <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
         </ul>
-        <div class="lang-toggle" id="lang-toggle">
-          <span class="lang-option" data-lang="en">EN</span>
-          <span class="lang-separator">|</span>
-          <span class="lang-option" data-lang="es">ES</span>
+        <div class="lang-toggle" id="lang-toggle" role="group" aria-label="Language">
+          <button class="lang-option" type="button" data-lang="en" aria-pressed="false">EN</button>
+          <span class="lang-separator" aria-hidden="true">|</span>
+          <button class="lang-option" type="button" data-lang="es" aria-pressed="false">ES</button>
         </div>
       </div>
       <button class="mobile-menu-btn" aria-label="Toggle menu">
@@ -98,17 +111,5 @@
       <p>&copy; 2026 Ashel</p>
       <p data-i18n="site.builtWith">Built with obsession</p>
     </footer>
-    <script>
-      (function () {
-        if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
-        var d = document.querySelector('.cursor-dot'),
-          r = document.querySelector('.cursor-ring');
-        if (!d || !r) return;
-        document.addEventListener('mousemove', function (e) {
-          d.style.transform = 'translate(' + (e.clientX - 3) + 'px,' + (e.clientY - 3) + 'px)';
-          r.style.transform = 'translate(' + (e.clientX - 15) + 'px,' + (e.clientY - 15) + 'px)';
-        });
-      })();
-    </script>
   </body>
 </html>
