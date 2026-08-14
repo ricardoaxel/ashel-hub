@@ -4,7 +4,7 @@ import { colorCache, getColorFallback } from '../colors.js';
 import { attachCursor } from '../cursor.js';
 import { openModal } from '../modal.js';
 import { makeAccessible, pad2, shuffleArray } from '../utils.js';
-import { DEFAULT_HERO_COLORS } from '../config.js';
+import { BREAKPOINTS, PREVIEW_COUNTS, DEFAULT_HERO_COLORS } from '../config.js';
 
 let heroColors = [...DEFAULT_HERO_COLORS];
 
@@ -140,15 +140,14 @@ function renderReleaseTimeline(data, isUpdate) {
   const years = [...new Set(allReleases.map((r) => r.year))].sort();
   const total = allReleases.length;
 
-  const coverItems = allReleases.map((r, i) => ({
-    ...r,
-    pct: total > 1 ? (6 + (i / (total - 1)) * 88).toFixed(1) : '50',
-  }));
+  // Position ticks/items between 6% and 94% of the rail to avoid edge clipping.
+  const MIN_PCT = 6;
+  const MAX_PCT = 94;
+  const spread = (index, count) =>
+    count > 1 ? (MIN_PCT + (index / (count - 1)) * (MAX_PCT - MIN_PCT)).toFixed(1) : '50';
 
-  const yearItems = years.map((y, i) => ({
-    year: y,
-    pct: years.length > 1 ? (6 + (i / (years.length - 1)) * 88).toFixed(1) : '50',
-  }));
+  const coverItems = allReleases.map((r, i) => ({ ...r, pct: spread(i, total) }));
+  const yearItems = years.map((y, i) => ({ year: y, pct: spread(i, years.length) }));
 
   const timelineHtml = `
     <div class="release-timeline" id="release-timeline">
@@ -252,9 +251,9 @@ function getGalleryPhotos(data) {
 
 function renderGallery(data, t, isUpdate) {
   const allPhotos = getGalleryPhotos(data);
-  const isMobile = window.innerWidth <= 768;
-  const columns = isMobile ? 2 : 3;
-  const galleryPreviewCount = Math.min(columns * 2, allPhotos.length);
+  const isMobile = window.innerWidth <= BREAKPOINTS.mobile;
+  const columns = isMobile ? PREVIEW_COUNTS.gallery.mobileColumns : PREVIEW_COUNTS.gallery.desktopColumns;
+  const galleryPreviewCount = Math.min(columns * PREVIEW_COUNTS.gallery.multiplier, allPhotos.length);
 
   document.getElementById('gallery-count').textContent = pad2(allPhotos.length);
 
@@ -320,8 +319,14 @@ function renderGallery(data, t, isUpdate) {
 
 function renderIllustrationsPreview(data, t, isUpdate) {
   const totalCount = data.illustrations.length;
-  const illColumns = window.innerWidth <= 480 ? 1 : window.innerWidth <= 768 ? 2 : 4;
-  const previewCount = Math.min(illColumns * 2, totalCount);
+  const width = window.innerWidth;
+  const illColumns =
+    width <= BREAKPOINTS.small
+      ? PREVIEW_COUNTS.illustrations.small
+      : width <= BREAKPOINTS.mobile
+        ? PREVIEW_COUNTS.illustrations.mobile
+        : PREVIEW_COUNTS.illustrations.desktop;
+  const previewCount = Math.min(illColumns * PREVIEW_COUNTS.illustrations.multiplier, totalCount);
   const illGrid = document.getElementById('illustrations-grid');
   const illSection = illGrid.parentNode;
 
@@ -378,13 +383,15 @@ function renderVideosPreview(data, t, isUpdate) {
     }
   });
 
-  let videoPreviewCount = 6;
-  if (window.innerWidth <= 768) {
-    videoPreviewCount = 3;
-  } else if (window.innerWidth <= 1024) {
-    videoPreviewCount = 4;
-  }
-  videoPreviewCount = Math.min(videoPreviewCount, allVideos.length);
+  const width = window.innerWidth;
+  const videoPreviewCount = Math.min(
+    width <= BREAKPOINTS.mobile
+      ? PREVIEW_COUNTS.videos.mobile
+      : width <= BREAKPOINTS.tablet
+        ? PREVIEW_COUNTS.videos.tablet
+        : PREVIEW_COUNTS.videos.desktop,
+    allVideos.length
+  );
 
   document.getElementById('videos-count').textContent = pad2(allVideos.length);
   const videosHtml = allVideos

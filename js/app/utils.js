@@ -4,12 +4,11 @@
 
 /**
  * Makes any element keyboard/screen-reader accessible like a button.
- * NOTE: This adds new listeners every time it is called; callers must ensure
- * they do not re-attach listeners to the same element on every re-render.
+ * Idempotent: marks the element with data-accessible and skips if already processed,
+ * preventing duplicate listeners when renderers run multiple times.
  */
 export function makeAccessible(el, callback, label) {
-  if (!el) return;
-  if (el.dataset.accessible === 'true') return;
+  if (!el || el.dataset.accessible === 'true') return;
   el.dataset.accessible = 'true';
   el.setAttribute('role', 'button');
   el.setAttribute('tabindex', '0');

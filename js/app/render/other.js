@@ -3,6 +3,7 @@ import { getLocale } from '../i18n.js';
 import { openModal } from '../modal.js';
 import { attachCursor } from '../cursor.js';
 import { makeAccessible, pad2 } from '../utils.js';
+import { FALLBACK_TEXTS } from '../config.js';
 import { renderEmbed, adjustSoundCloudHeight, createYouTubePlayer } from '../media.js';
 
 export function renderOtherContent() {
@@ -61,11 +62,11 @@ export function renderOtherContent() {
     ? `
     <div class="live-sessions-section">
       <div class="section-label bare live-section-label">
-        <span>${t.site?.liveSessions || 'Sesiones en vivo'}</span>
+        <span>${t.site?.liveSessions || FALLBACK_TEXTS.liveSessions}</span>
         <span class="count">${pad2(liveSessions.length)}</span>
       </div>
       <p class="live-sessions-desc">
-        ${t.site?.liveSessionsDesc || 'Participación en grabación y mezcla de las siguientes sesiones en vivo.'}
+        ${t.site?.liveSessionsDesc || FALLBACK_TEXTS.liveSessionsDesc}
       </p>
       <div class="videos-grid live-grid">
         ${liveSessions

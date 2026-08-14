@@ -11,6 +11,8 @@ import { renderIllustrationsContent } from './render/illustrations.js';
 import { renderOtherContent } from './render/other.js';
 import { initWaveCanvas } from './wave-canvas.js';
 import { initBubbles } from './bubbles.js';
+import { TIMINGS } from './config.js';
+import { getLocaleDisplayName } from './utils.js';
 
 const pageName = document.body.dataset.page || 'index';
 const isProjectPage = pageName === 'project';
@@ -52,7 +54,7 @@ function throttleSave() {
   scrollTimer = setTimeout(() => {
     scrollTimer = null;
     saveScroll();
-  }, 150);
+  }, TIMINGS.scrollSaveThrottleMs);
 }
 
 window.addEventListener('scroll', throttleSave, { passive: true });
@@ -77,9 +79,9 @@ function hidePageLoader() {
     clearTimeout(window._loaderTextTimer);
     window._loaderTextTimer = null;
   }
-  loader.style.transition = 'opacity 0.35s ease';
+  loader.style.transition = `opacity ${TIMINGS.pageLoaderFadeMs}ms ease`;
   loader.style.opacity = '0';
-  setTimeout(() => loader.remove(), 350);
+  setTimeout(() => loader.remove(), TIMINGS.pageLoaderFadeMs);
 }
 
 function reRender() {
@@ -105,7 +107,7 @@ loadData()
     try {
       applyTranslations();
       const i18n = getI18nData();
-      const loc = navigator.language.startsWith('es') ? 'es' : 'en';
+      const loc = getLocaleDisplayName(navigator.language);
       const tPage = i18n?.[loc] || i18n?.en || {};
 
       if (isProjectPage) {
@@ -175,7 +177,7 @@ loadData()
   });
 
 function showError(type) {
-  const locale = navigator.language.startsWith('en') ? 'en' : 'es';
+  const locale = getLocaleDisplayName(navigator.language);
   const i18n = getI18nData();
   const t = (i18n?.[locale] || i18n?.en || {});
   const fallbacks = { renderError: 'Render error', dataError: 'Error loading data' };

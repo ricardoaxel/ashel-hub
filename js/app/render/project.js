@@ -4,7 +4,7 @@ import { attachCursor, refreshCursorColor } from '../cursor.js';
 import { colorCache, getColorFallback, extractColors, applyProjectColors } from '../colors.js';
 import { openModal } from '../modal.js';
 import { makeAccessible, pad2, translateDate, sortByDateDesc } from '../utils.js';
-import { SOCIAL_ICONS } from '../config.js';
+import { BREAKPOINTS, PREVIEW_COUNTS, SOCIAL_ICONS } from '../config.js';
 
 let currentProject = null;
 let currentProjectId = null;
@@ -253,7 +253,7 @@ function updateEmbedColor(color) {
   }
 }
 
-function applyProjectColorSet(project, colors) {
+function applyProjectColorSet(colors) {
   const root = document.documentElement.style;
   root.setProperty('--section-accent', colors[0]);
   root.setProperty('--section-accent-secondary', colors[1]);
@@ -286,15 +286,14 @@ function setupAlbumSelector(project, t) {
       }, 120);
       extractColors(selected.cover)
         .then((colors) => {
-          applyProjectColorSet(project, colors);
+          applyProjectColorSet(colors);
         })
         .catch(() => {});
     }, 200);
   });
 }
 
-function setupShowMoreButtons(project, t, photoPreview, flyerPreview) {
-  const isMobile = window.innerWidth <= 768;
+function setupShowMoreButtons(project, t, photoPreview, flyerPreview, isMobile) {
   const projectPhotos = project.photos?.map((p) => ({ ...p, projectName: project.name })) || [];
   const sortedFlyers = project.flyers?.length ? sortByDateDesc(project.flyers) : [];
 
@@ -377,7 +376,7 @@ function setupModals(project) {
 function applyInitialColors(project) {
   const colors = colorCache[project.id];
   if (colors) {
-    applyProjectColorSet(project, colors);
+    applyProjectColorSet(colors);
     return;
   }
 
@@ -390,9 +389,9 @@ export function renderProjectContent() {
   const siteData = getSiteData();
   const currentLocale = getLocale();
   const t = i18nData?.[currentLocale] || i18nData?.en || {};
-  const isMobile = window.innerWidth <= 768;
-  const photoPreview = isMobile ? 3 : 6;
-  const flyerPreview = isMobile ? 3 : 6;
+  const isMobile = window.innerWidth <= BREAKPOINTS.mobile;
+  const photoPreview = isMobile ? PREVIEW_COUNTS.photos.mobile : PREVIEW_COUNTS.photos.desktop;
+  const flyerPreview = isMobile ? PREVIEW_COUNTS.flyers.mobile : PREVIEW_COUNTS.flyers.desktop;
 
   if (!i18nData || !siteData || !currentProject) {
     document.getElementById('project-content').innerHTML = `
@@ -416,7 +415,7 @@ export function renderProjectContent() {
 
   document.querySelectorAll('a, button, .album-card, .photo-card').forEach(attachCursor);
 
-  setupShowMoreButtons(project, t, photoPreview, flyerPreview);
+  setupShowMoreButtons(project, t, photoPreview, flyerPreview, isMobile);
   setupModals(project);
   setupAlbumSelector(project, t);
   applyInitialColors(project);
@@ -434,14 +433,14 @@ export function renderProjectContent() {
         document.querySelector('.player-ghost')?.classList.add('hide');
       }, 400);
       extractColors(autoAlbum.cover)
-        .then((colors) => applyProjectColorSet(project, colors))
+        .then((colors) => applyProjectColorSet(colors))
         .catch(() => {});
     }
   } else {
     extractColors(project.cover)
       .then((colors) => {
         applyProjectColors(project.id, colors);
-        applyProjectColorSet(project, colors);
+        applyProjectColorSet(colors);
       })
       .catch(() => {
         const fb = getColorFallback(project);

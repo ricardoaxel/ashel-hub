@@ -2,6 +2,7 @@ import { getSiteData, getI18nData } from './data.js';
 import { getLocale } from './i18n.js';
 import { openModal } from './modal.js';
 import { TIMINGS } from './config.js';
+import { pad2 } from './utils.js';
 
 let intervalId = null;
 let currentIndex = 0;
@@ -36,9 +37,7 @@ async function showIllustration(items, index, bg1, bg2) {
   const counter = document.getElementById('hero-illustration-counter');
   if (counter) {
     const globalIdx = items[index]._originalIndex + 1;
-    const num = String(globalIdx).padStart(2, '0');
-    const total = String(totalCount).padStart(2, '0');
-    counter.textContent = `${num}/${total}`;
+    counter.textContent = `${pad2(globalIdx)}/${pad2(totalCount)}`;
   }
   busy = false;
 }
@@ -65,6 +64,8 @@ export function initIllustration() {
   const allItems = data?.illustrations;
   if (!allItems || allItems.length === 0) return;
 
+  // Tag each hero item with its original index in the full illustrations array
+  // so the counter can display the real position (e.g., 04/22) instead of the hero subset position.
   const items = allItems
     .map((item, index) => ({ ...item, _originalIndex: index }))
     .filter((item) => item.useInHero);
