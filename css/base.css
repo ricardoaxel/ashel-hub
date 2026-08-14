@@ -17,6 +17,28 @@
   --serif: 'Playfair Display', 'Georgia', serif;
   --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Spacing scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+  --space-4xl: 10rem;
+
+  /* Radius scale */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+
+  /* Z-index scale */
+  --z-base: 1;
+  --z-nav: 100;
+  --z-menu: 99;
+  --z-modal: 1000;
+  --z-loader: 99999;
+  --z-cursor: 1000000;
 }
 
 *,
@@ -126,4 +148,40 @@ body.custom-cursor-active [role="button"] {
   50% {
     opacity: 0.2;
   }
+}
+
+/* Utility modifiers */
+.section-label--spaced {
+  margin-bottom: 2rem;
+}
+
+.section-label--spaced-sm {
+  margin-bottom: 1.5rem;
+}
+
+.video-iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.error-message {
+  padding: 10rem 2rem;
+  text-align: center;
+  font-family: var(--mono);
+  color: var(--text-dim);
+}
+
+.error-message--page {
+  padding-top: 120px;
+}
+
+/* Timeline dynamic positions via custom properties */
+.tl-year-tick {
+  left: var(--tl-pct);
+}
+
+.tl-item {
+  left: var(--tl-pct);
 }

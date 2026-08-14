@@ -2,6 +2,8 @@ import { getSiteData, getI18nData } from '../data.js';
 import { getLocale } from '../i18n.js';
 import { openModal } from '../modal.js';
 import { attachCursor } from '../cursor.js';
+import { makeAccessible, pad2 } from '../utils.js';
+import { renderEmbed, adjustSoundCloudHeight, createYouTubePlayer } from '../media.js';
 
 export function renderOtherContent() {
   const i18nData = getI18nData();
@@ -16,18 +18,11 @@ export function renderOtherContent() {
     return;
   }
 
-  function renderEmbed(item) {
-    if (item.embed) return item.embed;
-    if (item.type === 'youtube' && item.videoId)
-      return `<iframe src="https://www.youtube.com/embed/${item.videoId}" frameborder="0" allowfullscreen loading="lazy"></iframe>`;
-    return `<span style="font-family:var(--mono);font-size:0.7rem;color:var(--text-muted)">${item.type}</span>`;
-  }
-
   const gridItems = items.filter((item) => item.type !== 'soundcloud');
   const scItems = items.filter((item) => item.type === 'soundcloud');
 
   const gridHtml = gridItems.length
-    ? `<div style="padding:0 2rem">
+    ? `<div class="other-grid-wrapper">
         <div class="other-detail-grid">
           ${gridItems
             .map(
@@ -50,12 +45,12 @@ export function renderOtherContent() {
     ? scItems
         .map(
           (item) => `
-      <div style="padding:3rem 2rem 4rem">
-        <div class="section-label bare" style="margin-bottom:1.5rem">
+      <div class="soundcloud-section">
+        <div class="section-label bare soundcloud-section-label">
           <span>${item.title}</span>
         </div>
         <div class="soundcloud-wrap">
-          ${item.embed ? item.embed.replace('height="450"', 'height="350"') : ''}
+          ${adjustSoundCloudHeight(item.embed, 350)}
         </div>
       </div>`
         )
@@ -64,12 +59,12 @@ export function renderOtherContent() {
 
   const liveHtml = liveSessions.length
     ? `
-    <div style="padding:3rem 2rem 4rem;border-top:1px solid var(--border)">
-      <div class="section-label bare" style="margin-bottom:1rem">
+    <div class="live-sessions-section">
+      <div class="section-label bare live-section-label">
         <span>${t.site?.liveSessions || 'Sesiones en vivo'}</span>
-        <span class="count">${String(liveSessions.length).padStart(2, '0')}</span>
+        <span class="count">${pad2(liveSessions.length)}</span>
       </div>
-      <p style="font-family:var(--mono);font-size:0.75rem;color:var(--text-dim);line-height:1.6;margin-bottom:2rem">
+      <p class="live-sessions-desc">
         ${t.site?.liveSessionsDesc || 'Participación en grabación y mezcla de las siguientes sesiones en vivo.'}
       </p>
       <div class="videos-grid live-grid">
@@ -89,14 +84,14 @@ export function renderOtherContent() {
     : '';
 
   document.getElementById('other-content').innerHTML = `
-    <div class="detail-header" style="padding-bottom:2rem">
+    <div class="detail-header other-detail-header">
       <a href="index.html#projects" class="back-link">&larr; ${t.site?.backToProjects || 'Back to Projects'}</a>
-      <div style="margin-top:2rem">
+      <div class="other-detail-intro">
         <div class="section-label bare">
           <span>${t.labels?.otherSection || 'Extras'}</span>
-          <span class="count">${String(items.length).padStart(2, '0')}</span>
+          <span class="count">${pad2(items.length)}</span>
         </div>
-        <p style="font-family:var(--mono);font-size:0.8rem;color:var(--text-dim);line-height:1.8;margin-top:1rem">
+        <p class="other-detail-desc">
           ${t.site?.otherDesc || 'Side projects, collaborations, experiments, and other odds & ends.'}
         </p>
       </div>
@@ -113,7 +108,7 @@ export function renderOtherContent() {
         const videoId = el.dataset.videoId;
         const title = el.dataset.videoTitle || '';
         el.classList.remove('video-facade');
-        el.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" style="position:absolute;inset:0;width:100%;height:100%" title="${title.replace(/"/g, '&quot;')}"></iframe>`;
+        el.innerHTML = createYouTubePlayer(videoId, { title });
       };
       el.addEventListener('click', activate);
       el.addEventListener('keydown', (e) => {

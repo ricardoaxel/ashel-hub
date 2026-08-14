@@ -3,22 +3,10 @@ import { getLocale } from '../i18n.js';
 import { colorCache, getColorFallback } from '../colors.js';
 import { attachCursor } from '../cursor.js';
 import { openModal } from '../modal.js';
+import { makeAccessible, pad2, shuffleArray } from '../utils.js';
+import { DEFAULT_HERO_COLORS } from '../config.js';
 
-let heroColors = ['#ff2d55', '#5856d6', '#00d4aa'];
-
-function makeAccessible(el, callback, label) {
-  if (!el) return;
-  el.setAttribute('role', 'button');
-  el.setAttribute('tabindex', '0');
-  if (label) el.setAttribute('aria-label', label);
-  el.addEventListener('click', callback);
-  el.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      callback();
-    }
-  });
-}
+let heroColors = [...DEFAULT_HERO_COLORS];
 
 export function getHeroColors() {
   return heroColors;
@@ -55,16 +43,42 @@ export function applyCardColors() {
   updateHeroColors();
 }
 
-export function renderIndexContent(isUpdate = false) {
-  const i18nData = getI18nData();
-  const siteData = getSiteData();
-  const currentLocale = getLocale();
-  if (!i18nData || !siteData) return;
-  const t = i18nData[currentLocale] || i18nData.en;
-  const data = siteData;
+function renderProjectCard(p, i, t) {
+  const timelineHtml = p.yearsActive
+    ? `
+    <div class="project-timeline">
+      <div class="tl-track">
+        <span class="tl-dot"></span>
+        <span class="tl-line"></span>
+        <span class="tl-dot"></span>
+      </div>
+      <div class="tl-labels">
+        <span class="tl-year">${p.yearsActive.start}</span>
+        <span class="tl-year">${p.yearsActive.end || t.labels?.present || 'Present'}</span>
+      </div>
+    </div>`
+    : '';
 
-  document.getElementById('hero-tagline').textContent = t.site?.subtitle || data.site.subtitle;
+  return `
+    <a href="project.html?id=${p.id}" class="project-card" id="project-${p.id}">
+      <div class="project-cover-wrap">
+        <img src="${p.cover}" alt="${p.name}" class="project-cover" loading="eager" decoding="async">
+        ${p.badge ? `<span class="project-badge">${p.badge}</span>` : ''}
+      </div>
+      <div class="project-info">
+        <span class="project-number">${pad2(i + 1)}</span>
+        ${timelineHtml}
+        <h2 class="project-name">${p.name}</h2>
+        <div class="project-genres">
+          ${p.genres.map((g) => `<span class="genre-tag">${g}</span>`).join('')}
+        </div>
+        <p class="project-desc">${t.projects?.[p.id]?.shortDescription || p.shortDescription}</p>
+        <span class="project-arrow">→</span>
+      </div>
+    </a>`;
+}
 
+function renderMarquee(data, isUpdate) {
   const marquee = document.getElementById('marquee');
   if (!isUpdate || !marquee.innerHTML.trim()) {
     const marqueeItems = data.projects
@@ -78,7 +92,9 @@ export function renderIndexContent(isUpdate = false) {
       document.querySelector('.marquee-content')?.classList.add('animate');
     }, 2000);
   }
+}
 
+function renderProjectsGrid(data, t, isUpdate) {
   const grid = document.getElementById('projects-grid');
   const existingCards = grid.querySelectorAll('.project-card:not(.other-card)');
 
@@ -93,177 +109,136 @@ export function renderIndexContent(isUpdate = false) {
       }
     });
   } else {
-    const projectsHtml = data.projects
-      .map(
-        (p, i) => `
-        <a href="project.html?id=${p.id}" class="project-card" id="project-${p.id}">
-          <div class="project-cover-wrap">
-            <img src="${p.cover}" alt="${p.name}" class="project-cover" loading="eager" decoding="async">
-            ${p.badge ? `<span class="project-badge">${p.badge}</span>` : ''}
-          </div>
-          <div class="project-info">
-            <span class="project-number">${String(i + 1).padStart(2, '0')}</span>
-            ${
-              p.yearsActive
-                ? `
-            <div class="project-timeline">
-              <div class="tl-track">
-                <span class="tl-dot"></span>
-                <span class="tl-line"></span>
-                <span class="tl-dot"></span>
-              </div>
-              <div class="tl-labels">
-                <span class="tl-year">${p.yearsActive.start}</span>
-                <span class="tl-year">${p.yearsActive.end || t.labels?.present || 'Present'}</span>
-              </div>
-            </div>`
-                : ''
-            }
-            <h2 class="project-name">${p.name}</h2>
-            <div class="project-genres">
-              ${p.genres.map((g) => `<span class="genre-tag">${g}</span>`).join('')}
-            </div>
-            <p class="project-desc">${t.projects?.[p.id]?.shortDescription || p.shortDescription}</p>
-            <span class="project-arrow">→</span>
-          </div>
-        </a>`
-      )
-      .join('');
-    grid.innerHTML = projectsHtml;
+    grid.innerHTML = data.projects.map((p, i) => renderProjectCard(p, i, t)).join('');
   }
 
-  document.getElementById('project-count').textContent = String(data.projects.length).padStart(
-    2,
-    '0'
-  );
+  document.getElementById('project-count').textContent = pad2(data.projects.length);
+}
 
-  // ── Release Timeline ──
-  if (!isUpdate) {
-    const allReleases = [];
-    data.projects.forEach((p) => {
-      (p.releases || []).forEach((r) => {
-        if (r.type === 'Single' || r.type === 'Cover') return;
-        let year = 0;
-        try {
-          year = parseInt((r.year || '').split(' ').pop()) || 0;
-        } catch (_) {}
-        allReleases.push({
-          project: p.id,
-          projectName: p.name,
-          name: r.name,
-          year,
-          cover: r.cover,
-          url: r.url,
-        });
+function renderReleaseTimeline(data, isUpdate) {
+  if (isUpdate) return;
+
+  const allReleases = [];
+  data.projects.forEach((p) => {
+    (p.releases || []).forEach((r) => {
+      if (r.type === 'Single' || r.type === 'Cover') return;
+      const year = parseInt((r.year || '').split(' ').pop()) || 0;
+      allReleases.push({
+        project: p.id,
+        projectName: p.name,
+        name: r.name,
+        year,
+        cover: r.cover,
+        url: r.url,
       });
     });
-    allReleases.sort((a, b) => a.year - b.year || a.name.localeCompare(b.name));
+  });
+  allReleases.sort((a, b) => a.year - b.year || a.name.localeCompare(b.name));
 
-    if (allReleases.length) {
-      const minYear = allReleases[0].year;
-      const maxYear = allReleases[allReleases.length - 1].year;
-      const yearSpan = maxYear - minYear || 1;
-      const total = allReleases.length;
+  if (!allReleases.length) return;
 
-      // Build unique sorted years list
-      const years = [...new Set(allReleases.map((r) => r.year))].sort();
+  const years = [...new Set(allReleases.map((r) => r.year))].sort();
+  const total = allReleases.length;
 
-      // Equal spacing for releases (6% to 94% to avoid edge clipping)
-      const coverItems = allReleases.map((r, i) => ({
-        ...r,
-        pct: total > 1 ? (6 + (i / (total - 1)) * 88).toFixed(1) : '50',
-      }));
+  const coverItems = allReleases.map((r, i) => ({
+    ...r,
+    pct: total > 1 ? (6 + (i / (total - 1)) * 88).toFixed(1) : '50',
+  }));
 
-      // Equal spacing for years (6% to 94% to avoid edge clipping)
-      const yearItems = years.map((y, i) => ({
-        year: y,
-        pct: years.length > 1 ? (6 + (i / (years.length - 1)) * 88).toFixed(1) : '50',
-      }));
+  const yearItems = years.map((y, i) => ({
+    year: y,
+    pct: years.length > 1 ? (6 + (i / (years.length - 1)) * 88).toFixed(1) : '50',
+  }));
 
-      const timelineHtml = `
-        <div class="release-timeline" id="release-timeline">
-          <div class="tl-rail">
-            <div class="tl-rail-track">
-              <span class="tl-rail-dot"></span>
-              <span class="tl-rail-line"></span>
-              <span class="tl-rail-dot"></span>
-            </div>
+  const timelineHtml = `
+    <div class="release-timeline" id="release-timeline">
+      <div class="tl-rail">
+        <div class="tl-rail-track">
+          <span class="tl-rail-dot"></span>
+          <span class="tl-rail-line"></span>
+          <span class="tl-rail-dot"></span>
+        </div>
 
-            ${yearItems
-              .map(
-                (y) => `
-            <span class="tl-year-tick" style="left:${y.pct}%">
-              <span class="tl-year-tick-label">${y.year}</span>
-              <span class="tl-year-tick-line"></span>
-            </span>`
-              )
-              .join('')}
+        ${yearItems
+          .map(
+            (y) => `
+        <span class="tl-year-tick" style="--tl-pct:${y.pct}%">
+          <span class="tl-year-tick-label">${y.year}</span>
+          <span class="tl-year-tick-line"></span>
+        </span>`
+          )
+          .join('')}
 
-            ${coverItems
-              .map(
-                (r) => `
-            <a href="project.html?id=${r.project}&album=${encodeURIComponent(r.name)}" class="tl-item" style="left:${r.pct}%">
-              <span class="tl-item-label">
-                <span class="tl-item-proj">${r.projectName}</span>
-                <span class="tl-item-name">${r.name} (${r.year})</span>
-              </span>
-              <span class="tl-pin"></span>
-              <span class="tl-cover" style="background-image:url(${r.cover})"></span>
-            </a>`
-              )
-              .join('')}
-          </div>
-        </div>`;
+        ${coverItems
+          .map(
+            (r) => `
+        <a href="project.html?id=${r.project}&album=${encodeURIComponent(r.name)}" class="tl-item" style="--tl-pct:${r.pct}%">
+          <span class="tl-item-label">
+            <span class="tl-item-proj">${r.projectName}</span>
+            <span class="tl-item-name">${r.name} (${r.year})</span>
+          </span>
+          <span class="tl-pin"></span>
+          <span class="tl-cover" style="background-image:url(${r.cover})"></span>
+        </a>`
+          )
+          .join('')}
+      </div>
+    </div>`;
 
-      const projectsSection = document.getElementById('projects');
-      const grid = document.getElementById('projects-grid');
-      if (projectsSection && grid) {
-        const old = document.getElementById('release-timeline');
-        if (old) old.remove();
-        grid.insertAdjacentHTML('beforebegin', timelineHtml);
-      }
-    }
+  const projectsSection = document.getElementById('projects');
+  const grid = document.getElementById('projects-grid');
+  if (projectsSection && grid) {
+    const old = document.getElementById('release-timeline');
+    if (old) old.remove();
+    grid.insertAdjacentHTML('beforebegin', timelineHtml);
   }
+}
 
-  // Single compact card linking to extras page
+function renderOtherCard(data, t, isUpdate) {
+  const grid = document.getElementById('projects-grid');
   const otherCount = (data.other || []).length;
   const existingOther = grid.querySelector('.other-card');
-  if (otherCount) {
-    if (isUpdate && existingOther) {
-      const otherLabel = existingOther.querySelector('.tl-labels .tl-year:first-child');
-      if (otherLabel) otherLabel.textContent = t.site?.otherLabel || 'misc';
-      const otherTitle = existingOther.querySelector('.project-name');
-      if (otherTitle) otherTitle.textContent = t.labels?.otherSection || 'Extras';
-      const otherDesc = existingOther.querySelector('.other-desc');
-      if (otherDesc)
-        otherDesc.textContent =
-          t.site?.otherDesc || 'Side projects, collaborations, experiments, and other odds & ends.';
-    } else {
-      const otherHtml = `
-        <a href="other.html" class="project-card other-card">
-          <div class="project-cover-wrap other-cover-wrap">
-            <div class="other-badge">✦</div>
-          </div>
-          <div class="project-info other-info">
-            <div>
-              <span class="project-number">${String(data.projects.length + 1).padStart(2, '0')}</span>
-              <div class="project-timeline">
-                <div class="tl-track"><span class="tl-dot"></span><span class="tl-line"></span><span class="tl-dot"></span></div>
-                <div class="tl-labels"><span class="tl-year">${t.site?.otherLabel || 'misc'}</span><span class="tl-year">${String(otherCount).padStart(2, '0')}</span></div>
-              </div>
-              <h2 class="project-name">${t.labels?.otherSection || 'Extras'}</h2>
-              <p class="other-desc">${t.site?.otherDesc || 'Side projects, collaborations, experiments, and other odds & ends.'}</p>
-            </div>
-            <span class="project-arrow">→</span>
-          </div>
-        </a>`;
-      if (existingOther) existingOther.remove();
-      grid.insertAdjacentHTML('beforeend', otherHtml);
-    }
-  } else if (existingOther) {
-    existingOther.remove();
+
+  if (!otherCount) {
+    if (existingOther) existingOther.remove();
+    return;
   }
 
+  if (isUpdate && existingOther) {
+    const otherLabel = existingOther.querySelector('.tl-labels .tl-year:first-child');
+    if (otherLabel) otherLabel.textContent = t.site?.otherLabel || 'misc';
+    const otherTitle = existingOther.querySelector('.project-name');
+    if (otherTitle) otherTitle.textContent = t.labels?.otherSection || 'Extras';
+    const otherDesc = existingOther.querySelector('.other-desc');
+    if (otherDesc)
+      otherDesc.textContent =
+        t.site?.otherDesc || 'Side projects, collaborations, experiments, and other odds & ends.';
+    return;
+  }
+
+  const otherHtml = `
+    <a href="other.html" class="project-card other-card">
+      <div class="project-cover-wrap other-cover-wrap">
+        <div class="other-badge">✦</div>
+      </div>
+      <div class="project-info other-info">
+        <div>
+          <span class="project-number">${pad2(data.projects.length + 1)}</span>
+          <div class="project-timeline">
+            <div class="tl-track"><span class="tl-dot"></span><span class="tl-line"></span><span class="tl-dot"></span></div>
+            <div class="tl-labels"><span class="tl-year">${t.site?.otherLabel || 'misc'}</span><span class="tl-year">${pad2(otherCount)}</span></div>
+          </div>
+          <h2 class="project-name">${t.labels?.otherSection || 'Extras'}</h2>
+          <p class="other-desc">${t.site?.otherDesc || 'Side projects, collaborations, experiments, and other odds & ends.'}</p>
+        </div>
+        <span class="project-arrow">→</span>
+      </div>
+    </a>`;
+  if (existingOther) existingOther.remove();
+  grid.insertAdjacentHTML('beforeend', otherHtml);
+}
+
+function getGalleryPhotos(data) {
   const allPhotos = [];
   data.projects.forEach((p) => {
     if (p.photos) {
@@ -272,157 +247,172 @@ export function renderIndexContent(isUpdate = false) {
       });
     }
   });
-  for (let i = allPhotos.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [allPhotos[i], allPhotos[j]] = [allPhotos[j], allPhotos[i]];
-  }
+  return shuffleArray(allPhotos);
+}
+
+function renderGallery(data, t, isUpdate) {
+  const allPhotos = getGalleryPhotos(data);
   const isMobile = window.innerWidth <= 768;
   const columns = isMobile ? 2 : 3;
   const galleryPreviewCount = Math.min(columns * 2, allPhotos.length);
-  document.getElementById('gallery-count').textContent = String(allPhotos.length).padStart(2, '0');
-  if (!isUpdate) {
-    const galleryHtml = allPhotos
-      .slice(0, galleryPreviewCount)
+
+  document.getElementById('gallery-count').textContent = pad2(allPhotos.length);
+
+  if (isUpdate) {
+    const gallerySection = document.getElementById('gallery-grid')?.parentNode;
+    const galleryShowMore = gallerySection?.querySelector('.illustration-show-more a');
+    if (galleryShowMore) {
+      galleryShowMore.innerHTML = `${t.labels?.viewAll || 'VIEW ALL'} <span class="count">${pad2(allPhotos.length)}</span>`;
+    }
+    return;
+  }
+
+  const galleryHtml = allPhotos
+    .slice(0, galleryPreviewCount)
+    .map(
+      (photo, i) => `
+      <div class="gallery-item" data-label="${photo.projectName}" data-index="${i}" role="button" tabindex="0" aria-label="${t.site?.photos || 'Photo'} ${i + 1}: ${photo.projectName}">
+        <img src="${photo.src}" alt="${photo.projectName}" loading="lazy" decoding="async">
+      </div>`
+    )
+    .join('');
+  document.getElementById('gallery-grid').innerHTML = galleryHtml;
+
+  document.querySelectorAll('.gallery-item').forEach((el) => {
+    const index = parseInt(el.dataset.index, 10);
+    makeAccessible(el, () => openModal(allPhotos, index));
+  });
+
+  if (allPhotos.length <= galleryPreviewCount) return;
+
+  const galleryGrid = document.getElementById('gallery-grid');
+  const section = galleryGrid.parentNode;
+  section.querySelectorAll('.illustration-show-more').forEach((el) => el.remove());
+
+  const showMore = document.createElement('div');
+  showMore.className = 'illustration-show-more';
+  showMore.innerHTML = `<a href="#" id="gallery-show-more">${t.labels?.viewAll || 'VIEW ALL'} <span class="count">${pad2(allPhotos.length)}</span></a>`;
+  section.appendChild(showMore);
+
+  showMore.querySelector('a').addEventListener('click', (e) => {
+    e.preventDefault();
+    if (isMobile) {
+      openModal(allPhotos, galleryPreviewCount);
+      return;
+    }
+    showMore.remove();
+    const remaining = allPhotos.slice(galleryPreviewCount);
+    const extraHtml = remaining
       .map(
         (photo, i) => `
-        <div class="gallery-item" data-label="${photo.projectName}" data-index="${i}" role="button" tabindex="0" aria-label="${t.site?.photos || 'Photo'} ${i + 1}: ${photo.projectName}">
+        <div class="gallery-item" data-label="${photo.projectName}" data-index="${galleryPreviewCount + i}">
           <img src="${photo.src}" alt="${photo.projectName}" loading="lazy" decoding="async">
         </div>`
       )
       .join('');
-    document.getElementById('gallery-grid').innerHTML = galleryHtml;
+    galleryGrid.insertAdjacentHTML('beforeend', extraHtml);
     document.querySelectorAll('.gallery-item').forEach((el) => {
       const index = parseInt(el.dataset.index, 10);
       makeAccessible(el, () => openModal(allPhotos, index));
     });
-    if (allPhotos.length > galleryPreviewCount) {
-      const galleryGrid = document.getElementById('gallery-grid');
-      const section = galleryGrid.parentNode;
-      section.querySelectorAll('.illustration-show-more').forEach((el) => el.remove());
-      const showMore = document.createElement('div');
-      showMore.className = 'illustration-show-more';
-      showMore.innerHTML = `<a href="#" id="gallery-show-more">${t.labels?.viewAll || 'VIEW ALL'} <span class="count">${String(allPhotos.length).padStart(2, '0')}</span></a>`;
-      section.appendChild(showMore);
-      showMore.querySelector('a').addEventListener('click', (e) => {
-        e.preventDefault();
-        if (isMobile) {
-          openModal(allPhotos, galleryPreviewCount);
-          return;
-        }
-        showMore.remove();
-        const remaining = allPhotos.slice(galleryPreviewCount);
-        const extraHtml = remaining
-          .map(
-            (photo, i) => `
-          <div class="gallery-item" data-label="${photo.projectName}" data-index="${galleryPreviewCount + i}">
-            <img src="${photo.src}" alt="${photo.projectName}" loading="lazy" decoding="async">
-          </div>`
-          )
-          .join('');
-        galleryGrid.insertAdjacentHTML('beforeend', extraHtml);
-        document.querySelectorAll('.gallery-item').forEach((el) => {
-          const index = parseInt(el.dataset.index, 10);
-          makeAccessible(el, () => openModal(allPhotos, index));
-        });
-      });
-    }
-  } else {
-    const gallerySection = document.getElementById('gallery-grid')?.parentNode;
-    const galleryShowMore = gallerySection?.querySelector('.illustration-show-more a');
-    if (galleryShowMore) {
-      galleryShowMore.innerHTML = `${t.labels?.viewAll || 'VIEW ALL'} <span class="count">${String(allPhotos.length).padStart(2, '0')}</span>`;
-    }
-  }
+  });
+}
 
-  document.getElementById('illustrations-count').textContent = String(
-    data.illustrations.length
-  ).padStart(2, '0');
-
-  const illColumns = window.innerWidth <= 480 ? 1 : window.innerWidth <= 768 ? 2 : 4;
-  let previewCount = Math.min(illColumns * 2, data.illustrations.length);
+function renderIllustrationsPreview(data, t, isUpdate) {
   const totalCount = data.illustrations.length;
+  const illColumns = window.innerWidth <= 480 ? 1 : window.innerWidth <= 768 ? 2 : 4;
+  const previewCount = Math.min(illColumns * 2, totalCount);
   const illGrid = document.getElementById('illustrations-grid');
   const illSection = illGrid.parentNode;
+
+  document.getElementById('illustrations-count').textContent = pad2(totalCount);
 
   if (!isUpdate) {
     const illustrationsHtml = data.illustrations
       .slice(0, previewCount)
       .map(
         (item, i) => `
-        <div class="illustration-item" data-label="${t.labels?.illustration || 'Illustration'} ${String(i + 1).padStart(2, '0')}" data-index="${i}" role="button" tabindex="0" aria-label="${t.labels?.illustration || 'Illustration'} ${String(i + 1).padStart(2, '0')}">
+        <div class="illustration-item" data-label="${t.labels?.illustration || 'Illustration'} ${pad2(i + 1)}" data-index="${i}" role="button" tabindex="0" aria-label="${t.labels?.illustration || 'Illustration'} ${pad2(i + 1)}">
           <img src="${item.src}" alt="" loading="lazy" decoding="async">
         </div>`
       )
       .join('');
     illGrid.innerHTML = illustrationsHtml;
-  } else {
-    const illItems = illGrid.querySelectorAll('.illustration-item');
-    illItems.forEach((item, i) => {
-      item.dataset.label = `${t.labels?.illustration || 'Illustration'} ${String(i + 1).padStart(2, '0')}`;
-    });
-  }
 
-  if (!isUpdate) {
     illSection.querySelectorAll('.illustration-show-more').forEach((el) => el.remove());
     if (totalCount > previewCount) {
       const showMore = document.createElement('div');
       showMore.className = 'illustration-show-more';
-      showMore.innerHTML = `<a href="illustrations.html">${t.labels?.viewAll || 'VIEW ALL'} <span class="count">${String(totalCount).padStart(2, '0')}</span></a>`;
+      showMore.innerHTML = `<a href="illustrations.html">${t.labels?.viewAll || 'VIEW ALL'} <span class="count">${pad2(totalCount)}</span></a>`;
       illSection.appendChild(showMore);
     }
-    const dataIllustrations = data.illustrations;
+
     document.querySelectorAll('.illustration-item').forEach((el) => {
       const index = parseInt(el.dataset.index, 10);
-      makeAccessible(el, () => openModal(dataIllustrations, index));
+      makeAccessible(el, () => openModal(data.illustrations, index));
     });
   } else {
+    const illItems = illGrid.querySelectorAll('.illustration-item');
+    illItems.forEach((item, i) => {
+      item.dataset.label = `${t.labels?.illustration || 'Illustration'} ${pad2(i + 1)}`;
+    });
     const illShowMore = illSection.querySelector('.illustration-show-more a');
     if (illShowMore) {
-      illShowMore.innerHTML = `${t.labels?.viewAll || 'VIEW ALL'} <span class="count">${String(totalCount).padStart(2, '0')}</span>`;
+      illShowMore.innerHTML = `${t.labels?.viewAll || 'VIEW ALL'} <span class="count">${pad2(totalCount)}</span>`;
     }
   }
+}
 
-  if (!isUpdate) {
-    const mainIds = data.site.mainVideos || [];
-    const allVideos = [];
-    mainIds.forEach((id) => {
-      for (const p of data.projects) {
-        const v = (p.videos || []).find((v) => v.videoId === id);
-        if (v) {
-          allVideos.push({ ...v, projectName: p.name, projectId: p.id });
-          break;
-        }
+function renderVideosPreview(data, t, isUpdate) {
+  if (isUpdate) return;
+
+  const mainIds = data.site.mainVideos || [];
+  const allVideos = [];
+  mainIds.forEach((id) => {
+    for (const p of data.projects) {
+      const v = (p.videos || []).find((v) => v.videoId === id);
+      if (v) {
+        allVideos.push({ ...v, projectName: p.name, projectId: p.id });
+        break;
       }
-    });
-    let videoPreviewCount = 6;
-    if (window.innerWidth <= 768) {
-      videoPreviewCount = 3;
-    } else if (window.innerWidth <= 1024) {
-      videoPreviewCount = 4;
     }
-    videoPreviewCount = Math.min(videoPreviewCount, allVideos.length);
-    document.getElementById('videos-count').textContent = String(allVideos.length).padStart(2, '0');
-    const videosHtml = allVideos
-      .slice(0, videoPreviewCount)
-      .map(
-        (v, i) => `
-        <div class="video-card" data-video-index="${i}" role="button" tabindex="0" aria-label="${t.site?.videos || 'Video'}: ${v.title}">
-          <iframe src="https://www.youtube.com/embed/${v.videoId}" frameborder="0" allowfullscreen loading="lazy" style="position:absolute;inset:0;width:100%;height:100%" title="${v.title}" tabindex="-1"></iframe>
-        </div>`
-      )
-      .join('');
-    document.getElementById('videos-grid').innerHTML = videosHtml;
-    document.querySelectorAll('.video-card').forEach((el) => {
-      const index = parseInt(el.dataset.videoIndex, 10);
-      makeAccessible(el, () => openModal(allVideos, index));
-    });
+  });
 
-    const socialHtml = data.site.social
-      .map((s) => `<a href="${s.url}" target="_blank" rel="noopener noreferrer">${s.label}</a>`)
-      .join('');
-    document.getElementById('social-links').innerHTML = socialHtml;
+  let videoPreviewCount = 6;
+  if (window.innerWidth <= 768) {
+    videoPreviewCount = 3;
+  } else if (window.innerWidth <= 1024) {
+    videoPreviewCount = 4;
   }
+  videoPreviewCount = Math.min(videoPreviewCount, allVideos.length);
 
+  document.getElementById('videos-count').textContent = pad2(allVideos.length);
+  const videosHtml = allVideos
+    .slice(0, videoPreviewCount)
+    .map(
+      (v, i) => `
+      <div class="video-card" data-video-index="${i}" role="button" tabindex="0" aria-label="${t.site?.videos || 'Video'}: ${v.title}">
+        <iframe class="video-iframe" src="https://www.youtube.com/embed/${v.videoId}" frameborder="0" allowfullscreen loading="lazy" title="${v.title}" tabindex="-1"></iframe>
+      </div>`
+    )
+    .join('');
+  document.getElementById('videos-grid').innerHTML = videosHtml;
+
+  document.querySelectorAll('.video-card').forEach((el) => {
+    const index = parseInt(el.dataset.videoIndex, 10);
+    makeAccessible(el, () => openModal(allVideos, index));
+  });
+}
+
+function renderSocialLinks(data, isUpdate) {
+  if (isUpdate) return;
+  const socialHtml = data.site.social
+    .map((s) => `<a href="${s.url}" target="_blank" rel="noopener noreferrer">${s.label}</a>`)
+    .join('');
+  document.getElementById('social-links').innerHTML = socialHtml;
+}
+
+function renderAbout(data, t, isUpdate) {
   const statKeys = ['projects', 'tracks', 'years'];
   const statLabels = t.stats || {
     projects: 'Projects',
@@ -457,6 +447,27 @@ export function renderIndexContent(isUpdate = false) {
       el.textContent = statLabels[statKeys[i]] || data.site.stats[i]?.label;
     });
   }
+}
+
+export function renderIndexContent(isUpdate = false) {
+  const i18nData = getI18nData();
+  const siteData = getSiteData();
+  const currentLocale = getLocale();
+  if (!i18nData || !siteData) return;
+  const t = i18nData[currentLocale] || i18nData.en;
+  const data = siteData;
+
+  document.getElementById('hero-tagline').textContent = t.site?.subtitle || data.site.subtitle;
+
+  renderMarquee(data, isUpdate);
+  renderProjectsGrid(data, t, isUpdate);
+  renderReleaseTimeline(data, isUpdate);
+  renderOtherCard(data, t, isUpdate);
+  renderGallery(data, t, isUpdate);
+  renderIllustrationsPreview(data, t, isUpdate);
+  renderVideosPreview(data, t, isUpdate);
+  renderSocialLinks(data, isUpdate);
+  renderAbout(data, t, isUpdate);
 
   applyCardColors();
 

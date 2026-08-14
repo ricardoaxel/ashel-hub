@@ -51,9 +51,10 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+    <script src="js/app/init-loader.js?v=2"></script>
     <script type="module" src="js/app/main.js?v=2"></script>
   </head>
-  <body class="scanlines">
+  <body class="scanlines" data-page="index">
     <div
       id="page-loader"
       style="
@@ -74,20 +75,6 @@
         Loading
       </div>
     </div>
-    <script>
-      var _ld = new URLSearchParams(window.location.search).get('locale');
-      try {
-        _ld = _ld || localStorage.getItem('locale');
-      } catch (e) {}
-      _ld = _ld || navigator.language;
-      document.getElementById('loader-text').textContent = _ld.startsWith('es')
-        ? 'Cargando'
-        : 'Loading';
-      window._loaderTextTimer = setTimeout(function () {
-        var t = document.getElementById('loader-text');
-        if (t) t.style.opacity = '1';
-      }, 500);
-    </script>
     <div class="cursor-dot"></div>
     <div class="cursor-ring"></div>
     <div class="noise"></div>
