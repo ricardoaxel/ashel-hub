@@ -65,9 +65,9 @@ export const FALLBACK_TEXTS = {
   location: 'Location',
   tracklist: 'Tracklist',
   visitLink: 'Visit →',
-  liveSessions: 'Sesiones en vivo',
+  liveSessions: 'Live Sessions',
   liveSessionsDesc:
-    'Participación en grabación y mezcla de las siguientes sesiones en vivo.',
+    'Participation in the recording and mixing of the following live sessions.',
   builtWith: 'Built with obsession',
   loading: 'Loading',
   loadingEs: 'Cargando',

@@ -300,15 +300,18 @@ function renderGallery(data, t, isUpdate) {
       return;
     }
     showMore.remove();
-    const remaining = allPhotos.slice(galleryPreviewCount);
-    const extraHtml = remaining
-      .map(
-        (photo, i) => `
-        <div class="gallery-item" data-label="${photo.projectName}" data-index="${galleryPreviewCount + i}">
+        const remaining = allPhotos.slice(galleryPreviewCount);
+        const extraHtml = remaining
+          .map(
+            (photo, i) => {
+              const idx = galleryPreviewCount + i;
+              return `
+        <div class="gallery-item" data-label="${photo.projectName}" data-index="${idx}" role="button" tabindex="0" aria-label="${t.site?.photos || 'Photo'} ${idx + 1}: ${photo.projectName}">
           <img src="${photo.src}" alt="${photo.projectName}" loading="lazy" decoding="async">
-        </div>`
-      )
-      .join('');
+        </div>`;
+            }
+          )
+          .join('');
     galleryGrid.insertAdjacentHTML('beforeend', extraHtml);
     document.querySelectorAll('.gallery-item').forEach((el) => {
       const index = parseInt(el.dataset.index, 10);

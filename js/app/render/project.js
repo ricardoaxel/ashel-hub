@@ -381,7 +381,7 @@ function applyInitialColors(project) {
   }
 
   const fallback = getColorFallback(project);
-  applyProjectColorSet(project, fallback);
+  applyProjectColorSet(fallback);
 }
 
 export function renderProjectContent() {
@@ -445,7 +445,7 @@ export function renderProjectContent() {
       .catch(() => {
         const fb = getColorFallback(project);
         applyProjectColors(project.id, fb);
-        applyProjectColorSet(project, fb);
+        applyProjectColorSet(fb);
       });
   }
 
