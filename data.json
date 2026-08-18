@@ -62,15 +62,18 @@
     },
     {
       "src": "assets/images/illustrations/illustration-04.jpg",
-      "caption": ""
+      "caption": "",
+      "useInHero": true
     },
     {
       "src": "assets/images/illustrations/illustration-06.jpg",
-      "caption": ""
+      "caption": "",
+      "useInHero": true
     },
     {
       "src": "assets/images/illustrations/illustration-10.jpg",
-      "caption": ""
+      "caption": "",
+      "useInHero": true
     },
     {
       "src": "assets/images/illustrations/illustration-11.jpg",
@@ -82,19 +85,23 @@
     },
     {
       "src": "assets/images/illustrations/illustration-15.jpg",
-      "caption": ""
+      "caption": "",
+      "useInHero": true
     },
     {
       "src": "assets/images/illustrations/illustration-01.jpg",
-      "caption": ""
+      "caption": "",
+      "useInHero": true
     },
     {
       "src": "assets/images/illustrations/illustration-02.jpg",
-      "caption": ""
+      "caption": "",
+      "useInHero": true
     },
     {
       "src": "assets/images/illustrations/illustration-16.jpg",
-      "caption": ""
+      "caption": "",
+      "useInHero": true
     },
     {
       "src": "assets/images/illustrations/illustration-07.jpg",
@@ -102,7 +109,8 @@
     },
     {
       "src": "assets/images/illustrations/illustration-08.jpg",
-      "caption": ""
+      "caption": "",
+      "useInHero": true
     },
     {
       "src": "assets/images/illustrations/illustration-09.jpg",
@@ -114,7 +122,8 @@
     },
     {
       "src": "assets/images/illustrations/illustration-14.jpg",
-      "caption": ""
+      "caption": "",
+      "useInHero": true
     },
     {
       "src": "assets/images/illustrations/illustration-17.jpg",
@@ -122,11 +131,13 @@
     },
     {
       "src": "assets/images/illustrations/illustration-18.jpg",
-      "caption": ""
+      "caption": "",
+      "useInHero": true
     },
     {
       "src": "assets/images/illustrations/illustration-19.jpg",
-      "caption": ""
+      "caption": "",
+      "useInHero": true
     },
     {
       "src": "assets/images/illustrations/illustration-20.jpg",

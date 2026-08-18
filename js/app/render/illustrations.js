@@ -2,20 +2,7 @@ import { getSiteData, getI18nData } from '../data.js';
 import { getLocale } from '../i18n.js';
 import { openModal } from '../modal.js';
 import { attachCursor } from '../cursor.js';
-
-function makeAccessible(el, callback, label) {
-  if (!el) return;
-  el.setAttribute('role', 'button');
-  el.setAttribute('tabindex', '0');
-  if (label) el.setAttribute('aria-label', label);
-  el.addEventListener('click', callback);
-  el.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      callback();
-    }
-  });
-}
+import { makeAccessible, pad2 } from '../utils.js';
 
 export function renderIllustrationsContent() {
   const i18nData = getI18nData();
@@ -27,14 +14,16 @@ export function renderIllustrationsContent() {
   if (!items || items.length === 0) return;
 
   const first = items[0];
+  const sectionLabel = t.labels?.illustrationsSection || 'Illustrations';
+  const count = pad2(items.length);
 
   document.getElementById('illustrations-content').innerHTML = `
     <div class="ill-hero">
       <div class="ill-hero-bg" id="ill-hero-bg" style="background-image: url('${first.src}')"></div>
       <div class="ill-hero-overlay"></div>
       <div class="ill-hero-content">
-        <div class="ill-hero-sub">${t.labels?.illustrationsSection || 'Illustrations'} <span class="count">${String(items.length).padStart(2, '0')}</span></div>
-        <h1 class="ill-hero-title">${t.labels?.illustrationsSection || 'Illustrations'}</h1>
+        <div class="ill-hero-sub">${sectionLabel} <span class="count">${count}</span></div>
+        <h1 class="ill-hero-title">${sectionLabel}</h1>
         <p class="ill-hero-desc">${t.site?.visualsDesc || ''}</p>
       </div>
     </div>
@@ -46,7 +35,7 @@ export function renderIllustrationsContent() {
         ${items
           .map(
             (item, i) => `
-          <div class="ill-grid-item" data-label="Illustration ${String(i + 1).padStart(2, '0')}" data-index="${i}" role="button" tabindex="0" aria-label="${t.labels?.illustration || 'Illustration'} ${String(i + 1).padStart(2, '0')}">
+          <div class="ill-grid-item" data-label="Illustration ${pad2(i + 1)}" data-index="${i}" role="button" tabindex="0" aria-label="${t.labels?.illustration || 'Illustration'} ${pad2(i + 1)}">
             <img src="${item.src}" alt="" loading="lazy" decoding="async">
           </div>`
           )

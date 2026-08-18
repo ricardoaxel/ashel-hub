@@ -3,8 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Illustrations & Photos | Ashel</title>
+    <title>Ashel</title>
     <meta name="description" content="Drawings, photos, flyers, and visual work by Ashel." />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png" />
+    <link rel="manifest" href="assets/favicons/site.webmanifest" />
+    <meta name="theme-color" content="#050505" />
     <link rel="canonical" href="https://ashel.github.io/music-portfolio/illustrations.html" />
     <meta property="og:title" content="Illustrations & Photos | Ashel" />
     <meta property="og:description" content="Drawings, photos, flyers, and visual work by Ashel." />
@@ -38,9 +43,10 @@
     <link rel="stylesheet" href="css/effects.css" />
     <link rel="stylesheet" href="css/responsive.css" />
     <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+    <script src="js/app/init-loader.js?v=2"></script>
     <script type="module" src="js/app/main.js?v=2"></script>
   </head>
-  <body class="scanlines">
+  <body class="scanlines" data-page="illustrations">
     <div
       id="page-loader"
       style="
@@ -61,20 +67,6 @@
         Loading
       </div>
     </div>
-    <script>
-      var _ld = new URLSearchParams(window.location.search).get('locale');
-      try {
-        _ld = _ld || localStorage.getItem('locale');
-      } catch (e) {}
-      _ld = _ld || navigator.language;
-      document.getElementById('loader-text').textContent = _ld.startsWith('es')
-        ? 'Cargando'
-        : 'Loading';
-      window._loaderTextTimer = setTimeout(function () {
-        var t = document.getElementById('loader-text');
-        if (t) t.style.opacity = '1';
-      }, 500);
-    </script>
     <div class="cursor-dot"></div>
     <div class="cursor-ring"></div>
     <div class="noise"></div>

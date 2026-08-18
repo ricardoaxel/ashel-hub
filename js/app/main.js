@@ -11,10 +11,13 @@ import { renderIllustrationsContent } from './render/illustrations.js';
 import { renderOtherContent } from './render/other.js';
 import { initWaveCanvas } from './wave-canvas.js';
 import { initBubbles } from './bubbles.js';
+import { TIMINGS } from './config.js';
+import { getLocaleDisplayName } from './utils.js';
 
-const isProjectPage = window.location.pathname.includes('project.html');
-const isIllustrationPage = window.location.pathname.includes('illustrations.html');
-const isOtherPage = window.location.pathname.includes('other.html');
+const pageName = document.body.dataset.page || 'index';
+const isProjectPage = pageName === 'project';
+const isIllustrationPage = pageName === 'illustrations';
+const isOtherPage = pageName === 'other';
 const params = new URLSearchParams(window.location.search);
 
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
@@ -51,7 +54,7 @@ function throttleSave() {
   scrollTimer = setTimeout(() => {
     scrollTimer = null;
     saveScroll();
-  }, 150);
+  }, TIMINGS.scrollSaveThrottleMs);
 }
 
 window.addEventListener('scroll', throttleSave, { passive: true });
@@ -76,9 +79,9 @@ function hidePageLoader() {
     clearTimeout(window._loaderTextTimer);
     window._loaderTextTimer = null;
   }
-  loader.style.transition = 'opacity 0.35s ease';
+  loader.style.transition = `opacity ${TIMINGS.pageLoaderFadeMs}ms ease`;
   loader.style.opacity = '0';
-  setTimeout(() => loader.remove(), 350);
+  setTimeout(() => loader.remove(), TIMINGS.pageLoaderFadeMs);
 }
 
 function reRender() {
@@ -104,7 +107,7 @@ loadData()
     try {
       applyTranslations();
       const i18n = getI18nData();
-      const loc = navigator.language.startsWith('es') ? 'es' : 'en';
+      const loc = getLocaleDisplayName(navigator.language);
       const tPage = i18n?.[loc] || i18n?.en || {};
 
       if (isProjectPage) {
@@ -174,24 +177,27 @@ loadData()
   });
 
 function showError(type) {
-  const locale = navigator.language.startsWith('en') ? 'en' : 'es';
+  const locale = getLocaleDisplayName(navigator.language);
   const i18n = getI18nData();
   const t = (i18n?.[locale] || i18n?.en || {});
   const fallbacks = { renderError: 'Render error', dataError: 'Error loading data' };
   const msg = t.site?.[type === 'renderError' ? 'errorRender' : 'errorData'] || fallbacks[type] || 'Unknown error';
   const prefix = locale === 'es' ? 'Error: ' : 'Error: ';
   const text = prefix + msg;
+  const errorHtml = `<div class="error-message">${text}</div>`;
   if (isProjectPage) {
     const el = document.getElementById('project-content');
-    if (el) el.innerHTML = `<div class="loading">${text}</div>`;
+    if (el) el.innerHTML = errorHtml;
   } else if (isIllustrationPage) {
     const el = document.getElementById('illustrations-content');
-    if (el) el.innerHTML = `<div class="loading">${text}</div>`;
+    if (el) el.innerHTML = errorHtml;
   } else if (isOtherPage) {
     const el = document.getElementById('other-content');
-    if (el) el.innerHTML = `<div class="loading">${text}</div>`;
+    if (el) el.innerHTML = errorHtml;
   } else {
-    document.body.innerHTML = `<div class="loading" style="padding:10rem 2rem;text-align:center;font-family:var(--mono);color:var(--text-dim)">${text}</div>`;
+    const main = document.querySelector('main');
+    if (main) main.innerHTML = errorHtml;
+    else document.body.innerHTML = errorHtml;
   }
   hidePageLoader();
 }

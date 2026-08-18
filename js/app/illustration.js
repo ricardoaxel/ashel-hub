@@ -1,13 +1,16 @@
 import { getSiteData, getI18nData } from './data.js';
 import { getLocale } from './i18n.js';
 import { openModal } from './modal.js';
+import { TIMINGS } from './config.js';
+import { pad2 } from './utils.js';
 
 let intervalId = null;
 let currentIndex = 0;
 let totalCount = 0;
-let globalIndices = [];
+let heroItems = [];
 let busy = false;
-const CYCLE_MS = 7000;
+
+const CYCLE_MS = TIMINGS.illustrationCycleMs;
 const BG_OPACITY = 0.6;
 
 function preload(src) {
@@ -33,10 +36,8 @@ async function showIllustration(items, index, bg1, bg2) {
   prevBg.style.opacity = 0;
   const counter = document.getElementById('hero-illustration-counter');
   if (counter) {
-    const globalIdx = globalIndices[index];
-    const num = String(globalIdx).padStart(2, '0');
-    const total = String(totalCount).padStart(2, '0');
-    counter.textContent = `${num}/${total}`;
+    const globalIdx = items[index]._originalIndex + 1;
+    counter.textContent = `${pad2(globalIdx)}/${pad2(totalCount)}`;
   }
   busy = false;
 }
@@ -58,18 +59,20 @@ function stopCycling() {
   }
 }
 
-const DARK_INDICES = [4, 17, 3, 9, 14, 12, 10, 11, 5, 8, 15];
-
 export function initIllustration() {
   const data = getSiteData();
   const allItems = data?.illustrations;
   if (!allItems || allItems.length === 0) return;
 
-  const items = DARK_INDICES.map(i => allItems[i - 1]).filter(Boolean);
+  // Tag each hero item with its original index in the full illustrations array
+  // so the counter can display the real position (e.g., 04/22) instead of the hero subset position.
+  const items = allItems
+    .map((item, index) => ({ ...item, _originalIndex: index }))
+    .filter((item) => item.useInHero);
+
   if (items.length === 0) return;
 
   totalCount = allItems.length;
-  globalIndices = DARK_INDICES.slice(0, items.length);
 
   const i18n = getI18nData();
   const locale = getLocale();
@@ -85,6 +88,7 @@ export function initIllustration() {
 
   if (!label || !bg1 || !bg2) return;
 
+  heroItems = items;
   label.classList.add('visible');
 
   startCycling(items, bg1, bg2);

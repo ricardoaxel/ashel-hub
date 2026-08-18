@@ -7,10 +7,11 @@ A data-driven portfolio site showcasing music projects, releases, and embedded B
 ```
 ├── index.html              # Main portfolio page
 ├── project.html            # Per-project detail page
+├── illustrations.html      # Full illustration gallery
+├── other.html              # Side projects / live sessions
 ├── data.json               # All project/release data (single source of truth)
 ├── css/
-│   ├── styles.css          # Import hub (14 CSS modules)
-│   ├── base.css            # Reset, variables, typography
+│   ├── base.css            # Reset, variables, typography, utilities
 │   ├── layout.css          # Header, hero, marquee, footer
 │   ├── effects.css         # Noise/scanlines overlays
 │   ├── responsive.css      # All media queries
@@ -20,14 +21,21 @@ A data-driven portfolio site showcasing music projects, releases, and embedded B
         ├── main.js         # Entry point (page detection, boot sequence)
         ├── data.js         # Fetch + cache layer for data.json / i18n.json
         ├── i18n.js         # Locale engine (EN/ES), onLocaleChange events
+        ├── config.js       # Centralized breakpoints, counts, URLs, tokens
+        ├── utils.js        # Shared helpers (makeAccessible, pad2, etc.)
+        ├── media.js        # YouTube / SoundCloud / Bandcamp embed helpers
+        ├── init-loader.js  # Page loader text + cached color restoration
         ├── colors.js       # ColorThief extraction, palette scoring
         ├── cursor.js       # Custom cursor (dot + ring)
         ├── mobile-menu.js  # Mobile nav toggle
         ├── wave-canvas.js  # Hero waveform visualization
         ├── bubbles.js      # Floating album cover bubbles
+        ├── illustration.js # Hero illustration cycling
         └── render/         # Page renderers
             ├── index.js
-            └── project.js
+            ├── project.js
+            ├── illustrations.js
+            └── other.js
 ```
 
 ## Setup
@@ -52,6 +60,7 @@ Then open `http://localhost:8000`. Opening `index.html` directly from disk (`fil
 - **Colors**: Edit CSS variables in `css/base.css` `:root`
 - **Fonts**: Change `font-family` in `css/base.css` `body`
 - **Layout**: Breakpoints in `css/responsive.css`
+- **Config**: Shared constants in `js/app/config.js`
 
 ## Tech
 

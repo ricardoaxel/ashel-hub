@@ -3,8 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ashel — Musician & Producer Portfolio</title>
+    <title>Ashel</title>
     <meta name="description" content="Ashel — musician, producer, and artist from Mexico City. Portfolio of projects including Oshira, Dotzd, Recuerdos de un Sueño Perdido, Hostem, and solo work." />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png" />
+    <link rel="manifest" href="assets/favicons/site.webmanifest" />
+    <meta name="theme-color" content="#050505" />
     <link rel="canonical" href="https://ashel.github.io/music-portfolio/" />
     <meta property="og:title" content="Ashel — Musician & Producer Portfolio" />
     <meta property="og:description" content="Musician, producer, and artist from Mexico City. Explore projects, releases, photos, and visual work." />
@@ -51,9 +56,10 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+    <script src="js/app/init-loader.js?v=2"></script>
     <script type="module" src="js/app/main.js?v=2"></script>
   </head>
-  <body class="scanlines">
+  <body class="scanlines" data-page="index">
     <div
       id="page-loader"
       style="
@@ -74,20 +80,6 @@
         Loading
       </div>
     </div>
-    <script>
-      var _ld = new URLSearchParams(window.location.search).get('locale');
-      try {
-        _ld = _ld || localStorage.getItem('locale');
-      } catch (e) {}
-      _ld = _ld || navigator.language;
-      document.getElementById('loader-text').textContent = _ld.startsWith('es')
-        ? 'Cargando'
-        : 'Loading';
-      window._loaderTextTimer = setTimeout(function () {
-        var t = document.getElementById('loader-text');
-        if (t) t.style.opacity = '1';
-      }, 500);
-    </script>
     <div class="cursor-dot"></div>
     <div class="cursor-ring"></div>
     <div class="noise"></div>
