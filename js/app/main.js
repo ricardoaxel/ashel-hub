@@ -35,9 +35,9 @@ function scrollToHashTarget(hash = window.location.hash, behavior = 'instant') {
     const targetId = `project-${hash.replace('#project-', '')}`;
     target = document.getElementById(targetId);
   } else if (hash === '#about') {
-    // Scroll to the inner about grid so the section label is skipped.
+    // Scroll to the about image so it starts right below the header.
     const section = document.getElementById('about');
-    target = section?.querySelector('.about') || section;
+    target = section?.querySelector('.about-image') || section?.querySelector('.about') || section;
   } else {
     const targetId = hash.slice(1);
     target = document.getElementById(targetId);
@@ -47,7 +47,9 @@ function scrollToHashTarget(hash = window.location.hash, behavior = 'instant') {
 
   const header = document.querySelector('.header');
   const headerHeight = header ? header.offsetHeight : 0;
-  const y = target.getBoundingClientRect().top + window.scrollY - headerHeight - 8;
+  // For About, align the image flush with the header; keep a small gap for other sections.
+  const extraMargin = hash === '#about' ? 0 : 8;
+  const y = target.getBoundingClientRect().top + window.scrollY - headerHeight - extraMargin;
 
   window.scrollTo({ top: Math.max(0, y), behavior });
 
