@@ -30,19 +30,26 @@ function scrollKey() {
 function scrollToHashTarget(hash = window.location.hash, behavior = 'instant') {
   if (!hash || hash === '#') return false;
 
-  let targetId;
+  let target;
   if (hash.startsWith('#project-')) {
-    targetId = `project-${hash.replace('#project-', '')}`;
+    const targetId = `project-${hash.replace('#project-', '')}`;
+    target = document.getElementById(targetId);
+  } else if (hash === '#about') {
+    // Scroll to the inner about grid so the section label is skipped.
+    const section = document.getElementById('about');
+    target = section?.querySelector('.about') || section;
   } else {
-    targetId = hash.slice(1);
+    const targetId = hash.slice(1);
+    target = document.getElementById(targetId);
   }
 
-  const target = document.getElementById(targetId);
   if (!target) return false;
 
   const header = document.querySelector('.header');
   const headerHeight = header ? header.offsetHeight : 0;
-  const y = target.getBoundingClientRect().top + window.scrollY - headerHeight - 24;
+  // For About, align the content grid just below the header so the section label is hidden.
+  const extraMargin = hash === '#about' ? 0 : 24;
+  const y = target.getBoundingClientRect().top + window.scrollY - headerHeight - extraMargin;
 
   window.scrollTo({ top: Math.max(0, y), behavior });
 

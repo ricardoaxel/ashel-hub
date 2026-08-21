@@ -195,6 +195,10 @@
     grid-template-columns: 1fr;
   }
 
+  #about .section-label {
+    display: none;
+  }
+
   .about-image {
     border-right: none;
     border-bottom: 1px solid var(--border);
