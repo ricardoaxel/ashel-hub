@@ -34,6 +34,10 @@ function scrollToHashTarget(hash = window.location.hash, behavior = 'instant') {
   if (hash.startsWith('#project-')) {
     const targetId = `project-${hash.replace('#project-', '')}`;
     target = document.getElementById(targetId);
+  } else if (hash === '#about') {
+    // Scroll to the inner about grid so the section label is skipped.
+    const section = document.getElementById('about');
+    target = section?.querySelector('.about') || section;
   } else {
     const targetId = hash.slice(1);
     target = document.getElementById(targetId);
