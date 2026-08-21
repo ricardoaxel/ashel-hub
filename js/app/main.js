@@ -27,9 +27,8 @@ function scrollKey() {
   return 'scrollPos:' + location.pathname + location.search;
 }
 
-function scrollToHashTarget() {
-  const hash = window.location.hash;
-  if (!hash) return false;
+function scrollToHashTarget(hash = window.location.hash, behavior = 'instant') {
+  if (!hash || hash === '#') return false;
 
   let targetId;
   if (hash.startsWith('#project-')) {
@@ -45,7 +44,7 @@ function scrollToHashTarget() {
   const headerHeight = header ? header.offsetHeight : 0;
   const y = target.getBoundingClientRect().top + window.scrollY - headerHeight - 24;
 
-  window.scrollTo({ top: Math.max(0, y), behavior: 'instant' });
+  window.scrollTo({ top: Math.max(0, y), behavior });
 
   // Clean the hash for project back-links; keep section anchors in the URL.
   if (hash.startsWith('#project-')) {
@@ -101,6 +100,20 @@ window.addEventListener('pagehide', () => {
 
 window.addEventListener('pageshow', (e) => {
   if (e.persisted) restoreScroll();
+});
+
+// Same-page hash anchors should also respect the header offset + margin.
+document.addEventListener('click', (e) => {
+  const anchor = e.target.closest('a[href^="#"]');
+  if (!anchor) return;
+  const hash = anchor.getAttribute('href');
+  if (scrollToHashTarget(hash, 'smooth')) {
+    e.preventDefault();
+  }
+});
+
+window.addEventListener('hashchange', () => {
+  scrollToHashTarget(window.location.hash, 'smooth');
 });
 
 function hidePageLoader() {
