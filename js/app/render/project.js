@@ -204,7 +204,31 @@ function renderVideos(project, t) {
     </section>`;
 }
 
+function getNextProject(project) {
+  const data = getSiteData();
+  if (!data?.projects?.length) return null;
+  const projects = data.projects;
+  const index = projects.findIndex((p) => p.id === project.id);
+  if (index === -1) return null;
+  const nextIndex = (index + 1) % projects.length;
+  return projects[nextIndex];
+}
+
+function projectUrl(projectId) {
+  const params = new URLSearchParams(window.location.search);
+  params.set('id', projectId);
+  return `project.html?${params.toString()}`;
+}
+
 function renderDetailHeader(project, t, defaultFeatured) {
+  const nextProject = getNextProject(project);
+  const nextProjectHtml = nextProject
+    ? `<a href="${projectUrl(nextProject.id)}" class="next-project-link" aria-label="${t.site?.nextProject || 'Next project'}: ${nextProject.name}">
+        <span class="next-project-text">${t.site?.nextProject || 'Next project'} →</span>
+        <img src="${nextProject.cover}" alt="" class="next-project-thumb" loading="lazy" decoding="async">
+      </a>`
+    : '';
+
   const timelineHtml = project.yearsActive
     ? `
     <div class="detail-timeline">
@@ -222,7 +246,10 @@ function renderDetailHeader(project, t, defaultFeatured) {
 
   return `
     <section class="detail-header">
-      <a href="index.html#projects" class="back-link">&larr; ${t.site?.backToProjects || 'Back to Projects'}</a>
+      <nav class="project-nav" aria-label="${t.site?.backToProjects || 'Back to Projects'} / ${t.site?.nextProject || 'Next project'}">
+        <a href="index.html#project-${project.id}" class="back-link">&larr; ${t.site?.backToProjects || 'Back to Projects'}</a>
+        ${nextProjectHtml}
+      </nav>
       <div class="detail-hero">
         <div class="detail-left">
           <img src="${project.cover}" alt="${project.name}" class="detail-cover" decoding="async">

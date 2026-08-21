@@ -5,6 +5,7 @@
       "subtitle": "Musician | Producer | etc · Mexico City",
       "scrollHint": "Scroll",
       "backToProjects": "Back to Projects",
+      "nextProject": "Next project",
       "nowPlaying": "Now Playing",
       "tracklist": "Tracklist",
       "featuredRelease": "Featured Release",
@@ -41,7 +42,7 @@
       "galleryLabel": "Gallery",
       "otherSection": "Other Projects",
       "visitLink": "Visit →",
-        "otherDescs": {
+      "otherDescs": {
         "Masiosare — Osier": "Sludge/black/post-metal. All instruments by Ashel. Free download.",
         "Noise & Lo-fi — [†π]": "Noise, lo-fi, experimental tracks from 2015."
       },
@@ -98,7 +99,7 @@
         }
       },
       "dotzd": {
-        "shortDescription": "Post-rock/shoegaze/blackgaze/etc project with 5 releases since 2012.",
+        "shortDescription": "Post-rock/shoegaze/blackgaze/etc project with 8 releases since 2012.",
         "description": [
           "Ashel's solo project where blackgaze, post-rock, and shoegaze merge into soundscapes ranging from serene introspection to walls of distortion. Eight releases since 2012 exploring duality — day and night, change and the eternal.",
           "The sound spans blackgaze, shoegaze, slowcore, psychedelia, ambient, and noise — everything needed to express the duality that is a constant in life. \"Tempo\" was produced at Echo Bravo Studio. \"Empero\" features Carlo Ixcamparij on drums, marking the first collaboration on a Dotzd release."
@@ -163,6 +164,7 @@
       "subtitle": "Músico | Productor | etc · CDMX",
       "scrollHint": "Desplázate",
       "backToProjects": "Volver a Proyectos",
+      "nextProject": "Siguiente proyecto",
       "nowPlaying": "Reproduciendo",
       "tracklist": "Tracklist",
       "featuredRelease": "Lanzamiento Destacado",
@@ -199,7 +201,7 @@
       "galleryLabel": "Galería",
       "otherSection": "Otros Proyectos",
       "visitLink": "Visitar →",
-        "otherDescs": {
+      "otherDescs": {
         "Masiosare — Osier": "Sludge/black/post-metal. Todos los instrumentos por Ashel. Descarga gratuita.",
         "Noise & Lo-fi — [†π]": "Noise, lo-fi, experimental. Pistas de 2015."
       },
@@ -256,7 +258,7 @@
         }
       },
       "dotzd": {
-        "shortDescription": "Proyecto de post-rock/shoegaze/blackgaze/etc con 5 lanzamientos desde 2012",
+        "shortDescription": "Proyecto de post-rock/shoegaze/blackgaze/etc con 8 lanzamientos desde 2012",
         "description": [
           "Proyecto solista de Ashel donde el blackgaze, el post-rock y el shoegaze se funden en paisajes sonoros que van de la introspección más serena al muro de distorsión más denso. Ocho lanzamientos desde 2012 explorando la dualidad — el día y la noche, el cambio y lo eterno.",
           "El sonido abarca blackgaze, shoegaze, slowcore, psicodelia, ambient y noise — todo lo necesario para expresar la dualidad que es una constante en la vida. \"Tempo\" fue producido en Echo Bravo Studio. \"Empero\" cuenta con Carlo Ixcamparij en la batería, marcando la primera colaboración en un lanzamiento de Dotzd."

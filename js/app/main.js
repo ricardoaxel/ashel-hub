@@ -13,6 +13,7 @@ import { initWaveCanvas } from './wave-canvas.js';
 import { initBubbles } from './bubbles.js';
 import { TIMINGS } from './config.js';
 import { getLocaleDisplayName } from './utils.js';
+import { initAnalytics } from './analytics.js';
 
 const pageName = document.body.dataset.page || 'index';
 const isProjectPage = pageName === 'project';
@@ -26,6 +27,23 @@ function scrollKey() {
   return 'scrollPos:' + location.pathname + location.search;
 }
 
+function scrollToProjectFromHash() {
+  const hash = window.location.hash;
+  if (!hash.startsWith('#project-')) return false;
+
+  const id = hash.replace('#project-', '');
+  const card = document.getElementById(`project-${id}`);
+  if (!card) return false;
+
+  const header = document.querySelector('.header');
+  const headerHeight = header ? header.offsetHeight : 0;
+  const y = card.getBoundingClientRect().top + window.scrollY - headerHeight - 24;
+
+  window.scrollTo({ top: Math.max(0, y), behavior: 'instant' });
+  history.replaceState(null, '', window.location.pathname + window.location.search);
+  return true;
+}
+
 let isReRendering = false;
 
 function saveScroll() {
@@ -35,6 +53,8 @@ function saveScroll() {
 
 function restoreScroll() {
   try {
+    if (scrollToProjectFromHash()) return;
+
     const saved = sessionStorage.getItem(scrollKey());
     if (!saved) return;
     sessionStorage.removeItem(scrollKey());
@@ -205,4 +225,5 @@ function showError(type) {
 initLangToggle();
 onLocaleChange(reRender);
 initMobileMenu();
+initAnalytics();
 initCursor();

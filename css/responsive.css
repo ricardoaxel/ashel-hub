@@ -329,10 +329,24 @@
     text-align: left;
   }
 
-  .back-link {
-    font-size: 0.6rem;
+  .project-nav {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
     margin-bottom: 1.5rem;
-    padding: 0.5rem 0;
+  }
+
+  .back-link,
+  .next-project-link {
+    font-size: 0.6rem;
+    padding: 0.75rem 0;
+    min-height: 44px;
+  }
+
+  .next-project-thumb {
+    width: 36px;
+    height: 36px;
   }
 
   .btn-small {
