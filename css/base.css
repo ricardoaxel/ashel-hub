@@ -86,10 +86,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Ensure the index page is tall enough for the contact section to scroll to top. */
-body[data-page="index"] {
-  padding-bottom: 50vh;
-}
+
 
 body.custom-cursor-active {
   cursor: none;
