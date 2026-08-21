@@ -33,7 +33,7 @@
     "nav": {
       "projects": "Projects",
       "gallery": "Gallery",
-      "illustrations": "Illustrations/Photo",
+      "illustrations": "Visual",
       "about": "About",
       "contact": "Contact"
     },
@@ -46,7 +46,7 @@
         "Masiosare — Osier": "Sludge/black/post-metal. All instruments by Ashel. Free download.",
         "Noise & Lo-fi — [†π]": "Noise, lo-fi, experimental tracks from 2015."
       },
-      "illustrationsSection": "Illustrations/Photo",
+      "illustrationsSection": "Visual",
       "illustrationLabel": "Visual",
       "illustration": "Illustration",
       "viewAll": "View All",
