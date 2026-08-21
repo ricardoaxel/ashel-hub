@@ -43,7 +43,7 @@ function scrollToHashTarget(hash = window.location.hash, behavior = 'instant') {
 
   const header = document.querySelector('.header');
   const headerHeight = header ? header.offsetHeight : 0;
-  const y = target.getBoundingClientRect().top + window.scrollY - headerHeight - 24;
+  const y = target.getBoundingClientRect().top + window.scrollY - headerHeight - 8;
 
   window.scrollTo({ top: Math.max(0, y), behavior });
 
