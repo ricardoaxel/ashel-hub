@@ -198,6 +198,11 @@
   .about-image {
     border-right: none;
     border-bottom: 1px solid var(--border);
+    max-height: 45vh;
+  }
+
+  .about-image img {
+    object-position: center 20%;
   }
 
   .about-content {
