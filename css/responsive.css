@@ -198,7 +198,10 @@
   .about-image {
     border-right: none;
     border-bottom: 1px solid var(--border);
-    max-height: 45vh;
+    width: 100%;
+    height: 45vh;
+    aspect-ratio: auto;
+    max-height: none;
   }
 
   .about-image img {
