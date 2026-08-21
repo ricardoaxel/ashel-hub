@@ -47,9 +47,11 @@ function scrollToHashTarget(hash = window.location.hash, behavior = 'instant') {
 
   const header = document.querySelector('.header');
   const headerHeight = header ? header.offsetHeight : 0;
-  // For About, align the image flush with the header; keep a small gap for other sections.
+  // For About, align the image at the very top of the viewport (header overlays it).
+  // For other sections, keep a small gap below the header.
   const extraMargin = hash === '#about' ? 0 : 8;
-  const y = target.getBoundingClientRect().top + window.scrollY - headerHeight - extraMargin;
+  const offset = hash === '#about' ? 0 : headerHeight;
+  const y = target.getBoundingClientRect().top + window.scrollY - offset - extraMargin;
 
   window.scrollTo({ top: Math.max(0, y), behavior });
 
