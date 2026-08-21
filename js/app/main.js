@@ -27,20 +27,31 @@ function scrollKey() {
   return 'scrollPos:' + location.pathname + location.search;
 }
 
-function scrollToProjectFromHash() {
+function scrollToHashTarget() {
   const hash = window.location.hash;
-  if (!hash.startsWith('#project-')) return false;
+  if (!hash) return false;
 
-  const id = hash.replace('#project-', '');
-  const card = document.getElementById(`project-${id}`);
-  if (!card) return false;
+  let targetId;
+  if (hash.startsWith('#project-')) {
+    targetId = `project-${hash.replace('#project-', '')}`;
+  } else {
+    targetId = hash.slice(1);
+  }
+
+  const target = document.getElementById(targetId);
+  if (!target) return false;
 
   const header = document.querySelector('.header');
   const headerHeight = header ? header.offsetHeight : 0;
-  const y = card.getBoundingClientRect().top + window.scrollY - headerHeight - 24;
+  const y = target.getBoundingClientRect().top + window.scrollY - headerHeight - 24;
 
   window.scrollTo({ top: Math.max(0, y), behavior: 'instant' });
-  history.replaceState(null, '', window.location.pathname + window.location.search);
+
+  // Clean the hash for project back-links; keep section anchors in the URL.
+  if (hash.startsWith('#project-')) {
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  }
+
   return true;
 }
 
@@ -53,7 +64,7 @@ function saveScroll() {
 
 function restoreScroll() {
   try {
-    if (scrollToProjectFromHash()) return;
+    if (scrollToHashTarget()) return;
 
     const saved = sessionStorage.getItem(scrollKey());
     if (!saved) return;
